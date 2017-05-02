@@ -19,7 +19,7 @@ private:
 
     UINT32          SendMessage();
 
-    UINT32          StartListen(IN const CHAR* pcIpAddr, IN UINT32 u32Port);
+    UINT32          StartListen(IN const CHAR* pcIpAddr, IN UINT16 u16Port, CAdpt* pAdpt);
     UINT32          DoAccept();         // 启动接受连接
     VOID            RunIOServer();
     VOID            AcceptHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock);      // 连接回调

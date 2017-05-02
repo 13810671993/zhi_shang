@@ -32,6 +32,10 @@ VOID CSubscriberImp::DestroyInstance()
 UINT32 CSubscriberImp::PushMessage(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen)
 {
     UINT32  u32Ret = 0;
+
+	//std::cout << pcMsg << std:: endl;
+
+	printf(pcMsg);
     
     // 封装数据 写入sub队列中
 

@@ -8,5 +8,6 @@
 
 #include "adpt/adpt.h"
 #include "adpt/svr_adpt.h"
+#include "network/network_mgr.h"
 
 #endif

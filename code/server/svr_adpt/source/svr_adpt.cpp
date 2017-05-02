@@ -37,9 +37,7 @@ UINT32 CSvrAdpt::StartListen(IN const CHAR* pcIpAddr, IN UINT16 u16Port)
 {
     // ¿ªÆôÄ³Ò»¶Ë¿Ú¼àÌý
     // adpt²ãÖ±½ÓÏòÍøÂçµ×²ã×¢²á
-    UINT32  u32Ret = 0;
-
-    return u32Ret;
+	return CNetworkMgr::GetInstance()->StartListen(pcIpAddr, u16Port, this);
 }
 
 UINT32 CSvrAdpt::RegistAdpt(CAdpt* pAdpt)

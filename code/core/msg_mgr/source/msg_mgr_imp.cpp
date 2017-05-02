@@ -33,6 +33,7 @@ VOID CMsgMgrImp::DestroyInstance()
 VOID CMsgMgrImp::AddAdpt(IN CAdpt* pAdpt)
 {
     m_pAdpt = pAdpt;
+	SetMsgTransmitLayer2Adpt();
 }
 
 VOID CMsgMgrImp::SetMsgTransmitLayer2Adpt()

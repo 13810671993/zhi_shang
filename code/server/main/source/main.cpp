@@ -64,7 +64,8 @@ UINT32 CMain::InitMessageModule()
         CHECK_ERR_BREAK(pAdpt != NULL, COMERR_NULL_POINTER, "CSvrAdpt::GetInstance failed. u32Ret = 0x%x\n", u32Ret);
 
         pMsgMgr->AddAdpt(pAdpt);
-        u32Ret = pMsgMgr->StartLisen("192.168.9.51", 1993);
+        //u32Ret = pMsgMgr->StartLisen("127.0.0.1", 1993);
+        u32Ret = pMsgMgr->StartLisen("192.168.31.181", 1993);
         CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "StartListen failed. u32Ret = 0x%x\n", u32Ret);
 
     } while (0);
@@ -74,7 +75,15 @@ UINT32 CMain::InitMessageModule()
 
 UINT32 CMain::InitLogicModule()
 {
-    return COMERR_OK;
+	UINT32	u32Ret = 0;
+	do 
+	{
+		CLogic* pLogic = CLogic::GetInstance();
+		CHECK_ERR_BREAK(pLogic != NULL, COMERR_NULL_POINTER, "CLogic::GetInstance failed. u32Ret = 0x%x\n", u32Ret);
+		pLogic->Run();
+	} while (0);
+
+	return u32Ret;
 }
 
 int main()
