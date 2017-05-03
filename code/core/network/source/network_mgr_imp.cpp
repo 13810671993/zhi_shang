@@ -104,14 +104,17 @@ VOID CNetworkMgrImp::AcceptHandler(const boost::system::error_code& ec, std::sha
     m_pNodeIDLayer->GenerateNetNodeID(ptrSock, u32NodeID);
 
     // 新来一个连接 创建缓冲区
+	std::vector<CHAR>* pcMessageVec = new std::vector<CHAR>(1024, 0);
 
-    ptrSock->async_read_some(boost::asio::buffer(cMessageVec), boost::bind(&CNetworkMgrImp::MessageHandler, this, boost::asio::placeholders::error, ptrSock, u32NodeID));
+    //ptrSock->async_read_some(boost::asio::buffer(cMessageVec), boost::bind(&CNetworkMgrImp::MessageHandler, this, boost::asio::placeholders::error, ptrSock, u32NodeID));
+    ptrSock->async_read_some(boost::asio::buffer(*pcMessageVec), boost::bind(&CNetworkMgrImp::MessageHandler, this, boost::asio::placeholders::error, ptrSock, u32NodeID, pcMessageVec));
 
     // 继续接受新的连接
     DoAccept();     // 没有继续调用 将不再接收其他连接
 }
 
-VOID CNetworkMgrImp::MessageHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock, UINT32 u32NodeID)
+//VOID CNetworkMgrImp::MessageHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock, UINT32 u32NodeID)
+VOID CNetworkMgrImp::MessageHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock, UINT32 u32NodeID, std::vector<CHAR>* pcMessageVec)
 {
     if (ec)
         return;
@@ -121,6 +124,7 @@ VOID CNetworkMgrImp::MessageHandler(const boost::system::error_code& ec, std::sh
 	//if (cMessageVec.size() != 0)
 	//	m_pAdpt->RecvMessage(u32NodeID, UINT32(cMessageVec.data()), cMessageVec.data() + sizeof(UINT32), cMessageVec.size() - sizeof(UINT32));
     
+#if 0
     // 直接将数据写入队列?
     // 将数据封装到类中 然后写入队列
     STNetMsg* pNetMsg = NULL;
@@ -135,6 +139,16 @@ VOID CNetworkMgrImp::MessageHandler(const boost::system::error_code& ec, std::sh
     //std::cout << cMessageVec.data() << std::endl;
     memset(cMessageVec.data(), 0, cMessageVec.size());
     //cMessageVec.clear();    // 这里有坑 http://blog.csdn.net/linfengmove/article/details/17448549
-    ptrSock->async_read_some(boost::asio::buffer(cMessageVec), boost::bind(&CNetworkMgrImp::MessageHandler, this, boost::asio::placeholders::error, ptrSock, u32NodeID));
+#endif
+    //ptrSock->async_read_some(boost::asio::buffer(cMessageVec), boost::bind(&CNetworkMgrImp::MessageHandler, this, boost::asio::placeholders::error, ptrSock, u32NodeID, pcMessageVec));
+	std::cout << pcMessageVec->data() << std::endl;
+	memset(pcMessageVec->data(), 0, sizeof(pcMessageVec->size()));
+    ptrSock->async_read_some(boost::asio::buffer(*pcMessageVec), boost::bind(&CNetworkMgrImp::MessageHandler, this, boost::asio::placeholders::error, ptrSock, u32NodeID, pcMessageVec));
+	boost::system::error_code error_code;
+	if (error_code == boost::asio::error::eof)
+	{
+		std::cout << "连接断开?" << std::endl;
+		getchar();
+	}
 }
 

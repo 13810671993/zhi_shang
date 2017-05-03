@@ -23,7 +23,7 @@ private:
     UINT32          DoAccept();         // 启动接受连接
     VOID            RunIOServer();
     VOID            AcceptHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock);      // 连接回调
-    VOID            MessageHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock, UINT32 u32NodeID);     // 消息回调
+    VOID            MessageHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock, UINT32 u32NodeID, std::vector<CHAR>* pcMessageVec);     // 消息回调
 
 private:
     static CNetworkMgrImp*  m_pNetworkMgrImp;
