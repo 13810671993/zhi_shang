@@ -1,14 +1,9 @@
 #ifndef __MAIN_COMMON_H__
 #define __MAIN_COMMON_H__
 
-//#include "ZeroMQ 4.0.4/zmq.h"
-//#include "ZeroMQ 4.0.4/zmq_utils.h"
-
 #include "common/link_lib.h"
 #include "common/data_type.h"
 #include "common/common_error.h"
-
-//#include "boost/regex.hpp"
 
 #include <stdio.h>
 
@@ -25,9 +20,6 @@
 
 #ifdef _WIN32
 #ifdef _DEBUG
-//#pragma comment(lib, LIB_THIRD_IMPORT("libevent-2.0.22-stable/libevent.lib"))
-//#pragma comment(lib, LIB_THIRD_IMPORT("libevent-2.0.22-stable/libevent_core.lib"))
-//#pragma comment(lib, LIB_THIRD_IMPORT("libevent-2.0.22-stable/libevent_extras.lib"))
 
 #pragma comment(lib, LIB_DEBUG_IMPORT("sub_d.lib"))
 #pragma comment(lib, LIB_DEBUG_IMPORT("network_d.lib"))
@@ -35,8 +27,6 @@
 #pragma comment(lib, LIB_DEBUG_IMPORT("msg_mgr_d.lib"))
 #pragma comment(lib, LIB_DEBUG_IMPORT("conf_d.lib"))
 #pragma comment(lib, LIB_DEBUG_IMPORT("logic_d.lib"))
-
-//#pragma comment(lib, LIB_THIRD_IMPORT("ZeroMQ 4.0.4/libzmq-v100-mt-gd-4_0_4.lib"))
 
 #else
 

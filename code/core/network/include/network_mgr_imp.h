@@ -15,7 +15,7 @@ public:
     UINT32          RegistAdpt(CAdpt* pAdpt);
 
 private:
-    static VOID*    NetworkMsgThread(VOID* pParam);
+    static VOID*    PushNetMsgThread(VOID* pParam);
 
     UINT32          SendMessage();
 
@@ -23,7 +23,7 @@ private:
     UINT32          DoAccept();         // 启动接受连接
     VOID            RunIOServer();
     VOID            AcceptHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock);      // 连接回调
-    VOID            MessageHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock, UINT32 u32NodeID, std::vector<CHAR> cMessageVec);     // 消息回调
+    VOID            MessageHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock, UINT32 u32NodeID);     // 消息回调
 
 private:
     static CNetworkMgrImp*  m_pNetworkMgrImp;
@@ -32,6 +32,7 @@ private:
 
     boost::asio::io_service         m_ioServer;
     boost::asio::ip::tcp::acceptor  m_acceptor;
+    std::vector<CHAR>               cMessageVec;
     //acceptor.open(boost::asio::ip::tcp::v4(), ec);
 };
 

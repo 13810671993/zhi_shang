@@ -5,6 +5,9 @@
 #include <boost/asio.hpp>
 #include <boost/bind/bind.hpp>
 #include <boost/system/error_code.hpp>
+#include <boost/lockfree/queue.hpp>
+#include <boost/thread.hpp>
+#include "boost/thread/mutex.hpp"
 
 #include "common/data_type.h"
 #include "common/common_error.h"
@@ -17,6 +20,7 @@
 #include "network/net_node_id_layer.h"
 #include "network/net_msg_layer.h"
 #include "network/network_mgr.h"
+#include "network_inner.h"
 #include "network_mgr_imp.h"
 
 #endif
