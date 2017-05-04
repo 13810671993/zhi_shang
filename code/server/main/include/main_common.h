@@ -4,6 +4,7 @@
 #include "common/link_lib.h"
 #include "common/data_type.h"
 #include "common/common_error.h"
+#include "common/common_tool.h"
 
 #include <stdio.h>
 
@@ -33,13 +34,5 @@
 #endif
 #elif _LINUX
 #endif
-
-#define CHECK_ERR_BREAK(bRet, result, format, ...)\
-    if( !(bRet) )\
-{\
-    printf(format, ##__VA_ARGS__);\
-    u32Ret = result; \
-    break; \
-}\
 
 #endif

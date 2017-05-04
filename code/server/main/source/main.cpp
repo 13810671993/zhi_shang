@@ -65,8 +65,8 @@ UINT32 CMain::InitMessageModule()
 
         pMsgMgr->AddAdpt(pAdpt);
         //u32Ret = pMsgMgr->StartLisen("127.0.0.1", 1993);
-        u32Ret = pMsgMgr->StartLisen("192.168.31.181", 1993);
-        //u32Ret = pMsgMgr->StartLisen("192.168.9.51", 1993);
+        //u32Ret = pMsgMgr->StartLisen("192.168.31.181", 1993);
+        u32Ret = pMsgMgr->StartLisen(1993);
         CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "StartListen failed. u32Ret = 0x%x\n", u32Ret);
 
     } while (0);

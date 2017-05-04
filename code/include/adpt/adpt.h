@@ -20,7 +20,7 @@ public:
     virtual ~CAdpt()    {}
 
     virtual VOID    SetMsgTransmitLayer(CMsgTransmit* pMsgTransmitLayer) = 0;
-    virtual UINT32  StartListen(IN const CHAR* pcIpAddr, IN UINT16 u16Port) = 0;
+    virtual UINT32  StartListen(IN UINT16 u16Port) = 0;
     virtual UINT32  RegistAdpt(CAdpt* pAdpt) = 0;
     virtual UINT32  RecvMessage(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen) = 0;
     virtual UINT32  SendMessage() = 0;

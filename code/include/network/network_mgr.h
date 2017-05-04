@@ -8,7 +8,8 @@ public:
     static VOID         DestroyInstance();
 
 public:
-    virtual UINT32  StartListen(IN const CHAR* pcIpAddr, IN UINT16 u16Port, CAdpt* pAdpt) = 0;
+    virtual UINT32  RegistAdpt(CAdpt* pAdpt) = 0;
+    virtual UINT32  StartListen(IN UINT16 u16Port) = 0;
 
 protected:
     CNetworkMgr();

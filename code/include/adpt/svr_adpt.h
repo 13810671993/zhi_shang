@@ -17,7 +17,7 @@ private:
     ~CSvrAdpt();
 public:
     VOID    SetMsgTransmitLayer(CMsgTransmit* pMsgTransmitLayer);
-    UINT32  StartListen(IN const CHAR* pcIpAddr, IN UINT16 u16Port);
+    UINT32  StartListen(IN UINT16 u16Port);
     UINT32  RegistAdpt(CAdpt* pAdpt);
     UINT32  RecvMessage(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen);
     UINT32  SendMessage();

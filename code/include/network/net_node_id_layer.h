@@ -11,10 +11,11 @@ public:
     ~CNetNodeIDLayer();
 
 public:
-    UINT32  GenerateNetNodeID(IN std::shared_ptr<boost::asio::ip::tcp::socket> ptrSocket, OUT UINT32& u32NodeID);
+    UINT32  GenerateNetNodeID(IN std::shared_ptr<CNetSession> ptrSession, OUT UINT32& u32NodeID);
+    UINT32  ReleaseNetNodeID(IN UINT32 u32NodeID);
 
 private:
-    std::map<UINT32, std::shared_ptr<boost::asio::ip::tcp::socket>> m_u32NodeID_ptrSocketMap;
+    std::map<UINT32, std::shared_ptr<CNetSession>> m_u32NodeID_ptrSession;
 };
 
 #endif

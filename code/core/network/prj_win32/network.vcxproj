@@ -125,12 +125,16 @@
     <ClInclude Include="..\include\network_common.h" />
     <ClInclude Include="..\include\network_inner.h" />
     <ClInclude Include="..\include\network_mgr_imp.h" />
+    <ClInclude Include="..\include\net_connection_mgr.h" />
+    <ClInclude Include="..\include\net_session.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\network_mgr.cpp" />
     <ClCompile Include="..\source\network_mgr_imp.cpp" />
+    <ClCompile Include="..\source\net_connection_mgr.cpp" />
     <ClCompile Include="..\source\net_msg_layer.cpp" />
     <ClCompile Include="..\source\net_node_id_layer.cpp" />
+    <ClCompile Include="..\source\net_session.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

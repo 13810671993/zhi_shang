@@ -15,25 +15,14 @@ public:
     UINT32          RegistAdpt(CAdpt* pAdpt);
 
 private:
-    static VOID*    PushNetMsgThread(VOID* pParam);
-
-    UINT32          SendMessage();
-
-    UINT32          StartListen(IN const CHAR* pcIpAddr, IN UINT16 u16Port, CAdpt* pAdpt);
-    UINT32          DoAccept();         // 启动接受连接
-    VOID            RunIOServer();
-    VOID            AcceptHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock);      // 连接回调
-    VOID            MessageHandler(const boost::system::error_code& ec, std::shared_ptr<boost::asio::ip::tcp::socket> ptrSock, UINT32 u32NodeID, std::vector<CHAR>* pcMessageVec);     // 消息回调
+    // 面向连接
+    UINT32          StartListen(IN UINT16 u16Port);
 
 private:
     static CNetworkMgrImp*  m_pNetworkMgrImp;
     CAdpt*                  m_pAdpt;
-    CNetNodeIDLayer*        m_pNodeIDLayer;
+    CNetConnectionMgr*      m_pNetConnectionMgr;
 
-    boost::asio::io_service         m_ioServer;
-    boost::asio::ip::tcp::acceptor  m_acceptor;
-    std::vector<CHAR>               cMessageVec;
-    //acceptor.open(boost::asio::ip::tcp::v4(), ec);
 };
 
 #endif

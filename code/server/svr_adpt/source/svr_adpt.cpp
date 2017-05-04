@@ -33,17 +33,17 @@ VOID CSvrAdpt::SetMsgTransmitLayer(CMsgTransmit* pMsgTransmitLayer)
     m_pMsgTransmitLayer = pMsgTransmitLayer;
 }
 
-UINT32 CSvrAdpt::StartListen(IN const CHAR* pcIpAddr, IN UINT16 u16Port)
+UINT32 CSvrAdpt::StartListen(IN UINT16 u16Port)
 {
     // ¿ªÆôÄ³Ò»¶Ë¿Ú¼àÌý
     // adpt²ãÖ±½ÓÏòÍøÂçµ×²ã×¢²á
-	return CNetworkMgr::GetInstance()->StartListen(pcIpAddr, u16Port, this);
+	return CNetworkMgr::GetInstance()->StartListen(u16Port);
 }
 
 UINT32 CSvrAdpt::RegistAdpt(CAdpt* pAdpt)
 {
     UINT32  u32Ret = 0;
-
+    return CNetworkMgr::GetInstance()->RegistAdpt(pAdpt);
     return u32Ret;
 }
 

@@ -10,30 +10,40 @@ CNetNodeIDLayer::~CNetNodeIDLayer()
 
 }
 
-UINT32 CNetNodeIDLayer::GenerateNetNodeID(IN std::shared_ptr<boost::asio::ip::tcp::socket> ptrSocket, OUT UINT32& u32NodeID)
+UINT32 CNetNodeIDLayer::GenerateNetNodeID(IN std::shared_ptr<CNetSession> ptrSession, OUT UINT32& u32NodeID)
 {
-    UINT32  u32Ret = 0;
     static UINT32   u32TempCount = 1;
     
-    auto it = m_u32NodeID_ptrSocketMap.begin();
-    for (; it != m_u32NodeID_ptrSocketMap.end(); it++)
+    auto it = m_u32NodeID_ptrSession.begin();
+    for (; it != m_u32NodeID_ptrSession.end(); it++)
     {
-        if (it->second == ptrSocket)
+        if (it->second == ptrSession)
             break;
     }
-    if (it != m_u32NodeID_ptrSocketMap.end())
+    if (it != m_u32NodeID_ptrSession.end())
     {
-        // 已存在的NodeID 发生错误
-        u32Ret = 1;
+        // 已存在的NodeID  发生错误
+        return COMERR_NODEID_EXIT;
     }
     else
     {
         // 这是一个新的连接
         u32NodeID = u32TempCount;
         u32TempCount++;
-        m_u32NodeID_ptrSocketMap.insert(std::make_pair(u32NodeID, ptrSocket));
-        u32Ret = 0;
+        m_u32NodeID_ptrSession.insert(std::make_pair(u32NodeID, ptrSession));
+        return COMERR_OK;
     }
+}
 
-    return u32Ret;
+UINT32 CNetNodeIDLayer::ReleaseNetNodeID(IN UINT32 u32NodeID)
+{
+    auto it = m_u32NodeID_ptrSession.find(u32NodeID);
+    if (it != m_u32NodeID_ptrSession.end())
+    {
+        // 找到这个节点ID了 擦掉这个session
+        m_u32NodeID_ptrSession.erase(it);
+        u32NodeID = 0;
+    }
+    // 如果没找到 u32NodeID非0;
+    return u32NodeID;
 }

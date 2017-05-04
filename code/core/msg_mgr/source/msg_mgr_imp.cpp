@@ -33,6 +33,7 @@ VOID CMsgMgrImp::DestroyInstance()
 VOID CMsgMgrImp::AddAdpt(IN CAdpt* pAdpt)
 {
     m_pAdpt = pAdpt;
+    m_pAdpt->RegistAdpt(pAdpt);
 	SetMsgTransmitLayer2Adpt();
 }
 
@@ -41,10 +42,10 @@ VOID CMsgMgrImp::SetMsgTransmitLayer2Adpt()
     m_pAdpt->SetMsgTransmitLayer(m_pMsgLayer);
 }
 
-UINT32 CMsgMgrImp::StartLisen(IN const CHAR* pcIpAddr, IN UINT16 u16Port)
+UINT32 CMsgMgrImp::StartLisen(IN UINT16 u16Port)
 {
     // 向底层去执行 开启监听某一端口
-    return m_pAdpt->StartListen(pcIpAddr, u16Port);
+    return m_pAdpt->StartListen(u16Port);
 }
 
 UINT32 CMsgMgrImp::PostMessage()

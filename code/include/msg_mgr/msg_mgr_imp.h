@@ -19,7 +19,7 @@ private:
 public:
     VOID    AddAdpt(IN CAdpt* pAdpt);
     VOID    SetMsgTransmitLayer2Adpt();
-    UINT32  StartLisen(IN const CHAR* pcIpAddr, IN UINT16 u16Port);
+    UINT32  StartLisen(IN UINT16 u16Port);
     UINT32  PostMessage();
     UINT32  SubscribeMessage(UINT32 u32MsgType, CSubMsgHandler* pSubMsgHandler);
 
