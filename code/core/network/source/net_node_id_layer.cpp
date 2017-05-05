@@ -10,8 +10,9 @@ CNetNodeIDLayer::~CNetNodeIDLayer()
 
 }
 
-UINT32 CNetNodeIDLayer::GenerateNetNodeID(IN std::shared_ptr<CNetSession> ptrSession, OUT UINT32& u32NodeID)
+UINT32 CNetNodeIDLayer::GenerateNetNodeID(IN boost::shared_ptr<CNetSession> ptrSession, OUT UINT32& u32NodeID)
 {
+    CNetNodeIDLayer::TypeWriteLock writeLock(m_mutex);
     static UINT32   u32TempCount = 1;
     
     auto it = m_u32NodeID_ptrSession.begin();
@@ -37,6 +38,7 @@ UINT32 CNetNodeIDLayer::GenerateNetNodeID(IN std::shared_ptr<CNetSession> ptrSes
 
 UINT32 CNetNodeIDLayer::ReleaseNetNodeID(IN UINT32 u32NodeID)
 {
+    CNetNodeIDLayer::TypeWriteLock writeLock(m_mutex);
     auto it = m_u32NodeID_ptrSession.find(u32NodeID);
     if (it != m_u32NodeID_ptrSession.end())
     {
@@ -46,4 +48,21 @@ UINT32 CNetNodeIDLayer::ReleaseNetNodeID(IN UINT32 u32NodeID)
     }
     // 如果没找到 u32NodeID非0;
     return u32NodeID;
+}
+
+UINT32 CNetNodeIDLayer::GetSession(IN UINT32 u32NodeID, OUT boost::shared_ptr<CNetSession>& ptrSession)
+{
+    CNetNodeIDLayer::TypeReadLock readLock(m_mutex);
+    auto it = m_u32NodeID_ptrSession.find(u32NodeID);
+    if (it != m_u32NodeID_ptrSession.end())
+    {
+        // 找到了
+        ptrSession = it->second;
+        return COMERR_OK;
+    }
+    else
+    {
+        // 未找到
+        return COMERR_NOT_FOUND;
+    }
 }

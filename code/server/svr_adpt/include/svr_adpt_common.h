@@ -4,6 +4,7 @@
 #include "common/data_type.h"
 
 #include <iostream>
+#include <string>
 #include <vector>
 
 #include "adpt/adpt.h"

@@ -24,7 +24,7 @@ private:
 private:
     static CSubscriberImp*  m_pSubscriberImp;
 
-    std::map<UINT32, CSubscribersMap*>  m_msgType_SubscribersMap;
+    std::map<UINT32, CSubscribersMap*>  m_msgType_SubscribersMap;   // 所有逻辑模块启动后 该资源以及固定不会更改 所以不需要锁
 };
 
 #endif

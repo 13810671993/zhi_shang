@@ -48,13 +48,9 @@ UINT32 CMsgMgrImp::StartLisen(IN UINT16 u16Port)
     return m_pAdpt->StartListen(u16Port);
 }
 
-UINT32 CMsgMgrImp::PostMessage()
+VOID CMsgMgrImp::PostMessage(IN UINT32 u32NodeID, IN const std::string& strMsg)
 {
-    UINT32  u32Ret = 0;
-
-    m_pAdpt->SendMessage();
-
-    return u32Ret;
+    m_pAdpt->PostMessage(u32NodeID, strMsg);
 }
 
 UINT32 CMsgMgrImp::SubscribeMessage(UINT32 u32MsgType, CSubMsgHandler* pSubMsgHandler)

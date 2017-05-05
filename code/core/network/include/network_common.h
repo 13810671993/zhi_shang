@@ -2,12 +2,14 @@
 #define __NETWORK_COMMON_H__
 
 #include <iostream>
-#include <boost/asio.hpp>
+#include <string>
 #include <boost/bind/bind.hpp>
+#include <boost/asio.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/lockfree/queue.hpp>
 #include <boost/thread.hpp>
 #include <boost/thread/mutex.hpp>
+#include <boost/thread/shared_mutex.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include "common/data_type.h"

@@ -25,13 +25,13 @@ UINT32 CNetConnectionMgr::StartListen(IN UINT16 u16Port)
         CHECK_ERR_BREAK(error == 0, (UINT32)error.value(), "Create endpoint Failed. error = 0x%x\n", error.value());
         // protocol
         m_acceptor.open(boost::asio::ip::tcp::v4());
-        CHECK_ERR_BREAK(error == 0, (UINT32)error.value(), "Accept open Failed. error = 0x%x\n", error.value());
+        CHECK_ERR_BREAK(error == 0, (UINT32)error.value(), "Acceptor open Failed. error = 0x%x\n", error.value());
         // bind
         m_acceptor.bind(end_point);
-        CHECK_ERR_BREAK(error == 0, (UINT32)error.value(), "Accept bind Failed. error = 0x%x\n", error.value());
+        CHECK_ERR_BREAK(error == 0, (UINT32)error.value(), "Acceptor bind Failed. error = 0x%x\n", error.value());
         // listen
         m_acceptor.listen();
-        CHECK_ERR_BREAK(error == 0, (UINT32)error.value(), "Accept listen Failed. error = 0x%x\n", error.value());
+        CHECK_ERR_BREAK(error == 0, (UINT32)error.value(), "Acceptor listen Failed. error = 0x%x\n", error.value());
         // 开始接受连接
         u32Ret = DoAccept();
         CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "DoAccept Failed. u32Ret = 0x%x\n", u32Ret);
@@ -44,7 +44,7 @@ UINT32 CNetConnectionMgr::StartListen(IN UINT16 u16Port)
 
 UINT32 CNetConnectionMgr::DoAccept()
 {
-    std::shared_ptr<CNetSession> ptrSession(new CNetSession(m_ioServer, this));
+    boost::shared_ptr<CNetSession> ptrSession(new CNetSession(m_ioServer, this));
     // 注册AcceptHandler
     m_acceptor.async_accept(ptrSession->GetSocket(), boost::bind(&CNetConnectionMgr::AcceptHandlerCB, this, boost::asio::placeholders::error, ptrSession));
 
@@ -56,7 +56,7 @@ VOID CNetConnectionMgr::RunIOServer()
     m_ioServer.run();
 }
 
-VOID CNetConnectionMgr::AcceptHandlerCB(const boost::system::error_code& ec, std::shared_ptr<CNetSession> ptrSession)
+VOID CNetConnectionMgr::AcceptHandlerCB(const boost::system::error_code& ec, boost::shared_ptr<CNetSession> ptrSession)
 {
     if (ec)
         return;
@@ -83,5 +83,16 @@ UINT32 CNetConnectionMgr::Disconnect(UINT32 u32NodeID)
 {
     std::cout << u32NodeID << std::endl;
     return m_pNodeIDLayer->ReleaseNetNodeID(u32NodeID);
+}
+
+VOID CNetConnectionMgr::PostMessage(IN UINT32 u32NodeID, IN const std::string& strMsg)
+{
+    boost::shared_ptr<CNetSession> ptrSession;
+    do 
+    {
+        UINT32 u32Ret = m_pNodeIDLayer->GetSession(u32NodeID, ptrSession);
+        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GetSession Failed. u32Ret = 0x%x\n", u32Ret);
+    } while (0);
+    ptrSession->PostMessage(strMsg);
 }
 

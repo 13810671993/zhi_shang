@@ -20,7 +20,7 @@ public:
     VOID    AddAdpt(IN CAdpt* pAdpt);
     VOID    SetMsgTransmitLayer2Adpt();
     UINT32  StartLisen(IN UINT16 u16Port);
-    UINT32  PostMessage();
+    VOID    PostMessage(IN UINT32 u32NodeID, IN const std::string& strMsg);
     UINT32  SubscribeMessage(UINT32 u32MsgType, CSubMsgHandler* pSubMsgHandler);
 
 private:

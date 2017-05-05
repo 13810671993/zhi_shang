@@ -7,6 +7,7 @@
 #include "common/common_tool.h"
 
 #include <stdio.h>
+#include <string>
 
 #include "main.h"
 #include "adpt/adpt.h"

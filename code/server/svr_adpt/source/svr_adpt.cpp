@@ -44,18 +44,15 @@ UINT32 CSvrAdpt::RegistAdpt(CAdpt* pAdpt)
 {
     UINT32  u32Ret = 0;
     return CNetworkMgr::GetInstance()->RegistAdpt(pAdpt);
-    return u32Ret;
 }
 
-UINT32 CSvrAdpt::RecvMessage(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen)
+UINT32 CSvrAdpt::PushMessage(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen)
 {
     return m_pMsgTransmitLayer->PushMessage(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
 }
 
-UINT32 CSvrAdpt::SendMessage()
+VOID CSvrAdpt::PostMessage(IN UINT32 u32NodeID, IN const std::string& strMsg)
 {
-    UINT32  u32Ret = 0;
-
-    return u32Ret;
+    CNetworkMgr::GetInstance()->PostMessage(u32NodeID, strMsg);
 }
 
