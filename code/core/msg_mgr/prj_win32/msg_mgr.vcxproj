@@ -122,12 +122,12 @@
     <ClInclude Include="..\..\..\include\msg_mgr\msg_mgr.h" />
     <ClInclude Include="..\..\..\include\msg_mgr\msg_mgr_imp.h" />
     <ClInclude Include="..\include\msg_mgr_common.h" />
-    <ClInclude Include="..\include\msg_layer.h" />
+    <ClInclude Include="..\include\msg_transmit_imp.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\msg_mgr.cpp" />
     <ClCompile Include="..\source\msg_mgr_imp.cpp" />
-    <ClCompile Include="..\source\msg_layer.cpp" />
+    <ClCompile Include="..\source\msg_transmit_imp.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

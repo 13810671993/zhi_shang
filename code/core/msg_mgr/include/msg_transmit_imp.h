@@ -3,11 +3,11 @@
 
 // 消息层
 // 负责将adpt发送来的消息发送到sub 主要是连通adpt-sub
-class CMsgTransmitLayer : public CMsgTransmit
+class CMsgTransmitImp : public CMsgTransmit
 {
 public:
-    CMsgTransmitLayer();
-    ~CMsgTransmitLayer();
+    CMsgTransmitImp();
+    ~CMsgTransmitImp();
 public:
     VOID    SetSubscriber(IN CSubscriber* pSubcriber);
     UINT32  PushMessage(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen);

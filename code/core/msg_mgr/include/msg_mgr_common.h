@@ -18,7 +18,7 @@
 #include "sub/subscribers_map.h"
 #include "sub/subscriber.h"
 #include "adpt/adpt.h"
-#include "msg_layer.h"
+#include "msg_transmit_imp.h"
 #include "msg_mgr/msg_mgr.h"
 #include "msg_mgr/msg_mgr_imp.h"
 

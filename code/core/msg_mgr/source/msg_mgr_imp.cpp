@@ -3,7 +3,7 @@
 CMsgMgrImp::CMsgMgrImp()
 {
     m_pSubscriber       = CSubscriber::GetInstance();
-    m_pMsgLayer         = new CMsgTransmitLayer();
+    m_pMsgLayer         = new CMsgTransmitImp();
     m_pMsgLayer->SetSubscriber(m_pSubscriber);
 }
 

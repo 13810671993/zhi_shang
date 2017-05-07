@@ -27,7 +27,7 @@ private:
     static CMsgMgrImp*  m_pMsgMgrImp;
 
     CSubscriber*        m_pSubscriber;
-    CMsgTransmitLayer*  m_pMsgLayer;
+    CMsgTransmitImp*  m_pMsgLayer;
     CAdpt*              m_pAdpt;
 };
 
