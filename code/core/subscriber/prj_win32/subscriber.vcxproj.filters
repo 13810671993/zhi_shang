@@ -11,27 +11,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\logic\logic.h">
+    <ClInclude Include="..\include\subscriber_common.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\logic_imp.h">
+    <ClInclude Include="..\..\..\include\subscriber\sub_msg_handler.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\logic_common.h">
+    <ClInclude Include="..\..\..\include\subscriber\subscriber.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\logic_inner.h">
+    <ClInclude Include="..\..\..\include\subscriber\subscriber_imp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\include\subscriber\subscribers_map.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sub_inner.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\logic_imp.cpp">
+    <ClCompile Include="..\source\subscriber.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\logic.cpp">
+    <ClCompile Include="..\source\subscriber_imp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\logic_inner.cpp">
+    <ClCompile Include="..\source\subscribers_map.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\sub_inner.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

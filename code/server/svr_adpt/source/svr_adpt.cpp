@@ -28,9 +28,9 @@ void CSvrAdpt::DestroyInstance()
     }
 }
 
-VOID CSvrAdpt::SetMsgTransmitLayer(CMsgTransmit* pMsgTransmitLayer)
+VOID CSvrAdpt::SetMsgTransimit(CMsgTransmit* pMsgTransmit)
 {
-    m_pMsgTransmitLayer = pMsgTransmitLayer;
+    m_pMsgTransmit = pMsgTransmit;
 }
 
 UINT32 CSvrAdpt::StartListen(IN UINT16 u16Port)
@@ -48,7 +48,7 @@ UINT32 CSvrAdpt::RegistAdpt(CAdpt* pAdpt)
 
 UINT32 CSvrAdpt::PushMessage(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen)
 {
-    return m_pMsgTransmitLayer->PushMessage(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
+    return m_pMsgTransmit->PushMessage(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
 }
 
 VOID CSvrAdpt::PostMessage(IN UINT32 u32NodeID, IN const std::string& strMsg)

@@ -18,6 +18,7 @@ public:
 private:
     // 面向连接
     UINT32          StartListen(IN UINT16 u16Port);
+    static VOID     ListenThread(CNetworkMgrImp* pThis, UINT16 u16Port);
     static VOID     PushMessage2AdptThread(CNetworkMgrImp* pThis);
 
 private:

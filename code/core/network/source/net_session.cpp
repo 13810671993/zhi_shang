@@ -1,6 +1,6 @@
 #include "network_common.h"
 
-extern boost::lockfree::queue<CNetMsgLayer*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue;
+extern boost::lockfree::queue<CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue;
 
 CNetSession::CNetSession(boost::asio::io_service& ioServer, CNetConnectionMgr* pNetConnectionMgr) : m_socket(ioServer), m_cNetMessageVec(2048, 0), m_pNetConnectionMgr(pNetConnectionMgr)
 {
@@ -37,7 +37,13 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
     // 如果有数据
 
     // 将数据封装到类中 然后写入队列
-    CNetMsgLayer* pNetMsg = new CNetMsgLayer(u32NodeID, (UINT32)m_cNetMessageVec.data(), m_cNetMessageVec.data() + sizeof(UINT32), m_cNetMessageVec.size() - sizeof(UINT32));
+    UINT32 u32MsgType = 0;
+    UINT32 u32MsgLen = 0;
+    std::string strMsg;
+    memcpy(&u32MsgType, m_cNetMessageVec.data(), sizeof(UINT32));
+    strMsg.assign(m_cNetMessageVec.data() + sizeof(UINT32));
+    u32MsgLen = strMsg.length();
+    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, (CHAR*)strMsg.data(), u32MsgLen);
     g_netMsgQueue.push(pNetMsg);
 
     // 清空缓冲区 持续接收数据

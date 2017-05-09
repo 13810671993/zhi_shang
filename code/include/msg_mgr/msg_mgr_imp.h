@@ -18,7 +18,7 @@ private:
 
 public:
     VOID    AddAdpt(IN CAdpt* pAdpt);
-    VOID    SetMsgTransmitLayer2Adpt();
+    VOID    SetMsgTransmit2Adpt();
     UINT32  StartLisen(IN UINT16 u16Port);
     VOID    PostMessage(IN UINT32 u32NodeID, IN const std::string& strMsg);
     UINT32  SubscribeMessage(UINT32 u32MsgType, CSubMsgHandler* pSubMsgHandler);
@@ -27,7 +27,7 @@ private:
     static CMsgMgrImp*  m_pMsgMgrImp;
 
     CSubscriber*        m_pSubscriber;
-    CMsgTransmitImp*  m_pMsgLayer;
+    CMsgTransmitImp*    m_pMsgLayer;
     CAdpt*              m_pAdpt;
 };
 

@@ -96,5 +96,7 @@ int main()
     pMain->InitMessageModule();
     pMain->InitLogicModule();
     getchar();
+    while (1)
+        BOOST_SLEEP(1000);
     CMain::DestroyInstance();
 }

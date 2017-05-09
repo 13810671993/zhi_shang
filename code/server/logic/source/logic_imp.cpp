@@ -1,5 +1,7 @@
 #include "logic_common.h"
 
+boost::lockfree::queue<CLogicInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_LogicMsgQueue(0);
+
 CLogicImp::CLogicImp() : m_pMsgMgr(NULL), m_bRun(FALSE)
 {
 
@@ -28,11 +30,11 @@ VOID CLogicImp::DestroyInstance()
     }
 }
 
-UINT32 CLogicImp::RecvMessageFromSub()
+UINT32 CLogicImp::RecvMessageFromSub(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen)
 {
-    UINT32  u32Ret = 0;
-
-    return u32Ret;
+    CLogicInnerMsg* pMsg = new CLogicInnerMsg(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
+    g_LogicMsgQueue.push(pMsg);
+    return COMERR_OK;
 }
 
 UINT32 CLogicImp::Run()
@@ -66,11 +68,12 @@ UINT32 CLogicImp::Run()
         return u32Ret;
     }
 
-    // 资源准备完毕 启动逻辑线程
+    // 资源准备完毕 启动逻辑线程(池)
     do 
     {
-        boost::thread threadImp(boost::bind(DealMessageThread, (VOID*)this));
-        //threadImp.join();
+        boost::thread_group threads;
+        for (UINT32 i = 0; i < 6; i++)
+            threads.create_thread(boost::bind(&DealMessageThread, this, i));
     } while (0);
 
     return u32Ret;
@@ -91,19 +94,22 @@ UINT32 CLogicImp::Stop()
 
 }
 
-VOID* CLogicImp::DealMessageThread(VOID* pParam)
+VOID CLogicImp::DealMessageThread(CLogicImp* pThis, UINT32 u32ThreadNum)
 {
-    VOID*   pMsg = NULL;
+    CLogicInnerMsg*   pMsg = NULL;
 
     while (1)
     {
-        if (msgQueue.pop(pMsg))
+        if (g_LogicMsgQueue.pop(pMsg) && pMsg != NULL)
         {
+            std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgBuf() << std::endl;
+            //CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgBuf());
+            delete pMsg;
+            pMsg = NULL;
         }
         else
             BOOST_SLEEP(100);
     }
-    return NULL;
 }
 
 UINT32 CLogicImp::RegistMessageCB()
@@ -111,14 +117,15 @@ UINT32 CLogicImp::RegistMessageCB()
     UINT32  u32Ret = 0;
     UINT32  au32MsgType[] = {
                                 0,
+                                1111,
                             };
     for (auto i = 0; i < sizeof(au32MsgType) / sizeof(UINT32); i++)
     {
-        u32Ret = m_pMsgMgr->SubscribeMessage(au32MsgType[i], this);
-        if (u32Ret != 0)
+        do
         {
-            ;
-        }
+            u32Ret = m_pMsgMgr->SubscribeMessage(au32MsgType[i], this);
+            CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "SubscribeMessage Failed. u32Ret = 0x%x\n", u32Ret);
+        } while (0);
     }
 
     return u32Ret;

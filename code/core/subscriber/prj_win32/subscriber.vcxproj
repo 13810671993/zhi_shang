@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4213CC1E-D770-40D9-94FE-077536B98EED}</ProjectGuid>
-    <RootNamespace>msg_mgr</RootNamespace>
+    <ProjectGuid>{19462B60-EC99-4146-8C6D-5209781DB30D}</ProjectGuid>
+    <RootNamespace>subscriber</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -131,15 +131,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\msg_mgr\msg_mgr.h" />
-    <ClInclude Include="..\..\..\include\msg_mgr\msg_mgr_imp.h" />
-    <ClInclude Include="..\include\msg_mgr_common.h" />
-    <ClInclude Include="..\include\msg_transmit_imp.h" />
+    <ClInclude Include="..\..\..\include\subscriber\subscriber.h" />
+    <ClInclude Include="..\..\..\include\subscriber\subscribers_map.h" />
+    <ClInclude Include="..\..\..\include\subscriber\subscriber_imp.h" />
+    <ClInclude Include="..\..\..\include\subscriber\sub_msg_handler.h" />
+    <ClInclude Include="..\include\subscriber_common.h" />
+    <ClInclude Include="..\include\sub_inner.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\msg_mgr.cpp" />
-    <ClCompile Include="..\source\msg_mgr_imp.cpp" />
-    <ClCompile Include="..\source\msg_transmit_imp.cpp" />
+    <ClCompile Include="..\source\subscriber.cpp" />
+    <ClCompile Include="..\source\subscribers_map.cpp" />
+    <ClCompile Include="..\source\subscriber_imp.cpp" />
+    <ClCompile Include="..\source\sub_inner.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

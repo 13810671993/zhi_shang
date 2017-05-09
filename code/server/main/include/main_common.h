@@ -9,12 +9,13 @@
 #include <stdio.h>
 #include <string>
 
+#include "boost/thread.hpp"
+
 #include "main.h"
 #include "adpt/adpt.h"
 #include "adpt/svr_adpt.h"
 #include "network/network_mgr.h"
-#include "sub/sub_msg_handler.h"
-#include "sub/subscriber.h"
+#include "subscriber/subscriber.h"
 #include "msg_mgr/msg_mgr.h"
 #include "conf/conf.h"
 
@@ -23,7 +24,7 @@
 #ifdef _WIN32
 #ifdef _DEBUG
 
-#pragma comment(lib, LIB_DEBUG_IMPORT("sub_d.lib"))
+#pragma comment(lib, LIB_DEBUG_IMPORT("subscriber_d.lib"))
 #pragma comment(lib, LIB_DEBUG_IMPORT("network_d.lib"))
 #pragma comment(lib, LIB_DEBUG_IMPORT("svr_adpt_d.lib"))
 #pragma comment(lib, LIB_DEBUG_IMPORT("msg_mgr_d.lib"))

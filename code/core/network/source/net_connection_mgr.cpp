@@ -38,6 +38,7 @@ UINT32 CNetConnectionMgr::StartListen(IN UINT16 u16Port)
     } while (0);
 
     // 启动接受connect
+    std::cout << "开启监听 port: " << u16Port << std::endl;
     RunIOServer();
     return u32Ret;
 }

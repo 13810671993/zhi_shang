@@ -34,12 +34,12 @@ VOID CMsgMgrImp::AddAdpt(IN CAdpt* pAdpt)
 {
     m_pAdpt = pAdpt;
     m_pAdpt->RegistAdpt(pAdpt);
-	SetMsgTransmitLayer2Adpt();
+	SetMsgTransmit2Adpt();
 }
 
-VOID CMsgMgrImp::SetMsgTransmitLayer2Adpt()
+VOID CMsgMgrImp::SetMsgTransmit2Adpt()
 {
-    m_pAdpt->SetMsgTransmitLayer(m_pMsgLayer);
+    m_pAdpt->SetMsgTransimit(m_pMsgLayer);
 }
 
 UINT32 CMsgMgrImp::StartLisen(IN UINT16 u16Port)

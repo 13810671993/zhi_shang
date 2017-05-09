@@ -1,6 +1,6 @@
 #include "network_common.h"
 
-boost::lockfree::queue<CNetMsgLayer*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue(0);
+boost::lockfree::queue<CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue(0);
 
 CNetworkMgrImp::CNetworkMgrImp()
 {
@@ -45,19 +45,25 @@ VOID CNetworkMgrImp::DestroyInstance()
 
 UINT32 CNetworkMgrImp::StartListen(IN UINT16 u16Port)
 {
-    return m_pNetConnectionMgr->StartListen(u16Port);
+    // 在这里 我要新启动一根线程去执行监听
+    boost::thread threadImp(boost::bind(&ListenThread, this, u16Port));
+    return COMERR_OK;
+}
+
+VOID CNetworkMgrImp::ListenThread(CNetworkMgrImp* pThis, UINT16 u16Port)
+{
+    pThis->m_pNetConnectionMgr->StartListen(u16Port);
 }
 
 VOID CNetworkMgrImp::PushMessage2AdptThread(CNetworkMgrImp* pThis)
 {
-    CNetMsgLayer* pNetMsg = NULL;
+    CNetInnerMsg* pNetMsg = NULL;
     while (1)
     {
         // 从队列中弹出数据 写到adpt中去
         if (g_netMsgQueue.pop(pNetMsg) && pNetMsg != NULL)
         {
-            std::cout << pNetMsg->GetMsgBuf() << std::endl;
-            CMsgMgr::GetInstance()->PostMessage(pNetMsg->GetNodeID(), pNetMsg->GetMsgBuf());
+            pThis->m_pAdpt->PushMessage(pNetMsg->GetNodeID(), pNetMsg->GetMsgType(), pNetMsg->GetMsgBuf(), pNetMsg->GetMsgLen());
             delete pNetMsg;
             pNetMsg = NULL;
         }

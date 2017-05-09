@@ -14,9 +14,8 @@
 
 #endif
 
-#include "sub/sub_msg_handler.h"
-#include "sub/subscribers_map.h"
-#include "sub/subscriber.h"
+#include "subscriber/sub_msg_handler.h"
+#include "subscriber/subscriber.h"
 #include "adpt/adpt.h"
 #include "msg_transmit_imp.h"
 #include "msg_mgr/msg_mgr.h"
