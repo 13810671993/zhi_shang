@@ -2,8 +2,7 @@
 #define __MSG_MGR_COMMON_H__
 
 #include <iostream>
-#include <vector>
-#include <map>
+#include <string>
 
 #include "common/data_type.h"
 #include "common/link_lib.h"

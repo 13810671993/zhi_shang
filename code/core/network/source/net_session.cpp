@@ -51,7 +51,7 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
     m_socket.async_read_some(boost::asio::buffer(m_cNetMessageVec), boost::bind(&CNetSession::MessageHandlerCB, this, boost::asio::placeholders::error, u32NodeID));
 }
 
-VOID CNetSession::PostMessage(IN const std::string& strMsg)
+VOID CNetSession::PostMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
 {
     if (!m_socket.is_open())
     {
@@ -65,7 +65,15 @@ VOID CNetSession::PostMessage(IN const std::string& strMsg)
     //boost::asio::async_write(m_socket, boost::asio::buffer(strMsg), boost::bind(&CNetSession::Test, this));
 
     // 同步发送数据
-    m_socket.write_some(boost::asio::buffer(strMsg), error);
+    //CHAR acTemp = {0};
+    CHAR* pcTemp = new CHAR[u32MsgLen + sizeof(u32MsgType) + 1];
+    memset(pcTemp, 0, u32MsgLen + sizeof(u32MsgType) + 1);
+    memcpy(pcTemp, &u32MsgType, sizeof(u32MsgType));
+    memcpy(pcTemp + sizeof(u32MsgType), pcMsg, u32MsgLen);
+    
+    std::string strMsg(pcTemp);
+    m_socket.write_some(boost::asio::buffer((const std::string)strMsg), error);
+    delete[] pcTemp;
     if (error)
     {
         std::cout << boost::system::system_error(error).what() << std::endl;

@@ -1,10 +1,6 @@
 #ifndef __DATA_TYPE_H__
 #define __DATA_TYPE_H__
 
-#ifdef _MSC_VER
-#include <windows.h>
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -14,7 +10,7 @@ extern "C" {
     *********************************************************************************************************/
 #ifndef _UINT32_TYPE_
 #define _UINT32_TYPE_
-#ifdef _MSC_VER
+#ifdef _WIN32_
     typedef signed      __int64		    INT64;
     typedef unsigned    __int64	        UINT64;
 #else
@@ -96,17 +92,9 @@ extern "C" {
 #define HOWCALL __stdcall
 #endif
 
-    //#ifdef _MSC_VER
-    //	#ifndef HOWCALL
-    //		#define HOWCALL __stdcall
-    //	#endif
-    //#else
-    //	#define HOWCALL
-    //#endif
-
-    /*********************************************************************************************************
-    * 布尔常量 和 空值
-    *********************************************************************************************************/
+/*********************************************************************************************************
+* 布尔常量 和 空值
+*********************************************************************************************************/
 #ifndef    TRUE
 #define    TRUE	1
 #endif

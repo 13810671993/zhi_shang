@@ -18,21 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\include\main.h" />
-    <ClInclude Include="..\include\main_common.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\source\main.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{47F9DD61-B40F-47FF-A516-E0BBAF780B2B}</ProjectGuid>
-    <RootNamespace>main</RootNamespace>
+    <ProjectGuid>{56CB448B-17C2-4567-853F-F690E4386D30}</ProjectGuid>
+    <RootNamespace>app_sdk</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -78,16 +71,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(Configuration)\</OutDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <ExecutablePath>$(VC_ExecutablePath_x86);$(WindowsSDK_ExecutablePath);$(VS_ExecutablePath);$(MSBuild_ExecutablePath);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);G:\boost_1_64_0;D:\boost_1_64_0</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;G:\boost_1_64_0\stage\lib;D:\boost_1_64_0\stage\lib</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86;G:\boost_1_64_0\stage\lib</LibraryPath>
-    <OutDir>$(Configuration)\</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
-    <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);G:\boost_1_64_0</IncludePath>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -95,10 +79,11 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../include/;../../../include/;</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_WIN32_</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;%(PreprocessorDefinitions);_WIN32_;SDK_EXPORTS</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
-      <Command>call ..\..\..\..\script\bat\copy_exe_result_win32.bat $(Configuration) $(TargetName).exe</Command>
+      <Command>call ..\..\..\..\script\bat\copy_lib_result_win32.bat $(Configuration) $(TargetName).lib
+call ..\..\..\..\script\bat\copy_lib_result_win32.bat $(Configuration) $(TargetName).dll</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -106,7 +91,6 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../include/;../../../include/;</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -135,6 +119,16 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\sdk\sdk.h" />
+    <ClInclude Include="..\..\..\include\sdk\sdk_protocol.h" />
+    <ClInclude Include="..\include\sdk_common.h" />
+    <ClInclude Include="..\include\sdk_mgr.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\sdk.cpp" />
+    <ClCompile Include="..\source\sdk_mgr.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

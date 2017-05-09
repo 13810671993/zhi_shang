@@ -13,7 +13,7 @@ protected:
 
 public:
     UINT32          RegistAdpt(CAdpt* pAdpt);
-    VOID            PostMessage(IN UINT32 u32NodeID, IN const std::string& strMsg);
+    VOID            PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg);
 
 private:
     // 面向连接

@@ -5,7 +5,6 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
 
 #include "adpt/adpt.h"
 #include "adpt/svr_adpt.h"

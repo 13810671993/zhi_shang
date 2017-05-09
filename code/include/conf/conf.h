@@ -4,7 +4,7 @@
 #define SIZE_LINE		1024	//每行最大长度
 #define SIZE_FILENAME	256		//文件名最大长度
 
-//#define min(x, y)		((x) <= (y)) ? (x) : (y)
+#define min(x, y)		((x) <= (y)) ? (x) : (y)
 
 typedef enum _ELineType_ 
 {

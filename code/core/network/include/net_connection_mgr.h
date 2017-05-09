@@ -16,7 +16,7 @@ public:
     UINT32          Disconnect(UINT32 u32NodeID);
 
 public:
-    VOID            PostMessage(IN UINT32 u32NodeID, IN const std::string& strMsg);
+    VOID            PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg);
 private:
     CNetNodeIDLayer*        m_pNodeIDLayer;
 

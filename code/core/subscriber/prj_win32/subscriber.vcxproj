@@ -88,6 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../include/;../../../include/;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_WIN32_</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
       <Command>call ..\..\..\..\script\bat\copy_lib_result_win32.bat $(Configuration) $(TargetName).lib</Command>

@@ -16,8 +16,6 @@
 #include "common/common_error.h"
 #include "common/common_tool.h"
 
-#include "libevent-2.0.22-stable/tree.h"
-
 #include "subscriber/sub_msg_handler.h"
 #include "adpt/adpt.h"
 #include "msg_mgr/msg_mgr.h"

@@ -21,7 +21,7 @@
 
 #include "logic/logic.h"
 
-#ifdef _WIN32
+#ifdef _WIN32_
 #ifdef _DEBUG
 
 #pragma comment(lib, LIB_DEBUG_IMPORT("subscriber_d.lib"))
@@ -34,7 +34,7 @@
 #else
 
 #endif
-#elif _LINUX
+#elif _LINUX_
 #endif
 
 #endif

@@ -20,9 +20,9 @@ UINT32 CNetworkMgrImp::RegistAdpt(CAdpt* pAdpt)
     return COMERR_OK;
 }
 
-VOID CNetworkMgrImp::PostMessage(IN UINT32 u32NodeID, IN const std::string& strMsg)
+VOID CNetworkMgrImp::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
 {
-    m_pNetConnectionMgr->PostMessage(u32NodeID, strMsg);
+    m_pNetConnectionMgr->PostMessage(u32NodeID, u32MsgType, u32MsgLen, pcMsg);
 }
 
 CNetworkMgrImp* CNetworkMgrImp::m_pNetworkMgrImp = NULL;
