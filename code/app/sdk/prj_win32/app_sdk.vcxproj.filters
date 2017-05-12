@@ -20,7 +20,7 @@
     <ClInclude Include="..\..\..\include\sdk\sdk_protocol.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\sdk_mgr.h">
+    <ClInclude Include="..\..\..\include\sdk\sdk_mgr.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

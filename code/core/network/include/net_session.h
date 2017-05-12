@@ -12,7 +12,7 @@ public:
     // 面向会话
     VOID            StartSession(IN UINT32 u32NodeID);
     VOID            MessageHandlerCB(IN const boost::system::error_code& ec, IN UINT32 u32NodeID);     // 消息回调
-    VOID            PostMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg);
+    VOID            SendMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg);
 
     boost::asio::ip::tcp::socket& GetSocket();
 

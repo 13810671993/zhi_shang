@@ -1,6 +1,6 @@
 #include "sdk_common.h"
 
-CSdkMgr::CSdkMgr()
+CSdkMgr::CSdkMgr() : m_pFunMessageCB(NULL)
 {
 
 }
@@ -38,13 +38,15 @@ UINT32 CSdkMgr::Connect(IN const CHAR* pcIpAddr, IN UINT16 u16Port, OUT UINT32& 
     return 0;
 }
 
-UINT32 CSdkMgr::SendMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
+UINT32 CSdkMgr::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
 {
+    // 通过nodeID找到连接会话 然后调用network的SendMessage发送消息;
     return 0;
 }
 
 UINT32 CSdkMgr::RegistRecvMsgCallBack(PFN_SDK_MESSAGE_CALLBACK pFunMsgCB)
 {
-    return 0;
+    m_pFunMessageCB = pFunMsgCB;
+    return COMERR_OK;
 }
 

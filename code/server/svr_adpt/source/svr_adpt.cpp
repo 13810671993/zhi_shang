@@ -53,6 +53,6 @@ UINT32 CSvrAdpt::PushMessage(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, U
 
 VOID CSvrAdpt::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
 {
-    CNetworkMgr::GetInstance()->PostMessage(u32NodeID, u32MsgType, u32MsgLen, pcMsg);
+    CNetworkMgr::GetInstance()->SendMessage(u32NodeID, u32MsgType, u32MsgLen, pcMsg);
 }
 

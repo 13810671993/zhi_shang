@@ -86,6 +86,11 @@ UINT32 CNetConnectionMgr::Disconnect(UINT32 u32NodeID)
     return m_pNodeIDLayer->ReleaseNetNodeID(u32NodeID);
 }
 
+BOOL CNetConnectionMgr::IsConnect()
+{
+    return m_pNodeIDLayer->IsConnect();
+}
+
 VOID CNetConnectionMgr::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
 {
     boost::shared_ptr<CNetSession> ptrSession;
@@ -94,6 +99,6 @@ VOID CNetConnectionMgr::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, I
         UINT32 u32Ret = m_pNodeIDLayer->GetSession(u32NodeID, ptrSession);
         CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GetSession Failed. u32Ret = 0x%x\n", u32Ret);
     } while (0);
-    ptrSession->PostMessage(u32MsgType, u32MsgLen, pcMsg);
+    ptrSession->SendMessage(u32MsgType, u32MsgLen, pcMsg);
 }
 

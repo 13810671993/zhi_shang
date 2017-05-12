@@ -121,9 +121,9 @@ call ..\..\..\..\script\bat\copy_lib_result_win32.bat $(Configuration) $(TargetN
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\sdk\sdk.h" />
+    <ClInclude Include="..\..\..\include\sdk\sdk_mgr.h" />
     <ClInclude Include="..\..\..\include\sdk\sdk_protocol.h" />
     <ClInclude Include="..\include\sdk_common.h" />
-    <ClInclude Include="..\include\sdk_mgr.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\sdk.cpp" />

@@ -14,6 +14,7 @@ public:
     VOID            AcceptHandlerCB(const boost::system::error_code& ec, boost::shared_ptr<CNetSession> ptrSession);      // 连接回调
 
     UINT32          Disconnect(UINT32 u32NodeID);
+    BOOL            IsConnect();
 
 public:
     VOID            PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg);

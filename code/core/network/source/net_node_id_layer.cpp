@@ -66,3 +66,11 @@ UINT32 CNetNodeIDLayer::GetSession(IN UINT32 u32NodeID, OUT boost::shared_ptr<CN
         return COMERR_NOT_FOUND;
     }
 }
+
+BOOL CNetNodeIDLayer::IsConnect()
+{
+    if (m_u32NodeID_ptrSession.empty())
+        return FALSE;
+    else
+        return TRUE;
+}

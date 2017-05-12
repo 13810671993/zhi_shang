@@ -16,6 +16,7 @@
 #include "common/common_error.h"
 #include "common/common_tool.h"
 
+// 服务器头文件
 #include "subscriber/sub_msg_handler.h"
 #include "adpt/adpt.h"
 #include "msg_mgr/msg_mgr.h"
@@ -25,5 +26,9 @@
 #include "net_inner.h"
 #include "network/network_mgr.h"
 #include "network_mgr_imp.h"
+
+// sdk头文件
+#include "sdk/sdk.h"
+#include "sdk/sdk_mgr.h"
 
 #endif

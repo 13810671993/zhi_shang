@@ -7,7 +7,7 @@
 #include "common/link_lib.h"
 
 #include "sdk/sdk.h"
-#include "sdk_mgr.h"
+#include "sdk/sdk_mgr.h"
 
 #endif // !__APP_SDK_COMMON_H__
 
