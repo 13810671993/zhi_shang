@@ -83,7 +83,9 @@ VOID CSubscriberImp::PushMsg2SubscriberThread(CSubscriberImp* pThis)
             }
             else
             {
-                // 没有人订阅该消息
+                // 没有人订阅该消息 
+                // fix: 测试需要
+                pThis->m_msgType_SubscribersMap.begin()->second->PubMessage(pMsg);
             }
             delete pMsg;
             pMsg = NULL;

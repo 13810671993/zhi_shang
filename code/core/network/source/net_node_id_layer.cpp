@@ -74,3 +74,14 @@ BOOL CNetNodeIDLayer::IsConnect()
     else
         return TRUE;
 }
+
+UINT32 CNetNodeIDLayer::GetNodeID(OUT UINT32& u32NodeID)
+{
+    if (IsConnect())
+    {
+        u32NodeID = m_u32NodeID_ptrSession.begin()->first;
+        return COMERR_OK;
+    }
+    else
+        return COMERR_NOT_FOUND;
+}

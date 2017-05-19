@@ -40,10 +40,13 @@ private:
 public:
     UINT32          Init();
     UINT32          Connect(IN const CHAR* pcIpAddr, IN UINT16 u16Port, OUT UINT32& u32NodeID);     // 目前只有同步
-    UINT32          RegistRecvMsgCallBack(CSdkMgr* pSdkMgr);    // 可能会改成函数指针
+    UINT32          RegistRecvMsgCallBack(PFUN_MESSAGE_CALLBACK pFunMessageCallback);    // 可能会改成函数指针
 
 private:
-    static VOID     RecvMessageFromServer(CNetworkMgrImp* pThis);
+    static VOID     RecvMessageFromServerThread(CNetworkMgrImp* pThis);
+
+private:
+    PFUN_MESSAGE_CALLBACK   m_pFunMessageCallback;
 /*******************************************************客户端用***************************************************************/
 };
 

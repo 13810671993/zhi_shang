@@ -81,6 +81,36 @@ VOID CNetSession::SendMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN cons
     }
 }
 
+UINT32 CNetSession::Connect(IN const CHAR* pcIpAddr, IN UINT16 u16Port)
+{
+    boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address_v4::from_string(pcIpAddr), u16Port);
+    boost::system::error_code err;
+    m_socket.connect(endpoint, err);
+    if (err)
+    {
+        // ÓÐ´íÎó
+        return COMERR_UNKOWN;
+    }
+    return COMERR_OK;
+}
+
+UINT32 CNetSession::RecvMessage(OUT UINT32& u32MsgType, OUT std::string& strMsg)
+{
+    boost::system::error_code err;
+    m_socket.read_some(boost::asio::buffer(m_cNetMessageVec), err);
+    if (err)
+    {
+        // ÓÐ´íÎó
+        return COMERR_UNKOWN;
+    }
+    else
+    {
+        memcpy(&u32MsgType, m_cNetMessageVec.data(), sizeof(UINT32));
+        strMsg.assign(m_cNetMessageVec.data() + sizeof(UINT32));
+        return COMERR_OK;
+    }
+}
+
 boost::asio::ip::tcp::socket& CNetSession::GetSocket()
 {
     return m_socket;

@@ -103,7 +103,7 @@ VOID CLogicImp::DealMessageThread(CLogicImp* pThis, UINT32 u32ThreadNum)
         if (g_LogicMsgQueue.pop(pMsg) && pMsg != NULL)
         {
             std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgBuf() << std::endl;
-            //CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgBuf());
+            CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
             delete pMsg;
             pMsg = NULL;
         }

@@ -14,7 +14,9 @@ public:
     UINT32  GenerateNetNodeID(IN boost::shared_ptr<CNetSession> ptrSession, OUT UINT32& u32NodeID);
     UINT32  ReleaseNetNodeID(IN UINT32 u32NodeID);
     UINT32  GetSession(IN UINT32 u32NodeID, OUT boost::shared_ptr<CNetSession>& ptrSession);
+
     BOOL    IsConnect();
+    UINT32  GetNodeID(OUT UINT32& u32NodeID);
 
 private:
     typedef boost::shared_lock<boost::shared_mutex>     TypeReadLock;       // ¶ÁmapËø
