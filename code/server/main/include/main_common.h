@@ -20,6 +20,7 @@
 #include "conf/conf.h"
 
 #include "logic/logic.h"
+#include "log.h"
 
 #ifdef _WIN32_
 #ifdef _DEBUG

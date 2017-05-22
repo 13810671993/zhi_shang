@@ -1,4 +1,4 @@
-#include "log/log.h"
+#include "log.h"
 
 //
 boost::log::sources::severity_logger< E_SEVERITY_LEVEL > lg;
@@ -57,7 +57,7 @@ void CLog::InitLogBase()
     // 创建并init文件后端
     boost::shared_ptr<boost::log::sinks::text_file_backend> ptrBackend = boost::make_shared<boost::log::sinks::text_file_backend>(
         // 日志文件名
-        boost::log::keywords::file_name = "../../../../log/server-%Y.%m.%d-%H.%M.%S.log",
+        boost::log::keywords::file_name = "../log/server-%Y.%m.%d-%H.%M.%S.log",
         // 单个日志文件大小限制
         boost::log::keywords::rotation_size = 100 * 1024 * 1024,
         // 每隔指定时间重建新文件
