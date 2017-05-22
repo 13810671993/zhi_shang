@@ -35,8 +35,6 @@ UINT32 CMain::InitCommModule()
     {
         CConf* pConf = CConf::GetInstance("");
         CHECK_ERR_BREAK(pConf != NULL, COMERR_NULL_POINTER, "CConf::GetInstance failed. u32Ret = 0x%x\n", u32Ret);
-        CLog* pLog = new CLog(DEBUG);
-        CLog::PrintLog(DEBUG, "panbingfan");
     } while (0);
 
     return u32Ret;
@@ -89,11 +87,6 @@ UINT32 CMain::InitLogicModule()
 	return u32Ret;
 }
 
-void SetFilter2()
-{
-    boost::log::core::get()->set_filter(boost::log::trivial::severity >= boost::log::trivial::debug);
-}
-
 int main()
 {
     CMain* pMain = CMain::GetInstance();
@@ -102,25 +95,6 @@ int main()
     pMain->InitNetworkModule();
     pMain->InitMessageModule();
     pMain->InitLogicModule();
-
-#if 0
-    boost::log::add_file_log("sample.log");
-    SetFilter2();
-    BOOST_LOG_TRIVIAL(trace) << "A trace severity message";
-    BOOST_LOG_TRIVIAL(debug) << "A debug severity message";
-    BOOST_LOG_TRIVIAL(info) << "An informational severity message";
-    BOOST_LOG_TRIVIAL(warning) << "A warning severity message";
-    BOOST_LOG_TRIVIAL(error) << "An error severity message";
-    BOOST_LOG_TRIVIAL(fatal) << "A fatal severity message";
-#endif
-#if 0
-    BOOST_LOG_TRIVIAL(trace) << "A trace severity message";
-    BOOST_LOG_TRIVIAL(debug) << "A debug severity message";
-    BOOST_LOG_TRIVIAL(info) << "An informational severity message";
-    BOOST_LOG_TRIVIAL(warning) << "A warning severity message";
-    BOOST_LOG_TRIVIAL(error) << "An error severity message";
-    BOOST_LOG_TRIVIAL(fatal) << "A fatal severity message";
-#endif
 
     getchar();
     while (1)
