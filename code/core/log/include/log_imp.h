@@ -1,19 +1,30 @@
 #ifndef __LOG_IMP_H__
 #define __LOG_IMP_H__
 
+
 class CLogImp : public CLog
 {
 public:
-	static CLogImp*	GetInstance();
-	static VOID		DestroyInstance();
+    static CLogImp* GetInstance(E_SEVERITY_LEVEL eLogLevel);
+    static VOID     DestroyInstance();
 
 protected:
-	CLogImp();
-	~CLogImp();
+    CLogImp(E_SEVERITY_LEVEL eLogLevel);
+    ~CLogImp();
 
-private:
-	static CLogImp*	m_pLogImp;
+public:
+    static VOID PrintLog(E_SEVERITY_LEVEL eLogLevel, CHAR* pLogMessage);
+
+	// 设置log基础环境
+	VOID InitLogBase();
+	// 设置log过滤级别 支持运行中动态修改
+	VOID SetLogLevel(E_SEVERITY_LEVEL eLogLevel);
+
+public:
+    static CLogImp* m_pLogImp;
+
 };
+
 
 #endif // !__LOG_IMP_H__
 

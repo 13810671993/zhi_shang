@@ -34,7 +34,9 @@ UINT32 CMain::InitCommModule()
     do 
     {
         CConf* pConf = CConf::GetInstance("");
-        CHECK_ERR_BREAK(pConf != NULL, COMERR_NULL_POINTER, "CConf::GetInstance failed. u32Ret = 0x%x\n", u32Ret);
+        CHECK_ERR_BREAK(pConf != NULL, COMERR_NULL_POINTER, "CConf::GetInstance Failed. u32Ret = 0x%x\n", u32Ret);
+        CLog* pLog = CLog::GetInstance(E_LOG_LEVEL_DEBUG);
+        CHECK_ERR_BREAK(pLog != NULL, COMERR_NULL_POINTER, "CLog::GetInstance Failed. u32Ret = 0x%x\n", u32Ret);
     } while (0);
 
     return u32Ret;
@@ -46,7 +48,7 @@ UINT32 CMain::InitNetworkModule()
     do 
     {
         CNetworkMgr* pNetworkMgr = CNetworkMgr::GetInstance();
-        CHECK_ERR_BREAK(pNetworkMgr != NULL, COMERR_NULL_POINTER, "CNetworkMgr::GetInstance failed. u32Ret = 0x%x\n", u32Ret);
+        CHECK_ERR_BREAK(pNetworkMgr != NULL, COMERR_NULL_POINTER, "CNetworkMgr::GetInstance Failed. u32Ret = 0x%x\n", u32Ret);
     } while (0);
 
     return u32Ret;
@@ -58,16 +60,16 @@ UINT32 CMain::InitMessageModule()
     do 
     {
         CMsgMgr* pMsgMgr = CMsgMgr::GetInstance();
-        CHECK_ERR_BREAK(pMsgMgr != NULL, COMERR_NULL_POINTER, "CMsgMgr::GetInstance failed. u32Ret = 0x%x\n", u32Ret);
+        CHECK_ERR_BREAK(pMsgMgr != NULL, COMERR_NULL_POINTER, "CMsgMgr::GetInstance Failed. u32Ret = 0x%x\n", u32Ret);
 
         CAdpt* pAdpt = CSvrAdpt::GetInstance();
-        CHECK_ERR_BREAK(pAdpt != NULL, COMERR_NULL_POINTER, "CSvrAdpt::GetInstance failed. u32Ret = 0x%x\n", u32Ret);
+        CHECK_ERR_BREAK(pAdpt != NULL, COMERR_NULL_POINTER, "CSvrAdpt::GetInstance Failed. u32Ret = 0x%x\n", u32Ret);
 
         pMsgMgr->AddAdpt(pAdpt);
         //u32Ret = pMsgMgr->StartLisen("127.0.0.1", 1993);
         //u32Ret = pMsgMgr->StartLisen("192.168.31.181", 1993);
         u32Ret = pMsgMgr->StartLisen(1993);
-        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "StartListen failed. u32Ret = 0x%x\n", u32Ret);
+        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "StartListen Failed. u32Ret = 0x%x\n", u32Ret);
 
     } while (0);
 
@@ -80,7 +82,7 @@ UINT32 CMain::InitLogicModule()
 	do 
 	{
 		CLogic* pLogic = CLogic::GetInstance();
-		CHECK_ERR_BREAK(pLogic != NULL, COMERR_NULL_POINTER, "CLogic::GetInstance failed. u32Ret = 0x%x\n", u32Ret);
+		CHECK_ERR_BREAK(pLogic != NULL, COMERR_NULL_POINTER, "CLogic::GetInstance Failed. u32Ret = 0x%x\n", u32Ret);
 		pLogic->Run();
 	} while (0);
 
@@ -96,7 +98,7 @@ int main()
     pMain->InitMessageModule();
     pMain->InitLogicModule();
 
-    getchar();
+    //getchar();
     while (1)
         BOOST_SLEEP(1000);
     CMain::DestroyInstance();

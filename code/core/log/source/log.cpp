@@ -10,13 +10,23 @@ CLog::~CLog()
 
 }
 
-CLog* CLog::GetInstance()
+VOID CLog::PrintLog(E_SEVERITY_LEVEL eLogLevel, CHAR* format, ...)
 {
-	return CLogImp::GetInstance();
+    va_list arg;
+    va_start(arg, format);
+    std::vector<CHAR> cLogMessageVec(strlen(format) + 1, 0);
+    snprintf(cLogMessageVec.data(), strlen(format) + 1, format, arg);
+    va_end(arg);
+    CLogImp::PrintLog(eLogLevel, cLogMessageVec.data());
+}
+
+CLog* CLog::GetInstance(E_SEVERITY_LEVEL eLogLevel)
+{
+    return CLogImp::GetInstance(eLogLevel);
 }
 
 VOID CLog::DestroyInstance()
 {
-	CLogImp::DestroyInstance();
+    CLogImp::DestroyInstance();
 }
 

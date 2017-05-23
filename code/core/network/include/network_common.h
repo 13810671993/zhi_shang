@@ -12,6 +12,7 @@
 #include <boost/thread/shared_mutex.hpp>
 #include <boost/shared_ptr.hpp>
 
+
 #include "common/data_type.h"
 #include "common/common_error.h"
 #include "common/common_tool.h"
@@ -26,6 +27,8 @@
 #include "net_inner.h"
 #include "network/network_mgr.h"
 #include "network_mgr_imp.h"
+
+#include "log/log.h"
 
 // sdkÍ·ÎÄ¼þ
 #include "sdk/sdk.h"

@@ -23,4 +23,5 @@
 #include "logic/logic.h"
 #include "logic_imp.h"
 
+#include "log/log.h"
 #endif

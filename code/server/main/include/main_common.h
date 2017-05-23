@@ -18,8 +18,9 @@
 #include "subscriber/subscriber.h"
 #include "msg_mgr/msg_mgr.h"
 #include "conf/conf.h"
-
 #include "logic/logic.h"
+
+#include "log/log.h"
 
 #ifdef _WIN32_
 #ifdef _DEBUG
@@ -30,6 +31,7 @@
 #pragma comment(lib, LIB_DEBUG_IMPORT("msg_mgr_d.lib"))
 #pragma comment(lib, LIB_DEBUG_IMPORT("conf_d.lib"))
 #pragma comment(lib, LIB_DEBUG_IMPORT("logic_d.lib"))
+#pragma comment(lib, LIB_DEBUG_IMPORT("log_d.lib"))
 
 #else
 

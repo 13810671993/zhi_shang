@@ -1,0 +1,5 @@
+QPushButton#btnClose
+{
+background-color: grey;
+color: red;
+}

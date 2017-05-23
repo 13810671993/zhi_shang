@@ -11,10 +11,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\log\log.h">
+    <ClInclude Include="..\include\log_common.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\log_common.h">
+    <ClInclude Include="..\..\..\include\log\log.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\include\log_imp.h">

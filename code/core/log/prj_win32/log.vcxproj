@@ -18,17 +18,8 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\include\log\log.h" />
-    <ClInclude Include="..\include\log_common.h" />
-    <ClInclude Include="..\include\log_imp.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\source\log.cpp" />
-    <ClCompile Include="..\source\log_imp.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{30E97121-5ED0-4289-B8DE-34E2058B0076}</ProjectGuid>
+    <ProjectGuid>{31539D47-FC41-4126-A324-562CE4CD3EFF}</ProjectGuid>
     <RootNamespace>log</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -127,6 +118,15 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\log\log.h" />
+    <ClInclude Include="..\include\log_common.h" />
+    <ClInclude Include="..\include\log_imp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\log.cpp" />
+    <ClCompile Include="..\source\log_imp.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
