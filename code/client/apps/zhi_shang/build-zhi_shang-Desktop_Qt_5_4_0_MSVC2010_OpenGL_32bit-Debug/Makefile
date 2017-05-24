@@ -197,6 +197,7 @@ Makefile: ..\prj_qt\zhi_shang.pro C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\win3
 		C:/Qt/Qt5.4.0/5.4/msvc2010_opengl/lib/Qt5Cored.prl \
 		C:/Qt/Qt5.4.0/5.4/msvc2010_opengl/lib/Qt5Widgets.prl \
 		C:/Qt/Qt5.4.0/5.4/msvc2010_opengl/lib/Qt5Gui.prl \
+		C:/Qt/Qt5.4.0/5.4/msvc2010_opengl/lib/Qt5Network.prl \
 		C:/Qt/Qt5.4.0/5.4/msvc2010_opengl/lib/Qt5Core.prl
 	$(QMAKE) -spec win32-msvc2010 CONFIG+=debug -o Makefile ..\prj_qt\zhi_shang.pro
 C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\spec_pre.prf:
@@ -323,6 +324,7 @@ C:/Qt/Qt5.4.0/5.4/msvc2010_opengl/lib/qtmaind.prl:
 C:/Qt/Qt5.4.0/5.4/msvc2010_opengl/lib/Qt5Cored.prl:
 C:/Qt/Qt5.4.0/5.4/msvc2010_opengl/lib/Qt5Widgets.prl:
 C:/Qt/Qt5.4.0/5.4/msvc2010_opengl/lib/Qt5Gui.prl:
+C:/Qt/Qt5.4.0/5.4/msvc2010_opengl/lib/Qt5Network.prl:
 C:/Qt/Qt5.4.0/5.4/msvc2010_opengl/lib/Qt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -spec win32-msvc2010 CONFIG+=debug -o Makefile ..\prj_qt\zhi_shang.pro
