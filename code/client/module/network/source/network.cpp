@@ -12,29 +12,27 @@ CNetwork::~CNetwork()
     delete m_pSocket;
 }
 
-void CNetwork::PortEditFinished(QString qstrPort)
+void CNetwork::SLOT_PortEditFinished(QString qstrPort)
 {
     // port编辑完成 获取到port
     m_iPort = qstrPort.toInt();
     qDebug() << m_iPort;
 }
 
-void CNetwork::DoConnect()
+void CNetwork::SLOT_Connect()
 {
     Connect();
 }
 
-void CNetwork::DoSendMessage(QString qstrSendMessage)
+void CNetwork::SLOT_SendMessage(QString qstrSendMessage)
 {
-    // 1. 获取输入框中的发送信息
-    // 2.
-
+    m_pSocket->write(qstrSendMessage.toLatin1());
 }
 
 void CNetwork::RecvMessage()
 {
     QString qstrMessage = m_pSocket->readAll();
-    emit ShowRecvMessage(qstrMessage);
+    emit SIGNAL_ShowRecvMessage(qstrMessage);
     qDebug() << qstrMessage;
 }
 

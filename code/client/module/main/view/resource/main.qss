@@ -3,3 +3,8 @@ QPushButton#btnClose
 background-color: grey;
 color: red;
 }
+
+QLabel#labelBackground
+{
+background-color: #acfeff;
+}

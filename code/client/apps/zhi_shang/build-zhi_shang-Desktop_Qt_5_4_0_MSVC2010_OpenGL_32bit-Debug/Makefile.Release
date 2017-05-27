@@ -477,6 +477,8 @@ release\main.obj: ..\source\main.cpp ..\..\..\module\main\main_common.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\qcontainerfwd.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\qisenum.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\qobject_impl.h \
+		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\QTextCodec \
+		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\qtextcodec.h \
 		..\..\..\module\main\view\include\view_main_widget.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtWidgets\QWidget \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtWidgets\qwidget.h \
@@ -598,6 +600,8 @@ release\view_main_widget.obj: ..\..\..\module\main\view\source\view_main_widget.
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\qcontainerfwd.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\qisenum.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\qobject_impl.h \
+		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\QTextCodec \
+		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\qtextcodec.h \
 		..\..\..\module\main\view\include\view_main_widget.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtWidgets\QWidget \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtWidgets\qwidget.h \

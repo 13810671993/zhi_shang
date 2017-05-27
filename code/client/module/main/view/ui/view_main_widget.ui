@@ -121,6 +121,29 @@
     </rect>
    </property>
   </widget>
+  <widget class="QLabel" name="labelBackground">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>392</width>
+     <height>300</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>labelBackground</zorder>
+  <zorder>btnClose</zorder>
+  <zorder>btnConnect</zorder>
+  <zorder>btnSend</zorder>
+  <zorder>labelPort</zorder>
+  <zorder>labelRecv</zorder>
+  <zorder>labelSend</zorder>
+  <zorder>lineEditPort</zorder>
+  <zorder>textBrowserRecv</zorder>
+  <zorder>textEditSend</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

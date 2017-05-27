@@ -17,9 +17,9 @@ public:
     ~CMainWidget();
 
 public slots:
-    void DoShowRecvMessage(QString qstrMessage);
-    void DoGetSendMessage();
-    void DoCloseMainWidget();
+    void SLOT_ShowRecvMessage(QString qstrMessage);
+    void SLOT_GetSendMessage();
+    void SLOT_CloseMainWidget();
 
 private:
     void BindSignals();

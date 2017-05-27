@@ -15,13 +15,13 @@ public:
     ~CNetwork();
 
 signals:
-    void ShowRecvMessage(QString qstrMessage);
-    void SendMessage(QString qstrSendMessage);
+    void SIGNAL_ShowRecvMessage(QString qstrMessage);
+    void SIGNAL_SendMessage(QString qstrSendMessage);
 
 public slots:
-    void PortEditFinished(QString qstrPort);
-    void DoConnect();
-    void DoSendMessage(QString qstrSendMessage);
+    void SLOT_PortEditFinished(QString qstrPort);
+    void SLOT_Connect();
+    void SLOT_SendMessage(QString qstrSendMessage);
 
 private slots:
     void RecvMessage();
