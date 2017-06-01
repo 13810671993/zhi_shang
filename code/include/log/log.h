@@ -1,6 +1,11 @@
 #ifndef __LOG_H__
 #define __LOG_H__
 
+#ifndef MAX_LOG_SIZE
+#define MAX_LOG_SIZE 2048
+
+#endif
+
 // 日志级别
 typedef enum 
 {
@@ -79,11 +84,5 @@ public:
 private:
 
 };
-
-
-
-
-
-
 
 #endif

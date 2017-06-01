@@ -89,16 +89,96 @@ UINT32 CMain::InitLogicModule()
 	return u32Ret;
 }
 
+#pragma warning(disable:4996)
+#pragma warning(disable:4703)
+#include <vector>
+
+std::vector<CHAR> cDataVec;
+std::vector<UINT32> u32TestVec;
+std::string strTest;
+CHAR pcTest[512];
+CHAR* pTest;
+
+CHAR* AssignInStack(CHAR** pcPoint2, CHAR* pcPoint1, CHAR*& pcRefer)
+{
+    CHAR cText = 'a';
+    cDataVec.push_back(cText);
+    cDataVec.push_back(++cText);
+
+    CHAR buf[] = "test stack";
+    strTest = buf;
+    (*pcPoint2) = buf;
+    //pcPoint1 = buf;
+    pcPoint1 = new CHAR[250];
+    strcpy(pcPoint1, buf);
+
+    pcRefer = new CHAR[250];
+    strcpy(pcRefer, buf);
+#if 0
+    std::string strTemp1(strTest);
+    std::string strTemp2(strTemp1);
+    std::string strTemp3 = strTemp2;
+
+    LogDebug("&buf: 0x%x", buf);
+    LogDebug("&strTest: 0x%x", (strTest.data()));
+    LogDebug("&strTemp1: 0x%x", (strTemp1.data()));
+    LogDebug("&strTemp2: 0x%x", (strTemp2.data()));
+    LogDebug("&strTemp3: 0x%x", (strTemp3.data()));
+#endif
+
+    UINT32 u32Num = 1;
+    u32TestVec.push_back(u32Num);
+    u32TestVec.push_back(++u32Num);
+
+    strcpy(pcTest, strTest.data());
+    pTest = buf;
+
+    return buf;
+}
+
+CHAR*& AssignInStackRefer()
+{
+    CHAR buf[] = "test stack";
+
+    CHAR* p = buf;
+    return p;
+}
+
 int main()
 {
     CMain* pMain = CMain::GetInstance();
 
     pMain->InitCommModule();
+#if 1
+    CHAR* pcPoint2 = NULL;
+    CHAR* pcPoint1 = NULL;
+    CHAR* pcRefer = NULL;
+    CHAR* pcRet = AssignInStack(&pcPoint2, pcPoint1, pcRefer);
+    CHAR* pcReferReturn = AssignInStackRefer();
+    LogDebug("%c", cDataVec[0]);
+    LogDebug("%c", cDataVec[1]);
+
+    LogDebug("%s", strTest.c_str());
+    LogDebug("data: %u", u32TestVec[0]);
+    LogDebug("%u", u32TestVec[1]);
+
+    LogDebug("pcTest: %s", pcTest);
+    LogDebug("pTest: %s", pTest);
+
+    LogDebug("pcRet: %s", pcRet);
+
+    LogDebug("pcPoint2: %s", pcPoint2);
+    LogDebug("pcPoint1: %s", pcPoint1);
+
+    LogDebug("pcRefer: %s", pcRefer);
+
+    LogDebug("pcReferReturn: %s", pcReferReturn);
+#else
     pMain->InitNetworkModule();
     pMain->InitMessageModule();
     pMain->InitLogicModule();
+#endif
 
-    //getchar();
     while (1)
         BOOST_SLEEP(1000);
     CMain::DestroyInstance();

@@ -23,6 +23,13 @@ public:
 public:
     static CLogImp* m_pLogImp;
 
+    // 使用文件后端
+    typedef boost::log::sinks::synchronous_sink<boost::log::sinks::text_file_backend> TypeSink;
+private:
+    //
+    static boost::log::sources::severity_logger< E_SEVERITY_LEVEL > m_lg;
+    boost::shared_ptr<TypeSink> m_ptrSink;
+
 };
 
 

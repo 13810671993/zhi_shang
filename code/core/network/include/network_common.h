@@ -30,8 +30,4 @@
 
 #include "log/log.h"
 
-// sdkÍ·ÎÄ¼ş
-#include "sdk/sdk.h"
-#include "sdk/sdk_mgr.h"
-
 #endif

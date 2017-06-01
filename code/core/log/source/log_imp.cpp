@@ -1,8 +1,5 @@
 #include "log_common.h"
 
-//
-boost::log::sources::severity_logger< E_SEVERITY_LEVEL > lg;
-
 // 自定义打印日志级别
 template< typename CharT, typename TraitsT >
 inline std::basic_ostream< CharT, TraitsT >& operator<< (std::basic_ostream< CharT, TraitsT >& stream, E_SEVERITY_LEVEL level)
@@ -23,11 +20,6 @@ inline std::basic_ostream< CharT, TraitsT >& operator<< (std::basic_ostream< Cha
 	return stream;
 }
 
-// 使用文件后端
-typedef boost::log::sinks::synchronous_sink<boost::log::sinks::text_file_backend> type_sink;
-
-boost::shared_ptr<type_sink> ptrSink;
-
 CLogImp::CLogImp(E_SEVERITY_LEVEL eLogLevel)
 {
     InitLogBase();
@@ -39,9 +31,11 @@ CLogImp::~CLogImp()
 
 }
 
+boost::log::sources::severity_logger< E_SEVERITY_LEVEL > CLogImp::m_lg;
+
 VOID CLogImp::PrintLog(E_SEVERITY_LEVEL eLogLevel, CHAR* pLogMessage)
 {
-    BOOST_LOG_SEV(lg, eLogLevel) << pLogMessage;
+    BOOST_LOG_SEV(m_lg, eLogLevel) << pLogMessage;
 }
 
 CLogImp* CLogImp::m_pLogImp = NULL;
@@ -81,9 +75,9 @@ VOID CLogImp::InitLogBase()
     //ptrBackend->auto_flush(TRUE);
 
 	// 使用文件后端来创建sink
-	ptrSink = boost::make_shared<type_sink>(ptrBackend);
+	m_ptrSink = boost::make_shared<TypeSink>(ptrBackend);
 
-	ptrSink->set_formatter(
+	m_ptrSink->set_formatter(
         // 日志格式
 		boost::log::expressions::format("[%1%] [%2%] | %3%| %4%")
         // 时间戳格式
@@ -95,12 +89,12 @@ VOID CLogImp::InitLogBase()
         // 要打印的log
 		% boost::log::expressions::message
 	);
-	boost::log::core::get()->add_sink(ptrSink);
+	boost::log::core::get()->add_sink(m_ptrSink);
 	boost::log::add_common_attributes();
 }
 
 VOID CLogImp::SetLogLevel(E_SEVERITY_LEVEL eLogLevel)
 {
 	// 通过sink设置日志过滤等级
-	ptrSink->set_filter(boost::log::expressions::attr< E_SEVERITY_LEVEL >("Severity") >= eLogLevel);
+	m_ptrSink->set_filter(boost::log::expressions::attr< E_SEVERITY_LEVEL >("Severity") >= eLogLevel);
 }
