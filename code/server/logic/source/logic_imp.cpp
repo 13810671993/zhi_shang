@@ -132,6 +132,7 @@ UINT32 CLogicImp::RegistMessageCB()
         {
             u32Ret = m_pMsgMgr->SubscribeMessage(au32MsgType[i], this);
             CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "SubscribeMessage Failed. u32Ret = 0x%x", u32Ret);
+
         } while (0);
     }
 
