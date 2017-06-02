@@ -1,6 +1,6 @@
 #include "network_common.h"
 
-CNetNodeIDLayer::CNetNodeIDLayer()
+CNetNodeIDLayer::CNetNodeIDLayer() : m_u32Index(0)
 {
 
 }
@@ -13,10 +13,9 @@ CNetNodeIDLayer::~CNetNodeIDLayer()
 UINT32 CNetNodeIDLayer::GenerateNetNodeID(IN boost::shared_ptr<CNetSession> ptrSession, OUT UINT32& u32NodeID)
 {
     CNetNodeIDLayer::TypeWriteLock writeLock(m_mutex);
-    static UINT32   u32TempCount = 1;
     
     auto it = m_u32NodeID_ptrSession.begin();
-    for (; it != m_u32NodeID_ptrSession.end(); it++)
+    for (; it != m_u32NodeID_ptrSession.end(); ++it)
     {
         if (it->second == ptrSession)
             break;
@@ -28,9 +27,20 @@ UINT32 CNetNodeIDLayer::GenerateNetNodeID(IN boost::shared_ptr<CNetSession> ptrS
     }
     else
     {
+        // 循环使用m_u32Index 防止达到最大数
+        if (!(++m_u32Index))
+            ++m_u32Index;
+        auto it = m_u32NodeID_ptrSession.end();
+        while (1)
+        {
+            it = m_u32NodeID_ptrSession.find(m_u32Index);
+            if (it == m_u32NodeID_ptrSession.end())
+                break;
+            ++m_u32Index;
+        }
+
         // 这是一个新的连接
-        u32NodeID = u32TempCount;
-        u32TempCount++;
+        u32NodeID = m_u32Index;
         m_u32NodeID_ptrSession.insert(std::make_pair(u32NodeID, ptrSession));
         return COMERR_OK;
     }
@@ -45,9 +55,10 @@ UINT32 CNetNodeIDLayer::ReleaseNetNodeID(IN UINT32 u32NodeID)
         // 找到这个节点ID了 擦掉这个session
         m_u32NodeID_ptrSession.erase(it);
         u32NodeID = 0;
+        return COMERR_OK;
     }
     // 如果没找到 u32NodeID非0;
-    return u32NodeID;
+    return COMERR_NOT_FOUND;
 }
 
 UINT32 CNetNodeIDLayer::GetSession(IN UINT32 u32NodeID, OUT boost::shared_ptr<CNetSession>& ptrSession)
@@ -65,23 +76,4 @@ UINT32 CNetNodeIDLayer::GetSession(IN UINT32 u32NodeID, OUT boost::shared_ptr<CN
         // 未找到
         return COMERR_NOT_FOUND;
     }
-}
-
-BOOL CNetNodeIDLayer::IsConnect()
-{
-    if (m_u32NodeID_ptrSession.empty())
-        return FALSE;
-    else
-        return TRUE;
-}
-
-UINT32 CNetNodeIDLayer::GetNodeID(OUT UINT32& u32NodeID)
-{
-    if (IsConnect())
-    {
-        u32NodeID = m_u32NodeID_ptrSession.begin()->first;
-        return COMERR_OK;
-    }
-    else
-        return COMERR_NOT_FOUND;
 }

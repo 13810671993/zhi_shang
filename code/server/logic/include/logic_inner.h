@@ -10,7 +10,7 @@
 class CLogicInnerMsg
 {
 public:
-    CLogicInnerMsg(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen);
+    CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg);
     ~CLogicInnerMsg();
     
 public:

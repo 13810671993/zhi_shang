@@ -7,6 +7,7 @@
     if( !(bRet) )\
 {\
     printf(format, ##__VA_ARGS__);\
+    printf("\n");\
     LogError(format, ##__VA_ARGS__);\
     u32Ret = result; \
     break; \

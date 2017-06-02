@@ -17,11 +17,11 @@ private:
     ~CMsgMgrImp();
 
 public:
-    VOID    AddAdpt(IN CAdpt* pAdpt);
+    UINT32  AddAdpt(IN CAdpt* pAdpt);
     VOID    SetMsgTransmit2Adpt();
     UINT32  StartLisen(IN UINT16 u16Port);
     VOID    PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg);
-    UINT32  SubscribeMessage(UINT32 u32MsgType, CSubMsgHandler* pSubMsgHandler);
+    UINT32  SubscribeMessage(IN UINT32 u32MsgType, IN CSubMsgHandler* pSubMsgHandler);
 
 private:
     static CMsgMgrImp*  m_pMsgMgrImp;

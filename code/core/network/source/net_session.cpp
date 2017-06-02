@@ -2,7 +2,7 @@
 
 extern boost::lockfree::queue<CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue;
 
-CNetSession::CNetSession(boost::asio::io_service& ioServer, CNetConnectionMgr* pNetConnectionMgr) : m_socket(ioServer), m_cNetMessageVec(2048, 0), m_pNetConnectionMgr(pNetConnectionMgr)
+CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetConnectionMgr* pNetConnectionMgr) : m_socket(ioServer), m_cNetMessageVec(2048, 0), m_pNetConnectionMgr(pNetConnectionMgr)
 {
 }
 
@@ -29,8 +29,14 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
         do 
         {
             u32Ret = m_pNetConnectionMgr->Disconnect(u32NodeID);
-            CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "Disconnect Failed. u32Ret = 0x%x\n", u32Ret);
+            CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "Disconnect Failed. u32Ret = 0x%x. u32NodeID = %u", u32Ret, u32NodeID);
         } while (0);
+
+#ifdef _DEBUG
+        std::cout << ec.message() << std::endl;
+#endif
+        LogInfo("MessageHandlerCB error. error_code = %d, error: %s", ec.value(), ec.message().c_str());
+
         return; 
     }
     
@@ -38,12 +44,10 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
 
     // 将数据封装到类中 然后写入队列
     UINT32 u32MsgType = 0;
-    UINT32 u32MsgLen = 0;
     std::string strMsg;
     memcpy(&u32MsgType, m_cNetMessageVec.data(), sizeof(UINT32));
     strMsg.assign(m_cNetMessageVec.data() + sizeof(UINT32));
-    u32MsgLen = strMsg.length();
-    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, (CHAR*)strMsg.data(), u32MsgLen);
+    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, (CHAR*)strMsg.data(), (UINT32)strMsg.length());
     g_netMsgQueue.push(pNetMsg);
 
     // 清空缓冲区 持续接收数据
@@ -65,49 +69,18 @@ VOID CNetSession::SendMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN cons
     //boost::asio::async_write(m_socket, boost::asio::buffer(strMsg), boost::bind(&CNetSession::Test, this));
 
     // 同步发送数据
-    //CHAR acTemp = {0};
-    CHAR* pcTemp = new CHAR[u32MsgLen + sizeof(u32MsgType) + 1];
-    memset(pcTemp, 0, u32MsgLen + sizeof(u32MsgType) + 1);
-    memcpy(pcTemp, &u32MsgType, sizeof(u32MsgType));
-    memcpy(pcTemp + sizeof(u32MsgType), pcMsg, u32MsgLen);
-    
-    std::string strMsg(pcTemp);
-    m_socket.write_some(boost::asio::buffer((const std::string)strMsg), error);
-    delete[] pcTemp;
+    std::vector<CHAR> cMessageVec(u32MsgLen + sizeof(u32MsgType) + 1, 0);
+    memcpy(cMessageVec.data(), &u32MsgType, sizeof(u32MsgType));
+    memcpy(cMessageVec.data() + sizeof(u32MsgType), pcMsg, u32MsgLen);
+    m_socket.write_some(boost::asio::buffer(cMessageVec), error);
+
     if (error)
     {
+#ifdef _DEBUG
         std::cout << boost::system::system_error(error).what() << std::endl;
+#endif
+        LogError("write_some error. error_code = %d, error: %s", error.value(), error.message().c_str());
         return;
-    }
-}
-
-UINT32 CNetSession::Connect(IN const CHAR* pcIpAddr, IN UINT16 u16Port)
-{
-    boost::asio::ip::tcp::endpoint endpoint(boost::asio::ip::address_v4::from_string(pcIpAddr), u16Port);
-    boost::system::error_code err;
-    m_socket.connect(endpoint, err);
-    if (err)
-    {
-        // 有错误
-        return COMERR_UNKOWN;
-    }
-    return COMERR_OK;
-}
-
-UINT32 CNetSession::RecvMessage(OUT UINT32& u32MsgType, OUT std::string& strMsg)
-{
-    boost::system::error_code err;
-    m_socket.read_some(boost::asio::buffer(m_cNetMessageVec), err);
-    if (err)
-    {
-        // 有错误
-        return COMERR_UNKOWN;
-    }
-    else
-    {
-        memcpy(&u32MsgType, m_cNetMessageVec.data(), sizeof(UINT32));
-        strMsg.assign(m_cNetMessageVec.data() + sizeof(UINT32));
-        return COMERR_OK;
     }
 }
 

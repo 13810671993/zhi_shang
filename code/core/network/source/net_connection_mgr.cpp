@@ -17,28 +17,23 @@ CNetConnectionMgr::~CNetConnectionMgr()
 UINT32 CNetConnectionMgr::StartListen(IN UINT16 u16Port)
 {
     UINT32  u32Ret = 0;
-    boost::system::error_code error;
     do
     {
         // 创建端点
         boost::asio::ip::tcp::endpoint  end_point(boost::asio::ip::tcp::v4(), u16Port);
-        CHECK_ERR_BREAK(error == 0, (UINT32)error.value(), "Create endpoint Failed. error = 0x%x\n", error.value());
         // protocol
         m_acceptor.open(boost::asio::ip::tcp::v4());
-        CHECK_ERR_BREAK(error == 0, (UINT32)error.value(), "Acceptor open Failed. error = 0x%x\n", error.value());
         // bind
         m_acceptor.bind(end_point);
-        CHECK_ERR_BREAK(error == 0, (UINT32)error.value(), "Acceptor bind Failed. error = 0x%x\n", error.value());
         // listen
         m_acceptor.listen();
-        CHECK_ERR_BREAK(error == 0, (UINT32)error.value(), "Acceptor listen Failed. error = 0x%x\n", error.value());
         // 开始接受连接
         u32Ret = DoAccept();
-        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "DoAccept Failed. u32Ret = 0x%x\n", u32Ret);
+        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "DoAccept Failed. u32Ret = 0x%x", u32Ret);
     } while (0);
 
     // 启动接受connect
-    std::cout << "开启监听 port: " << u16Port << std::endl;
+    LogInfo("Start listen. port = %d", u16Port);
     RunIOServer();
     return u32Ret;
 }
@@ -57,10 +52,14 @@ VOID CNetConnectionMgr::RunIOServer()
     m_ioServer.run();
 }
 
-VOID CNetConnectionMgr::AcceptHandlerCB(const boost::system::error_code& ec, boost::shared_ptr<CNetSession> ptrSession)
+VOID CNetConnectionMgr::AcceptHandlerCB(IN const boost::system::error_code& ec, IN boost::shared_ptr<CNetSession>& ptrSession)
 {
     if (ec)
+    {
+        LogInfo("AcceptHandlerCB not success. error_code = %d, error: %s", ec.value(), ec.message().c_str());
         return;
+    }
+
     // 有一个新的连接
 
     // 记录下来这个新的连接 为其分配节点ID
@@ -69,7 +68,7 @@ VOID CNetConnectionMgr::AcceptHandlerCB(const boost::system::error_code& ec, boo
     do 
     {
         u32Ret = m_pNodeIDLayer->GenerateNetNodeID(ptrSession, u32NodeID);
-        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GenerateNetNodeID Failed. u32Ret = 0x%x\n", u32Ret);
+        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GenerateNetNodeID Failed. u32Ret = 0x%x", u32Ret);
     } while (0);
     // 启动这个会话
     ptrSession->StartSession(u32NodeID);
@@ -80,53 +79,13 @@ VOID CNetConnectionMgr::AcceptHandlerCB(const boost::system::error_code& ec, boo
     m_acceptor.async_accept(ptrSession->GetSocket(), boost::bind(&CNetConnectionMgr::AcceptHandlerCB, this, boost::asio::placeholders::error, ptrSession));
 }
 
-UINT32 CNetConnectionMgr::Disconnect(UINT32 u32NodeID)
+UINT32 CNetConnectionMgr::Disconnect(IN UINT32 u32NodeID)
 {
+#ifdef _DEBUG
     std::cout << u32NodeID << std::endl;
+#endif
+    LogInfo("Disconnect u32NodeID = %u", u32NodeID);
     return m_pNodeIDLayer->ReleaseNetNodeID(u32NodeID);
-}
-
-BOOL CNetConnectionMgr::IsConnect()
-{
-    return m_pNodeIDLayer->IsConnect();
-}
-
-UINT32 CNetConnectionMgr::Connect(IN const CHAR* pcIpAddr, IN UINT16 u16Port, OUT UINT32& u32NodeID)
-{
-    UINT32 u32Ret = 0;
-    // 创建一个新的会话
-    boost::shared_ptr<CNetSession> ptrSession(new CNetSession(m_ioServer, this));
-
-    // connect
-    do 
-    {
-        u32Ret = ptrSession->Connect(pcIpAddr, u16Port);
-        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "Connect Failed. u32Ret = 0x%x\n", u32Ret);
-    } while (0);
-
-    // 分配一个新的节点ID
-    do 
-    {
-        u32Ret = m_pNodeIDLayer->GenerateNetNodeID(ptrSession, u32NodeID);
-        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GenerateNetNodeID Failed. u32Ret = 0x%x\n", u32Ret);
-    } while (0);
-    return u32Ret;
-}
-
-UINT32 CNetConnectionMgr::RecvMessage(OUT UINT32& u32NodeID, OUT UINT32& u32MsgType, OUT std::string& strMsg)
-{
-    UINT32 u32Ret = 0;
-    boost::shared_ptr<CNetSession> ptrNetSession;
-    do 
-    {
-        u32Ret = m_pNodeIDLayer->GetNodeID(u32NodeID);
-        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GetNodeID Failed. u32Ret = 0x%x\n", u32Ret);
-        u32Ret = m_pNodeIDLayer->GetSession(u32NodeID, ptrNetSession);
-        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GetSession Failed. u32Ret = 0x%x\n", u32Ret);
-        u32Ret = ptrNetSession->RecvMessage(u32MsgType, strMsg);
-    } while (0);
-
-    return u32Ret;
 }
 
 VOID CNetConnectionMgr::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
@@ -135,7 +94,7 @@ VOID CNetConnectionMgr::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, I
     do 
     {
         UINT32 u32Ret = m_pNodeIDLayer->GetSession(u32NodeID, ptrSession);
-        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GetSession Failed. u32Ret = 0x%x\n", u32Ret);
+        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GetSession Failed. u32Ret = 0x%x", u32Ret);
     } while (0);
     ptrSession->SendMessage(u32MsgType, u32MsgLen, pcMsg);
 }

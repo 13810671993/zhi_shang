@@ -32,7 +32,7 @@ VOID CLogicImp::DestroyInstance()
 
 UINT32 CLogicImp::RecvMessageFromSub(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen)
 {
-    CLogicInnerMsg* pMsg = new CLogicInnerMsg(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
+    CLogicInnerMsg* pMsg = new CLogicInnerMsg(u32NodeID, u32MsgType, u32MsgLen, pcMsg);
     g_LogicMsgQueue.push(pMsg);
     return COMERR_OK;
 }
@@ -72,8 +72,11 @@ UINT32 CLogicImp::Run()
     do 
     {
         boost::thread_group threads;
-        for (UINT32 i = 0; i < 6; i++)
+        for (UINT32 i = 0; i < 6; ++i)
+        {
             threads.create_thread(boost::bind(&DealMessageThread, this, i));
+            LogInfo("DealMessageThread start. ThreadNum = %d", i);
+        }
     } while (0);
 
     return u32Ret;
@@ -94,7 +97,7 @@ UINT32 CLogicImp::Stop()
 
 }
 
-VOID CLogicImp::DealMessageThread(CLogicImp* pThis, UINT32 u32ThreadNum)
+VOID CLogicImp::DealMessageThread(IN CLogicImp* pThis, IN UINT32 u32ThreadNum)
 {
     CLogicInnerMsg*   pMsg = NULL;
 
@@ -102,7 +105,9 @@ VOID CLogicImp::DealMessageThread(CLogicImp* pThis, UINT32 u32ThreadNum)
     {
         if (g_LogicMsgQueue.pop(pMsg) && pMsg != NULL)
         {
+#ifdef _DEBUG
             std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgBuf() << std::endl;
+#endif
             CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
             delete pMsg;
             pMsg = NULL;
@@ -121,12 +126,12 @@ UINT32 CLogicImp::RegistMessageCB()
                                 0,
                                 1111,
                             };
-    for (auto i = 0; i < sizeof(au32MsgType) / sizeof(UINT32); i++)
+    for (auto i = 0; i < sizeof(au32MsgType) / sizeof(UINT32); ++i)
     {
         do
         {
             u32Ret = m_pMsgMgr->SubscribeMessage(au32MsgType[i], this);
-            CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "SubscribeMessage Failed. u32Ret = 0x%x\n", u32Ret);
+            CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "SubscribeMessage Failed. u32Ret = 0x%x", u32Ret);
         } while (0);
     }
 

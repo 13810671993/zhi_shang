@@ -1,6 +1,6 @@
 #include "logic_common.h"
 
-CLogicInnerMsg::CLogicInnerMsg(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen)
+CLogicInnerMsg::CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg)
 {
     m_u32NodeID = u32NodeID;
     m_u32MsgType = u32MsgType;

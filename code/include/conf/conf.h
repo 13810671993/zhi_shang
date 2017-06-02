@@ -23,11 +23,11 @@ public:
 
 public:
 	//获取字符串，不带引号
-	INT32 GetString(IN const CHAR *section, IN const CHAR *key, OUT CHAR *value, IN INT32 size, IN const CHAR *defvalue);
+	INT32 GetString(IN const CHAR *section, IN const CHAR *key, OUT CHAR *value, IN INT32 size, IN const CHAR *defvalue) const;
 	//获取整数值
-	INT32 GetInt(IN const CHAR *section, IN const CHAR *key, IN INT32 defvalue);
+	INT32 GetInt(IN const CHAR *section, IN const CHAR *key, IN INT32 defvalue) const;
 	//获取浮点数
-	double GetDouble(IN const CHAR *section, IN const CHAR *key, IN double defvalue);
+	double GetDouble(IN const CHAR *section, IN const CHAR *key, IN double defvalue) const;
 	//设置字符串：若value为NULL，则删除该key所在行，包括注释
 	INT32 SetString(IN const CHAR *section, IN const CHAR *key, IN const CHAR *value);
 	//设置整数值：base取值10、16、8，分别表示10、16、8进制，缺省为10进制
@@ -44,17 +44,17 @@ private:
 	void FileFree();
 
 	//去除串首尾空格，原串被改写
-	CHAR* StrStrip(CHAR *s);
+	CHAR* StrStrip(CHAR *s) const;
 	//不区分大小写比较字符串
-	INT32 StriCmp(const CHAR *s1, const CHAR *s2);
+	INT32 StriCmp(const CHAR *s1, const CHAR *s2) const;
 	//取一行
-	INT32 GetLine(CHAR *buf, INT32 buflen, CHAR *content, CHAR **rem1, CHAR **rem2, CHAR **nextline);
+	INT32 GetLine(CHAR *buf, INT32 buflen, CHAR *content, CHAR **rem1, CHAR **rem2, CHAR **nextline) const;
 	//取一节section
-	INT32 FindSection(const CHAR *section, CHAR **sect1, CHAR **sect2, CHAR **cont1, CHAR **cont2, CHAR **nextsect);
+	INT32 FindSection(const CHAR *section, CHAR **sect1, CHAR **sect2, CHAR **cont1, CHAR **cont2, CHAR **nextsect) const;
 	//从一行取键、值
-	void GetKeyValue(CHAR *content, CHAR **key, CHAR **value);
+	void GetKeyValue(CHAR *content, CHAR **key, CHAR **value) const;
 	//读取值原始串
-	INT32 GetValue(const CHAR *section, const CHAR *key, CHAR *value, INT32 maxlen, const CHAR *defvalue);
+	INT32 GetValue(const CHAR *section, const CHAR *key, CHAR *value, INT32 maxlen, const CHAR *defvalue) const;
 
 private:
     static CConf*    m_pConf;

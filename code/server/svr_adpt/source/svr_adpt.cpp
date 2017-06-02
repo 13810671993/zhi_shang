@@ -28,7 +28,7 @@ void CSvrAdpt::DestroyInstance()
     }
 }
 
-VOID CSvrAdpt::SetMsgTransimit(CMsgTransmit* pMsgTransmit)
+VOID CSvrAdpt::SetMsgTransimit(IN CMsgTransmit* pMsgTransmit)
 {
     m_pMsgTransmit = pMsgTransmit;
 }
@@ -40,13 +40,13 @@ UINT32 CSvrAdpt::StartListen(IN UINT16 u16Port)
 	return CNetworkMgr::GetInstance()->StartListen(u16Port);
 }
 
-UINT32 CSvrAdpt::RegistAdpt(CAdpt* pAdpt)
+UINT32 CSvrAdpt::RegistAdpt(IN CAdpt* pAdpt)
 {
     UINT32  u32Ret = 0;
     return CNetworkMgr::GetInstance()->RegistAdpt(pAdpt);
 }
 
-UINT32 CSvrAdpt::PushMessage(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen)
+UINT32 CSvrAdpt::PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg)
 {
     return m_pMsgTransmit->PushMessage(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
 }

@@ -69,7 +69,7 @@ void CConf :: FileFree()
 }
 
 //获取字符串，不带引号
-INT32 CConf :: GetString(IN const CHAR *section, IN const CHAR *key, OUT CHAR *value, IN INT32 maxlen, IN const CHAR *defvalue)
+INT32 CConf :: GetString(IN const CHAR *section, IN const CHAR *key, OUT CHAR *value, IN INT32 maxlen, IN const CHAR *defvalue) const
 {
 	INT32 ret;
 	INT32 len;
@@ -92,7 +92,7 @@ INT32 CConf :: GetString(IN const CHAR *section, IN const CHAR *key, OUT CHAR *v
 }
 
 //获取整数值
-INT32 CConf :: GetInt(IN const CHAR *section, IN const CHAR *key, IN INT32 defvalue)
+INT32 CConf :: GetInt(IN const CHAR *section, IN const CHAR *key, IN INT32 defvalue) const
 {
 	CHAR valstr[64];
 
@@ -102,7 +102,7 @@ INT32 CConf :: GetInt(IN const CHAR *section, IN const CHAR *key, IN INT32 defva
 }
 
 //获取浮点数
-double CConf :: GetDouble(IN const CHAR *section, IN const CHAR *key, IN double defvalue)
+double CConf :: GetDouble(IN const CHAR *section, IN const CHAR *key, IN double defvalue) const
 {
 	CHAR valstr[64];
 
@@ -217,7 +217,7 @@ INT32 CConf :: SetInt(IN const CHAR *section, IN const CHAR *key, IN INT32 value
 }
 
 //去除串首尾空格，原串被改写
-CHAR* CConf :: StrStrip(CHAR *s)
+CHAR* CConf :: StrStrip(CHAR *s) const
 {
 	size_t size;
 	CHAR *p1, *p2;
@@ -229,19 +229,19 @@ CHAR* CConf :: StrStrip(CHAR *s)
 	p2 = s + size - 1;
 
 	while ((p2 >= s) && isspace(*p2))
-		p2 --;
+		--p2;
 	*(p2 + 1) = '\0';
 
 	p1 = s;
 	while (*p1 && isspace(*p1))
-		p1 ++;
+		++p1;
 	if (s != p1)
 		memmove(s, p1, p2 - p1 + 2);
 	return s;
 }
 
 //不区分大小写比较字符串
-INT32 CConf :: StriCmp(const CHAR *s1, const CHAR *s2)
+INT32 CConf :: StriCmp(const CHAR *s1, const CHAR *s2) const
 {
 	INT32 ch1, ch2;
 	do
@@ -261,7 +261,7 @@ INT32 CConf :: StriCmp(const CHAR *s1, const CHAR *s2)
 //输入：数据区(指针及长度)
 //输出：行类型、有效内容串(去首尾空格)、注释首、注释尾、下一行首(行尾与下一行首间为换行符)
 //      有效内容位置为[buf, rem1)
-INT32 CConf :: GetLine(CHAR *buf, INT32 buflen, CHAR *content, CHAR **rem1, CHAR **rem2, CHAR **nextline)
+INT32 CConf :: GetLine(CHAR *buf, INT32 buflen, CHAR *content, CHAR **rem1, CHAR **rem2, CHAR **nextline) const
 {
 	CHAR *cont1, *cont2;
 	INT32 cntblank, cntCR, cntLF;		//连续空格、换行符数量
@@ -275,15 +275,15 @@ INT32 CConf :: GetLine(CHAR *buf, INT32 buflen, CHAR *content, CHAR **rem1, CHAR
 	isQuot1 = isQuot2 = 0;
 	cont1 = *rem1 = 0;
 	content[0] = 0;
-	for (i = 0, p = buf; i < buflen; i ++, p ++)
+	for (i = 0, p = buf; i < buflen; ++i, ++p)
 	{
 		if (*p == 0) {
-			p ++;
+			++p;
 			break;
 		}
 		//2个CR或LF，行结束
 		if (cntCR == 2 || cntLF == 2) {
-			p --;	//回溯1
+			--p;	//回溯1
 			break;
 		}
 		//CR或LF各1个之后任意字符，行结束
@@ -296,10 +296,10 @@ INT32 CConf :: GetLine(CHAR *buf, INT32 buflen, CHAR *content, CHAR **rem1, CHAR
 
 		switch (*p) {
 		case '\r':
-			cntCR ++;
+			++cntCR;
 			break;
 		case '\n':
-			cntLF ++;
+			++cntLF;
 			break;
 		case '\'':
 			if (!isQuot2)
@@ -318,7 +318,7 @@ INT32 CConf :: GetLine(CHAR *buf, INT32 buflen, CHAR *content, CHAR **rem1, CHAR
 			break;
 		default:
 			if (isspace((UINT8)*p)) {
-				cntblank ++;
+				++cntblank;
 			} else {
 				cntblank = 0;
 				if ((*rem1 == NULL) && (cont1 == NULL))
@@ -358,7 +358,7 @@ INT32 CConf :: GetLine(CHAR *buf, INT32 buflen, CHAR *content, CHAR **rem1, CHAR
 //取一节section
 //输入：节名称
 //输出：成功与否、节名称首、节名称尾、节内容首、节内容尾(含换行)、下一节首(节尾与下一节首间为空行或注释行)
-INT32 CConf :: FindSection(const CHAR *section, CHAR **sect1, CHAR **sect2, CHAR **cont1, CHAR **cont2, CHAR **nextsect)
+INT32 CConf :: FindSection(const CHAR *section, CHAR **sect1, CHAR **sect2, CHAR **cont1, CHAR **cont2, CHAR **nextsect) const
 {
 	INT32 type;
 	CHAR content[SIZE_LINE];
@@ -411,7 +411,7 @@ INT32 CConf :: FindSection(const CHAR *section, CHAR **sect1, CHAR **sect2, CHAR
 //从一行取键、值
 //输入：内容串(将被改写)
 //输出：键串、值串
-void CConf :: GetKeyValue(CHAR *content, CHAR **key, CHAR **value)
+void CConf :: GetKeyValue(CHAR *content, CHAR **key, CHAR **value) const
 {
 	CHAR *p;
 
@@ -427,7 +427,7 @@ void CConf :: GetKeyValue(CHAR *content, CHAR **key, CHAR **value)
 
 
 //读取值原始串
-INT32 CConf :: GetValue(const CHAR *section, const CHAR *key, CHAR *value, INT32 maxlen, const CHAR *defvalue)
+INT32 CConf :: GetValue(const CHAR *section, const CHAR *key, CHAR *value, INT32 maxlen, const CHAR *defvalue) const
 {
 	INT32 type;
 	CHAR content[SIZE_LINE];

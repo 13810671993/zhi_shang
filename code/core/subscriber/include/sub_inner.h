@@ -7,7 +7,7 @@
 class CSubInnerMsgLayer
 {
 public:
-    CSubInnerMsgLayer(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen);
+    CSubInnerMsgLayer(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen);
     ~CSubInnerMsgLayer();
 
 public:

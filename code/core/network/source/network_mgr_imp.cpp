@@ -6,7 +6,10 @@ CNetworkMgrImp::CNetworkMgrImp() : m_pNetConnectionMgr(NULL), m_pAdpt(NULL)
 {
     m_pNetConnectionMgr = new CNetConnectionMgr();
     boost::thread threadImp(boost::bind(&CNetworkMgrImp::PushMessage2AdptThread, this));
-    std::cout << "创建线程" << std::endl;
+#ifdef _DEBUG
+    std::cout << "启动网络线程" << std::endl;
+#endif
+    LogInfo("PushMessage2AdptThread start.");
 }
 
 CNetworkMgrImp::~CNetworkMgrImp()
@@ -14,7 +17,7 @@ CNetworkMgrImp::~CNetworkMgrImp()
 
 }
 
-UINT32 CNetworkMgrImp::RegistAdpt(CAdpt* pAdpt)
+UINT32 CNetworkMgrImp::RegistAdpt(IN CAdpt* pAdpt)
 {
     m_pAdpt = pAdpt;
     return COMERR_OK;
@@ -47,15 +50,16 @@ UINT32 CNetworkMgrImp::StartListen(IN UINT16 u16Port)
 {
     // 在这里 我要新启动一根线程去执行监听
     boost::thread threadImp(boost::bind(&ListenThread, this, u16Port));
+    LogInfo("ListenThread start.");
     return COMERR_OK;
 }
 
-VOID CNetworkMgrImp::ListenThread(CNetworkMgrImp* pThis, UINT16 u16Port)
+VOID CNetworkMgrImp::ListenThread(IN CNetworkMgrImp* pThis, IN UINT16 u16Port)
 {
     pThis->m_pNetConnectionMgr->StartListen(u16Port);
 }
 
-VOID CNetworkMgrImp::PushMessage2AdptThread(CNetworkMgrImp* pThis)
+VOID CNetworkMgrImp::PushMessage2AdptThread(IN CNetworkMgrImp* pThis)
 {
     CNetInnerMsg* pNetMsg = NULL;
     while (1)
@@ -63,7 +67,7 @@ VOID CNetworkMgrImp::PushMessage2AdptThread(CNetworkMgrImp* pThis)
         // 从队列中弹出数据 写到adpt中去
         if (g_netMsgQueue.pop(pNetMsg) && pNetMsg != NULL)
         {
-            pThis->m_pAdpt->PushMessage(pNetMsg->GetNodeID(), pNetMsg->GetMsgType(), pNetMsg->GetMsgBuf(), pNetMsg->GetMsgLen());
+            pThis->m_pAdpt->PushMessage(pNetMsg->GetNodeID(), pNetMsg->GetMsgType(), pNetMsg->GetMsgLen(), pNetMsg->GetMsgBuf());
             delete pNetMsg;
             pNetMsg = NULL;
         }

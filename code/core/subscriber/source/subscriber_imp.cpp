@@ -5,7 +5,7 @@ boost::lockfree::queue<CSubInnerMsgLayer*, boost::lockfree::fixed_sized<FALSE>> 
 CSubscriberImp::CSubscriberImp()
 {
     boost::thread threadImp(boost::bind(PushMsg2SubscriberThread, this));
-    //threadImp.join();
+    LogInfo("PushMsg2SubscriberThread start.");
 }
 
 CSubscriberImp::~CSubscriberImp()
@@ -31,7 +31,7 @@ VOID CSubscriberImp::DestroyInstance()
     }
 }
 
-UINT32 CSubscriberImp::PushMessage(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen)
+UINT32 CSubscriberImp::PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen)
 {
     CSubInnerMsgLayer* pMsg = new CSubInnerMsgLayer(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
 
@@ -64,7 +64,7 @@ UINT32 CSubscriberImp::SubscribeMessage(IN UINT32 u32MsgType, IN CSubMsgHandler*
     return u32Ret;
 }
 
-VOID CSubscriberImp::PushMsg2SubscriberThread(CSubscriberImp* pThis)
+VOID CSubscriberImp::PushMsg2SubscriberThread(IN CSubscriberImp* pThis)
 {
     CSubInnerMsgLayer* pMsg = NULL;
     while (1)
@@ -75,6 +75,8 @@ VOID CSubscriberImp::PushMsg2SubscriberThread(CSubscriberImp* pThis)
         {
             // 从队列中获取了消息 并且得知了MsgType
             TypeReadLock lock(pThis->m_mutex);
+            pThis->PubMessage(pMsg);
+#if 0
             auto it = pThis->m_msgType_SubscribersMap.find(pMsg->GetMsgType());
             if (it != pThis->m_msgType_SubscribersMap.end())
             {
@@ -87,10 +89,29 @@ VOID CSubscriberImp::PushMsg2SubscriberThread(CSubscriberImp* pThis)
                 // fix: 测试需要
                 pThis->m_msgType_SubscribersMap.begin()->second->PubMessage(pMsg);
             }
+#endif
             delete pMsg;
             pMsg = NULL;
         }
         else
             BOOST_SLEEP(100);
+    }
+}
+
+UINT32 CSubscriberImp::PubMessage(IN CSubInnerMsgLayer* pMsg)
+{
+    auto it = m_msgType_SubscribersMap.find(pMsg->GetMsgType());
+    if (it != m_msgType_SubscribersMap.end())
+    {
+        // 有订阅者
+        return it->second->PubMessage(pMsg);
+    }
+    else
+    {
+        // 没有人订阅该消息 
+        // fix: 测试需要
+        m_msgType_SubscribersMap.begin()->second->PubMessage(pMsg);
+        LogWarning("PubMessage failed. No one subscribe this message. u32MsgType = %u", pMsg->GetMsgType());
+        return COMERR_NOT_FOUND;
     }
 }

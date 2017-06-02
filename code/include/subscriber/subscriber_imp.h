@@ -12,14 +12,15 @@ public:
     static CSubscriberImp*  GetInstance();
     static VOID             DestroyInstance();
 
-    UINT32          PushMessage(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen);
+    UINT32          PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen);
     UINT32          SubscribeMessage(IN UINT32 u32MsgType, IN CSubMsgHandler* pSubMsgHandler);
 private:
     CSubscriberImp();
     ~CSubscriberImp();
 
 private:
-    static  VOID    PushMsg2SubscriberThread(CSubscriberImp* pThis);
+    static  VOID    PushMsg2SubscriberThread(IN CSubscriberImp* pThis);
+    UINT32          PubMessage(IN CSubInnerMsgLayer* pMsg);
 
 private:
     static CSubscriberImp*  m_pSubscriberImp;

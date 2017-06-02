@@ -30,11 +30,14 @@ VOID CMsgMgrImp::DestroyInstance()
     }
 }
 
-VOID CMsgMgrImp::AddAdpt(IN CAdpt* pAdpt)
+UINT32 CMsgMgrImp::AddAdpt(IN CAdpt* pAdpt)
 {
+    UINT32 u32Ret = 0;
     m_pAdpt = pAdpt;
-    m_pAdpt->RegistAdpt(pAdpt);
+    u32Ret = m_pAdpt->RegistAdpt(pAdpt);
 	SetMsgTransmit2Adpt();
+
+    return u32Ret;
 }
 
 VOID CMsgMgrImp::SetMsgTransmit2Adpt()
@@ -53,11 +56,7 @@ VOID CMsgMgrImp::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT3
     m_pAdpt->PostMessage(u32NodeID, u32MsgType, u32MsgLen, pcMsg);
 }
 
-UINT32 CMsgMgrImp::SubscribeMessage(UINT32 u32MsgType, CSubMsgHandler* pSubMsgHandler)
+UINT32 CMsgMgrImp::SubscribeMessage(IN UINT32 u32MsgType, IN CSubMsgHandler* pSubMsgHandler)
 {
-    UINT32  u32Ret = 0;
-
-    u32Ret = m_pSubscriber->SubscribeMessage(u32MsgType, pSubMsgHandler);
-
-    return u32Ret;
+    return m_pSubscriber->SubscribeMessage(u32MsgType, pSubMsgHandler);
 }

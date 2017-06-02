@@ -71,17 +71,22 @@ VOID CLogImp::InitLogBase()
 		boost::log::keywords::min_free_space = 3 * 1024 * 1024
 		);
 
+#ifdef _DEBUG
     // 立即写日志
-    //ptrBackend->auto_flush(TRUE);
-
+    ptrBackend->auto_flush(TRUE);
+#endif
 	// 使用文件后端来创建sink
 	m_ptrSink = boost::make_shared<TypeSink>(ptrBackend);
 
 	m_ptrSink->set_formatter(
         // 日志格式
 		boost::log::expressions::format("[%1%] [%2%] | %3%| %4%")
-        // 时间戳格式
+        // 时间戳格式 debug下不打印data以上的时间
+#ifdef _DEBUG
+		% boost::log::expressions::format_date_time< boost::posix_time::ptime >("TimeStamp", "%H:%M:%S.%f")
+#else
 		% boost::log::expressions::format_date_time< boost::posix_time::ptime >("TimeStamp", "%Y-%m-%d %H:%M:%S.%f")
+#endif
         // 线程ID
 		% boost::log::expressions::attr<boost::log::attributes::current_thread_id::value_type >("ThreadID")
         // 日志级别

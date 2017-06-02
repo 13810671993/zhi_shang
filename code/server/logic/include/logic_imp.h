@@ -17,7 +17,7 @@ public:
     UINT32  Stop();                             // 逻辑停止入口 
 
 private:
-    static VOID     DealMessageThread(CLogicImp* pThis, UINT32 u32ThreadNum);        // 消息处理线程
+    static VOID     DealMessageThread(IN CLogicImp* pThis, IN UINT32 u32ThreadNum);        // 消息处理线程
 
     UINT32  RegistMessageCB();                  // 注册订阅消息
     UINT32  UnRegistMessageCB();                // 取消注册

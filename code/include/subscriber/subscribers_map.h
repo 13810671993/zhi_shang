@@ -12,9 +12,9 @@ public:
     ~CSubscribersMap();
 
 public:
-    UINT32  AddMsgHandler(CSubMsgHandler* pSubMsgHandler);
+    UINT32  AddMsgHandler(IN CSubMsgHandler* pSubMsgHandler);
 
-    UINT32  PubMessage(CSubInnerMsgLayer* pMsg);
+    UINT32  PubMessage(IN CSubInnerMsgLayer* pMsg);
 
 private:
     std::vector<CSubMsgHandler*> m_subMsgHandlerVec;

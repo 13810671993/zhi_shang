@@ -18,5 +18,6 @@
 #include "subscriber/subscribers_map.h"
 #include "subscriber/subscriber.h"
 #include "subscriber/subscriber_imp.h"
+#include "log/log.h"
 
 #endif
