@@ -1,18 +1,7 @@
 #ifndef __ADPT_H__
 #define __ADPT_H__
 
-// 衔接adpt <-> sub
-// 消息传输 虚基类
-class CMsgTransmit
-{
-public:
-    CMsgTransmit()      {}
-    ~CMsgTransmit()     {}
-
-    virtual UINT32  PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen) = 0;
-};
-
-
+class CMsgTransmit;
 // 适配器 虚基类
 class CAdpt
 {

@@ -5,6 +5,9 @@
 // 1. 添加删除订阅者
 // 2. 为每个订阅者发送消息
 
+class CSubMsgHandler;
+class CSubInnerMsgLayer;
+
 class CSubscribersMap
 {
 public:

@@ -7,6 +7,11 @@
 // 3. 让适配器开启监听
 // 4. 发送消息
 
+class CSubMsgHandler;
+class CSubscriber;
+class CMsgTransmitImp;
+class CAdpt;
+
 class CMsgMgrImp : public CMsgMgr
 {
 public:

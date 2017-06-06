@@ -4,6 +4,8 @@
 // 维护网络节点ID-网络连接会话映射资源
 // 分配节点ID 建立与网络连接会话的映射
 
+class CNetSession;
+
 class CNetNodeIDLayer
 {
 public:

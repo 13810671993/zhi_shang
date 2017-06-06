@@ -1,6 +1,9 @@
 #ifndef __MSG_MGR_H__
 #define __MSG_MGR_H__
 
+class CAdpt;
+class CSubMsgHandler;
+
 class CMsgMgr
 {
 public:

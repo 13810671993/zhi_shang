@@ -1,6 +1,8 @@
 #ifndef __NETWORK_H__
 #define __NETWORK_H__
 
+class CAdpt;
+
 class CNetworkMgr
 {
 public:

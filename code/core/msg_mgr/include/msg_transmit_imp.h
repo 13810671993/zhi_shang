@@ -3,6 +3,8 @@
 
 // 消息层
 // 负责将adpt发送来的消息发送到sub 主要是连通adpt-sub
+class CSubscriber;
+
 class CMsgTransmitImp : public CMsgTransmit
 {
 public:

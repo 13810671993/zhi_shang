@@ -7,14 +7,14 @@
 class CNetInnerMsg
 {
 public:
-    CNetInnerMsg(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen);
+    CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN CHAR* pcMsg);
     ~CNetInnerMsg();
     
 public:
-    UINT32  GetMsgType();
-    UINT32  GetMsgLen();
-    UINT32  GetNodeID();
-    CHAR*   GetMsgBuf();
+    inline UINT32  GetMsgType();
+    inline UINT32  GetMsgLen();
+    inline UINT32  GetNodeID();
+    inline CHAR*   GetMsgBuf();
 
 private:
     CHAR*   m_pcMsg;
@@ -22,5 +22,25 @@ private:
     UINT32  m_u32MsgLen;
     UINT32  m_u32NodeID;
 };
+
+inline UINT32 CNetInnerMsg::GetMsgType()
+{
+    return m_u32MsgType;
+}
+
+inline UINT32 CNetInnerMsg::GetMsgLen()
+{
+    return m_u32MsgLen;
+}
+
+inline UINT32 CNetInnerMsg::GetNodeID()
+{
+    return m_u32NodeID;
+}
+
+inline CHAR* CNetInnerMsg::GetMsgBuf()
+{
+    return m_pcMsg;
+}
 
 #endif

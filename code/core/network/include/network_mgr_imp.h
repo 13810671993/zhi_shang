@@ -1,6 +1,9 @@
 #ifndef __NETWORK_IMP_H__
 #define __NETWORK_IMP_H__
 
+class CAdpt;
+class CNetConnectionMgr;
+
 class CNetworkMgrImp : public CNetworkMgr
 {
 public:

@@ -16,10 +16,11 @@ CNetSession::~CNetSession()
 
 VOID CNetSession::StartSession(IN UINT32 u32NodeID)
 {
-    m_socket.async_read_some(boost::asio::buffer(m_cNetMessageVec), boost::bind(&CNetSession::MessageHandlerCB, this, boost::asio::placeholders::error, u32NodeID));
+    // boost::asio 接收数据做的非常好 不会有越界问题 数据包过大的时候都会分多次来接收 所以不用考虑越界问题
+    m_socket.async_read_some(boost::asio::buffer(m_cNetMessageVec), boost::bind(&CNetSession::MessageHandlerCB, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred, u32NodeID));
 }
 
-VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UINT32 u32NodeID)
+VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UINT32 u32MsgLen, IN UINT32 u32NodeID)
 {
     if (ec)
     {
@@ -32,7 +33,7 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
             CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "Disconnect Failed. u32Ret = 0x%x. u32NodeID = %u", u32Ret, u32NodeID);
         } while (0);
 
-#ifdef _DEBUG
+#ifdef _DEBUG_
         std::cout << ec.message() << std::endl;
 #endif
         LogInfo("MessageHandlerCB error. error_code = %d, error: %s", ec.value(), ec.message().c_str());
@@ -40,19 +41,28 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
         return; 
     }
     
-    // 如果有数据
+    // 越界问题应该不会出现 如果出现 绝对是最大的问题了
+    if (u32MsgLen > m_cNetMessageVec.size())
+    {
+        LogFatal("Recv message error for out of bounds. u32MsgLen = %d", u32MsgLen);
+#ifdef _DEBUG_
+        exit(0);
+#else
+        return;
+#endif
+    }
 
+    // 如果有数据
     // 将数据封装到类中 然后写入队列
     UINT32 u32MsgType = 0;
-    std::string strMsg;
     memcpy(&u32MsgType, m_cNetMessageVec.data(), sizeof(UINT32));
-    strMsg.assign(m_cNetMessageVec.data() + sizeof(UINT32));
-    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, (CHAR*)strMsg.data(), (UINT32)strMsg.length());
+    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32));
     g_netMsgQueue.push(pNetMsg);
 
-    // 清空缓冲区 持续接收数据
+    //m_cNetMessageVec.clear();
+    // 清空缓冲区 持续接收数据 这里不能用clear 否则会死循环
     memset(m_cNetMessageVec.data(), 0, m_cNetMessageVec.size());
-    m_socket.async_read_some(boost::asio::buffer(m_cNetMessageVec), boost::bind(&CNetSession::MessageHandlerCB, this, boost::asio::placeholders::error, u32NodeID));
+    m_socket.async_read_some(boost::asio::buffer(m_cNetMessageVec), boost::bind(&CNetSession::MessageHandlerCB, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred, u32NodeID));
 }
 
 VOID CNetSession::SendMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
@@ -76,7 +86,7 @@ VOID CNetSession::SendMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN cons
 
     if (error)
     {
-#ifdef _DEBUG
+#ifdef _DEBUG_
         std::cout << boost::system::system_error(error).what() << std::endl;
 #endif
         LogError("write_some error. error_code = %d, error: %s", error.value(), error.message().c_str());
@@ -84,7 +94,3 @@ VOID CNetSession::SendMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN cons
     }
 }
 
-boost::asio::ip::tcp::socket& CNetSession::GetSocket()
-{
-    return m_socket;
-}

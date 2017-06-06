@@ -6,6 +6,10 @@
 // 2. 维护一个队列 异步接收网络消息
 // 3. 维护一个 信令-操作者集合 映射
 
+class CSubscribersMap;
+class CSubMsgHandler;
+class CSubInnerMsgLayer;
+
 class CSubscriberImp : public CSubscriber
 {
 public:

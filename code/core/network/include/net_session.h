@@ -2,6 +2,7 @@
 #define __NET_SESSION_H__
 
 class CNetConnectionMgr;
+
 class CNetSession
 {
 public:
@@ -11,10 +12,10 @@ public:
 public:
     // 面向会话
     VOID            StartSession(IN UINT32 u32NodeID);
-    VOID            MessageHandlerCB(IN const boost::system::error_code& ec, IN UINT32 u32NodeID);     // 消息回调
+    VOID            MessageHandlerCB(IN const boost::system::error_code& ec, IN UINT32 u32MsgLen, IN UINT32 u32NodeID);     // 消息回调
     VOID            SendMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg);
 
-    boost::asio::ip::tcp::socket& GetSocket();
+    inline boost::asio::ip::tcp::socket& GetSocket();
 
 private:
     boost::asio::ip::tcp::socket m_socket;
@@ -22,5 +23,9 @@ private:
     CNetConnectionMgr* m_pNetConnectionMgr;
 };
 
+inline boost::asio::ip::tcp::socket& CNetSession::GetSocket()
+{
+    return m_socket;
+}
 #endif // !__NET_SESSION_MGR_H__
 

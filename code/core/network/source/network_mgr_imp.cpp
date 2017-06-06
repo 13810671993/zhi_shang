@@ -6,7 +6,7 @@ CNetworkMgrImp::CNetworkMgrImp() : m_pNetConnectionMgr(NULL), m_pAdpt(NULL)
 {
     m_pNetConnectionMgr = new CNetConnectionMgr();
     boost::thread threadImp(boost::bind(&CNetworkMgrImp::PushMessage2AdptThread, this));
-#ifdef _DEBUG
+#ifdef _DEBUG_
     std::cout << "Æô¶¯ÍøÂçÏß³Ì" << std::endl;
 #endif
     LogInfo("PushMessage2AdptThread start.");

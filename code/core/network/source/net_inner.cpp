@@ -1,6 +1,7 @@
 #include "network_common.h"
 
-CNetInnerMsg::CNetInnerMsg(UINT32 u32NodeID, UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen)
+CNetInnerMsg::CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN CHAR* pcMsg) : 
+                           m_u32NodeID(0), m_u32MsgType(0), m_u32MsgLen(0), m_pcMsg(NULL)
 {
     m_u32NodeID = u32NodeID;
     m_u32MsgType = u32MsgType;
@@ -16,22 +17,3 @@ CNetInnerMsg::~CNetInnerMsg()
     delete[] m_pcMsg;
 }
 
-UINT32 CNetInnerMsg::GetMsgType()
-{
-    return m_u32MsgType;
-}
-
-UINT32 CNetInnerMsg::GetMsgLen()
-{
-    return m_u32MsgLen;
-}
-
-UINT32 CNetInnerMsg::GetNodeID()
-{
-    return m_u32NodeID;
-}
-
-CHAR* CNetInnerMsg::GetMsgBuf()
-{
-    return m_pcMsg;
-}

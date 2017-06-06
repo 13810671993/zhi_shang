@@ -11,10 +11,10 @@ public:
     ~CSubInnerMsgLayer();
 
 public:
-    UINT32  GetMsgType();
-    UINT32  GetMsgLen();
-    UINT32  GetNodeID();
-    CHAR*   GetMsgBuf();
+    inline UINT32  GetMsgType();
+    inline UINT32  GetMsgLen();
+    inline UINT32  GetNodeID();
+    inline CHAR*   GetMsgBuf();
 
 private:
     CHAR*   m_pcMsg;
@@ -22,5 +22,25 @@ private:
     UINT32  m_u32MsgLen;
     UINT32  m_u32NodeID;
 };
+
+inline UINT32 CSubInnerMsgLayer::GetMsgType()
+{
+    return m_u32MsgType;
+}
+
+inline UINT32 CSubInnerMsgLayer::GetMsgLen()
+{
+    return m_u32MsgLen;
+}
+
+inline UINT32 CSubInnerMsgLayer::GetNodeID()
+{
+    return m_u32NodeID;
+}
+
+inline CHAR* CSubInnerMsgLayer::GetMsgBuf()
+{
+    return m_pcMsg;
+}
 
 #endif

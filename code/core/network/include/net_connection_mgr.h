@@ -1,6 +1,9 @@
 #ifndef __NET_CONNECTION_MGR_H__
 #define __NET_CONNECTION_MGR_H__
 
+class CNetSession;
+class CNetNodeIDLayer;
+
 class CNetConnectionMgr
 {
 public:
@@ -10,7 +13,6 @@ public:
     // 面向连接
     UINT32          StartListen(IN UINT16 u16Port);
     UINT32          DoAccept();         // 启动接受连接
-    VOID            RunIOServer();
     VOID            AcceptHandlerCB(IN const boost::system::error_code& ec, IN boost::shared_ptr<CNetSession>& ptrSession);      // 连接回调
 
     UINT32          Disconnect(IN UINT32 u32NodeID);

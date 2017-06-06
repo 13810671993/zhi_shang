@@ -105,7 +105,7 @@ VOID CLogicImp::DealMessageThread(IN CLogicImp* pThis, IN UINT32 u32ThreadNum)
     {
         if (g_LogicMsgQueue.pop(pMsg) && pMsg != NULL)
         {
-#ifdef _DEBUG
+#ifdef _DEBUG_
             std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgBuf() << std::endl;
 #endif
             CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());

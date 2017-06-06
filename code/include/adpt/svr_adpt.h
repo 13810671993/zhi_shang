@@ -6,6 +6,8 @@
 // 2. 注册回调
 // 3. 消息接收\发送
 
+class CMsgTransmit;
+
 class CSvrAdpt : public CAdpt
 {
 public:

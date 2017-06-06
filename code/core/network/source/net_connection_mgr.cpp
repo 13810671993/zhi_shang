@@ -34,7 +34,7 @@ UINT32 CNetConnectionMgr::StartListen(IN UINT16 u16Port)
 
     // Æô¶¯½ÓÊÜconnect
     LogInfo("Start listen. port = %d", u16Port);
-    RunIOServer();
+    m_ioServer.run();
     return u32Ret;
 }
 
@@ -45,11 +45,6 @@ UINT32 CNetConnectionMgr::DoAccept()
     m_acceptor.async_accept(ptrSession->GetSocket(), boost::bind(&CNetConnectionMgr::AcceptHandlerCB, this, boost::asio::placeholders::error, ptrSession));
 
     return COMERR_OK;
-}
-
-VOID CNetConnectionMgr::RunIOServer()
-{
-    m_ioServer.run();
 }
 
 VOID CNetConnectionMgr::AcceptHandlerCB(IN const boost::system::error_code& ec, IN boost::shared_ptr<CNetSession>& ptrSession)
@@ -81,7 +76,7 @@ VOID CNetConnectionMgr::AcceptHandlerCB(IN const boost::system::error_code& ec, 
 
 UINT32 CNetConnectionMgr::Disconnect(IN UINT32 u32NodeID)
 {
-#ifdef _DEBUG
+#ifdef _DEBUG_
     std::cout << u32NodeID << std::endl;
 #endif
     LogInfo("Disconnect u32NodeID = %u", u32NodeID);

@@ -16,23 +16,3 @@ CSubInnerMsgLayer::~CSubInnerMsgLayer()
 {
     delete[] m_pcMsg;
 }
-
-UINT32 CSubInnerMsgLayer::GetMsgType()
-{
-    return m_u32MsgType;
-}
-
-UINT32 CSubInnerMsgLayer::GetMsgLen()
-{
-    return m_u32MsgLen;
-}
-
-UINT32 CSubInnerMsgLayer::GetNodeID()
-{
-    return m_u32NodeID;
-}
-
-CHAR* CSubInnerMsgLayer::GetMsgBuf()
-{
-    return m_pcMsg;
-}

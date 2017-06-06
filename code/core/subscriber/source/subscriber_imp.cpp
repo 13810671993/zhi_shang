@@ -75,21 +75,9 @@ VOID CSubscriberImp::PushMsg2SubscriberThread(IN CSubscriberImp* pThis)
         {
             // 从队列中获取了消息 并且得知了MsgType
             TypeReadLock lock(pThis->m_mutex);
+
+            // 将消息推送给订阅者
             pThis->PubMessage(pMsg);
-#if 0
-            auto it = pThis->m_msgType_SubscribersMap.find(pMsg->GetMsgType());
-            if (it != pThis->m_msgType_SubscribersMap.end())
-            {
-                // 有订阅者
-                it->second->PubMessage(pMsg);
-            }
-            else
-            {
-                // 没有人订阅该消息 
-                // fix: 测试需要
-                pThis->m_msgType_SubscribersMap.begin()->second->PubMessage(pMsg);
-            }
-#endif
             delete pMsg;
             pMsg = NULL;
         }

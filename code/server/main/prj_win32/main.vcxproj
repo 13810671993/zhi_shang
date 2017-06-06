@@ -95,7 +95,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../include/;../../../include/;</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_WIN32_</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_WIN32_;_DEBUG_</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
       <Command>call ..\..\..\..\script\bat\copy_exe_result_win32.bat $(Configuration) $(TargetName).exe</Command>

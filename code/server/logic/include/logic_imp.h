@@ -5,6 +5,8 @@
 // CSubMsgHandler: 订阅消息的处理者
 // CLogicImp: 逻辑实例类 执行服务器逻辑 同时也要订阅消息 来获取消息处理
 
+class CMsgMgr;
+
 class CLogicImp : public CLogic, public CSubMsgHandler
 {
 public:

@@ -23,7 +23,7 @@
 #include "log/log.h"
 
 #ifdef _WIN32_
-    #ifdef _DEBUG
+    #ifdef _DEBUG_
         #pragma comment(lib, LIB_DEBUG_IMPORT("subscriber_d.lib"))
         #pragma comment(lib, LIB_DEBUG_IMPORT("network_d.lib"))
         #pragma comment(lib, LIB_DEBUG_IMPORT("svr_adpt_d.lib"))

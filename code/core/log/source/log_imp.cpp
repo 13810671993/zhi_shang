@@ -71,7 +71,7 @@ VOID CLogImp::InitLogBase()
 		boost::log::keywords::min_free_space = 3 * 1024 * 1024
 		);
 
-#ifdef _DEBUG
+#ifdef _DEBUG_
     // 立即写日志
     ptrBackend->auto_flush(TRUE);
 #endif
@@ -82,7 +82,7 @@ VOID CLogImp::InitLogBase()
         // 日志格式
 		boost::log::expressions::format("[%1%] [%2%] | %3%| %4%")
         // 时间戳格式 debug下不打印data以上的时间
-#ifdef _DEBUG
+#ifdef _DEBUG_
 		% boost::log::expressions::format_date_time< boost::posix_time::ptime >("TimeStamp", "%H:%M:%S.%f")
 #else
 		% boost::log::expressions::format_date_time< boost::posix_time::ptime >("TimeStamp", "%Y-%m-%d %H:%M:%S.%f")
