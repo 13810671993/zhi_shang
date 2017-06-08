@@ -90,7 +90,7 @@ VOID CNetConnectionMgr::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, I
     {
         UINT32 u32Ret = m_pNodeIDLayer->GetSession(u32NodeID, ptrSession);
         CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GetSession Failed. u32Ret = 0x%x", u32Ret);
+        ptrSession->SendMessage(u32MsgType, u32MsgLen, pcMsg);
     } while (0);
-    ptrSession->SendMessage(u32MsgType, u32MsgLen, pcMsg);
 }
 

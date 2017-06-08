@@ -21,6 +21,8 @@ private:
     boost::asio::ip::tcp::socket m_socket;
     std::vector<CHAR> m_cNetMessageVec;
     CNetConnectionMgr* m_pNetConnectionMgr;
+
+    //boost::pool<>   m_MemeryPool;
 };
 
 inline boost::asio::ip::tcp::socket& CNetSession::GetSocket()

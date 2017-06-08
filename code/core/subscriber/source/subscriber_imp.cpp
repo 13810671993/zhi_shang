@@ -99,7 +99,7 @@ UINT32 CSubscriberImp::PubMessage(IN CSubInnerMsgLayer* pMsg)
         // 没有人订阅该消息 
         // fix: 测试需要
         m_msgType_SubscribersMap.begin()->second->PubMessage(pMsg);
-        LogWarning("PubMessage failed. No one subscribe this message. u32MsgType = %u", pMsg->GetMsgType());
+        //LogWarning("PubMessage failed. No one subscribe this message. u32MsgType = %u", pMsg->GetMsgType());
         return COMERR_NOT_FOUND;
     }
 }

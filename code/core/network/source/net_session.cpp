@@ -2,7 +2,8 @@
 
 extern boost::lockfree::queue<CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue;
 
-CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetConnectionMgr* pNetConnectionMgr) : m_socket(ioServer), m_cNetMessageVec(2048, 0), m_pNetConnectionMgr(pNetConnectionMgr)
+CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetConnectionMgr* pNetConnectionMgr) : 
+    m_socket(ioServer), m_cNetMessageVec(NET_MESSAGE_MAX_SIZE, 0), m_pNetConnectionMgr(pNetConnectionMgr)//, m_MemeryPool(NET_MESSAGE_MAX_SIZE)
 {
 }
 
@@ -19,6 +20,8 @@ VOID CNetSession::StartSession(IN UINT32 u32NodeID)
     // boost::asio 接收数据做的非常好 不会有越界问题 数据包过大的时候都会分多次来接收 所以不用考虑越界问题
     m_socket.async_read_some(boost::asio::buffer(m_cNetMessageVec), boost::bind(&CNetSession::MessageHandlerCB, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred, u32NodeID));
 }
+
+LARGE_INTEGER  nFreq, t1, t2;
 
 VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UINT32 u32MsgLen, IN UINT32 u32NodeID)
 {
@@ -56,7 +59,19 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
     // 将数据封装到类中 然后写入队列
     UINT32 u32MsgType = 0;
     memcpy(&u32MsgType, m_cNetMessageVec.data(), sizeof(UINT32));
+    std::cout << "len: " << u32MsgLen << std::endl
+        << "type: " << u32MsgType << std::endl;
+    //std::cout << boost::posix_time::second_clock::local_time() << std::endl;;
+
+    QueryPerformanceFrequency(&nFreq);
+    QueryPerformanceCounter(&t1);
+
+    // fix: 调试
+#if 0
     CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32));
+#else
+    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen, m_cNetMessageVec.data());
+#endif
     g_netMsgQueue.push(pNetMsg);
 
     //m_cNetMessageVec.clear();
@@ -78,10 +93,16 @@ VOID CNetSession::SendMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN cons
     //m_socket.async_write_some(boost::asio::buffer(strMsg), boost::bind(&CNetSession::Test, this));
     //boost::asio::async_write(m_socket, boost::asio::buffer(strMsg), boost::bind(&CNetSession::Test, this));
 
+    // fix: 调试
     // 同步发送数据
+#if 0
     std::vector<CHAR> cMessageVec(u32MsgLen + sizeof(u32MsgType) + 1, 0);
     memcpy(cMessageVec.data(), &u32MsgType, sizeof(u32MsgType));
     memcpy(cMessageVec.data() + sizeof(u32MsgType), pcMsg, u32MsgLen);
+#else
+    std::vector<CHAR> cMessageVec(u32MsgLen, 0);
+    memcpy(cMessageVec.data(), pcMsg, u32MsgLen);
+#endif
     m_socket.write_some(boost::asio::buffer(cMessageVec), error);
 
     if (error)

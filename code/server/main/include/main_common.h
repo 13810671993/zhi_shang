@@ -31,6 +31,7 @@
         #pragma comment(lib, LIB_DEBUG_IMPORT("conf_d.lib"))
         #pragma comment(lib, LIB_DEBUG_IMPORT("logic_d.lib"))
         #pragma comment(lib, LIB_DEBUG_IMPORT("log_d.lib"))
+        #pragma comment(lib, LIB_DEBUG_IMPORT("mem_pool_d.lib"))
     #else
         #pragma comment(lib, LIB_RELEASE_IMPORT("subscriber.lib"))
         #pragma comment(lib, LIB_RELEASE_IMPORT("network.lib"))

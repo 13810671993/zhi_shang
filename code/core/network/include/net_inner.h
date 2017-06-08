@@ -17,10 +17,10 @@ public:
     inline CHAR*   GetMsgBuf();
 
 private:
-    CHAR*   m_pcMsg;
-    UINT32  m_u32MsgType;
-    UINT32  m_u32MsgLen;
-    UINT32  m_u32NodeID;
+    CHAR*           m_pcMsg;
+    UINT32          m_u32MsgType;
+    UINT32          m_u32MsgLen;
+    UINT32          m_u32NodeID;
 };
 
 inline UINT32 CNetInnerMsg::GetMsgType()

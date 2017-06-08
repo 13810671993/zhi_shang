@@ -59,6 +59,8 @@ VOID CNetworkMgrImp::ListenThread(IN CNetworkMgrImp* pThis, IN UINT16 u16Port)
     pThis->m_pNetConnectionMgr->StartListen(u16Port);
 }
 
+extern LARGE_INTEGER  nFreq, t1, t2;
+
 VOID CNetworkMgrImp::PushMessage2AdptThread(IN CNetworkMgrImp* pThis)
 {
     CNetInnerMsg* pNetMsg = NULL;
@@ -70,8 +72,14 @@ VOID CNetworkMgrImp::PushMessage2AdptThread(IN CNetworkMgrImp* pThis)
             pThis->m_pAdpt->PushMessage(pNetMsg->GetNodeID(), pNetMsg->GetMsgType(), pNetMsg->GetMsgLen(), pNetMsg->GetMsgBuf());
             delete pNetMsg;
             pNetMsg = NULL;
+            QueryPerformanceCounter(&t2);
+            double dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
+            LogDebug("Ê±¼ä²î: %lfus", dt * 1000000);
+
         }
         else
-            BOOST_SLEEP(100);
+        {
+        }
+            //BOOST_SLEEP(100);
     }
 }

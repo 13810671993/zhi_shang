@@ -69,7 +69,8 @@ UINT32 CMain::InitMessageModule()
         CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "AddAdpt Failed. u32Ret = 0x%x", u32Ret);
         //u32Ret = pMsgMgr->StartLisen("127.0.0.1", 1993);
         //u32Ret = pMsgMgr->StartLisen("192.168.31.181", 1993);
-        u32Ret = pMsgMgr->StartLisen(1993);
+        //u32Ret = pMsgMgr->StartLisen(1993);
+        u32Ret = pMsgMgr->StartLisen(8080);
         CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "StartListen Failed. u32Ret = 0x%x", u32Ret);
 
     } while (0);
@@ -147,11 +148,27 @@ CHAR*& AssignInStackRefer()
 }
 #endif
 
+#include <iostream>
+#include <ctime>
+#include <boost/pool/pool.hpp>
+#include <boost/pool/object_pool.hpp>
+#include <boost/pool/singleton_pool.hpp>
+
+const int MAXLENGTH = 100000;
+
+typedef struct
+{
+    CHAR test[512];
+}test;
+
 int main()
 {
+
+#if 1
     CMain* pMain = CMain::GetInstance();
 
     pMain->InitCommModule();
+#endif
 #if 0
     CHAR* pcPoint2 = NULL;
     CHAR* pcPoint1 = NULL;
@@ -185,12 +202,118 @@ int main()
     LogDebug("&strTestCopy2: 0x%x", strTestCopy2.data());
 #endif
 
+#if 0
+#if 0
+    boost::pool<> p(sizeof(int));
+
+    int** vec1 = new int*[MAXLENGTH];
+    int** vec2 = new int*[MAXLENGTH];
+
+    clock_t clock_begin = clock();
+
+    for (int i = 0; i < MAXLENGTH; ++i)
+        vec1[i] = static_cast<int*>(p.malloc());
+
+    for (int i = 0; i < MAXLENGTH; ++i)
+        p.free(vec1[i]);
+
+    clock_t clock_end = clock();
+
+    std::cout << "内存池 程序运行了 " << clock_end - clock_begin << " 个系统时钟" << std::endl;
+
+    clock_begin = clock();
+
+    for (int i = 0; i < MAXLENGTH; ++i)
+        vec2[i] = new int();
+
+    for (int i = 0; i < MAXLENGTH; ++i)
+        delete vec2[i];
+
+    clock_end = clock();
+
+    std::cout << "手动分配 程序运行了 " << clock_end - clock_begin << " 个系统时钟" << std::endl;
+#endif
+
+    boost::pool<> pl(2000);
+    CHAR* pp1 = NULL;
+    CHAR* pp2 = NULL;
+    CHAR* temp = "0123456789";
+    CHAR buf[2001] = { 0 };
+    for (auto i = 0; i < 200; ++i)
+    {
+        memcpy(buf + strlen(temp) * i, temp, strlen(temp));
+    }
+    clock_t clock_begin = clock();
+    for (int i = 0; i < MAXLENGTH; ++i)
+    {
+        pp1 = (CHAR*)pl.malloc();
+        memset(pp1, 0, 2000);
+        memcpy(pp1, buf, 2000);
+        pl.free(pp1);
+    }
+    clock_t clock_end = clock();
+    std::cout << "内存池 程序运行了 " << clock_end - clock_begin << " 个系统时钟" << std::endl;
+
+    clock_begin = clock();
+    for (int i = 0; i < MAXLENGTH; ++i)
+    {
+        pp2 = new CHAR[2000];
+        memset(pp1, 0, 2000);
+        memcpy(pp1, buf, 2000);
+        delete[] pp2;
+    }
+    clock_end = clock();
+    std::cout << "手动分配 程序运行了 " << clock_end - clock_begin << " 个系统时钟" << std::endl;
+#endif
+    
+#if 0
+    test** vec1 = new test*[MAXLENGTH];
+    test** vec2 = new test*[MAXLENGTH];
+
+    clock_t clock_begin = clock();
+
+    for (int i = 0; i < MAXLENGTH; ++i)
+        vec1[i] = (test*)boost::singleton_pool<tag, sizeof(test)>::malloc();
+
+    for (int i = 0; i < MAXLENGTH; ++i)
+        boost::singleton_pool<tag, sizeof(test)>::free(vec1[i]);
+
+    clock_t clock_end = clock();
+
+    std::cout << "内存池 程序运行了 " << clock_end - clock_begin << " 个系统时钟" << std::endl;
+
+    clock_begin = clock();
+
+    for (int i = 0; i < MAXLENGTH; ++i)
+        vec1[i] = (test*)boost::singleton_pool<tag, sizeof(test)>::malloc();
+
+    for (int i = 0; i < MAXLENGTH; ++i)
+        boost::singleton_pool<tag, sizeof(test)>::free(vec1[i]);
+
+    clock_end = clock();
+
+    std::cout << "内存池 程序运行了 " << clock_end - clock_begin << " 个系统时钟" << std::endl;
+
+    clock_begin = clock();
+
+    for (int i = 0; i < MAXLENGTH; ++i)
+        vec2[i] = new test;
+
+    for (int i = 0; i < MAXLENGTH; ++i)
+        delete vec2[i];
+
+    clock_end = clock();
+
+    std::cout << "手动分配 程序运行了 " << clock_end - clock_begin << " 个系统时钟" << std::endl;
+
+#endif
+
 #if 1
     pMain->InitNetworkModule();
     pMain->InitMessageModule();
     pMain->InitLogicModule();
-#endif
 
+#endif
     while (1)
         BOOST_SLEEP(1000);
     CMain::DestroyInstance();
