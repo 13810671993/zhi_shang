@@ -2,10 +2,19 @@
 
 extern boost::lockfree::queue<CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue;
 
+#ifdef _MEM_POOL_
+CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetConnectionMgr* pNetConnectionMgr) :
+    m_socket(ioServer), m_cNetMessageVec(NET_MESSAGE_MAX_SIZE, 0), m_pNetConnectionMgr(pNetConnectionMgr), m_tMemPool(MEM_POOL_INITIALIZER)
+{
+    MemPoolInit_API();
+    m_tMemPool = MemPoolCreate_API(NULL, NET_MESSAGE_MAX_SIZE);
+}
+#else
 CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetConnectionMgr* pNetConnectionMgr) : 
-    m_socket(ioServer), m_cNetMessageVec(NET_MESSAGE_MAX_SIZE, 0), m_pNetConnectionMgr(pNetConnectionMgr)//, m_MemeryPool(NET_MESSAGE_MAX_SIZE)
+    m_socket(ioServer), m_cNetMessageVec(NET_MESSAGE_MAX_SIZE, 0), m_pNetConnectionMgr(pNetConnectionMgr)
 {
 }
+#endif
 
 CNetSession::~CNetSession()
 {
@@ -13,6 +22,11 @@ CNetSession::~CNetSession()
     {
         m_socket.close();
     }
+#ifdef _MEM_POOL_
+    MemPoolDestroy_API(&m_tMemPool);
+    MemPoolFinalize_API();
+#else
+#endif
 }
 
 VOID CNetSession::StartSession(IN UINT32 u32NodeID)
@@ -21,7 +35,10 @@ VOID CNetSession::StartSession(IN UINT32 u32NodeID)
     m_socket.async_read_some(boost::asio::buffer(m_cNetMessageVec), boost::bind(&CNetSession::MessageHandlerCB, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred, u32NodeID));
 }
 
+#ifdef _WIN32_
 LARGE_INTEGER  nFreq, t1, t2;
+#else
+#endif
 
 VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UINT32 u32MsgLen, IN UINT32 u32NodeID)
 {
@@ -45,10 +62,11 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
     }
     
     // 越界问题应该不会出现 如果出现 绝对是最大的问题了
-    if (u32MsgLen > m_cNetMessageVec.size())
+    if (u32MsgLen > NET_MESSAGE_MAX_SIZE)
     {
         LogFatal("Recv message error for out of bounds. u32MsgLen = %d", u32MsgLen);
 #ifdef _DEBUG_
+        BOOST_SLEEP(1 * 1000);
         exit(0);
 #else
         return;
@@ -63,14 +81,16 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
         << "type: " << u32MsgType << std::endl;
     //std::cout << boost::posix_time::second_clock::local_time() << std::endl;;
 
+#ifdef _WIN32_
     QueryPerformanceFrequency(&nFreq);
     QueryPerformanceCounter(&t1);
-
-    // fix: 调试
-#if 0
-    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32));
 #else
-    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen, m_cNetMessageVec.data());
+#endif
+
+#ifdef _MEM_POOL_
+    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32), &m_tMemPool);
+#else
+    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32));
 #endif
     g_netMsgQueue.push(pNetMsg);
 

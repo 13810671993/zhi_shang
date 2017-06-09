@@ -1,7 +1,22 @@
 #include "subscriber_common.h"
 
-boost::lockfree::queue<CSubInnerMsgLayer*, boost::lockfree::fixed_sized<FALSE>> g_subInnerMsgQueue(0);
+boost::lockfree::queue<CSubInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_subInnerMsgQueue(0);
 
+#ifdef _MEM_POOL_
+CSubscriberImp::CSubscriberImp() : m_tMemPool(MEM_POOL_INITIALIZER)
+{
+    boost::thread threadImp(boost::bind(PushMsg2SubscriberThread, this));
+    LogInfo("PushMsg2SubscriberThread start.");
+    MemPoolInit_API();
+    m_tMemPool = MemPoolCreate_API(NULL, NET_MESSAGE_MAX_SIZE);
+}
+
+CSubscriberImp::~CSubscriberImp()
+{
+    MemPoolDestroy_API(&m_tMemPool);
+    MemPoolFinalize_API();
+}
+#else
 CSubscriberImp::CSubscriberImp()
 {
     boost::thread threadImp(boost::bind(PushMsg2SubscriberThread, this));
@@ -12,6 +27,7 @@ CSubscriberImp::~CSubscriberImp()
 {
 
 }
+#endif
 
 CSubscriberImp* CSubscriberImp::m_pSubscriberImp = NULL;
 
@@ -33,7 +49,11 @@ VOID CSubscriberImp::DestroyInstance()
 
 UINT32 CSubscriberImp::PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen)
 {
-    CSubInnerMsgLayer* pMsg = new CSubInnerMsgLayer(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
+#ifdef _MEM_POOL_
+    CSubInnerMsg* pMsg = new CSubInnerMsg(u32NodeID, u32MsgType, pcMsg, u32MsgLen, &m_tMemPool);
+#else
+    CSubInnerMsg* pMsg = new CSubInnerMsg(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
+#endif
 
     // 写入sub本地队列
     g_subInnerMsgQueue.push(pMsg);
@@ -66,7 +86,7 @@ UINT32 CSubscriberImp::SubscribeMessage(IN UINT32 u32MsgType, IN CSubMsgHandler*
 
 VOID CSubscriberImp::PushMsg2SubscriberThread(IN CSubscriberImp* pThis)
 {
-    CSubInnerMsgLayer* pMsg = NULL;
+    CSubInnerMsg* pMsg = NULL;
     while (1)
     {
         // 1. 先从sub消息队列中获取消息
@@ -86,7 +106,7 @@ VOID CSubscriberImp::PushMsg2SubscriberThread(IN CSubscriberImp* pThis)
     }
 }
 
-UINT32 CSubscriberImp::PubMessage(IN CSubInnerMsgLayer* pMsg)
+UINT32 CSubscriberImp::PubMessage(IN CSubInnerMsg* pMsg)
 {
     auto it = m_msgType_SubscribersMap.find(pMsg->GetMsgType());
     if (it != m_msgType_SubscribersMap.end())

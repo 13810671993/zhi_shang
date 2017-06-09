@@ -59,7 +59,7 @@ INT32 CConf :: FileLoad(const CHAR* pcFileName)
 }
 
 //释放ini文件所占资源
-void CConf :: FileFree()
+VOID CConf :: FileFree()
 {
 	if (m_pcBuffer != NULL) {
 		free(m_pcBuffer);
@@ -219,7 +219,7 @@ INT32 CConf :: SetInt(IN const CHAR *section, IN const CHAR *key, IN INT32 value
 //去除串首尾空格，原串被改写
 CHAR* CConf :: StrStrip(CHAR *s) const
 {
-	size_t size;
+	UINT32 size;
 	CHAR *p1, *p2;
 
 	size = strlen(s);
@@ -411,7 +411,7 @@ INT32 CConf :: FindSection(const CHAR *section, CHAR **sect1, CHAR **sect2, CHAR
 //从一行取键、值
 //输入：内容串(将被改写)
 //输出：键串、值串
-void CConf :: GetKeyValue(CHAR *content, CHAR **key, CHAR **value) const
+VOID CConf :: GetKeyValue(CHAR *content, CHAR **key, CHAR **value) const
 {
 	CHAR *p;
 

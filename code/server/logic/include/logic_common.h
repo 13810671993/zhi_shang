@@ -13,6 +13,9 @@
 #include "common/link_lib.h"
 #include "common/common_error.h"
 #include "common/common_tool.h"
+#include "common/common_define.h"
+
+#include "mem_pool/mem_pool.h"
 
 #include "subscriber/sub_msg_handler.h"
 #include "adpt/adpt.h"

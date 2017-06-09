@@ -41,7 +41,7 @@ private:
 	//加载ini文件至内存
 	INT32 FileLoad(const CHAR* pcFileName);
 	//释放ini文件所占资源
-	void FileFree();
+	VOID FileFree();
 
 	//去除串首尾空格，原串被改写
 	CHAR* StrStrip(CHAR *s) const;
@@ -52,7 +52,7 @@ private:
 	//取一节section
 	INT32 FindSection(const CHAR *section, CHAR **sect1, CHAR **sect2, CHAR **cont1, CHAR **cont2, CHAR **nextsect) const;
 	//从一行取键、值
-	void GetKeyValue(CHAR *content, CHAR **key, CHAR **value) const;
+	VOID GetKeyValue(CHAR *content, CHAR **key, CHAR **value) const;
 	//读取值原始串
 	INT32 GetValue(const CHAR *section, const CHAR *key, CHAR *value, INT32 maxlen, const CHAR *defvalue) const;
 

@@ -6,7 +6,7 @@
 // 2. 为每个订阅者发送消息
 
 class CSubMsgHandler;
-class CSubInnerMsgLayer;
+class CSubInnerMsg;
 
 class CSubscribersMap
 {
@@ -17,7 +17,7 @@ public:
 public:
     UINT32  AddMsgHandler(IN CSubMsgHandler* pSubMsgHandler);
 
-    UINT32  PubMessage(IN CSubInnerMsgLayer* pMsg);
+    UINT32  PubMessage(IN CSubInnerMsg* pMsg);
 
 private:
     std::vector<CSubMsgHandler*> m_subMsgHandlerVec;

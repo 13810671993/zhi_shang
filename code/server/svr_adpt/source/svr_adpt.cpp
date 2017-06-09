@@ -19,7 +19,7 @@ CSvrAdpt* CSvrAdpt::GetInstance()
     return m_pSvrAdpt;
 }
 
-void CSvrAdpt::DestroyInstance()
+VOID CSvrAdpt::DestroyInstance()
 {
     if (m_pSvrAdpt != NULL)
     {

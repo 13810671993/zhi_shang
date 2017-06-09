@@ -12,7 +12,7 @@ class CSvrAdpt : public CAdpt
 {
 public:
     static CSvrAdpt*    GetInstance();
-    static void         DestroyInstance();
+    static VOID         DestroyInstance();
 
 private:
     CSvrAdpt();

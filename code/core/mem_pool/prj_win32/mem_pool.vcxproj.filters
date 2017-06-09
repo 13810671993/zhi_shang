@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\mem_pool\elr_mpl.h">
+    <ClInclude Include="..\include\mem_pool_common.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\mem_pool_common.h">
+    <ClInclude Include="..\..\..\include\mem_pool\mem_pool.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\source\elr_mpl.c">
+    <ClCompile Include="..\source\mem_pool.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

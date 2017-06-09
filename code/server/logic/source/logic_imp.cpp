@@ -2,6 +2,19 @@
 
 boost::lockfree::queue<CLogicInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_LogicMsgQueue(0);
 
+#ifdef _MEM_POOL_
+CLogicImp::CLogicImp() : m_pMsgMgr(NULL), m_bRun(FALSE), m_tMemPool(MEM_POOL_INITIALIZER)
+{
+    MemPoolInit_API();
+    m_tMemPool = MemPoolCreate_API(NULL, NET_MESSAGE_MAX_SIZE);
+}
+
+CLogicImp::~CLogicImp()
+{
+    MemPoolDestroy_API(&m_tMemPool);
+    MemPoolFinalize_API();
+}
+#else
 CLogicImp::CLogicImp() : m_pMsgMgr(NULL), m_bRun(FALSE)
 {
 
@@ -11,6 +24,7 @@ CLogicImp::~CLogicImp()
 {
 
 }
+#endif
 
 CLogicImp* CLogicImp::m_pLogicImp = NULL;
 
@@ -30,9 +44,13 @@ VOID CLogicImp::DestroyInstance()
     }
 }
 
-UINT32 CLogicImp::RecvMessageFromSub(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen)
+UINT32 CLogicImp::RecvMessageFromSub(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg)
 {
+#ifdef _MEM_POOL_
+    CLogicInnerMsg* pMsg = new CLogicInnerMsg(u32NodeID, u32MsgType, u32MsgLen, pcMsg, &m_tMemPool);
+#else
     CLogicInnerMsg* pMsg = new CLogicInnerMsg(u32NodeID, u32MsgType, u32MsgLen, pcMsg);
+#endif
     g_LogicMsgQueue.push(pMsg);
     return COMERR_OK;
 }
@@ -109,6 +127,7 @@ VOID CLogicImp::DealMessageThread(IN CLogicImp* pThis, IN UINT32 u32ThreadNum)
             std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgBuf() << std::endl;
 #endif
             CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
+            pThis->OnDealMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
             delete pMsg;
             pMsg = NULL;
         }
@@ -142,6 +161,20 @@ UINT32 CLogicImp::RegistMessageCB()
 UINT32 CLogicImp::UnRegistMessageCB()
 {
     UINT32  u32Ret = 0;
+
+    return u32Ret;
+}
+
+UINT32 CLogicImp::OnDealMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg)
+{
+    UINT32 u32Ret = 0;
+    switch (u32MsgType)
+    {
+    case 0:
+        break;
+    default:
+        break;
+    }
 
     return u32Ret;
 }

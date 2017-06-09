@@ -22,7 +22,10 @@ private:
     std::vector<CHAR> m_cNetMessageVec;
     CNetConnectionMgr* m_pNetConnectionMgr;
 
-    //boost::pool<>   m_MemeryPool;
+#ifdef _MEM_POOL_
+    T_MEM_POOL m_tMemPool;
+#else
+#endif
 };
 
 inline boost::asio::ip::tcp::socket& CNetSession::GetSocket()

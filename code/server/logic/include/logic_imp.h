@@ -13,7 +13,7 @@ public:
     static CLogicImp*   GetInstance();
     static VOID         DestroyInstance();
 
-    UINT32  RecvMessageFromSub(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen); // 获取消息 CSubMsgHandler 接口
+    UINT32  RecvMessageFromSub(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg); // 获取消息 CSubMsgHandler 接口
 
     UINT32  Run();                              // 逻辑触发入口 
     UINT32  Stop();                             // 逻辑停止入口 
@@ -24,6 +24,8 @@ private:
     UINT32  RegistMessageCB();                  // 注册订阅消息
     UINT32  UnRegistMessageCB();                // 取消注册
 
+    UINT32  OnDealMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg);
+
 private:
     CLogicImp();
     ~CLogicImp();
@@ -33,6 +35,11 @@ private:
 
     CMsgMgr*        m_pMsgMgr;
     BOOL            m_bRun;
+
+#ifdef _MEM_POOL_
+    T_MEM_POOL  m_tMemPool;
+#else
+#endif
 };
 
 #endif

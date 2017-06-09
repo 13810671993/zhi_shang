@@ -32,12 +32,12 @@ UINT32 CSubscribersMap::AddMsgHandler(IN CSubMsgHandler* pSubMsgHandler)
     return u32Ret;
 }
 
-UINT32 CSubscribersMap::PubMessage(IN CSubInnerMsgLayer* pMsg)
+UINT32 CSubscribersMap::PubMessage(IN CSubInnerMsg* pMsg)
 {
     TypeReadLock lock(m_mutex);
     for (auto it = m_subMsgHandlerVec.begin(); it != m_subMsgHandlerVec.end(); ++it)
     {
-        (*it)->RecvMessageFromSub(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgBuf(), pMsg->GetMsgLen());
+        (*it)->RecvMessageFromSub(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
     }
     return COMERR_OK;
 }

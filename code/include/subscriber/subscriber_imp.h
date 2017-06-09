@@ -8,7 +8,7 @@
 
 class CSubscribersMap;
 class CSubMsgHandler;
-class CSubInnerMsgLayer;
+class CSubInnerMsg;
 
 class CSubscriberImp : public CSubscriber
 {
@@ -24,7 +24,7 @@ private:
 
 private:
     static  VOID    PushMsg2SubscriberThread(IN CSubscriberImp* pThis);
-    UINT32          PubMessage(IN CSubInnerMsgLayer* pMsg);
+    UINT32          PubMessage(IN CSubInnerMsg* pMsg);
 
 private:
     static CSubscriberImp*  m_pSubscriberImp;
@@ -34,6 +34,11 @@ private:
     typedef boost::shared_lock<boost::shared_mutex>     TypeReadLock;
     typedef boost::unique_lock<boost::shared_mutex>     TypeWriteLock;
     boost::shared_mutex                                 m_mutex;
+
+#ifdef _MEM_POOL_
+    T_MEM_POOL  m_tMemPool;
+#else
+#endif
 };
 
 #endif

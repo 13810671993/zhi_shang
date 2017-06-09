@@ -10,7 +10,11 @@
 class CLogicInnerMsg
 {
 public:
+#ifdef _MEM_POOL_
+    CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg, IN T_MEM_POOL* ptMemPool);
+#else
     CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg);
+#endif
     ~CLogicInnerMsg();
     
 public:

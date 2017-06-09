@@ -19,6 +19,7 @@
 #include "msg_mgr/msg_mgr.h"
 #include "conf/conf.h"
 #include "logic/logic.h"
+#include "mem_pool/mem_pool.h"
 
 #include "log/log.h"
 

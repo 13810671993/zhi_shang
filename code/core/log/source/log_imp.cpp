@@ -4,7 +4,7 @@
 template< typename CharT, typename TraitsT >
 inline std::basic_ostream< CharT, TraitsT >& operator<< (std::basic_ostream< CharT, TraitsT >& stream, E_SEVERITY_LEVEL level)
 {
-	static const char* const strLevel[] =
+	static const CHAR* const strLevel[] =
 	{
 		"TRACE  ",
 		"DEBUG  ",
@@ -16,7 +16,7 @@ inline std::basic_ostream< CharT, TraitsT >& operator<< (std::basic_ostream< Cha
 	if (static_cast<std::size_t>(level) < (sizeof(strLevel) / sizeof(*strLevel)))
 		stream << strLevel[level];
 	else
-		stream << static_cast<int>(level);
+		stream << static_cast<INT32>(level);
 	return stream;
 }
 

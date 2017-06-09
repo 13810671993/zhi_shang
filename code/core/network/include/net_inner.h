@@ -7,7 +7,11 @@
 class CNetInnerMsg
 {
 public:
+#ifdef _MEM_POOL_
+    CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN CHAR* pcMsg, IN T_MEM_POOL* ptMemPool);
+#else
     CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN CHAR* pcMsg);
+#endif
     ~CNetInnerMsg();
     
 public:
@@ -21,6 +25,8 @@ private:
     UINT32          m_u32MsgType;
     UINT32          m_u32MsgLen;
     UINT32          m_u32NodeID;
+
+    //T_MEM_POOL* m_ptMemPool;
 };
 
 inline UINT32 CNetInnerMsg::GetMsgType()
