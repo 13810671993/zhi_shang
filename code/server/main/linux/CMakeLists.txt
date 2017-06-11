@@ -1,0 +1,11 @@
+set(MAIN_INC_DIR ${MAIN_DIR}/include)
+include_directories(${MAIN_INC_DIR})
+aux_source_directory(${MAIN_DIR}/source MAIN_SRC)
+message("MAIN_SRC: " ${MAIN_SRC})
+add_definitions(-D_LINUX_)
+link_directories(/usr/lib64 /usr/local/lib ${LIBRARY_OUTPUT_PATH})
+message("LIBRARY_OUTPUT_PATH: " ${LIBRARY_OUTPUT_PATH})
+add_executable(zhishang ${MAIN_SRC})
+set(LINKLIB pthread boost_log boost_system boost_thread boost_filesystem boost_log_setup boost_date_time conf log mempool msgmgr network subscriber logic adpt)
+target_link_libraries(zhishang ${LINKLIB})
+

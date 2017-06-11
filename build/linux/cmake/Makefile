@@ -102,17 +102,697 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test
+# Target rules for targets named adpt
 
 # Build rule for target.
-test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test
-.PHONY : test
+adpt: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 adpt
+.PHONY : adpt
 
 # fast build rule for target.
-test/fast:
-	$(MAKE) -f linux.out/CMakeFiles/test.dir/build.make linux.out/CMakeFiles/test.dir/build
-.PHONY : test/fast
+adpt/fast:
+	$(MAKE) -f CMakeFiles/adpt.dir/build.make CMakeFiles/adpt.dir/build
+.PHONY : adpt/fast
+
+#=============================================================================
+# Target rules for targets named conf
+
+# Build rule for target.
+conf: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 conf
+.PHONY : conf
+
+# fast build rule for target.
+conf/fast:
+	$(MAKE) -f CMakeFiles/conf.dir/build.make CMakeFiles/conf.dir/build
+.PHONY : conf/fast
+
+#=============================================================================
+# Target rules for targets named log
+
+# Build rule for target.
+log: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 log
+.PHONY : log
+
+# fast build rule for target.
+log/fast:
+	$(MAKE) -f CMakeFiles/log.dir/build.make CMakeFiles/log.dir/build
+.PHONY : log/fast
+
+#=============================================================================
+# Target rules for targets named logic
+
+# Build rule for target.
+logic: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 logic
+.PHONY : logic
+
+# fast build rule for target.
+logic/fast:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/build
+.PHONY : logic/fast
+
+#=============================================================================
+# Target rules for targets named mempool
+
+# Build rule for target.
+mempool: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mempool
+.PHONY : mempool
+
+# fast build rule for target.
+mempool/fast:
+	$(MAKE) -f CMakeFiles/mempool.dir/build.make CMakeFiles/mempool.dir/build
+.PHONY : mempool/fast
+
+#=============================================================================
+# Target rules for targets named msgmgr
+
+# Build rule for target.
+msgmgr: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 msgmgr
+.PHONY : msgmgr
+
+# fast build rule for target.
+msgmgr/fast:
+	$(MAKE) -f CMakeFiles/msgmgr.dir/build.make CMakeFiles/msgmgr.dir/build
+.PHONY : msgmgr/fast
+
+#=============================================================================
+# Target rules for targets named network
+
+# Build rule for target.
+network: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 network
+.PHONY : network
+
+# fast build rule for target.
+network/fast:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/build
+.PHONY : network/fast
+
+#=============================================================================
+# Target rules for targets named subscriber
+
+# Build rule for target.
+subscriber: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 subscriber
+.PHONY : subscriber
+
+# fast build rule for target.
+subscriber/fast:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/build
+.PHONY : subscriber/fast
+
+#=============================================================================
+# Target rules for targets named zhishang
+
+# Build rule for target.
+zhishang: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 zhishang
+.PHONY : zhishang
+
+# fast build rule for target.
+zhishang/fast:
+	$(MAKE) -f CMakeFiles/zhishang.dir/build.make CMakeFiles/zhishang.dir/build
+.PHONY : zhishang/fast
+
+home/server/zhi_shang/code/core/conf/source/conf.o: home/server/zhi_shang/code/core/conf/source/conf.cpp.o
+.PHONY : home/server/zhi_shang/code/core/conf/source/conf.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/conf/source/conf.cpp.o:
+	$(MAKE) -f CMakeFiles/conf.dir/build.make CMakeFiles/conf.dir/home/server/zhi_shang/code/core/conf/source/conf.cpp.o
+.PHONY : home/server/zhi_shang/code/core/conf/source/conf.cpp.o
+
+home/server/zhi_shang/code/core/conf/source/conf.i: home/server/zhi_shang/code/core/conf/source/conf.cpp.i
+.PHONY : home/server/zhi_shang/code/core/conf/source/conf.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/conf/source/conf.cpp.i:
+	$(MAKE) -f CMakeFiles/conf.dir/build.make CMakeFiles/conf.dir/home/server/zhi_shang/code/core/conf/source/conf.cpp.i
+.PHONY : home/server/zhi_shang/code/core/conf/source/conf.cpp.i
+
+home/server/zhi_shang/code/core/conf/source/conf.s: home/server/zhi_shang/code/core/conf/source/conf.cpp.s
+.PHONY : home/server/zhi_shang/code/core/conf/source/conf.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/conf/source/conf.cpp.s:
+	$(MAKE) -f CMakeFiles/conf.dir/build.make CMakeFiles/conf.dir/home/server/zhi_shang/code/core/conf/source/conf.cpp.s
+.PHONY : home/server/zhi_shang/code/core/conf/source/conf.cpp.s
+
+home/server/zhi_shang/code/core/log/source/log.o: home/server/zhi_shang/code/core/log/source/log.cpp.o
+.PHONY : home/server/zhi_shang/code/core/log/source/log.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/log/source/log.cpp.o:
+	$(MAKE) -f CMakeFiles/log.dir/build.make CMakeFiles/log.dir/home/server/zhi_shang/code/core/log/source/log.cpp.o
+.PHONY : home/server/zhi_shang/code/core/log/source/log.cpp.o
+
+home/server/zhi_shang/code/core/log/source/log.i: home/server/zhi_shang/code/core/log/source/log.cpp.i
+.PHONY : home/server/zhi_shang/code/core/log/source/log.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/log/source/log.cpp.i:
+	$(MAKE) -f CMakeFiles/log.dir/build.make CMakeFiles/log.dir/home/server/zhi_shang/code/core/log/source/log.cpp.i
+.PHONY : home/server/zhi_shang/code/core/log/source/log.cpp.i
+
+home/server/zhi_shang/code/core/log/source/log.s: home/server/zhi_shang/code/core/log/source/log.cpp.s
+.PHONY : home/server/zhi_shang/code/core/log/source/log.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/log/source/log.cpp.s:
+	$(MAKE) -f CMakeFiles/log.dir/build.make CMakeFiles/log.dir/home/server/zhi_shang/code/core/log/source/log.cpp.s
+.PHONY : home/server/zhi_shang/code/core/log/source/log.cpp.s
+
+home/server/zhi_shang/code/core/log/source/log_imp.o: home/server/zhi_shang/code/core/log/source/log_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/core/log/source/log_imp.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/log/source/log_imp.cpp.o:
+	$(MAKE) -f CMakeFiles/log.dir/build.make CMakeFiles/log.dir/home/server/zhi_shang/code/core/log/source/log_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/core/log/source/log_imp.cpp.o
+
+home/server/zhi_shang/code/core/log/source/log_imp.i: home/server/zhi_shang/code/core/log/source/log_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/core/log/source/log_imp.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/log/source/log_imp.cpp.i:
+	$(MAKE) -f CMakeFiles/log.dir/build.make CMakeFiles/log.dir/home/server/zhi_shang/code/core/log/source/log_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/core/log/source/log_imp.cpp.i
+
+home/server/zhi_shang/code/core/log/source/log_imp.s: home/server/zhi_shang/code/core/log/source/log_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/core/log/source/log_imp.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/log/source/log_imp.cpp.s:
+	$(MAKE) -f CMakeFiles/log.dir/build.make CMakeFiles/log.dir/home/server/zhi_shang/code/core/log/source/log_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/core/log/source/log_imp.cpp.s
+
+home/server/zhi_shang/code/core/mem_pool/source/mem_pool.o: home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.o
+.PHONY : home/server/zhi_shang/code/core/mem_pool/source/mem_pool.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.o:
+	$(MAKE) -f CMakeFiles/mempool.dir/build.make CMakeFiles/mempool.dir/home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.o
+.PHONY : home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.o
+
+home/server/zhi_shang/code/core/mem_pool/source/mem_pool.i: home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.i
+.PHONY : home/server/zhi_shang/code/core/mem_pool/source/mem_pool.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.i:
+	$(MAKE) -f CMakeFiles/mempool.dir/build.make CMakeFiles/mempool.dir/home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.i
+.PHONY : home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.i
+
+home/server/zhi_shang/code/core/mem_pool/source/mem_pool.s: home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.s
+.PHONY : home/server/zhi_shang/code/core/mem_pool/source/mem_pool.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.s:
+	$(MAKE) -f CMakeFiles/mempool.dir/build.make CMakeFiles/mempool.dir/home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.s
+.PHONY : home/server/zhi_shang/code/core/mem_pool/source/mem_pool.c.s
+
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.o: home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.o
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.o:
+	$(MAKE) -f CMakeFiles/msgmgr.dir/build.make CMakeFiles/msgmgr.dir/home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.o
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.o
+
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.i: home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.i
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.i:
+	$(MAKE) -f CMakeFiles/msgmgr.dir/build.make CMakeFiles/msgmgr.dir/home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.i
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.i
+
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.s: home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.s
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.s:
+	$(MAKE) -f CMakeFiles/msgmgr.dir/build.make CMakeFiles/msgmgr.dir/home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.s
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.cpp.s
+
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.o: home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.o:
+	$(MAKE) -f CMakeFiles/msgmgr.dir/build.make CMakeFiles/msgmgr.dir/home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.o
+
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.i: home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.i:
+	$(MAKE) -f CMakeFiles/msgmgr.dir/build.make CMakeFiles/msgmgr.dir/home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.i
+
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.s: home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.s:
+	$(MAKE) -f CMakeFiles/msgmgr.dir/build.make CMakeFiles/msgmgr.dir/home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.cpp.s
+
+home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.o: home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.o:
+	$(MAKE) -f CMakeFiles/msgmgr.dir/build.make CMakeFiles/msgmgr.dir/home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.o
+
+home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.i: home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.i:
+	$(MAKE) -f CMakeFiles/msgmgr.dir/build.make CMakeFiles/msgmgr.dir/home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.i
+
+home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.s: home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.s:
+	$(MAKE) -f CMakeFiles/msgmgr.dir/build.make CMakeFiles/msgmgr.dir/home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.cpp.s
+
+home/server/zhi_shang/code/core/network/source/net_connection_mgr.o: home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/net_connection_mgr.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.o:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.o
+
+home/server/zhi_shang/code/core/network/source/net_connection_mgr.i: home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/net_connection_mgr.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.i:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.i
+
+home/server/zhi_shang/code/core/network/source/net_connection_mgr.s: home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/net_connection_mgr.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.s:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/net_connection_mgr.cpp.s
+
+home/server/zhi_shang/code/core/network/source/net_inner.o: home/server/zhi_shang/code/core/network/source/net_inner.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/net_inner.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/network/source/net_inner.cpp.o:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_inner.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/net_inner.cpp.o
+
+home/server/zhi_shang/code/core/network/source/net_inner.i: home/server/zhi_shang/code/core/network/source/net_inner.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/net_inner.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/network/source/net_inner.cpp.i:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_inner.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/net_inner.cpp.i
+
+home/server/zhi_shang/code/core/network/source/net_inner.s: home/server/zhi_shang/code/core/network/source/net_inner.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/net_inner.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/network/source/net_inner.cpp.s:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_inner.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/net_inner.cpp.s
+
+home/server/zhi_shang/code/core/network/source/net_msg.o: home/server/zhi_shang/code/core/network/source/net_msg.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/net_msg.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/network/source/net_msg.cpp.o:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_msg.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/net_msg.cpp.o
+
+home/server/zhi_shang/code/core/network/source/net_msg.i: home/server/zhi_shang/code/core/network/source/net_msg.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/net_msg.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/network/source/net_msg.cpp.i:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_msg.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/net_msg.cpp.i
+
+home/server/zhi_shang/code/core/network/source/net_msg.s: home/server/zhi_shang/code/core/network/source/net_msg.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/net_msg.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/network/source/net_msg.cpp.s:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_msg.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/net_msg.cpp.s
+
+home/server/zhi_shang/code/core/network/source/net_node_id_layer.o: home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/net_node_id_layer.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.o:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.o
+
+home/server/zhi_shang/code/core/network/source/net_node_id_layer.i: home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/net_node_id_layer.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.i:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.i
+
+home/server/zhi_shang/code/core/network/source/net_node_id_layer.s: home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/net_node_id_layer.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.s:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/net_node_id_layer.cpp.s
+
+home/server/zhi_shang/code/core/network/source/net_session.o: home/server/zhi_shang/code/core/network/source/net_session.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/net_session.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/network/source/net_session.cpp.o:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_session.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/net_session.cpp.o
+
+home/server/zhi_shang/code/core/network/source/net_session.i: home/server/zhi_shang/code/core/network/source/net_session.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/net_session.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/network/source/net_session.cpp.i:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_session.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/net_session.cpp.i
+
+home/server/zhi_shang/code/core/network/source/net_session.s: home/server/zhi_shang/code/core/network/source/net_session.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/net_session.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/network/source/net_session.cpp.s:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/net_session.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/net_session.cpp.s
+
+home/server/zhi_shang/code/core/network/source/network_mgr.o: home/server/zhi_shang/code/core/network/source/network_mgr.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/network/source/network_mgr.cpp.o:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/network_mgr.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr.cpp.o
+
+home/server/zhi_shang/code/core/network/source/network_mgr.i: home/server/zhi_shang/code/core/network/source/network_mgr.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/network/source/network_mgr.cpp.i:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/network_mgr.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr.cpp.i
+
+home/server/zhi_shang/code/core/network/source/network_mgr.s: home/server/zhi_shang/code/core/network/source/network_mgr.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/network/source/network_mgr.cpp.s:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/network_mgr.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr.cpp.s
+
+home/server/zhi_shang/code/core/network/source/network_mgr_imp.o: home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr_imp.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.o:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.o
+
+home/server/zhi_shang/code/core/network/source/network_mgr_imp.i: home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr_imp.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.i:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.i
+
+home/server/zhi_shang/code/core/network/source/network_mgr_imp.s: home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr_imp.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.s:
+	$(MAKE) -f CMakeFiles/network.dir/build.make CMakeFiles/network.dir/home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/core/network/source/network_mgr_imp.cpp.s
+
+home/server/zhi_shang/code/core/subscriber/source/sub_inner.o: home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.o
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/sub_inner.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.o:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.o
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.o
+
+home/server/zhi_shang/code/core/subscriber/source/sub_inner.i: home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.i
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/sub_inner.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.i:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.i
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.i
+
+home/server/zhi_shang/code/core/subscriber/source/sub_inner.s: home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.s
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/sub_inner.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.s:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.s
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/sub_inner.cpp.s
+
+home/server/zhi_shang/code/core/subscriber/source/subscriber.o: home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.o
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.o:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.o
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.o
+
+home/server/zhi_shang/code/core/subscriber/source/subscriber.i: home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.i
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.i:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.i
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.i
+
+home/server/zhi_shang/code/core/subscriber/source/subscriber.s: home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.s
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.s:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.s
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber.cpp.s
+
+home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.o: home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.o:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.o
+
+home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.i: home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.i:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.i
+
+home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.s: home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.s:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.cpp.s
+
+home/server/zhi_shang/code/core/subscriber/source/subscribers_map.o: home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.o
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscribers_map.o
+
+# target to build an object file
+home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.o:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.o
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.o
+
+home/server/zhi_shang/code/core/subscriber/source/subscribers_map.i: home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.i
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscribers_map.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.i:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.i
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.i
+
+home/server/zhi_shang/code/core/subscriber/source/subscribers_map.s: home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.s
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscribers_map.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.s:
+	$(MAKE) -f CMakeFiles/subscriber.dir/build.make CMakeFiles/subscriber.dir/home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.s
+.PHONY : home/server/zhi_shang/code/core/subscriber/source/subscribers_map.cpp.s
+
+home/server/zhi_shang/code/server/logic/source/logic.o: home/server/zhi_shang/code/server/logic/source/logic.cpp.o
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic.o
+
+# target to build an object file
+home/server/zhi_shang/code/server/logic/source/logic.cpp.o:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic.cpp.o
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic.cpp.o
+
+home/server/zhi_shang/code/server/logic/source/logic.i: home/server/zhi_shang/code/server/logic/source/logic.cpp.i
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/server/logic/source/logic.cpp.i:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic.cpp.i
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic.cpp.i
+
+home/server/zhi_shang/code/server/logic/source/logic.s: home/server/zhi_shang/code/server/logic/source/logic.cpp.s
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/server/logic/source/logic.cpp.s:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic.cpp.s
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic.cpp.s
+
+home/server/zhi_shang/code/server/logic/source/logic_imp.o: home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_imp.o
+
+# target to build an object file
+home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.o:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.o
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.o
+
+home/server/zhi_shang/code/server/logic/source/logic_imp.i: home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_imp.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.i:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.i
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.i
+
+home/server/zhi_shang/code/server/logic/source/logic_imp.s: home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_imp.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.s:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.s
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_imp.cpp.s
+
+home/server/zhi_shang/code/server/logic/source/logic_inner.o: home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.o
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner.o
+
+# target to build an object file
+home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.o:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.o
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.o
+
+home/server/zhi_shang/code/server/logic/source/logic_inner.i: home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.i
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.i:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.i
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.i
+
+home/server/zhi_shang/code/server/logic/source/logic_inner.s: home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.s
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.s:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.s
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner.cpp.s
+
+home/server/zhi_shang/code/server/logic/source/logic_inner_tools.o: home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.o
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner_tools.o
+
+# target to build an object file
+home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.o:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.o
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.o
+
+home/server/zhi_shang/code/server/logic/source/logic_inner_tools.i: home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.i
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner_tools.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.i:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.i
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.i
+
+home/server/zhi_shang/code/server/logic/source/logic_inner_tools.s: home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.s
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner_tools.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.s:
+	$(MAKE) -f CMakeFiles/logic.dir/build.make CMakeFiles/logic.dir/home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.s
+.PHONY : home/server/zhi_shang/code/server/logic/source/logic_inner_tools.cpp.s
+
+home/server/zhi_shang/code/server/main/source/main.o: home/server/zhi_shang/code/server/main/source/main.cpp.o
+.PHONY : home/server/zhi_shang/code/server/main/source/main.o
+
+# target to build an object file
+home/server/zhi_shang/code/server/main/source/main.cpp.o:
+	$(MAKE) -f CMakeFiles/zhishang.dir/build.make CMakeFiles/zhishang.dir/home/server/zhi_shang/code/server/main/source/main.cpp.o
+.PHONY : home/server/zhi_shang/code/server/main/source/main.cpp.o
+
+home/server/zhi_shang/code/server/main/source/main.i: home/server/zhi_shang/code/server/main/source/main.cpp.i
+.PHONY : home/server/zhi_shang/code/server/main/source/main.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/server/main/source/main.cpp.i:
+	$(MAKE) -f CMakeFiles/zhishang.dir/build.make CMakeFiles/zhishang.dir/home/server/zhi_shang/code/server/main/source/main.cpp.i
+.PHONY : home/server/zhi_shang/code/server/main/source/main.cpp.i
+
+home/server/zhi_shang/code/server/main/source/main.s: home/server/zhi_shang/code/server/main/source/main.cpp.s
+.PHONY : home/server/zhi_shang/code/server/main/source/main.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/server/main/source/main.cpp.s:
+	$(MAKE) -f CMakeFiles/zhishang.dir/build.make CMakeFiles/zhishang.dir/home/server/zhi_shang/code/server/main/source/main.cpp.s
+.PHONY : home/server/zhi_shang/code/server/main/source/main.cpp.s
+
+home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.o: home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.o
+.PHONY : home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.o
+
+# target to build an object file
+home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.o:
+	$(MAKE) -f CMakeFiles/adpt.dir/build.make CMakeFiles/adpt.dir/home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.o
+.PHONY : home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.o
+
+home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.i: home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.i
+.PHONY : home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.i
+
+# target to preprocess a source file
+home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.i:
+	$(MAKE) -f CMakeFiles/adpt.dir/build.make CMakeFiles/adpt.dir/home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.i
+.PHONY : home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.i
+
+home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.s: home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.s
+.PHONY : home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.s
+
+# target to generate assembly for a file
+home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.s:
+	$(MAKE) -f CMakeFiles/adpt.dir/build.make CMakeFiles/adpt.dir/home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.s
+.PHONY : home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.cpp.s
 
 # Help Target
 help:
@@ -120,9 +800,89 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... adpt"
+	@echo "... conf"
 	@echo "... edit_cache"
+	@echo "... log"
+	@echo "... logic"
+	@echo "... mempool"
+	@echo "... msgmgr"
+	@echo "... network"
 	@echo "... rebuild_cache"
-	@echo "... test"
+	@echo "... subscriber"
+	@echo "... zhishang"
+	@echo "... home/server/zhi_shang/code/core/conf/source/conf.o"
+	@echo "... home/server/zhi_shang/code/core/conf/source/conf.i"
+	@echo "... home/server/zhi_shang/code/core/conf/source/conf.s"
+	@echo "... home/server/zhi_shang/code/core/log/source/log.o"
+	@echo "... home/server/zhi_shang/code/core/log/source/log.i"
+	@echo "... home/server/zhi_shang/code/core/log/source/log.s"
+	@echo "... home/server/zhi_shang/code/core/log/source/log_imp.o"
+	@echo "... home/server/zhi_shang/code/core/log/source/log_imp.i"
+	@echo "... home/server/zhi_shang/code/core/log/source/log_imp.s"
+	@echo "... home/server/zhi_shang/code/core/mem_pool/source/mem_pool.o"
+	@echo "... home/server/zhi_shang/code/core/mem_pool/source/mem_pool.i"
+	@echo "... home/server/zhi_shang/code/core/mem_pool/source/mem_pool.s"
+	@echo "... home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.o"
+	@echo "... home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.i"
+	@echo "... home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr.s"
+	@echo "... home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.o"
+	@echo "... home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.i"
+	@echo "... home/server/zhi_shang/code/core/msg_mgr/source/msg_mgr_imp.s"
+	@echo "... home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.o"
+	@echo "... home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.i"
+	@echo "... home/server/zhi_shang/code/core/msg_mgr/source/msg_transmit_imp.s"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_connection_mgr.o"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_connection_mgr.i"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_connection_mgr.s"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_inner.o"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_inner.i"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_inner.s"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_msg.o"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_msg.i"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_msg.s"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_node_id_layer.o"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_node_id_layer.i"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_node_id_layer.s"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_session.o"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_session.i"
+	@echo "... home/server/zhi_shang/code/core/network/source/net_session.s"
+	@echo "... home/server/zhi_shang/code/core/network/source/network_mgr.o"
+	@echo "... home/server/zhi_shang/code/core/network/source/network_mgr.i"
+	@echo "... home/server/zhi_shang/code/core/network/source/network_mgr.s"
+	@echo "... home/server/zhi_shang/code/core/network/source/network_mgr_imp.o"
+	@echo "... home/server/zhi_shang/code/core/network/source/network_mgr_imp.i"
+	@echo "... home/server/zhi_shang/code/core/network/source/network_mgr_imp.s"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/sub_inner.o"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/sub_inner.i"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/sub_inner.s"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/subscriber.o"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/subscriber.i"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/subscriber.s"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.o"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.i"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/subscriber_imp.s"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/subscribers_map.o"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/subscribers_map.i"
+	@echo "... home/server/zhi_shang/code/core/subscriber/source/subscribers_map.s"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic.o"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic.i"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic.s"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic_imp.o"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic_imp.i"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic_imp.s"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic_inner.o"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic_inner.i"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic_inner.s"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic_inner_tools.o"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic_inner_tools.i"
+	@echo "... home/server/zhi_shang/code/server/logic/source/logic_inner_tools.s"
+	@echo "... home/server/zhi_shang/code/server/main/source/main.o"
+	@echo "... home/server/zhi_shang/code/server/main/source/main.i"
+	@echo "... home/server/zhi_shang/code/server/main/source/main.s"
+	@echo "... home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.o"
+	@echo "... home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.i"
+	@echo "... home/server/zhi_shang/code/server/svr_adpt/source/svr_adpt.s"
 .PHONY : help
 
 
