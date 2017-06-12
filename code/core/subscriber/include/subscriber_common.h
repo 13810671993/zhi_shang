@@ -4,8 +4,8 @@
 #include <map>
 #include <vector>
 
-#include "boost/bind.hpp"
-#include "boost/thread.hpp"
+#include <boost/bind.hpp>
+#include <boost/thread.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/shared_mutex.hpp>
 #include <boost/lockfree/queue.hpp>

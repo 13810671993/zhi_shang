@@ -244,8 +244,20 @@ INT32 main()
     clock_end = clock();
     std::cout << "手动分配 程序运行了 " << clock_end - clock_begin << " 个系统时钟" << std::endl;
 #endif
-#endif
+
+    CHAR** vec3 = new CHAR*[MAXLENGTH];
+    MemPoolInit_API();
+    T_MEM_POOL tMemPool = MemPoolCreate_API(NULL, 2048);
+    while (1)
+    {
+        vec3[0] = (CHAR*)MemPoolAlloc_API(&tMemPool);
+        memset(vec3[0], 0, 100);
+        memcpy(vec3[0], "123456", 6);
+        MemPoolFree_API(vec3[0]);
+        BOOST_SLEEP(10);
+    }
     
+#endif
 #if 1
     pMain->InitNetworkModule();
     pMain->InitMessageModule();

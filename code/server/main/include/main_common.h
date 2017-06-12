@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <string>
 
-#include "boost/thread.hpp"
+#include <boost/thread.hpp>
 
 #include "main.h"
 #include "adpt/adpt.h"
