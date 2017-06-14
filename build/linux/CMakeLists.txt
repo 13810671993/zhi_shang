@@ -12,6 +12,7 @@ set(CMAKE_CXX_COMPILER "g++")                   # 设置编译器为g++
 # Debug\Release
 if( CMAKE_BUILD_TYPE STREQUAL "Debug" )                                    
     message("Debug:")
+    add_definitions(-D_DEBUG_)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -Wall -Wno-unused-variable")
     set(LIBRARY_OUTPUT_PATH ${BASE_DIR}/lib/linux/Debug)	# 静态链接库生成目录
     set(EXECUTABLE_OUTPUT_PATH ${BASE_DIR}/bin/linux/Debug)	# 可执行文件生成目录
