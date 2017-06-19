@@ -11,8 +11,6 @@
 #include "subscriber/subscriber.h"
 #include "subscriber/sub_msg_handler.h"
 #include "msg_mgr/msg_mgr.h"
-#include "msg_mgr/msg_mgr_imp.h"
-#include "msg_mgr/msg_transmit.h"
-#include "msg_transmit_imp.h"
+#include "msg_mgr_imp.h"
 
 #endif

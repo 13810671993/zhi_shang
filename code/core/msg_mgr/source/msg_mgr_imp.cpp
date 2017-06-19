@@ -1,10 +1,11 @@
 #include "msg_mgr_common.h"
 
-CMsgMgrImp::CMsgMgrImp()
+CMsgMgrImp::CMsgMgrImp() :
+      m_pSubscriber(NULL)
+    , m_pMsgLayer(NULL)
+    , m_pAdpt(NULL)
 {
     m_pSubscriber       = CSubscriber::GetInstance();
-    m_pMsgLayer         = new CMsgTransmitImp();
-    m_pMsgLayer->SetSubscriber(m_pSubscriber);
 }
 
 CMsgMgrImp::~CMsgMgrImp()
@@ -35,14 +36,9 @@ UINT32 CMsgMgrImp::AddAdpt(IN CAdpt* pAdpt)
     UINT32 u32Ret = 0;
     m_pAdpt = pAdpt;
     u32Ret = m_pAdpt->RegistAdpt(pAdpt);
-	SetMsgTransmit2Adpt();
+    m_pAdpt->SetSubscriber(m_pSubscriber);
 
     return u32Ret;
-}
-
-VOID CMsgMgrImp::SetMsgTransmit2Adpt()
-{
-    m_pAdpt->SetMsgTransimit(m_pMsgLayer);
 }
 
 UINT32 CMsgMgrImp::StartLisen(IN UINT16 u16Port)

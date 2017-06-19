@@ -81,7 +81,6 @@ public:
 	virtual VOID InitLogBase() = 0;
 	// 设置log过滤级别 支持运行中动态修改
 	virtual VOID SetLogLevel(E_SEVERITY_LEVEL logLevel) = 0;
-private:
 
 };
 

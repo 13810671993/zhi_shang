@@ -9,6 +9,7 @@
 class CSubscribersMap;
 class CSubMsgHandler;
 class CSubInnerMsg;
+class CSubscriber;
 
 class CSubscriberImp : public CSubscriber
 {
@@ -27,7 +28,7 @@ private:
     UINT32          PubMessage(IN CSubInnerMsg* pMsg);
 
 private:
-    static CSubscriberImp*  m_pSubscriberImp;
+    static CSubscriberImp*                  m_pSubscriberImp;
 
     std::map<UINT32, CSubscribersMap*>      m_msgType_SubscribersMap;   // 所有逻辑模块启动后 该资源以及固定不会更改 即使如此 但还是加个锁吧 保险
 
@@ -37,6 +38,8 @@ private:
 
 #ifdef _MEM_POOL_
     T_MEM_POOL  m_tMemPool;
+#elif _POOL_
+    boost::pool<> m_MemPool;
 #else
 #endif
 };

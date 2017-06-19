@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../include/;../../../include/;</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_WIN32_;_DEBUG_;_MEM_POOL_</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_WIN32_;_DEBUG_;</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
       <Command>call ..\..\..\..\script\bat\copy_lib_result_win32.bat $(Configuration) $(TargetName).lib</Command>
@@ -133,10 +133,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\include\subscriber\subscriber.h" />
-    <ClInclude Include="..\..\..\include\subscriber\subscribers_map.h" />
-    <ClInclude Include="..\..\..\include\subscriber\subscriber_imp.h" />
     <ClInclude Include="..\..\..\include\subscriber\sub_msg_handler.h" />
+    <ClInclude Include="..\include\subscribers_map.h" />
     <ClInclude Include="..\include\subscriber_common.h" />
+    <ClInclude Include="..\include\subscriber_imp.h" />
     <ClInclude Include="..\include\sub_inner.h" />
   </ItemGroup>
   <ItemGroup>

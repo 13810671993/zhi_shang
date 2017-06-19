@@ -7,6 +7,7 @@
 #include <boost/thread.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/lockfree/queue.hpp>
+#include <boost/pool/singleton_pool.hpp>
 
 #include "common/data_type.h"
 #include "common/link_lib.h"

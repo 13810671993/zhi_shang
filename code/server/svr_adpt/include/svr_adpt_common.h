@@ -9,6 +9,6 @@
 #include "adpt/adpt.h"
 #include "adpt/svr_adpt.h"
 #include "network/network_mgr.h"
-#include "msg_mgr/msg_transmit.h"
+#include "subscriber/subscriber.h"
 
 #endif

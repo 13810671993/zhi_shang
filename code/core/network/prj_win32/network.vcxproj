@@ -88,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>../include/;../../../include/;</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_WIN32_;_DEBUG_;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_WIN32_;_DEBUG_;_MEM_POOL_</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
       <Command>call ..\..\..\..\script\bat\copy_lib_result_win32.bat $(Configuration) $(TargetName).lib</Command>
@@ -136,14 +136,12 @@
     <ClInclude Include="..\..\..\include\network\net_node_id_layer.h" />
     <ClInclude Include="..\include\network_common.h" />
     <ClInclude Include="..\include\network_mgr_imp.h" />
-    <ClInclude Include="..\include\net_connection_mgr.h" />
     <ClInclude Include="..\include\net_inner.h" />
     <ClInclude Include="..\include\net_session.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\network_mgr.cpp" />
     <ClCompile Include="..\source\network_mgr_imp.cpp" />
-    <ClCompile Include="..\source\net_connection_mgr.cpp" />
     <ClCompile Include="..\source\net_inner.cpp" />
     <ClCompile Include="..\source\net_node_id_layer.cpp" />
     <ClCompile Include="..\source\net_session.cpp" />

@@ -14,6 +14,14 @@ CLogicImp::~CLogicImp()
     MemPoolDestroy_API(&m_tMemPool);
     MemPoolFinalize_API();
 }
+#elif _POOL_
+CLogicImp::CLogicImp() : m_pMsgMgr(NULL), m_bRun(FALSE), m_MemPool(9216)
+{
+}
+
+CLogicImp::~CLogicImp()
+{
+}
 #else
 CLogicImp::CLogicImp() : m_pMsgMgr(NULL), m_bRun(FALSE)
 {
@@ -46,12 +54,16 @@ VOID CLogicImp::DestroyInstance()
 
 UINT32 CLogicImp::RecvMessageFromSub(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg)
 {
+#if 1
 #ifdef _MEM_POOL_
     CLogicInnerMsg* pMsg = new CLogicInnerMsg(u32NodeID, u32MsgType, u32MsgLen, pcMsg, &m_tMemPool);
+#elif _POOL_
+    CLogicInnerMsg* pMsg = new CLogicInnerMsg(u32NodeID, u32MsgType, u32MsgLen, pcMsg, m_MemPool);
 #else
     CLogicInnerMsg* pMsg = new CLogicInnerMsg(u32NodeID, u32MsgType, u32MsgLen, pcMsg);
 #endif
     g_LogicMsgQueue.push(pMsg);
+#endif
     return COMERR_OK;
 }
 
@@ -124,10 +136,10 @@ VOID CLogicImp::DealMessageThread(IN CLogicImp* pThis, IN UINT32 u32ThreadNum)
         if (g_LogicMsgQueue.pop(pMsg) && pMsg != NULL)
         {
 #ifdef _DEBUG_
-            std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgBuf() << std::endl;
+            //std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgBuf() << std::endl;
 #endif
-            CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
-            pThis->OnDealMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
+            //CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
+            //pThis->OnDealMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
             delete pMsg;
             pMsg = NULL;
         }

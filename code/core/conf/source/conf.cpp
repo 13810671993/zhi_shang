@@ -1,6 +1,8 @@
 #include "conf_common.h"
 
-CConf :: CConf(const CHAR* pcFileName)
+CConf :: CConf(const CHAR* pcFileName) : 
+      m_pcBuffer(NULL)
+    , m_iBufLen(0)
 {
 	FileLoad(pcFileName);
 }

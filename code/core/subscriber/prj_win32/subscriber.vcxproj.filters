@@ -20,13 +20,13 @@
     <ClInclude Include="..\..\..\include\subscriber\subscriber.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\subscriber\subscriber_imp.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\subscriber\subscribers_map.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\sub_inner.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\subscriber_imp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\subscribers_map.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

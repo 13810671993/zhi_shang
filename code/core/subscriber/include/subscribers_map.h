@@ -20,7 +20,7 @@ public:
     UINT32  PubMessage(IN CSubInnerMsg* pMsg);
 
 private:
-    std::vector<CSubMsgHandler*> m_subMsgHandlerVec;
+    std::vector<CSubMsgHandler*>                        m_subMsgHandlerVec;
 
     typedef boost::shared_lock<boost::shared_mutex>     TypeReadLock;
     typedef boost::unique_lock<boost::shared_mutex>     TypeWriteLock;

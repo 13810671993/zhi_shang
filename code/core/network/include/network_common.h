@@ -28,7 +28,6 @@
 
 #include "net_inner.h"
 #include "net_session.h"
-#include "net_connection_mgr.h"
 #include "network_mgr_imp.h"
 
 #include "adpt/adpt.h"

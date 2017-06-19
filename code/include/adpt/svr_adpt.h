@@ -6,7 +6,7 @@
 // 2. 注册回调
 // 3. 消息接收\发送
 
-class CMsgTransmit;
+class CSubscriber;
 
 class CSvrAdpt : public CAdpt
 {
@@ -18,7 +18,7 @@ private:
     CSvrAdpt();
     ~CSvrAdpt();
 public:
-    VOID    SetMsgTransimit(IN CMsgTransmit* pMsgTransmit);
+    VOID    SetSubscriber(IN CSubscriber* pSubscriber);
     UINT32  StartListen(IN UINT16 u16Port);
     UINT32  RegistAdpt(IN CAdpt* pAdpt);
     UINT32  PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg);
@@ -27,7 +27,7 @@ public:
 private:
     static CSvrAdpt*    m_pSvrAdpt;
 
-    CMsgTransmit*      m_pMsgTransmit;
+    CSubscriber*        m_pSubscriber;
 };
 
 #endif

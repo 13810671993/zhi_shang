@@ -1,5 +1,10 @@
 #include "logic_common.h"
 
+#ifdef _SINGLETON_POOL_
+typedef boost::singleton_pool<struct tag, NET_MESSAGE_MAX_SIZE> memPool;
+#else
+#endif
+
 #ifdef _MEM_POOL_
 CLogicInnerMsg::CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg, IN T_MEM_POOL* ptMemPool) :
     m_u32NodeID(u32NodeID), m_u32MsgType(u32MsgType), m_u32MsgLen(u32MsgLen)
@@ -22,11 +27,15 @@ CLogicInnerMsg::~CLogicInnerMsg()
         m_pcMsg = NULL;
     }
 }
-#else
-CLogicInnerMsg::CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg) :
-    m_u32NodeID(u32NodeID), m_u32MsgType(u32MsgType), m_u32MsgLen(u32MsgLen)
+#elif _POOL_
+CLogicInnerMsg::CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg, IN boost::pool<>& MemPool) :
+      m_u32NodeID(u32NodeID)
+    , m_u32MsgType(u32MsgType)
+    , m_u32MsgLen(u32MsgLen)
+    , m_pcMsg(NULL)
+    , m_MemPool(MemPool)
 {
-    m_pcMsg = new CHAR[u32MsgLen + 1];
+    m_pcMsg = (CHAR*)m_MemPool.ordered_malloc();
     if (m_pcMsg != NULL)
     {
         memset(m_pcMsg, 0, u32MsgLen + 1);
@@ -40,9 +49,51 @@ CLogicInnerMsg::~CLogicInnerMsg()
 {
     if (m_pcMsg != NULL)
     {
+        m_MemPool.ordered_free(m_pcMsg);
+        m_pcMsg = NULL;
+    }
+}
+#else
+CLogicInnerMsg::CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg) :
+      m_u32NodeID(u32NodeID)
+    , m_u32MsgType(u32MsgType)
+    , m_u32MsgLen(u32MsgLen)
+    , m_pcMsg(NULL)
+{
+#ifdef _SINGLETON_POOL_
+    m_pcMsg = (CHAR*)memPool::malloc();
+    if (m_pcMsg != NULL)
+    {
+        memset(m_pcMsg, 0, u32MsgLen + 1);
+        memcpy(m_pcMsg, pcMsg, u32MsgLen);
+    }
+#else
+    m_pcMsg = new CHAR[u32MsgLen + 1];
+    if (m_pcMsg != NULL)
+    {
+        memset(m_pcMsg, 0, u32MsgLen + 1);
+        memcpy(m_pcMsg, pcMsg, u32MsgLen);
+    }
+    else
+        LogFatal("New memery error. CLogicInnerMsg");
+#endif
+}
+
+CLogicInnerMsg::~CLogicInnerMsg()
+{
+#ifdef _SINGLETON_POOL_
+    if (m_pcMsg != NULL)
+    {
+        memPool::free(m_pcMsg);
+        m_pcMsg = NULL;
+    }
+#else
+    if (m_pcMsg != NULL)
+    {
         delete[] m_pcMsg;
         m_pcMsg = NULL;
     }
+#endif
 }
 #endif
 

@@ -10,8 +10,6 @@ CMsgMgr::~CMsgMgr()
 
 }
 
-CMsgMgr* CMsgMgr::m_pMsgMgr = NULL;
-
 CMsgMgr* CMsgMgr::GetInstance()
 {
     return CMsgMgrImp::GetInstance();

@@ -14,16 +14,10 @@
     <ClInclude Include="..\include\msg_mgr_common.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\include\msg_mgr\msg_mgr_imp.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\include\msg_mgr\msg_mgr.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\msg_transmit_imp.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\include\msg_mgr\msg_transmit.h">
+    <ClInclude Include="..\include\msg_mgr_imp.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,9 +26,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\source\msg_mgr.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\msg_transmit_imp.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

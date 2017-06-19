@@ -15,8 +15,6 @@ protected:
     CSubscriber();
     virtual ~CSubscriber();
 
-private:
-    static CSubscriber* m_pSubscriber;
 };
 
 #endif

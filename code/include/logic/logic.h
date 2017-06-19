@@ -15,8 +15,6 @@ public:
     virtual UINT32  Run() = 0;          // 逻辑触发入口
     virtual UINT32  Stop() = 0;         // 逻辑停止入口
 
-private:
-    static CLogic*  m_pLogic;
 };
 
 #endif

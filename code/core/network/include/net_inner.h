@@ -9,25 +9,34 @@ class CNetInnerMsg
 public:
 #ifdef _MEM_POOL_
     CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN CHAR* pcMsg, IN T_MEM_POOL* ptMemPool);
+#elif _POOL_
+    CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN CHAR* pcMsg, IN boost::pool<>& MemPool);
 #else
     CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN CHAR* pcMsg);
 #endif
     ~CNetInnerMsg();
     
 public:
+    inline UINT32  GetNodeID();
     inline UINT32  GetMsgType();
     inline UINT32  GetMsgLen();
-    inline UINT32  GetNodeID();
     inline CHAR*   GetMsgBuf();
 
 private:
-    CHAR*           m_pcMsg;
+    UINT32          m_u32NodeID;
     UINT32          m_u32MsgType;
     UINT32          m_u32MsgLen;
-    UINT32          m_u32NodeID;
+    CHAR*           m_pcMsg;
 
-    //T_MEM_POOL* m_ptMemPool;
+#ifdef _POOL_
+    boost::pool<>&  m_MemPool;
+#endif
 };
+
+inline UINT32 CNetInnerMsg::GetNodeID()
+{
+    return m_u32NodeID;
+}
 
 inline UINT32 CNetInnerMsg::GetMsgType()
 {
@@ -37,11 +46,6 @@ inline UINT32 CNetInnerMsg::GetMsgType()
 inline UINT32 CNetInnerMsg::GetMsgLen()
 {
     return m_u32MsgLen;
-}
-
-inline UINT32 CNetInnerMsg::GetNodeID()
-{
-    return m_u32NodeID;
 }
 
 inline CHAR* CNetInnerMsg::GetMsgBuf()

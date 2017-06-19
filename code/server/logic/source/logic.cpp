@@ -10,8 +10,6 @@ CLogic::~CLogic()
 
 }
 
-CLogic* CLogic::m_pLogic;
-
 CLogic* CLogic::GetInstance()
 {
     return CLogicImp::GetInstance();

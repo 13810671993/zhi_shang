@@ -10,8 +10,6 @@ CNetworkMgr::~CNetworkMgr()
 
 }
 
-CNetworkMgr* CNetworkMgr::m_pNetworkMgr = NULL;
-
 CNetworkMgr* CNetworkMgr::GetInstance()
 {
     return CNetworkMgrImp::GetInstance();

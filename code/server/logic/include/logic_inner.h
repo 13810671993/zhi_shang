@@ -12,6 +12,8 @@ class CLogicInnerMsg
 public:
 #ifdef _MEM_POOL_
     CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg, IN T_MEM_POOL* ptMemPool);
+#elif _POOL_
+    CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg, IN boost::pool<>& MemPool);
 #else
     CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg);
 #endif
@@ -24,10 +26,13 @@ public:
     CHAR*   GetMsgBuf();
 
 private:
-    CHAR*   m_pcMsg;
+    UINT32  m_u32NodeID;
     UINT32  m_u32MsgType;
     UINT32  m_u32MsgLen;
-    UINT32  m_u32NodeID;
+    CHAR*   m_pcMsg;
+#ifdef _POOL_
+    boost::pool<>&  m_MemPool;
+#endif
 };
 
 #endif

@@ -3,15 +3,23 @@
 extern boost::lockfree::queue<CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue;
 
 #ifdef _MEM_POOL_
-CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetConnectionMgr* pNetConnectionMgr) :
-    m_socket(ioServer), m_cNetMessageVec(NET_MESSAGE_MAX_SIZE, 0), m_pNetConnectionMgr(pNetConnectionMgr), m_tMemPool(MEM_POOL_INITIALIZER)
+CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetworkMgr* pNetworkMgr) :
+    m_socket(ioServer), m_cNetMessageVec(NET_MESSAGE_MAX_SIZE, 0), m_pNetworkMgr(pNetworkMgr), m_tMemPool(MEM_POOL_INITIALIZER)
 {
     MemPoolInit_API();
     m_tMemPool = MemPoolCreate_API(NULL, NET_MESSAGE_MAX_SIZE);
 }
+#elif _POOL_
+CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetworkMgr* pNetworkMgr) :
+    m_socket(ioServer), m_cNetMessageVec(NET_MESSAGE_MAX_SIZE, 0), m_pNetworkMgr(pNetworkMgr), m_MemPool(NET_MESSAGE_MAX_SIZE)
+{
+}
+
 #else
-CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetConnectionMgr* pNetConnectionMgr) : 
-    m_socket(ioServer), m_cNetMessageVec(NET_MESSAGE_MAX_SIZE, 0), m_pNetConnectionMgr(pNetConnectionMgr)
+CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetworkMgr* pNetworkMgr) :
+      m_socket(ioServer)
+    , m_cNetMessageVec(NET_MESSAGE_MAX_SIZE, 0)
+    , m_pNetworkMgr(pNetworkMgr)
 {
 }
 #endif
@@ -25,6 +33,8 @@ CNetSession::~CNetSession()
 #ifdef _MEM_POOL_
     MemPoolDestroy_API(&m_tMemPool);
     MemPoolFinalize_API();
+#elif _POOL_
+    //m_MemPool.purge_memory();
 #else
 #endif
 }
@@ -49,7 +59,7 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
         // 连接断开 回收节点ID资源
         do 
         {
-            u32Ret = m_pNetConnectionMgr->Disconnect(u32NodeID);
+            u32Ret = m_pNetworkMgr->Disconnect(u32NodeID);
             CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "Disconnect Failed. u32Ret = 0x%x. u32NodeID = %u", u32Ret, u32NodeID);
         } while (0);
 
@@ -61,16 +71,11 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
         return; 
     }
     
-    // 越界问题应该不会出现 如果出现 绝对是最大的问题了
+    // 数据包过大 丢弃
     if (u32MsgLen > NET_MESSAGE_MAX_SIZE)
     {
         LogFatal("Recv message error for out of bounds. u32MsgLen = %d", u32MsgLen);
-#ifdef _DEBUG_
-        BOOST_SLEEP(1 * 1000);
-        exit(0);
-#else
         return;
-#endif
     }
 
     // 如果有数据
@@ -89,6 +94,8 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
 
 #ifdef _MEM_POOL_
     CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32), &m_tMemPool);
+#elif _POOL_
+    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32), m_MemPool);
 #else
     CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32));
 #endif
@@ -100,7 +107,7 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
     m_socket.async_read_some(boost::asio::buffer(m_cNetMessageVec), boost::bind(&CNetSession::MessageHandlerCB, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred, u32NodeID));
 }
 
-VOID CNetSession::SendMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
+VOID CNetSession::PostMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
 {
     if (!m_socket.is_open())
     {

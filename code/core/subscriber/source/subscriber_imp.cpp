@@ -8,13 +8,23 @@ CSubscriberImp::CSubscriberImp() : m_tMemPool(MEM_POOL_INITIALIZER)
     boost::thread threadImp(boost::bind(PushMsg2SubscriberThread, this));
     LogInfo("PushMsg2SubscriberThread start.");
     MemPoolInit_API();
-    m_tMemPool = MemPoolCreate_API(NULL, NET_MESSAGE_MAX_SIZE);
+    m_tMemPool = MemPoolCreate_API(NULL, SUB_MESSAGE_MAX_SIZE);
 }
 
 CSubscriberImp::~CSubscriberImp()
 {
     MemPoolDestroy_API(&m_tMemPool);
     MemPoolFinalize_API();
+}
+#elif _POOL_
+CSubscriberImp::CSubscriberImp() : m_MemPool(SUB_MESSAGE_MAX_SIZE)
+{
+    boost::thread threadImp(boost::bind(PushMsg2SubscriberThread, this));
+    LogInfo("PushMsg2SubscriberThread start.");
+}
+
+CSubscriberImp::~CSubscriberImp()
+{
 }
 #else
 CSubscriberImp::CSubscriberImp()
@@ -47,10 +57,25 @@ VOID CSubscriberImp::DestroyInstance()
     }
 }
 
+#ifdef _WIN32_
+#include <windows.h>
+LARGE_INTEGER  nFreqSub, t1Sub, t2Sub;
+#else
+#endif
+
+
 UINT32 CSubscriberImp::PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen)
 {
+#ifdef _WIN32_
+    //QueryPerformanceFrequency(&nFreqSub);
+    //QueryPerformanceCounter(&t1Sub);
+#else
+#endif
+
 #ifdef _MEM_POOL_
     CSubInnerMsg* pMsg = new CSubInnerMsg(u32NodeID, u32MsgType, pcMsg, u32MsgLen, &m_tMemPool);
+#elif _POOL_
+    CSubInnerMsg* pMsg = new CSubInnerMsg(u32NodeID, u32MsgType, pcMsg, u32MsgLen, m_MemPool);
 #else
     CSubInnerMsg* pMsg = new CSubInnerMsg(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
 #endif
@@ -84,6 +109,7 @@ UINT32 CSubscriberImp::SubscribeMessage(IN UINT32 u32MsgType, IN CSubMsgHandler*
     return u32Ret;
 }
 
+
 VOID CSubscriberImp::PushMsg2SubscriberThread(IN CSubscriberImp* pThis)
 {
     CSubInnerMsg* pMsg = NULL;
@@ -93,21 +119,27 @@ VOID CSubscriberImp::PushMsg2SubscriberThread(IN CSubscriberImp* pThis)
         // 2. 根据订阅记录 向每个订阅者推送消息
         if (g_subInnerMsgQueue.pop(pMsg) && pMsg != NULL)
         {
-            // 从队列中获取了消息 并且得知了MsgType
-            TypeReadLock lock(pThis->m_mutex);
-
             // 将消息推送给订阅者
             pThis->PubMessage(pMsg);
             delete pMsg;
             pMsg = NULL;
+#ifdef _WIN32_
+            //QueryPerformanceCounter(&t2Sub);
+            //double dt = (t2Sub.QuadPart - t1Sub.QuadPart) / (double)nFreqSub.QuadPart;
+            //LogDebug("时间差: %lfus", dt * 1000000);
+#else
+#endif
         }
         else
+        {
             BOOST_SLEEP(100);
+        }
     }
 }
 
 UINT32 CSubscriberImp::PubMessage(IN CSubInnerMsg* pMsg)
 {
+    TypeReadLock lock(m_mutex);
     auto it = m_msgType_SubscribersMap.find(pMsg->GetMsgType());
     if (it != m_msgType_SubscribersMap.end())
     {

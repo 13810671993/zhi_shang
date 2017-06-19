@@ -38,6 +38,8 @@ private:
 
 #ifdef _MEM_POOL_
     T_MEM_POOL  m_tMemPool;
+#elif _POOL_
+    boost::pool<>   m_MemPool;
 #else
 #endif
 };

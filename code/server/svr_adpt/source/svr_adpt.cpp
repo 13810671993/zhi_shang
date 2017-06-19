@@ -1,6 +1,7 @@
 #include "svr_adpt_common.h"
 
-CSvrAdpt::CSvrAdpt()
+CSvrAdpt::CSvrAdpt() : 
+    m_pSubscriber(NULL)
 {
 
 }
@@ -28,9 +29,9 @@ VOID CSvrAdpt::DestroyInstance()
     }
 }
 
-VOID CSvrAdpt::SetMsgTransimit(IN CMsgTransmit* pMsgTransmit)
+VOID CSvrAdpt::SetSubscriber(IN CSubscriber* pSubscriber)
 {
-    m_pMsgTransmit = pMsgTransmit;
+    m_pSubscriber = pSubscriber;
 }
 
 UINT32 CSvrAdpt::StartListen(IN UINT16 u16Port)
@@ -48,11 +49,11 @@ UINT32 CSvrAdpt::RegistAdpt(IN CAdpt* pAdpt)
 
 UINT32 CSvrAdpt::PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg)
 {
-    return m_pMsgTransmit->PushMessage(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
+    return m_pSubscriber->PushMessage(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
 }
 
 VOID CSvrAdpt::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
 {
-    CNetworkMgr::GetInstance()->SendMessage(u32NodeID, u32MsgType, u32MsgLen, pcMsg);
+    CNetworkMgr::GetInstance()->PostMessage(u32NodeID, u32MsgType, u32MsgLen, pcMsg);
 }
 
