@@ -150,7 +150,7 @@ VOID CNetworkMgrImp::PushMessage2AdptThread(IN CNetworkMgrImp* pThis)
         // 从队列中弹出数据 写到adpt中去
         if (g_netMsgQueue.pop(pNetMsg) && pNetMsg != NULL)
         {
-            //pThis->m_pAdpt->PushMessage(pNetMsg->GetNodeID(), pNetMsg->GetMsgType(), pNetMsg->GetMsgLen(), pNetMsg->GetMsgBuf());
+            pThis->m_pAdpt->PushMessage(pNetMsg->GetNodeID(), pNetMsg->GetMsgType(), pNetMsg->GetMsgLen(), pNetMsg->GetMsgBuf());
             delete pNetMsg;
             pNetMsg = NULL;
 #ifdef _WIN32_

@@ -154,7 +154,7 @@ CHAR*& AssignInStackRefer()
 #include <boost/pool/object_pool.hpp>
 #include <boost/pool/singleton_pool.hpp>
 
-const INT32 MAXLENGTH = 100000;
+const INT32 MAXLENGTH = 1000;
 
 typedef struct
 {
@@ -168,6 +168,28 @@ INT32 main()
     CMain* pMain = CMain::GetInstance();
 
     pMain->InitCommModule();
+
+#endif
+#if 0
+    int** vec3 = new int*[MAXLENGTH];
+    getchar();
+    MemPoolInit_API();
+    T_MEM_POOL tMemPool = MemPoolCreate_API(NULL, 1024 * 100);
+    for (int i = 0; i < MAXLENGTH; ++i)
+    {
+        vec3[i] = (int*)MemPoolAlloc_API(&tMemPool);
+        LogDebug("size: %d", MemPoolSize_API(vec3[i]));
+        BOOST_SLEEP(15);
+    }
+
+    for (int i = 0; i < MAXLENGTH; ++i)
+    {
+        MemPoolFree_API(vec3[i]);
+    }
+    //MemPoolDestroy_API(&tMemPool);
+    //MemPoolFinalize_API();
+    delete[] vec3;
+    std::cout << "end" << std::endl;
 #endif
 
 #if 0

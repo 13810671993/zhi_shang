@@ -254,8 +254,10 @@ VOID  MemPoolFree_API(VOID* pMem)
 #endif // USE_THREAD
 	pslice->tag++;
     pslice->next = pool->first_free_slice;
-    if(pool->first_free_slice != NULL)
+    if (pool->first_free_slice != NULL)
+    {
         pool->first_free_slice->prev = pslice;
+    }
     pool->first_free_slice = pslice;
 #ifdef USE_THREAD
     elr_mtx_unlock(&pool->pool_mutex);

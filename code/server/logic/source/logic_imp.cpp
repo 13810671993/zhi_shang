@@ -11,6 +11,8 @@ CLogicImp::CLogicImp() : m_pMsgMgr(NULL), m_bRun(FALSE), m_tMemPool(MEM_POOL_INI
 
 CLogicImp::~CLogicImp()
 {
+    // 确保内存池销毁前 所有内存都归还给内存池
+    BOOST_SLEEP(1 * 1000);
     MemPoolDestroy_API(&m_tMemPool);
     MemPoolFinalize_API();
 }

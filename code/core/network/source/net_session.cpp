@@ -31,6 +31,8 @@ CNetSession::~CNetSession()
         m_socket.close();
     }
 #ifdef _MEM_POOL_
+    // 确保内存池销毁前 所有内存都归还给内存池
+    BOOST_SLEEP(1 * 1000);
     MemPoolDestroy_API(&m_tMemPool);
     MemPoolFinalize_API();
 #elif _POOL_
