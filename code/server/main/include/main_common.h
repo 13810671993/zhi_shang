@@ -41,6 +41,7 @@
         #pragma comment(lib, LIB_RELEASE_IMPORT("conf.lib"))
         #pragma comment(lib, LIB_RELEASE_IMPORT("logic.lib"))
         #pragma comment(lib, LIB_RELEASE_IMPORT("log.lib"))
+        #pragma comment(lib, LIB_RELEASE_IMPORT("mem_pool.lib"))
 
     #endif
 

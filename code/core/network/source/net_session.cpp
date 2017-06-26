@@ -84,13 +84,13 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
     // 将数据封装到类中 然后写入队列
     UINT32 u32MsgType = 0;
     memcpy(&u32MsgType, m_cNetMessageVec.data(), sizeof(UINT32));
-    std::cout << "len: " << u32MsgLen << std::endl
-        << "type: " << u32MsgType << std::endl;
-    //std::cout << boost::posix_time::second_clock::local_time() << std::endl;;
+#ifdef _DEBUG_
+    std::cout << "len: " << u32MsgLen << std::endl;
+#endif
 
 #ifdef _WIN32_
-    QueryPerformanceFrequency(&nFreq);
-    QueryPerformanceCounter(&t1);
+    //QueryPerformanceFrequency(&nFreq);
+    //QueryPerformanceCounter(&t1);
 #else
 #endif
 

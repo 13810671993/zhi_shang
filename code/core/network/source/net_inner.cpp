@@ -9,11 +9,14 @@ typedef boost::singleton_pool<struct tag, NET_MESSAGE_MAX_SIZE> memPool;
 CNetInnerMsg::CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN CHAR* pcMsg, IN T_MEM_POOL* ptMemPool) :
                            m_u32NodeID(u32NodeID), m_u32MsgType(u32MsgType), m_u32MsgLen(u32MsgLen), m_pcMsg(NULL)
 {
-    m_pcMsg = (CHAR*)MemPoolAlloc_API(ptMemPool);
-    if (m_pcMsg != NULL)
+    if (pcMsg != NULL && ptMemPool)
     {
-        memset(m_pcMsg, 0, u32MsgLen + 1);
-        memcpy(m_pcMsg, pcMsg, u32MsgLen);
+        m_pcMsg = (CHAR*)MemPoolAlloc_API(ptMemPool);
+        if (m_pcMsg != NULL)
+        {
+            memset(m_pcMsg, 0, u32MsgLen + 1);
+            memcpy(m_pcMsg, pcMsg, u32MsgLen);
+        }
     }
 }
 

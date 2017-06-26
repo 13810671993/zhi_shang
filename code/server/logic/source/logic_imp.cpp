@@ -138,16 +138,19 @@ VOID CLogicImp::DealMessageThread(IN CLogicImp* pThis, IN UINT32 u32ThreadNum)
         if (g_LogicMsgQueue.pop(pMsg) && pMsg != NULL)
         {
 #ifdef _DEBUG_
-            //std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgBuf() << std::endl;
+            std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgBuf() << std::endl;
 #endif
-            //CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
-            //pThis->OnDealMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
+            if (pMsg->GetMsgBuf() != NULL)
+            {
+                //CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
+                //pThis->OnDealMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
+            }
             delete pMsg;
             pMsg = NULL;
         }
         else
         {
-            BOOST_SLEEP(100);
+            BOOST_SLEEP(10);
         }
     }
 }

@@ -154,16 +154,16 @@ VOID CNetworkMgrImp::PushMessage2AdptThread(IN CNetworkMgrImp* pThis)
             delete pNetMsg;
             pNetMsg = NULL;
 #ifdef _WIN32_
-            QueryPerformanceCounter(&t2);
-            double dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
-            LogDebug("时间差: %lfus", dt * 1000000);
+            //QueryPerformanceCounter(&t2);
+            //double dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
+            //LogDebug("时间差: %lfus", dt * 1000000);
 #else
 #endif
 
         }
         else
         {
-            //BOOST_SLEEP(100);
+            BOOST_SLEEP(10);
         }
     }
 }

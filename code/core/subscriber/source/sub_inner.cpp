@@ -56,21 +56,24 @@ CSubInnerMsg::CSubInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* p
     , m_u32MsgLen(u32MsgLen)
     , m_pcMsg(NULL)
 {
+    if (pcMsg != NULL)
+    {
 #ifdef _SINGLETON_POOL_
-    m_pcMsg = (CHAR*)memPool::malloc();
-    if (m_pcMsg != NULL)
-    {
-        memset(m_pcMsg, 0, u32MsgLen + 1);
-        memcpy(m_pcMsg, pcMsg, u32MsgLen);
-    }
+        m_pcMsg = (CHAR*)memPool::malloc();
+        if (m_pcMsg != NULL)
+        {
+            memset(m_pcMsg, 0, u32MsgLen + 1);
+            memcpy(m_pcMsg, pcMsg, u32MsgLen);
+        }
 #else
-    m_pcMsg = new CHAR[u32MsgLen + 1];
-    if (m_pcMsg != NULL)
-    {
-        memset(m_pcMsg, 0, u32MsgLen + 1);
-        memcpy(m_pcMsg, pcMsg, u32MsgLen);
-    }
+        m_pcMsg = new CHAR[u32MsgLen + 1];
+        if (m_pcMsg != NULL)
+        {
+            memset(m_pcMsg, 0, u32MsgLen + 1);
+            memcpy(m_pcMsg, pcMsg, u32MsgLen);
+        }
 #endif
+    }
 }
 
 CSubInnerMsg::~CSubInnerMsg()
