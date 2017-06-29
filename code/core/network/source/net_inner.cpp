@@ -44,7 +44,6 @@ CNetInnerMsg::~CNetInnerMsg()
 {
     if (m_pcMsg != NULL)
     {
-        //m_MemPool.ordered_free(m_pcMsg);
         m_MemPool.free(m_pcMsg);
         m_pcMsg = NULL;
     }
@@ -59,7 +58,6 @@ CNetInnerMsg::CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u
 {
 #ifdef _SINGLETON_POOL_
     m_pcMsg = (CHAR*)memPool::malloc();
-    //memPool::ordered_malloc();
     if (m_pcMsg != NULL)
     {
         memset(m_pcMsg, 0, u32MsgLen + 1);

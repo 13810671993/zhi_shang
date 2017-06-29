@@ -164,10 +164,22 @@ typedef struct
 INT32 main()
 {
 
-#if 1
     CMain* pMain = CMain::GetInstance();
 
     pMain->InitCommModule();
+
+#if 0
+    CHAR str1[10] = { 0 };
+    CHAR str2[10] = { 0 };
+    memcpy(str1, "123", 3);
+    memcpy(str2, "123", 3);
+    str1[3] = '\0';
+    str2[3] = '\0';
+    str1[4] = '5';
+    str2[4] = '6';
+    str1[5] = '0';
+    str2[5] = '8';
+    printf("ret: %d\n", memcmp(str1, str2, 10));
 
 #endif
 #if 0

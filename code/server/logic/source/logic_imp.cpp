@@ -150,7 +150,7 @@ VOID CLogicImp::DealMessageThread(IN CLogicImp* pThis, IN UINT32 u32ThreadNum)
         }
         else
         {
-            BOOST_SLEEP(10);
+            BOOST_SLEEP(1);
         }
     }
 }

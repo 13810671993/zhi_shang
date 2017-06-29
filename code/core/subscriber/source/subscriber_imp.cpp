@@ -69,8 +69,8 @@ LARGE_INTEGER  nFreqSub, t1Sub, t2Sub;
 UINT32 CSubscriberImp::PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen)
 {
 #ifdef _WIN32_
-    QueryPerformanceFrequency(&nFreqSub);
-    QueryPerformanceCounter(&t1Sub);
+    //QueryPerformanceFrequency(&nFreqSub);
+    //QueryPerformanceCounter(&t1Sub);
 #else
 #endif
 
@@ -126,15 +126,15 @@ VOID CSubscriberImp::PushMsg2SubscriberThread(IN CSubscriberImp* pThis)
             delete pMsg;
             pMsg = NULL;
 #ifdef _WIN32_
-            QueryPerformanceCounter(&t2Sub);
-            double dt = (t2Sub.QuadPart - t1Sub.QuadPart) / (double)nFreqSub.QuadPart;
-            LogDebug("Sub-时间差: %lfus", dt * 1000000);
+            //QueryPerformanceCounter(&t2Sub);
+            //double dt = (t2Sub.QuadPart - t1Sub.QuadPart) / (double)nFreqSub.QuadPart;
+            //LogDebug("Sub-时间差: %lfus", dt * 1000000);
 #else
 #endif
         }
         else
         {
-            BOOST_SLEEP(10);
+            BOOST_SLEEP(1);
         }
     }
 }

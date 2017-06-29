@@ -157,13 +157,14 @@ VOID CNetworkMgrImp::PushMessage2AdptThread(IN CNetworkMgrImp* pThis)
             //QueryPerformanceCounter(&t2);
             //double dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
             //LogDebug("时间差: %lfus", dt * 1000000);
+            //LogDebug("时间差: %lfus/10", dt * 100000);
 #else
 #endif
 
         }
         else
         {
-            BOOST_SLEEP(10);
+            BOOST_SLEEP(1);
         }
     }
 }
