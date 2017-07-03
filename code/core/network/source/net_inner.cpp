@@ -64,10 +64,10 @@ CNetInnerMsg::CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u
         memcpy(m_pcMsg, pcMsg, u32MsgLen);
     }
 #else
-    m_pcMsg = new CHAR[u32MsgLen + 1];          // new
+    m_pcMsg = new CHAR[u32MsgLen];          // new
     if (m_pcMsg != NULL)
     {
-        memset(m_pcMsg, 0, u32MsgLen + 1);
+        memset(m_pcMsg, 0, u32MsgLen);
         memcpy(m_pcMsg, pcMsg, u32MsgLen);
     }
 #endif

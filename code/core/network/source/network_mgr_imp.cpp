@@ -1,6 +1,12 @@
 #include "network_common.h"
 
+#ifdef _LOCK_FREE_QUEUE_
 boost::lockfree::queue<CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue(0);
+#else
+// 单生产 单消费无锁队列
+boost::lockfree::spsc_queue< CNetInnerMsg*, boost::lockfree::capacity<NET_MESSAGE_MAX_SIZE> > g_netMsgSpscQueue;
+//boost::lockfree::spsc_queue< CNetInnerMsg* > g_netMsgSpscQueue;
+#endif
 
 CNetworkMgrImp::CNetworkMgrImp() : 
       m_pAdpt(NULL)
@@ -38,7 +44,7 @@ VOID CNetworkMgrImp::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN U
     do 
     {
         UINT32 u32Ret = m_pNodeIDLayer->GetSession(u32NodeID, ptrSession);
-        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GetSession Failed. u32Ret = 0x%x", u32Ret);
+        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GetSession Failed. u32Ret = 0x%x u32NodeID = %d", u32Ret, u32NodeID);
         ptrSession->PostMessage(u32MsgType, u32MsgLen, pcMsg);
     } while (0);
 }
@@ -99,6 +105,8 @@ VOID CNetworkMgrImp::AcceptHandlerCB(IN const boost::system::error_code& ec, IN 
     // 启动这个会话
     ptrSession->StartSession(u32NodeID);
 
+    LogInfo("Start new session. u32NodeID = %d", u32NodeID);
+
     // 目前还不是很明白这个reset 不过目的是为下一个新的连接准备一个新的CNetSession
     ptrSession.reset(new CNetSession(m_ioServer, this));
     // 继续接受新的连接 没有继续调用 将不再接收其他连接
@@ -148,19 +156,23 @@ VOID CNetworkMgrImp::PushMessage2AdptThread(IN CNetworkMgrImp* pThis)
     while (1)
     {
         // 从队列中弹出数据 写到adpt中去
+#ifdef _LOCK_FREE_QUEUE_
         if (g_netMsgQueue.pop(pNetMsg) && pNetMsg != NULL)
+#else
+        if (g_netMsgSpscQueue.pop(pNetMsg) && pNetMsg != NULL)
+#endif
         {
-            pThis->m_pAdpt->PushMessage(pNetMsg->GetNodeID(), pNetMsg->GetMsgType(), pNetMsg->GetMsgLen(), pNetMsg->GetMsgBuf());
-            delete pNetMsg;
-            pNetMsg = NULL;
 #ifdef _WIN32_
             //QueryPerformanceCounter(&t2);
             //double dt = (t2.QuadPart - t1.QuadPart) / (double)nFreq.QuadPart;
             //LogDebug("时间差: %lfus", dt * 1000000);
-            //LogDebug("时间差: %lfus/10", dt * 100000);
+            //LogDebug("时间差 * 1000: %lfus", dt * 1000000000);
 #else
 #endif
 
+            pThis->m_pAdpt->PushMessage(pNetMsg->GetNodeID(), pNetMsg->GetMsgType(), pNetMsg->GetMsgLen(), pNetMsg->GetMsgBuf());
+            delete pNetMsg;
+            pNetMsg = NULL;
         }
         else
         {

@@ -13,6 +13,7 @@
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/shared_mutex.hpp>
 #include <boost/lockfree/queue.hpp>
+#include <boost/lockfree/spsc_queue.hpp>
 #include <boost/pool/singleton_pool.hpp>
 
 #include "common/data_type.h"

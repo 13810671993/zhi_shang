@@ -22,7 +22,7 @@ private:
     typedef boost::unique_lock<boost::shared_mutex>     TypeWriteLock;      // Ð´mapËø
 
     boost::shared_mutex                                 m_mutex;            // mutex
-    std::map< UINT32, boost::shared_ptr<CNetSession> >  m_u32NodeID_ptrSession;
+    std::map< UINT32, boost::shared_ptr<CNetSession> >  m_u32NodeID_ptrSessionMap;
     UINT32                                              m_u32Index;
 };
 

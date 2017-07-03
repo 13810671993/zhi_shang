@@ -1,6 +1,7 @@
 #include "subscriber_common.h"
 
-boost::lockfree::queue<CSubInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_subInnerMsgQueue(0);
+// 单生产 单消费无锁队列
+boost::lockfree::spsc_queue<CSubInnerMsg*, boost::lockfree::capacity<SUB_MESSAGE_MAX_SIZE>> g_subInnerMsgSpscQueue;
 
 #ifdef _MEM_POOL_
 CSubscriberImp::CSubscriberImp() : m_tMemPool(MEM_POOL_INITIALIZER)
@@ -83,7 +84,10 @@ UINT32 CSubscriberImp::PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN
 #endif
 
     // 写入sub本地队列
-    g_subInnerMsgQueue.push(pMsg);
+    if (!g_subInnerMsgSpscQueue.push(pMsg))
+    {
+        delete pMsg;
+    }
     
     return COMERR_OK;
 }
@@ -119,7 +123,7 @@ VOID CSubscriberImp::PushMsg2SubscriberThread(IN CSubscriberImp* pThis)
     {
         // 1. 先从sub消息队列中获取消息
         // 2. 根据订阅记录 向每个订阅者推送消息
-        if (g_subInnerMsgQueue.pop(pMsg) && pMsg != NULL)
+        if (g_subInnerMsgSpscQueue.pop(pMsg) && pMsg != NULL)
         {
             // 将消息推送给订阅者
             pThis->PubMessage(pMsg);

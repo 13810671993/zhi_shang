@@ -64,7 +64,10 @@ UINT32 CLogicImp::RecvMessageFromSub(IN UINT32 u32NodeID, IN UINT32 u32MsgType, 
 #else
     CLogicInnerMsg* pMsg = new CLogicInnerMsg(u32NodeID, u32MsgType, u32MsgLen, pcMsg);
 #endif
-    g_LogicMsgQueue.push(pMsg);
+    if (!g_LogicMsgQueue.push(pMsg))
+    {
+        delete pMsg;
+    }
 #endif
     return COMERR_OK;
 }
@@ -142,7 +145,7 @@ VOID CLogicImp::DealMessageThread(IN CLogicImp* pThis, IN UINT32 u32ThreadNum)
 #endif
             if (pMsg->GetMsgBuf() != NULL)
             {
-                //CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
+                CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
                 //pThis->OnDealMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
             }
             delete pMsg;

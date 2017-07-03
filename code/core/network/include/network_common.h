@@ -7,6 +7,7 @@
 #include <boost/asio.hpp>
 #include <boost/system/error_code.hpp>
 #include <boost/lockfree/queue.hpp>
+#include <boost/lockfree/spsc_queue.hpp>
 #include <boost/thread.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/shared_mutex.hpp>

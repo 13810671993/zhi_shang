@@ -49,6 +49,7 @@ UINT32 CSvrAdpt::RegistAdpt(IN CAdpt* pAdpt)
 
 UINT32 CSvrAdpt::PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg)
 {
+    // fix: 在这里 对数据包进行格式过滤
     return m_pSubscriber->PushMessage(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
 }
 

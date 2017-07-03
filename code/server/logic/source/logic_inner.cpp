@@ -68,10 +68,10 @@ CLogicInnerMsg::CLogicInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UIN
         memcpy(m_pcMsg, pcMsg, u32MsgLen);
     }
 #else
-    m_pcMsg = new CHAR[u32MsgLen + 1];
+    m_pcMsg = new CHAR[u32MsgLen];
     if (m_pcMsg != NULL)
     {
-        memset(m_pcMsg, 0, u32MsgLen + 1);
+        memset(m_pcMsg, 0, u32MsgLen);
         memcpy(m_pcMsg, pcMsg, u32MsgLen);
     }
     else

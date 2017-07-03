@@ -1,6 +1,12 @@
 #include "network_common.h"
 
+#ifdef _LOCK_FREE_QUEUE_
 extern boost::lockfree::queue<CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue;
+#else
+//extern boost::lockfree::spsc_queue< CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE> > g_netMsgSpscQueue;
+extern boost::lockfree::spsc_queue< CNetInnerMsg*, boost::lockfree::capacity<NET_MESSAGE_MAX_SIZE> > g_netMsgSpscQueue;
+//extern boost::lockfree::spsc_queue< CNetInnerMsg* > g_netMsgSpscQueue;
+#endif
 
 #ifdef _MEM_POOL_
 CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetworkMgr* pNetworkMgr) :
@@ -32,7 +38,7 @@ CNetSession::~CNetSession()
     }
 #ifdef _MEM_POOL_
     // 确保内存池销毁前 所有内存都归还给内存池
-    BOOST_SLEEP(1 * 1000);
+    BOOST_SLEEP(1 * 1);
     MemPoolDestroy_API(&m_tMemPool);
     MemPoolFinalize_API();
 #elif _POOL_
@@ -44,7 +50,10 @@ CNetSession::~CNetSession()
 VOID CNetSession::StartSession(IN UINT32 u32NodeID)
 {
     // boost::asio 接收数据做的非常好 不会有越界问题 数据包过大的时候都会分多次来接收 所以不用考虑越界问题
-    m_socket.async_read_some(boost::asio::buffer(m_cNetMessageVec), boost::bind(&CNetSession::MessageHandlerCB, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred, u32NodeID));
+    if (m_socket.is_open())
+    {
+        m_socket.async_read_some(boost::asio::buffer(m_cNetMessageVec), boost::bind(&CNetSession::MessageHandlerCB, this, boost::asio::placeholders::error, boost::asio::placeholders::bytes_transferred, u32NodeID));
+    }
 }
 
 #ifdef _WIN32_
@@ -99,9 +108,23 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
 #elif _POOL_
     CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32), m_MemPool);
 #else
-    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32));
+    //CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32));
+    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen, m_cNetMessageVec.data());
 #endif
-    g_netMsgQueue.push(pNetMsg);
+#ifdef _WIN32_
+    //QueryPerformanceFrequency(&nFreq);
+    //QueryPerformanceCounter(&t1);
+#else
+#endif
+
+#ifdef _LOCK_FREE_QUEUE_
+    if (!g_netMsgQueue.push(pNetMsg))
+#else
+    if (!g_netMsgSpscQueue.push(pNetMsg))
+#endif
+    {
+        delete pNetMsg;
+    }
 
     //m_cNetMessageVec.clear();
     // 清空缓冲区 持续接收数据 这里不能用clear 否则会死循环
@@ -111,11 +134,6 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
 
 VOID CNetSession::PostMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
 {
-    if (!m_socket.is_open())
-    {
-        return;
-    }
-
     boost::system::error_code error;
     // 不可以异步发送数据 异步发送数据是需要一个队列 循环弹出数据发送
     //m_socket.async_write_some(boost::asio::buffer(strMsg), boost::bind(&CNetSession::PostMessage, this, strMsg));
@@ -132,7 +150,11 @@ VOID CNetSession::PostMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN cons
     std::vector<CHAR> cMessageVec(u32MsgLen, 0);
     memcpy(cMessageVec.data(), pcMsg, u32MsgLen);
 #endif
-    m_socket.write_some(boost::asio::buffer(cMessageVec), error);
+
+    if (m_socket.is_open())
+    {
+        m_socket.write_some(boost::asio::buffer(cMessageVec), error);
+    }
 
     if (error)
     {
