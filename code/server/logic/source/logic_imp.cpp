@@ -6,7 +6,7 @@ boost::lockfree::queue<CLogicInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_L
 CLogicImp::CLogicImp() : m_pMsgMgr(NULL), m_bRun(FALSE), m_tMemPool(MEM_POOL_INITIALIZER)
 {
     MemPoolInit_API();
-    m_tMemPool = MemPoolCreate_API(NULL, NET_MESSAGE_MAX_SIZE);
+    m_tMemPool = MemPoolCreate_API(NULL, NET_MESSAGE_BODY_MAX_SIZE);
 }
 
 CLogicImp::~CLogicImp()
@@ -141,11 +141,13 @@ VOID CLogicImp::DealMessageThread(IN CLogicImp* pThis, IN UINT32 u32ThreadNum)
         if (g_LogicMsgQueue.pop(pMsg) && pMsg != NULL)
         {
 #ifdef _DEBUG_
-            std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgBuf() << std::endl;
+            T_APP_FIRST_TEST_REQ* ptReq = (T_APP_FIRST_TEST_REQ*)(pMsg->GetMsgBuf());
+
+            std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgType() << " " << ptReq->u32Result << " " << ptReq->u32Test << std::endl;
 #endif
             if (pMsg->GetMsgBuf() != NULL)
             {
-                CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
+                //CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
                 //pThis->OnDealMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
             }
             delete pMsg;

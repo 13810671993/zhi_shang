@@ -23,6 +23,8 @@
 
 #include "mem_pool/mem_pool.h"
 
+#include "application/app_protocol/app_protocol.h"
+
 // 服务器头文件
 #include "network/network_mgr.h"
 #include "network/net_node_id_layer.h"

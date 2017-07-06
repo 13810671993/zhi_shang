@@ -26,7 +26,15 @@ void CNetwork::SLOT_Connect()
 
 void CNetwork::SLOT_SendMessage(QString qstrSendMessage)
 {
-    m_pSocket->write(qstrSendMessage.toLatin1());
+    T_APP_FIRST_TEST tFirstTest = {0};
+    tFirstTest.u32Result = 1;
+    tFirstTest.u32Test = 2;
+    QString qstrMsgType;
+    qstrMsgType.append(QString("%1").arg(sizeof(tFirstTest) + 8, 8, 10));
+    qstrMsgType.append(QString("%1").arg(E_APP_MSG_FIRST_TEST, 8, 10));
+    qstrMsgType.append((char*)&tFirstTest);
+    m_pSocket->write(qstrMsgType.toStdString().data(), 24);
+    //m_pSocket->write(qstrSendMessage.toLatin1());
 }
 
 void CNetwork::RecvMessage()

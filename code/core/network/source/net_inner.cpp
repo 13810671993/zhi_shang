@@ -1,7 +1,7 @@
 #include "network_common.h"
 
 #ifdef _SINGLETON_POOL_
-typedef boost::singleton_pool<struct tag, NET_MESSAGE_MAX_SIZE> memPool;
+typedef boost::singleton_pool<struct tag, NET_MESSAGE_BODY_MAX_SIZE> memPool;
 #else
 #endif
 
@@ -50,7 +50,7 @@ CNetInnerMsg::~CNetInnerMsg()
 }
 
 #else
-CNetInnerMsg::CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN CHAR* pcMsg) :
+CNetInnerMsg::CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN const CHAR* pcMsg) :
       m_u32NodeID(u32NodeID)
     , m_u32MsgType(u32MsgType)
     , m_u32MsgLen(u32MsgLen)

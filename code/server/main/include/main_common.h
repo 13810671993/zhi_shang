@@ -25,6 +25,8 @@
 
 #ifdef _WIN32_
     #ifdef _DEBUG_
+        #pragma comment(lib, LIB_THIRD_IMPORT("google/protobuf/Debug/libprotobuf_d.lib"))
+        #pragma comment(lib, LIB_THIRD_IMPORT("google/protobuf/Debug/libprotobuf-lite_d.lib"))
         #pragma comment(lib, LIB_DEBUG_IMPORT("subscriber_d.lib"))
         #pragma comment(lib, LIB_DEBUG_IMPORT("network_d.lib"))
         #pragma comment(lib, LIB_DEBUG_IMPORT("svr_adpt_d.lib"))
@@ -33,7 +35,10 @@
         #pragma comment(lib, LIB_DEBUG_IMPORT("logic_d.lib"))
         #pragma comment(lib, LIB_DEBUG_IMPORT("log_d.lib"))
         #pragma comment(lib, LIB_DEBUG_IMPORT("mem_pool_d.lib"))
+        #pragma comment(lib, LIB_DEBUG_IMPORT("app_protocol_d.lib"))
     #else
+        #pragma comment(lib, LIB_THIRD_IMPORT("google/protobuf/Release/libprotobuf.lib"))
+        #pragma comment(lib, LIB_THIRD_IMPORT("google/protobuf/Release/libprotobuf-lite.lib"))
         #pragma comment(lib, LIB_RELEASE_IMPORT("subscriber.lib"))
         #pragma comment(lib, LIB_RELEASE_IMPORT("network.lib"))
         #pragma comment(lib, LIB_RELEASE_IMPORT("svr_adpt.lib"))
@@ -42,6 +47,7 @@
         #pragma comment(lib, LIB_RELEASE_IMPORT("logic.lib"))
         #pragma comment(lib, LIB_RELEASE_IMPORT("log.lib"))
         #pragma comment(lib, LIB_RELEASE_IMPORT("mem_pool.lib"))
+        #pragma comment(lib, LIB_RELEASE_IMPORT("app_protocol.lib"))
 
     #endif
 

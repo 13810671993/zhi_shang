@@ -1,0 +1,14 @@
+package application;
+
+option java_outer_classname = "application_struct";
+
+message T_APP_FIRST_TEST_RSP
+{
+	required fixed32 u32Result = 1;
+	required fixed32 u32Test = 2;
+}
+message T_APP_FIRST_TEST_REQ
+{
+	required fixed32 u32Result = 1;
+	required fixed32 u32Test = 2;
+}

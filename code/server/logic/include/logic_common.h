@@ -15,6 +15,9 @@
 #include "common/common_tool.h"
 #include "common/common_define.h"
 
+#include "application/app_protocol/application.h"
+#include "application/app_protocol/application_struct.h"
+
 #include "mem_pool/mem_pool.h"
 
 #include "subscriber/sub_msg_handler.h"

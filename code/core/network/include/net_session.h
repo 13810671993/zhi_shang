@@ -10,16 +10,21 @@ public:
 
 public:
     // 面向会话
-    VOID            StartSession(IN UINT32 u32NodeID);
+    VOID            DoRecvMessage(IN UINT32 u32NodeID);
+    VOID            RecvMessageHeadCB(IN const boost::system::error_code& ec, IN UINT32 u32NodeID);
+    VOID            RecvMessageBodyCB(IN const boost::system::error_code& ec, IN UINT32 u32MsgLen, IN UINT32 u32NodeID);
     VOID            MessageHandlerCB(IN const boost::system::error_code& ec, IN UINT32 u32MsgLen, IN UINT32 u32NodeID);     // 消息回调
     VOID            PostMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg);
 
     inline boost::asio::ip::tcp::socket& GetSocket();
 
 private:
-    boost::asio::ip::tcp::socket    m_socket;
-    std::vector<CHAR>               m_cNetMessageVec;
-    CNetworkMgr*                    m_pNetworkMgr;
+    boost::asio::ip::tcp::socket                m_socket;
+    //std::vector<CHAR>                           m_cMessageBodyVec;
+    CHAR                                        m_acMessageBody[NET_MESSAGE_BODY_MAX_SIZE];
+    //std::array<CHAR, NET_MESSAGE_HEAD_MAX_SIZE> m_acMessageHead;
+    CHAR                                        m_acMessageHead[NET_MESSAGE_HEAD_MAX_SIZE];
+    CNetworkMgr*                                m_pNetworkMgr;
 
 #ifdef _MEM_POOL_
     T_MEM_POOL m_tMemPool;

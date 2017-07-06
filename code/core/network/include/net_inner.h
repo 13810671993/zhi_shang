@@ -12,7 +12,7 @@ public:
 #elif _POOL_
     CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN CHAR* pcMsg, IN boost::pool<>& MemPool);
 #else
-    CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN CHAR* pcMsg);
+    CNetInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN INT32 u32MsgLen, IN const CHAR* pcMsg);
 #endif
     ~CNetInnerMsg();
     

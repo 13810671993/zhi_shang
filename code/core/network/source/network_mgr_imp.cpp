@@ -4,7 +4,7 @@
 boost::lockfree::queue<CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue(0);
 #else
 // 单生产 单消费无锁队列
-boost::lockfree::spsc_queue< CNetInnerMsg*, boost::lockfree::capacity<NET_MESSAGE_MAX_SIZE> > g_netMsgSpscQueue;
+boost::lockfree::spsc_queue< CNetInnerMsg*, boost::lockfree::capacity<NET_MESSAGE_BODY_MAX_SIZE> > g_netMsgSpscQueue;
 //boost::lockfree::spsc_queue< CNetInnerMsg* > g_netMsgSpscQueue;
 #endif
 
@@ -103,7 +103,7 @@ VOID CNetworkMgrImp::AcceptHandlerCB(IN const boost::system::error_code& ec, IN 
         CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GenerateNetNodeID Failed. u32Ret = 0x%x", u32Ret);
     } while (0);
     // 启动这个会话
-    ptrSession->StartSession(u32NodeID);
+    ptrSession->DoRecvMessage(u32NodeID);
 
     LogInfo("Start new session. u32NodeID = %d", u32NodeID);
 

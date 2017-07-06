@@ -1,7 +1,7 @@
 #include "subscriber_common.h"
 
 #ifdef _SINGLETON_POOL_
-typedef boost::singleton_pool<struct tag, NET_MESSAGE_MAX_SIZE> memPool;
+typedef boost::singleton_pool<struct tag, NET_MESSAGE_BODY_MAX_SIZE> memPool;
 #else
 #endif
 
