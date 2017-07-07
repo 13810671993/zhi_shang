@@ -25,30 +25,6 @@ CSubInnerMsg::~CSubInnerMsg()
         m_pcMsg = NULL;
     }
 }
-#elif _POOL_
-CSubInnerMsg::CSubInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen, IN boost::pool<>& MemPool) :
-    m_u32NodeID(u32NodeID)
-    , m_u32MsgType(u32MsgType)
-    , m_u32MsgLen(u32MsgLen)
-    , m_pcMsg(NULL)
-    , m_MemPool(MemPool)
-{
-    m_pcMsg = (CHAR*)m_MemPool.ordered_malloc();
-    if (m_pcMsg != NULL)
-    {
-        memset(m_pcMsg, 0, u32MsgLen + 1);
-        memcpy(m_pcMsg, pcMsg, u32MsgLen);
-    }
-}
-
-CSubInnerMsg::~CSubInnerMsg()
-{
-    if (m_pcMsg != NULL)
-    {
-        m_MemPool.ordered_free(m_pcMsg);
-        m_pcMsg = NULL;
-    }
-}
 #else
 CSubInnerMsg::CSubInnerMsg(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN CHAR* pcMsg, IN UINT32 u32MsgLen) : 
       m_u32NodeID(u32NodeID)

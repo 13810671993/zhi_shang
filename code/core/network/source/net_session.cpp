@@ -3,9 +3,7 @@
 #ifdef _LOCK_FREE_QUEUE_
 extern boost::lockfree::queue<CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE>> g_netMsgQueue;
 #else
-//extern boost::lockfree::spsc_queue< CNetInnerMsg*, boost::lockfree::fixed_sized<FALSE> > g_netMsgSpscQueue;
 extern boost::lockfree::spsc_queue< CNetInnerMsg*, boost::lockfree::capacity<NET_MESSAGE_BODY_MAX_SIZE> > g_netMsgSpscQueue;
-//extern boost::lockfree::spsc_queue< CNetInnerMsg* > g_netMsgSpscQueue;
 #endif
 
 #ifdef _MEM_POOL_
@@ -15,19 +13,11 @@ CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetworkMgr* p
     MemPoolInit_API();
     m_tMemPool = MemPoolCreate_API(NULL, NET_MESSAGE_BODY_MAX_SIZE);
 }
-#elif _POOL_
-CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetworkMgr* pNetworkMgr) :
-    m_socket(ioServer), m_acMessageBody(NET_MESSAGE_BODY_MAX_SIZE, 0), m_pNetworkMgr(pNetworkMgr), m_MemPool(NET_MESSAGE_BODY_MAX_SIZE)
-{
-}
-
 #else
 CNetSession::CNetSession(IN boost::asio::io_service& ioServer, IN CNetworkMgr* pNetworkMgr) :
       m_socket(ioServer)
-    //, m_cMessageBodyVec(NET_MESSAGE_BODY_MAX_SIZE, 0)
     , m_pNetworkMgr(pNetworkMgr)
 {
-    //memset(m_acMessageHead, 0, sizeof(m_acMessageHead));
 }
 #endif
 
@@ -35,6 +25,7 @@ CNetSession::~CNetSession()
 {
     if (m_socket.is_open())
     {
+        m_socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both);
         m_socket.close();
     }
 #ifdef _MEM_POOL_
@@ -42,8 +33,6 @@ CNetSession::~CNetSession()
     BOOST_SLEEP(1 * 1);
     MemPoolDestroy_API(&m_tMemPool);
     MemPoolFinalize_API();
-#elif _POOL_
-    //m_MemPool.purge_memory();
 #else
 #endif
 }
@@ -72,13 +61,7 @@ VOID CNetSession::RecvMessageHeadCB(IN const boost::system::error_code& ec, IN U
         // 读取包头成功
         // 获取包头数据 ->包体的长度
         UINT32 u32MsgBodyLen = 0;
-#if 0
-        CHAR acMsgBodyLen[NET_MESSAGE_HEAD_SIZE + 1] = { 0 };
-        memcpy(acMsgBodyLen, m_acMessageHead, NET_MESSAGE_HEAD_SIZE);
-        u32MsgBodyLen = atoi(acMsgBodyLen);
-#else
         memcpy(&u32MsgBodyLen, m_acMessageHead, sizeof(u32MsgBodyLen));
-#endif
         if (u32MsgBodyLen > NET_MESSAGE_BODY_MAX_SIZE || u32MsgBodyLen == 0)
         {
             LogError("Message body length error, message is illegal, disconnect. u32MsgBodyLen = %d", u32MsgBodyLen);
@@ -119,25 +102,13 @@ VOID CNetSession::RecvMessageBodyCB(IN const boost::system::error_code& ec, IN U
     {
         // 接收包体成功
         UINT32 u32MsgType = 0;
-#if 0
-        CHAR acMsgType[NET_MESSAGE_TYPE_SIZE + 1] = { 0 };
-        //memcpy(acMsgType, m_cMessageBodyVec.data(), NET_MESSAGE_TYPE_SIZE);
-        memcpy(acMsgType, m_acMessageBody, NET_MESSAGE_TYPE_SIZE);
-        u32MsgType = atoi(acMsgType);
-#else
-        //memcpy(&u32MsgType, m_acMessageBody, sizeof(u32MsgType));
-#endif
-        // pb -> struct
         std::string strStructBuf;
+        // pb -> struct 获取u32MsgType
         u32Ret = CAppProtocol::ProtoBuf2Struct(m_acMessageBody, u32MsgLen, u32MsgType, strStructBuf);
 #ifdef _MEM_POOL_
         CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_acMessageBody.data() + sizeof(UINT32), &m_tMemPool);
-#elif _POOL_
-        CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_acMessageBody.data() + sizeof(UINT32), m_MemPool);
 #else
         // 只要这个数据包的长度正确了 那么所有的元素都是正确的
-        //CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen, m_cMessageBodyVec.data() + NET_MESSAGE_TYPE_SIZE);
-        //CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(u32MsgType), m_acMessageBody + sizeof(u32MsgType));
         CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, strStructBuf.length(), strStructBuf.c_str());
 #endif
 
@@ -150,10 +121,7 @@ VOID CNetSession::RecvMessageBodyCB(IN const boost::system::error_code& ec, IN U
             delete pNetMsg;
         }
 
-        //m_cNetMessageVec.clear();
-        // 清空缓存 持续接收数据 这里不能用clear 否则会死循环
-        //memset(m_cMessageBodyVec.data(), 0, m_cMessageBodyVec.size());
-        //memset(m_acMessageHead, 0, sizeof(m_acMessageHead));
+        // 不清空缓存 持续接收数据 这里不能用clear 否则会死循环
         DoRecvMessage(u32NodeID);
     }
     else
@@ -209,7 +177,6 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
     // 如果有数据
     // 将数据封装到类中 然后写入队列
     UINT32 u32MsgType = 0;
-    //memcpy(&u32MsgType, m_cMessageBodyVec.data(), sizeof(UINT32));
     memcpy(&u32MsgType, m_acMessageBody, sizeof(UINT32));
 #ifdef _DEBUG_
     std::cout << "len: " << u32MsgLen << std::endl;
@@ -223,11 +190,7 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
 
 #ifdef _MEM_POOL_
     CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_acMessageBody.data() + sizeof(UINT32), &m_tMemPool);
-#elif _POOL_
-    CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_acMessageBody.data() + sizeof(UINT32), m_MemPool);
 #else
-    //CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen - sizeof(UINT32), m_cNetMessageVec.data() + sizeof(UINT32));
-    //CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen, m_cMessageBodyVec.data());
     CNetInnerMsg* pNetMsg = new CNetInnerMsg(u32NodeID, u32MsgType, u32MsgLen, m_acMessageBody);
 #endif
 #ifdef _WIN32_

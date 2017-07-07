@@ -6,14 +6,14 @@
 
 #include <algorithm>
 
-#include "third/google/protobuf/stubs/common.h"
-#include "third/google/protobuf/stubs/once.h"
-#include "third/google/protobuf/io/coded_stream.h"
-#include "third/google/protobuf/wire_format_lite_inl.h"
-#include "third/google/protobuf/descriptor.h"
-#include "third/google/protobuf/generated_message_reflection.h"
-#include "third/google/protobuf/reflection_ops.h"
-#include "third/google/protobuf/wire_format.h"
+#include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/once.h>
+#include <google/protobuf/io/coded_stream.h>
+#include <google/protobuf/wire_format_lite_inl.h>
+#include <google/protobuf/descriptor.h>
+#include <google/protobuf/generated_message_reflection.h>
+#include <google/protobuf/reflection_ops.h>
+#include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
 namespace application {

@@ -2,9 +2,10 @@
 #define NETWORK_COMMON_H
 
 #include "include/network.h"
-#include "../../../include/common/data_type.h"
-#include "../../../include/application/application.h"
-#include "../../../include/application/application_struct.h"
+#include "common/data_type.h"
+#include "application/app_protocol/app_protocol.h"
+#include "application/app_protocol/application.h"
+#include "application/app_protocol/application_struct.h"
 
 #endif // NETWORK_COMMON_H
 

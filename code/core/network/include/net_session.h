@@ -20,18 +20,13 @@ public:
 
 private:
     boost::asio::ip::tcp::socket                m_socket;
-    //std::vector<CHAR>                           m_cMessageBodyVec;
     CHAR                                        m_acMessageBody[NET_MESSAGE_BODY_MAX_SIZE];
-    //std::array<CHAR, NET_MESSAGE_HEAD_MAX_SIZE> m_acMessageHead;
     CHAR                                        m_acMessageHead[NET_MESSAGE_HEAD_MAX_SIZE];
     CNetworkMgr*                                m_pNetworkMgr;
 
 #ifdef _MEM_POOL_
     T_MEM_POOL m_tMemPool;
 #else
-#endif
-#ifdef _POOL_
-    boost::pool<> m_MemPool;
 #endif
 };
 

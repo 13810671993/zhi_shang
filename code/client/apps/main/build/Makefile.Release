@@ -11,13 +11,13 @@ MAKEFILE      = Makefile.Release
 
 CC            = cl
 CXX           = cl
-DEFINES       = -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG
+DEFINES       = -DUNICODE -DWIN32 -DNOMINMAX -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB -DNDEBUG
 CFLAGS        = -nologo -Zm200 -Zc:wchar_t -O2 -MD -W3 $(DEFINES)
-CXXFLAGS      = -nologo -Zm200 -Zc:wchar_t -O2 -MD -GR -W3 -w34100 -w34189 -EHsc $(DEFINES)
-INCPATH       = -I"..\..\..\module" -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include" -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtWidgets" -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtGui" -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork" -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore" -I"release" -I"." -I"." -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\win32-msvc2010"
+CXXFLAGS      = -nologo -Zm200 -Zc:wchar_t /wd4819 /wd4099 -O2 -MD -GR -W3 -w34100 -w34189 -EHsc $(DEFINES)
+INCPATH       = -I"..\..\..\module" -I"..\..\..\..\include" -I"..\..\..\..\include\third" -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include" -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtWidgets" -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtGui" -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork" -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore" -I"release" -I"." -I"." -I"C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\win32-msvc2010"
 LINKER        = link
 LFLAGS        = /NOLOGO /DYNAMICBASE /NXCOMPAT /INCREMENTAL:NO /SUBSYSTEM:WINDOWS "/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'"
-LIBS          = glu32.lib opengl32.lib gdi32.lib user32.lib /LIBPATH:C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\qtmain.lib shell32.lib C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Widgets.lib C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Gui.lib C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Network.lib C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Core.lib 
+LIBS          = glu32.lib opengl32.lib gdi32.lib user32.lib /LIBPATH:C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\qtmain.lib shell32.lib /LIBPATH:E:\zhi_shang\build\win32\client\..\..\..\lib\win32\Release\ /LIBPATH:E:\zhi_shang\build\win32\client\..\..\..\lib\win32\Third\google_2010\protobuf\Release\ app_protocol_2010.lib E:\zhi_shang\build\win32\client\..\..\..\lib\win32\Third\google_2010\protobuf\Release\\libprotobuf.lib E:\zhi_shang\build\win32\client\..\..\..\lib\win32\Third\google_2010\protobuf\Release\\libprotobuf-lite.lib C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Widgets.lib C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Gui.lib C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Network.lib C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\lib\Qt5Core.lib 
 QMAKE         = C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\bin\qmake.exe
 IDC           = idc
 IDL           = midl
@@ -325,8 +325,12 @@ release\moc_view_main_widget.cpp: C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtWi
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\QTcpSocket \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\qtcpsocket.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\qabstractsocket.h \
+		..\..\..\..\include\common\data_type.h \
+		..\..\..\..\include\application\app_protocol\app_protocol.h \
+		..\..\..\..\include\application\app_protocol\application.h \
+		..\..\..\..\include\application\app_protocol\application_struct.h \
 		..\..\..\module\main\view\include\view_main_widget.h
-	C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\bin\moc.exe $(DEFINES) -D_MSC_VER=1600 -D_WIN32 -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/mkspecs/win32-msvc2010 -IE:/zhi_shang/build/win32/client -IE:/zhi_shang/code/client/module -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtWidgets -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtGui -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtNetwork -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtCore -I. ..\..\..\module\main\view\include\view_main_widget.h -o release\moc_view_main_widget.cpp
+	C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\bin\moc.exe $(DEFINES) -D_MSC_VER=1600 -D_WIN32 -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/mkspecs/win32-msvc2010 -IE:/zhi_shang/build/win32/client -IE:/zhi_shang/code/client/module -IE:/zhi_shang/code/include -IE:/zhi_shang/code/include/third -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtWidgets -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtGui -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtNetwork -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtCore -I. ..\..\..\module\main\view\include\view_main_widget.h -o release\moc_view_main_widget.cpp
 
 release\moc_network.cpp: C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\QString \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\qstring.h \
@@ -401,7 +405,7 @@ release\moc_network.cpp: C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\QStrin
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\qtcpsocket.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\qabstractsocket.h \
 		..\..\..\module\network\include\network.h
-	C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\bin\moc.exe $(DEFINES) -D_MSC_VER=1600 -D_WIN32 -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/mkspecs/win32-msvc2010 -IE:/zhi_shang/build/win32/client -IE:/zhi_shang/code/client/module -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtWidgets -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtGui -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtNetwork -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtCore -I. ..\..\..\module\network\include\network.h -o release\moc_network.cpp
+	C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\bin\moc.exe $(DEFINES) -D_MSC_VER=1600 -D_WIN32 -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/mkspecs/win32-msvc2010 -IE:/zhi_shang/build/win32/client -IE:/zhi_shang/code/client/module -IE:/zhi_shang/code/include -IE:/zhi_shang/code/include/third -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtWidgets -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtGui -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtNetwork -IC:/Qt/Qt5.4.0/5.4/msvc2010_opengl/include/QtCore -I. ..\..\..\module\network\include\network.h -o release\moc_network.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -538,6 +542,10 @@ release\main.obj: ..\source\main.cpp ..\..\..\module\main\main_common.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\QTcpSocket \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\qtcpsocket.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\qabstractsocket.h \
+		..\..\..\..\include\common\data_type.h \
+		..\..\..\..\include\application\app_protocol\app_protocol.h \
+		..\..\..\..\include\application\app_protocol\application.h \
+		..\..\..\..\include\application\app_protocol\application_struct.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtWidgets\QApplication \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtWidgets\qapplication.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\qcoreapplication.h \
@@ -661,6 +669,10 @@ release\view_main_widget.obj: ..\..\..\module\main\view\source\view_main_widget.
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\QTcpSocket \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\qtcpsocket.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\qabstractsocket.h \
+		..\..\..\..\include\common\data_type.h \
+		..\..\..\..\include\application\app_protocol\app_protocol.h \
+		..\..\..\..\include\application\app_protocol\application.h \
+		..\..\..\..\include\application\app_protocol\application_struct.h \
 		ui_view_main_widget.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\QVariant \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtWidgets\QAction \
@@ -784,7 +796,11 @@ release\network.obj: ..\..\..\module\network\source\network.cpp ..\..\..\module\
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtCore\qcontiguouscache.h \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\QTcpSocket \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\qtcpsocket.h \
-		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\qabstractsocket.h
+		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\include\QtNetwork\qabstractsocket.h \
+		..\..\..\..\include\common\data_type.h \
+		..\..\..\..\include\application\app_protocol\app_protocol.h \
+		..\..\..\..\include\application\app_protocol\application.h \
+		..\..\..\..\include\application\app_protocol\application_struct.h
 
 release\qrc_mainresource.obj: release\qrc_mainresource.cpp 
 

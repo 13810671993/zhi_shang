@@ -19,16 +19,6 @@ CSubscriberImp::~CSubscriberImp()
     MemPoolDestroy_API(&m_tMemPool);
     MemPoolFinalize_API();
 }
-#elif _POOL_
-CSubscriberImp::CSubscriberImp() : m_MemPool(SUB_MESSAGE_MAX_SIZE)
-{
-    boost::thread threadImp(boost::bind(PushMsg2SubscriberThread, this));
-    LogInfo("PushMsg2SubscriberThread start.");
-}
-
-CSubscriberImp::~CSubscriberImp()
-{
-}
 #else
 CSubscriberImp::CSubscriberImp()
 {
@@ -77,8 +67,6 @@ UINT32 CSubscriberImp::PushMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN
 
 #ifdef _MEM_POOL_
     CSubInnerMsg* pMsg = new CSubInnerMsg(u32NodeID, u32MsgType, pcMsg, u32MsgLen, &m_tMemPool);
-#elif _POOL_
-    CSubInnerMsg* pMsg = new CSubInnerMsg(u32NodeID, u32MsgType, pcMsg, u32MsgLen, m_MemPool);
 #else
     CSubInnerMsg* pMsg = new CSubInnerMsg(u32NodeID, u32MsgType, pcMsg, u32MsgLen);
 #endif

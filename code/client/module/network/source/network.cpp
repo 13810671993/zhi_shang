@@ -26,15 +26,20 @@ void CNetwork::SLOT_Connect()
 
 void CNetwork::SLOT_SendMessage(QString qstrSendMessage)
 {
-    T_APP_FIRST_TEST tFirstTest = {0};
-    tFirstTest.u32Result = 1;
-    tFirstTest.u32Test = 2;
-    QString qstrMsgType;
-    qstrMsgType.append(QString("%1").arg(sizeof(tFirstTest) + 8, 8, 10));
-    qstrMsgType.append(QString("%1").arg(E_APP_MSG_FIRST_TEST, 8, 10));
-    qstrMsgType.append((char*)&tFirstTest);
-    m_pSocket->write(qstrMsgType.toStdString().data(), 24);
+    //QString qstrMsgType;
+    //m_pSocket->write(qstrMsgType.toStdString().data(), 24);
     //m_pSocket->write(qstrSendMessage.toLatin1());
+    UINT32 u32MsgType = E_APP_MSG_FIRST_TEST_REQ;
+    T_APP_FIRST_TEST_REQ tFirstTestReq = {0};
+    tFirstTestReq.u32Result = 1;
+    tFirstTestReq.u32Test = 2;
+    std::string strProtoBuf;
+    CAppProtocol::Struct2ProtoBuf(u32MsgType, &tFirstTestReq, sizeof(tFirstTestReq), strProtoBuf);
+    std::string strSend;
+    UINT32 u32MsgLen = strProtoBuf.length();
+    strSend.append((CHAR*)&u32MsgLen, sizeof(u32MsgLen));
+    strSend += strProtoBuf;
+    m_pSocket->write(strSend.data(), sizeof(u32MsgLen) + u32MsgLen);
 }
 
 void CNetwork::RecvMessage()
