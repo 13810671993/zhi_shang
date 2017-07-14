@@ -1,7 +1,7 @@
-#include "main/main_common.h"
-#include "network/network_common.h"
 #include <QApplication>
 #include <QTextCodec>
+#include "login/login_common.h"
+#include "network/network_common.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,8 +11,9 @@ int main(int argc, char *argv[])
     // 启动网络资源
     CNetwork* pNetwork = new CNetwork();
 
-    CMainWidget w(pNetwork);
-    w.show();
+    CLoginWidget ab(0);
+    ab.show();
+
 
     return a.exec();
 }

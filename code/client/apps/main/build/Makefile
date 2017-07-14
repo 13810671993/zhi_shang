@@ -173,8 +173,9 @@ Makefile: E:\zhi_shang\build\win32\client\zhi_shang.pro C:\Qt\Qt5.4.0\5.4\msvc20
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\exclusive_builds.prf \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\default_pre.prf \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\win32\default_pre.prf \
-		..\..\..\module\main\main.pri \
 		..\..\..\module\network\network.pri \
+		..\..\..\module\login\login.pri \
+		..\..\..\module\user\user.pri \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\resolve_config.prf \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\exclusive_builds_post.prf \
 		C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\default_post.prf \
@@ -300,8 +301,9 @@ C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\spec_post.prf:
 C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\exclusive_builds.prf:
 C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\default_pre.prf:
 C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\win32\default_pre.prf:
-..\..\..\module\main\main.pri:
 ..\..\..\module\network\network.pri:
+..\..\..\module\login\login.pri:
+..\..\..\module\user\user.pri:
 C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\resolve_config.prf:
 C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\exclusive_builds_post.prf:
 C:\Qt\Qt5.4.0\5.4\msvc2010_opengl\mkspecs\features\default_post.prf:

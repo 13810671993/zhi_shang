@@ -1,0 +1,109 @@
+/***********************************************************************************/
+QPushButton
+{
+    border: none;
+    outline: 0px;
+}
+
+QLineEdit
+{
+    background:white;
+    border-radius:3px;
+    border: 1px solid #d1d1d1;
+}
+QLineEdit:hover
+{
+    padding-top: 0px;
+    border: 1px solid #1583dd;
+}
+
+QLabel
+{
+    color: red;
+    outline: none;
+}
+
+QGroupBox
+{
+    border: none;
+    outline: none;
+}
+
+QRadioButton
+{
+    outline: none;	/*外部虚线框*/
+}
+
+QRadioButton::indicator
+{
+    width: 30px;
+    height: 30px;
+}
+
+
+QLabel#CLblBackgroundUp_Regist
+{
+    background-image: url(:/user_operation/resource/image/background_regist.png);
+}
+QLabel#CLblBackgroundCenter_Regist
+{
+    background-color: qlineargradient(spread:pad, x1:0.483, y1:0, x2:0.483, y2:0.181818, stop:0 rgba(41, 75, 110, 255), stop:1 rgba(242, 255, 254, 255));
+}
+QLabel#CLblBackgroundDown_Regist
+{
+    background-color: qlineargradient(spread:pad, x1:0.505318, y1:1, x2:0.494636, y2:0, stop:0 rgba(41, 75, 110, 255), stop:1 rgba(242, 255, 254, 255));
+}
+
+QPushButton#CBtnConfirm_Regist
+{
+    color: black;
+    border-radius:3px;
+    /*background-color: #0e96fe;*/
+    background-color: #f0f6fb;
+}
+QPushButton#CBtnConfirm_Regist:hover
+{
+    color: black;
+    /*background-color: #2c89ff;*/
+    background-color: #bfd7fb;
+}
+QPushButton#CBtnConfirm_Regist:pressed
+{
+    color: black;
+    padding-top:3px;
+    padding-left:3px;
+    /*background-color: #0e87e4;*/
+    background-color: #e2e8ed;
+}
+
+QPushButton#CBtnCancel_Regist
+{
+    color: black;
+    border-radius:3px;
+    /*background-color: #0e96fe;*/
+    background-color: #f0f6fb;
+}
+QPushButton#CBtnCancel_Regist:hover
+{
+    color: black;
+    /*background-color: #2c89ff;*/
+    background-color: #bfd7fb;
+}
+QPushButton#CBtnCancel_Regist:pressed
+{
+    color: black;
+    padding-top:3px;
+    padding-left:3px;
+    /*background-color: #0e87e4;*/
+    background-color: #e2e8ed;
+}
+
+QRadioButton#CRbtnMan
+{
+    image: url(:/user_operation/resource/image/man.png);
+}
+
+QRadioButton#CRbtnWoman
+{
+    image: url(:/user_operation/resource/image/woman.png);
+}

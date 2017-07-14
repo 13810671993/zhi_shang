@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CRegistAccountDialog</class>
+ <widget class="QDialog" name="CRegistAccountDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QPushButton" name="CBtnConfirm_Regist">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>270</y>
+     <width>80</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="CBtnCancel_Regist">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>270</y>
+     <width>80</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="CLedPasswd_Regist">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>178</y>
+     <width>180</width>
+     <height>28</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="CLedUser_Regist">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>150</y>
+     <width>180</width>
+     <height>28</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>234</y>
+     <width>180</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <widget class="QRadioButton" name="CRbtnMan">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>0</y>
+      <width>70</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="CRbtnWoman">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>0</y>
+      <width>70</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLineEdit" name="CLedPasswdAgain_Regist">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>206</y>
+     <width>180</width>
+     <height>28</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblBackgroundUp_Regist">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>140</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblUserError_Regist">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>150</y>
+     <width>110</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblPasswdAgainError_Regist">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>206</y>
+     <width>110</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblPasswdError_Regist">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>178</y>
+     <width>110</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblBackgroundCenter_Regist">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>140</y>
+     <width>400</width>
+     <height>125</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblBackgroundDown_Regist">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>265</y>
+     <width>400</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>CLblBackgroundUp_Regist</zorder>
+  <zorder>CLblBackgroundCenter_Regist</zorder>
+  <zorder>CLblBackgroundDown_Regist</zorder>
+  <zorder>CBtnConfirm_Regist</zorder>
+  <zorder>CBtnCancel_Regist</zorder>
+  <zorder>CLedPasswd_Regist</zorder>
+  <zorder>CLedUser_Regist</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>CLedPasswdAgain_Regist</zorder>
+  <zorder>CLblUserError_Regist</zorder>
+  <zorder>CLblPasswdAgainError_Regist</zorder>
+  <zorder>CLblPasswdError_Regist</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

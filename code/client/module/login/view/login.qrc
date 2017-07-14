@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/login">
+        <file>resource/login.qss</file>
+        <file>resource/image/button_close_checked.png</file>
+        <file>resource/image/button_close_hover.png</file>
+        <file>resource/image/button_close_normal.png</file>
+        <file>resource/image/button_minimum_checked.png</file>
+        <file>resource/image/button_minimum_hover.png</file>
+        <file>resource/image/button_minimum_normal.png</file>
+        <file>resource/image/button_switch_checked.png</file>
+        <file>resource/image/button_switch_hover.png</file>
+        <file>resource/image/button_switch_normal.png</file>
+        <file>resource/image/combobox_drop_down_button.png</file>
+        <file>resource/image/checkbox.png</file>
+        <file>resource/image/label_background_up_login.png</file>
+        <file>resource/image/label_background_up_server.png</file>
+    </qresource>
+</RCC>

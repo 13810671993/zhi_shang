@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CModifyPasswdDialog</class>
+ <widget class="QDialog" name="CModifyPasswdDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLineEdit" name="CLedUser_Modify">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>150</y>
+     <width>180</width>
+     <height>28</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="CLedPasswd_Modify">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>178</y>
+     <width>180</width>
+     <height>28</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="CLedPasswdAgain_Modify">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>206</y>
+     <width>180</width>
+     <height>28</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="CBtnConfirm_Modify">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>270</y>
+     <width>80</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="CBtnCancel_Modify">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>270</y>
+     <width>80</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblPasswdAgainError_Modify">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>206</y>
+     <width>110</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblUserError_Modify">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>150</y>
+     <width>110</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblPasswdError_Modify">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>178</y>
+     <width>110</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblBackgroundUp_Modify">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>140</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblBackgroundCenter_Modify">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>140</y>
+     <width>400</width>
+     <height>125</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="CLblBackgroundDown_Modify">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>265</y>
+     <width>400</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>CLblBackgroundDown_Modify</zorder>
+  <zorder>CLblBackgroundCenter_Modify</zorder>
+  <zorder>CLblBackgroundUp_Modify</zorder>
+  <zorder>CLedUser_Modify</zorder>
+  <zorder>CLedPasswd_Modify</zorder>
+  <zorder>CLedPasswdAgain_Modify</zorder>
+  <zorder>CBtnConfirm_Modify</zorder>
+  <zorder>CBtnCancel_Modify</zorder>
+  <zorder>CLblPasswdAgainError_Modify</zorder>
+  <zorder>CLblUserError_Modify</zorder>
+  <zorder>CLblPasswdError_Modify</zorder>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

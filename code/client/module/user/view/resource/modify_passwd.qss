@@ -1,0 +1,83 @@
+/***********************************************************************************/
+QPushButton
+{
+    border: none;
+    outline: 0px;
+}
+
+QLineEdit
+{
+    background:white;
+    border-radius:3px;
+    border: 1px solid #d1d1d1;
+}
+QLineEdit:hover
+{
+    padding-top: 0px;
+    border: 1px solid #1583dd;
+}
+
+QLabel
+{
+    color: red;
+}
+
+
+QLabel#CLblBackgroundUp_Modify
+{
+    background-image: url(:/user_operation/resource/image/backgroundUp_modify.png);
+}
+
+QLabel#CLblBackgroundCenter_Modify
+{
+    background-color: qlineargradient(spread:pad, x1:0.483, y1:0, x2:0.483, y2:0.181818, stop:0 rgba(171, 196, 199, 255), stop:1 rgba(242, 255, 254, 255));
+}
+
+QLabel#CLblBackgroundDown_Modify
+{
+    background-color: qlineargradient(spread:pad, x1:0.505318, y1:1, x2:0.494636, y2:0, stop:0 rgba(171, 196, 199, 255), stop:1 rgba(242, 255, 254, 255));
+}
+
+QPushButton#CBtnConfirm_Modify
+{
+    color: black;
+    border-radius:3px;
+    /*background-color: #0e96fe;*/
+    background-color: #f0f6fb;
+}
+QPushButton#CBtnConfirm_Modify:hover
+{
+    color: black;
+    /*background-color: #2c89ff;*/
+    background-color: #bfd7fb;
+}
+QPushButton#CBtnConfirm_Modify:pressed
+{
+    color: black;
+    padding-top:3px;
+    padding-left:3px;
+    /*background-color: #0e87e4;*/
+    background-color: #e2e8ed;
+}
+
+QPushButton#CBtnCancel_Modify
+{
+    color: black;
+    border-radius:3px;
+    /*background-color: #0e96fe;*/
+    background-color: #f0f6fb;
+}
+QPushButton#CBtnCancel_Modify:hover
+{
+    color: black;
+    /*background-color: #2c89ff;*/
+    background-color: #bfd7fb;
+}
+QPushButton#CBtnCancel_Modify:pressed
+{
+    color: black;
+    padding-top:3px;
+    padding-left:3px;
+    /*background-color: #0e87e4;*/
+    background-color: #e2e8ed;
+}
