@@ -33,7 +33,7 @@ void CRegistAccountDialog::SLOT_PopRegistPage()
 
 void CRegistAccountDialog::SLOT_GetUserName(QString qstrUserName)
 {
-    QRegExp regexUserName("[a-zA-Z0-9_]{6,30}");
+    QRegExp regexUserName("[a-zA-Z0-9_]{6,31}");
     if (!regexUserName.exactMatch(qstrUserName))
     {
         ui->CLblUserError_Regist->setStyleSheet("color: red;");
@@ -50,7 +50,9 @@ void CRegistAccountDialog::SLOT_GetUserName(QString qstrUserName)
 
 void CRegistAccountDialog::SLOT_GetPasswd(QString qstrPasswd)
 {
-    QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,20}");
+    if (qstrPasswd == "")
+        return ;
+    QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,15}");
     if (!regexPasswd.exactMatch(qstrPasswd))
     {
         ui->CLblPasswdError_Regist->setStyleSheet("color: red;");
@@ -66,6 +68,8 @@ void CRegistAccountDialog::SLOT_GetPasswd(QString qstrPasswd)
 
 void CRegistAccountDialog::SLOT_GetSecondpasswd(QString qstrPasswd)
 {
+    if (qstrPasswd == "")
+        return ;
     if (ui->CLedPasswd_Regist->text() == qstrPasswd)
     {
         ui->CLblPasswdAgainError_Regist->setStyleSheet("color: green;");
@@ -82,6 +86,8 @@ void CRegistAccountDialog::SLOT_GetSecondpasswd(QString qstrPasswd)
 
 void CRegistAccountDialog::SLOT_FinishedInputPasswd()
 {
+    if (ui->CLedPasswdAgain_Regist->text() == "")
+        return ;
     if (ui->CLedPasswd_Regist->text() == ui->CLedPasswdAgain_Regist->text())
     {
         ui->CLblPasswdAgainError_Regist->setStyleSheet("color: green;");
@@ -101,20 +107,39 @@ void CRegistAccountDialog::SLOT_GetSex(bool bSex)
     m_bSex = bSex;
 }
 
+void CRegistAccountDialog::SLOT_Regist()
+{
+    T_APP_REGIST_USER_REQ tRegistUser = {0};
+    tRegistUser.u32Sex = m_bSex;
+    tRegistUser.u64Context = 1;
+    memcpy(tRegistUser.acUserName, m_qstrUserName.toStdString().data(), m_qstrUserName.length());
+    memcpy(tRegistUser.acPasswd, m_qstrPasswd.toStdString().data(), m_qstrPasswd.length());
+    CNetwork::GetInstance()->SendMessage(E_APP_MSG_REGIST_USER_REQ, (CHAR*)&tRegistUser, sizeof(tRegistUser));
+}
+
 VOID CRegistAccountDialog::InitWidget()
 {
     ui->CBtnCancel_Regist->setText(tr("cancel"));
-    ui->CBtnConfirm_Regist->setText(tr("confirm"));
+    ui->CBtnRegist_Regist->setText(tr("regist"));
     ui->CLedUser_Regist->setPlaceholderText(tr("user name"));
     ui->CLedPasswd_Regist->setPlaceholderText(tr("passwd"));
     ui->CLedPasswdAgain_Regist->setPlaceholderText(tr("passwd again"));
     ui->CRbtnMan->setChecked(TRUE);
-    QRegExp regexUserName("[a-zA-Z0-9_]{6,30}");
+    QRegExp regexUserName("[a-zA-Z0-9_]{6,31}");
     QValidator* pValidatorUser = new QRegExpValidator(regexUserName, this);
     ui->CLedUser_Regist->setValidator(pValidatorUser);
-    QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,20}");
+    QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,15}");
     QValidator* pValidatorPasswd = new QRegExpValidator(regexPasswd, this);
     ui->CLedPasswd_Regist->setValidator(pValidatorPasswd);
+
+    // http://blog.sina.com.cn/s/blog_a0e483280102vizf.html
+    // 无右键菜单
+    ui->CLedUser_Regist->setContextMenuPolicy(Qt::NoContextMenu);
+    ui->CLedPasswd_Regist->setContextMenuPolicy(Qt::NoContextMenu);
+    ui->CLedPasswdAgain_Regist->setContextMenuPolicy(Qt::NoContextMenu);
+    // 设置密码隐藏
+    ui->CLedPasswd_Regist->setEchoMode(QLineEdit::Password);
+    ui->CLedPasswdAgain_Regist->setEchoMode(QLineEdit::Password);
 }
 
 VOID CRegistAccountDialog::InitWindow()
@@ -144,6 +169,7 @@ VOID CRegistAccountDialog::BindSignals()
     connect(ui->CLedPasswdAgain_Regist, SIGNAL(textChanged(QString)), this, SLOT(SLOT_GetSecondpasswd(QString)));
     connect(ui->CLedPasswdAgain_Regist, SIGNAL(editingFinished()), this, SLOT(SLOT_FinishedInputPasswd()));
     connect(ui->CRbtnMan, SIGNAL(clicked(bool)), this, SLOT(SLOT_GetSex(bool)));
+    connect(ui->CBtnRegist_Regist, SIGNAL(clicked()), this, SLOT(SLOT_Regist()));
 }
 
 

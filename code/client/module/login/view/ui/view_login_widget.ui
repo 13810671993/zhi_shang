@@ -230,7 +230,7 @@
       <string/>
      </property>
     </widget>
-    <widget class="QPushButton" name="CBtnConfirm_Server">
+    <widget class="QPushButton" name="CBtnConnect_Server">
      <property name="geometry">
       <rect>
        <x>100</x>
@@ -341,17 +341,31 @@
       </rect>
      </property>
     </widget>
+    <widget class="QLabel" name="CLblIpError_Server">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>160</y>
+       <width>90</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
     <zorder>CLblBackgroundUp_Server</zorder>
     <zorder>CLblBackgroundDown_Server</zorder>
     <zorder>CBtnCancel_Server</zorder>
     <zorder>CBtnClose_Server</zorder>
-    <zorder>CBtnConfirm_Server</zorder>
+    <zorder>CBtnConnect_Server</zorder>
     <zorder>CBtnMinimum_Server</zorder>
     <zorder>CBtnSwitch_Server</zorder>
     <zorder>CCmbIp_Server</zorder>
     <zorder>CLblIp_Server</zorder>
     <zorder>CLblPort_Server</zorder>
     <zorder>CLedPort_Server</zorder>
+    <zorder>CLblIpError_Server</zorder>
    </widget>
   </widget>
  </widget>

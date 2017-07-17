@@ -131,12 +131,12 @@ VOID CLogicImp::DealMessageThread(IN CLogicImp* pThis, IN UINT32 u32ThreadNum)
 #ifdef _DEBUG_
             T_APP_FIRST_TEST_REQ* ptReq = (T_APP_FIRST_TEST_REQ*)(pMsg->GetMsgBuf());
 
-            std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgType() << " " << ptReq->u32Result << " " << ptReq->u32Test << std::endl;
+            //std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgType() << " " << ptReq->u32Result << " " << ptReq->u32Test << std::endl;
 #endif
             if (pMsg->GetMsgBuf() != NULL)
             {
                 //CMsgMgr::GetInstance()->PostMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
-                //pThis->OnDealMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
+                pThis->OnDealMessage(pMsg->GetNodeID(), pMsg->GetMsgType(), pMsg->GetMsgLen(), pMsg->GetMsgBuf());
             }
             delete pMsg;
             pMsg = NULL;
@@ -152,8 +152,9 @@ UINT32 CLogicImp::RegistMessageCB()
 {
     UINT32  u32Ret = 0;
     UINT32  au32MsgType[] = {
-                                0,
-                                1111,
+                                E_APP_MSG_LOGIN_REQ,
+                                E_APP_MSG_REGIST_USER_REQ,
+                                E_APP_MSG_MODIFY_PASSWD_REQ,
                             };
     for (auto i = 0; i < sizeof(au32MsgType) / sizeof(UINT32); ++i)
     {
@@ -180,11 +181,32 @@ UINT32 CLogicImp::OnDealMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UI
     UINT32 u32Ret = 0;
     switch (u32MsgType)
     {
-    case 0:
+    case E_APP_MSG_LOGIN_REQ:
         break;
+    case E_APP_MSG_REGIST_USER_REQ:
+        OnRegistUserReq(u32NodeID, u32MsgLen, pcMsg);
+        break;
+    case E_APP_MSG_MODIFY_PASSWD_REQ:
+        break;
+
     default:
         break;
     }
+
+    return u32Ret;
+}
+
+UINT32 CLogicImp::OnRegistUserReq(IN UINT32 u32NodeID, IN UINT32 u32MsgLen, IN CHAR* pcMsg)
+{
+    T_APP_REGIST_USER_REQ*  ptReq = (T_APP_REGIST_USER_REQ*)pcMsg;
+    T_APP_REGIST_USER_RSP   tResp = { 0 };
+    UINT32 u32Ret = 0;
+
+    LogInfo("user: %s  passwd: %s", ptReq->acUserName, ptReq->acPasswd);
+
+    tResp.u32Result = 0;
+    tResp.u64Context = ptReq->u64Context;
+    m_pMsgMgr->PostMessage(u32NodeID, E_APP_MSG_REGIST_USER_RSP, sizeof(tResp), (CHAR*)&tResp);
 
     return u32Ret;
 }

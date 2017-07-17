@@ -2,12 +2,47 @@ package application;
 
 option java_outer_classname = "application_struct";
 
-message T_APP_FIRST_TEST_RSP
+message T_APP_LOGIN_REQ
+{
+	required fixed64 u64Context = 1;
+	required bytes acUserName = 2;
+	required bytes acPasswd = 3;
+}
+message T_APP_REGIST_USER_RSP
+{
+	required fixed64 u64Context = 1;
+	required fixed32 u32Result = 2;
+}
+message T_APP_FIRST_TEST_REQ
 {
 	required fixed32 u32Result = 1;
 	required fixed32 u32Test = 2;
 }
-message T_APP_FIRST_TEST_REQ
+message T_APP_MODIFY_PASSWD_REQ
+{
+	required fixed64 u64Context = 1;
+	required bytes acUserName = 2;
+	required bytes acOldPasswd = 3;
+	required bytes acNewPasswd = 4;
+}
+message T_APP_MODIFY_PASSWD_RSP
+{
+	required fixed64 u64Context = 1;
+	required fixed32 u32Result = 2;
+}
+message T_APP_LOGIN_RSP
+{
+	required fixed64 u64Context = 1;
+	required fixed32 u32Result = 2;
+}
+message T_APP_REGIST_USER_REQ
+{
+	required fixed64 u64Context = 1;
+	required bytes acUserName = 2;
+	required bytes acPasswd = 3;
+	required fixed32 u32Sex = 4;
+}
+message T_APP_FIRST_TEST_RSP
 {
 	required fixed32 u32Result = 1;
 	required fixed32 u32Test = 2;

@@ -240,18 +240,18 @@ QPushButton#CBtnClose_Server:pressed
     background-image: url(:/login/resource/image/button_close_checked.png);
 }
 
-QPushButton#CBtnConfirm_Server
+QPushButton#CBtnConnect_Server
 {
     color: white;
     border-radius:5px;
     background-color: #0e96fe;
 }
-QPushButton#CBtnConfirm_Server:hover
+QPushButton#CBtnConnect_Server:hover
 {
     color: white;
     background-color: #2c89ff;
 }
-QPushButton#CBtnConfirm_Server:pressed
+QPushButton#CBtnConnect_Server:pressed
 {
     color: white;
     padding-top:3px;

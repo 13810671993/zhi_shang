@@ -32,7 +32,9 @@ void CModifyPasswdDialog::SLOT_PopModifyPage()
 
 void CModifyPasswdDialog::SLOT_GetUserName(QString qstrUserName)
 {
-    QRegExp regexUserName("[a-zA-Z0-9_]{6,30}");
+    if (qstrUserName == "")
+        return ;
+    QRegExp regexUserName("[a-zA-Z0-9_]{6,31}");
     if (!regexUserName.exactMatch(qstrUserName))
     {
         ui->CLblUserError_Modify->setStyleSheet("color: red;");
@@ -49,7 +51,9 @@ void CModifyPasswdDialog::SLOT_GetUserName(QString qstrUserName)
 
 void CModifyPasswdDialog::SLOT_GetPasswd(QString qstrPasswd)
 {
-    QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,20}");
+    if (qstrPasswd == "")
+        return ;
+    QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,15}");
     if (!regexPasswd.exactMatch(qstrPasswd))
     {
         ui->CLblPasswdError_Modify->setStyleSheet("color: red;");
@@ -65,6 +69,8 @@ void CModifyPasswdDialog::SLOT_GetPasswd(QString qstrPasswd)
 
 void CModifyPasswdDialog::SLOT_GetSecondpasswd(QString qstrPasswd)
 {
+    if (qstrPasswd == "")
+        return ;
     if (ui->CLedPasswd_Modify->text() == qstrPasswd)
     {
         ui->CLblPasswdAgainError_Modify->setStyleSheet("color: green;");
@@ -80,6 +86,8 @@ void CModifyPasswdDialog::SLOT_GetSecondpasswd(QString qstrPasswd)
 
 void CModifyPasswdDialog::SLOT_FinishedInputPasswd()
 {
+    if (ui->CLedPasswdAgain_Modify->text() == "")
+        return ;
     if (ui->CLedPasswd_Modify->text() == ui->CLedPasswdAgain_Modify->text())
     {
         ui->CLblPasswdAgainError_Modify->setStyleSheet("color: green;");
@@ -97,16 +105,25 @@ void CModifyPasswdDialog::SLOT_FinishedInputPasswd()
 VOID CModifyPasswdDialog::InitWidget()
 {
     ui->CBtnCancel_Modify->setText(tr("cancel"));
-    ui->CBtnConfirm_Modify->setText(tr("confirm"));
+    ui->CBtnConfirm_Modify->setText(tr("modify"));
     ui->CLedUser_Modify->setPlaceholderText(tr("user name"));
     ui->CLedPasswd_Modify->setPlaceholderText(tr("passwd"));
     ui->CLedPasswdAgain_Modify->setPlaceholderText(tr("passwd again"));
-    QRegExp regexUserName("[a-zA-Z0-9_]{6,30}");
+    QRegExp regexUserName("[a-zA-Z0-9_]{6,31}");
     QValidator* pValidatorUser = new QRegExpValidator(regexUserName, this);
     ui->CLedUser_Modify->setValidator(pValidatorUser);
-    QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,20}");
+    QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,15}");
     QValidator* pValidatorPasswd = new QRegExpValidator(regexPasswd, this);
     ui->CLedPasswd_Modify->setValidator(pValidatorPasswd);
+
+    // http://blog.sina.com.cn/s/blog_a0e483280102vizf.html
+    // 无右键菜单
+    ui->CLedUser_Modify->setContextMenuPolicy(Qt::NoContextMenu);
+    ui->CLedPasswd_Modify->setContextMenuPolicy(Qt::NoContextMenu);
+    ui->CLedPasswdAgain_Modify->setContextMenuPolicy(Qt::NoContextMenu);
+    // 设置密码隐藏
+    ui->CLedPasswd_Modify->setEchoMode(QLineEdit::Password);
+    ui->CLedPasswdAgain_Modify->setEchoMode(QLineEdit::Password);
 }
 
 VOID CModifyPasswdDialog::InitWindow()

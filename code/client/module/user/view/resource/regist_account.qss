@@ -54,20 +54,20 @@ QLabel#CLblBackgroundDown_Regist
     background-color: qlineargradient(spread:pad, x1:0.505318, y1:1, x2:0.494636, y2:0, stop:0 rgba(41, 75, 110, 255), stop:1 rgba(242, 255, 254, 255));
 }
 
-QPushButton#CBtnConfirm_Regist
+QPushButton#CBtnRegist_Regist
 {
     color: black;
     border-radius:3px;
     /*background-color: #0e96fe;*/
     background-color: #f0f6fb;
 }
-QPushButton#CBtnConfirm_Regist:hover
+QPushButton#CBtnRegist_Regist:hover
 {
     color: black;
     /*background-color: #2c89ff;*/
     background-color: #bfd7fb;
 }
-QPushButton#CBtnConfirm_Regist:pressed
+QPushButton#CBtnRegist_Regist:pressed
 {
     color: black;
     padding-top:3px;

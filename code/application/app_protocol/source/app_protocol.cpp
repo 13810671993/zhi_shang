@@ -64,6 +64,9 @@ UINT32 CAppProtocol::Struct2ProtoBuf(IN UINT32 u32MsgType, IN VOID* pStruct, IN 
     switch (u32MsgType)
     {
         APP_REQ_AND_RSP_TO_PROTO(FIRST_TEST)
+        APP_REQ_AND_RSP_TO_PROTO(REGIST_USER)
+        APP_REQ_AND_RSP_TO_PROTO(LOGIN)
+        APP_REQ_AND_RSP_TO_PROTO(MODIFY_PASSWD)
     }
 
     return u32Ret;
@@ -80,6 +83,9 @@ UINT32 CAppProtocol::ProtoBuf2Struct(IN VOID* pProtoBuf, IN UINT32 u32ProtoBufLe
     switch (u32MsgType)
     {
         APP_PROTO_TO_REQ_AND_RSP(FIRST_TEST)
+        APP_PROTO_TO_REQ_AND_RSP(REGIST_USER)
+        APP_PROTO_TO_REQ_AND_RSP(LOGIN)
+        APP_PROTO_TO_REQ_AND_RSP(MODIFY_PASSWD)
     }
 
     return u32Ret;

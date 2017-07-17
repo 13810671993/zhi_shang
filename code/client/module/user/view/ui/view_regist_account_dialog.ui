@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="CBtnConfirm_Regist">
+  <widget class="QPushButton" name="CBtnRegist_Regist">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -192,7 +192,7 @@
   <zorder>CLblBackgroundUp_Regist</zorder>
   <zorder>CLblBackgroundCenter_Regist</zorder>
   <zorder>CLblBackgroundDown_Regist</zorder>
-  <zorder>CBtnConfirm_Regist</zorder>
+  <zorder>CBtnRegist_Regist</zorder>
   <zorder>CBtnCancel_Regist</zorder>
   <zorder>CLedPasswd_Regist</zorder>
   <zorder>CLedUser_Regist</zorder>

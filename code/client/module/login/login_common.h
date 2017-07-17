@@ -5,6 +5,8 @@
 #include <QPropertyAnimation>
 #include <QMouseEvent>
 #include <QDesktopWidget>
+#include <QRegExp>
+#include <QValidator>
 
 #include "common/data_type.h"
 #include "network/network_common.h"

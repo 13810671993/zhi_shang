@@ -19,8 +19,9 @@ public:
     ~CLoginWidget();
 
 public slots:
-    void Exit();
-    void SwitchPage();
+    void SLOT_Exit();
+    void SLOT_SwitchPage();
+    void SLOT_Connect2Server();
 
 private:
     VOID InitWidget();

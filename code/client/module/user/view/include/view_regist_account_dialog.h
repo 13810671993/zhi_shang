@@ -23,6 +23,7 @@ public slots:
     void SLOT_GetSecondpasswd(QString);
     void SLOT_FinishedInputPasswd();
     void SLOT_GetSex(bool);
+    void SLOT_Regist();
 
 
 private:

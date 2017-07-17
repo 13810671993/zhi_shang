@@ -1,7 +1,6 @@
 #include "network/network_common.h"
 
-
-CNetwork::CNetwork() : QObject(), m_pSocket(nullptr), m_iPort(0)
+CNetwork::CNetwork() : QObject(), m_pSocket(nullptr)
 {
     InitNetwork();
 }
@@ -12,59 +11,87 @@ CNetwork::~CNetwork()
     delete m_pSocket;
 }
 
-void CNetwork::SLOT_PortEditFinished(QString qstrPort)
+CNetwork* CNetwork::m_pNetwork = NULL;
+
+CNetwork* CNetwork::GetInstance()
 {
-    // port编辑完成 获取到port
-    m_iPort = qstrPort.toInt();
-    qDebug() << m_iPort;
+    if (m_pNetwork == NULL)
+        m_pNetwork = new CNetwork();
+    return m_pNetwork;
 }
 
-void CNetwork::SLOT_Connect()
+void CNetwork::DestroyInstance()
 {
-    Connect();
+    if (m_pNetwork != NULL)
+    {
+        delete m_pNetwork;
+        m_pNetwork = NULL;
+    }
 }
 
-void CNetwork::SLOT_SendMessage(QString qstrSendMessage)
+BOOL CNetwork::Connect(const QString& qstrIp, const QString& qstrPort, QString& qstrError)
 {
-    //QString qstrMsgType;
-    //m_pSocket->write(qstrMsgType.toStdString().data(), 24);
-    //m_pSocket->write(qstrSendMessage.toLatin1());
-    UINT32 u32MsgType = E_APP_MSG_FIRST_TEST_REQ;
-    T_APP_FIRST_TEST_REQ tFirstTestReq = {0};
-    tFirstTestReq.u32Result = 1;
-    tFirstTestReq.u32Test = 2;
+    m_pSocket->abort();
+    m_pSocket->connectToHost(qstrIp, qstrPort.toInt());
+    BOOL bResult = m_pSocket->waitForConnected(3 * 1000);
+    qstrError = m_pSocket->errorString();
+    return bResult;
+}
+
+VOID CNetwork::SendMessage(UINT32 u32MsgType, CHAR *pcMsg, UINT32 u32MsgLen)
+{
     std::string strProtoBuf;
-    CAppProtocol::Struct2ProtoBuf(u32MsgType, &tFirstTestReq, sizeof(tFirstTestReq), strProtoBuf);
-    std::string strSend;
-    UINT32 u32MsgLen = strProtoBuf.length();
-    strSend.append((CHAR*)&u32MsgLen, sizeof(u32MsgLen));
-    strSend += strProtoBuf;
-    m_pSocket->write(strSend.data(), sizeof(u32MsgLen) + u32MsgLen);
+    CAppProtocol::Struct2ProtoBuf(u32MsgType, pcMsg, u32MsgLen, strProtoBuf);
+    std::string strMsg;
+    UINT32 u32PbLen = strProtoBuf.length();
+    strMsg.append((CHAR*)&u32PbLen, sizeof(u32PbLen));
+    strMsg += strProtoBuf;
+
+    if (m_pSocket->isOpen())
+        m_pSocket->write(strMsg.data(), sizeof(UINT32) + strProtoBuf.length());
+
 }
 
-void CNetwork::RecvMessage()
+void CNetwork::SLOT_RecvMessage()
 {
     QString qstrMessage = m_pSocket->readAll();
-    emit SIGNAL_ShowRecvMessage(qstrMessage);
+    QByteArray arrMsg =  qstrMessage.toLatin1();
+    UINT32 u32MsgType = 0;
+    UINT32 u32PbLen = 0;
+    memcpy(&u32PbLen, arrMsg.data(), sizeof(u32PbLen));
+    std::string strStructBuf;
+    CAppProtocol::ProtoBuf2Struct(arrMsg.data() + sizeof(u32PbLen), u32PbLen, u32MsgType, strStructBuf);
+    PushMessage(u32MsgType, strStructBuf.c_str(), strStructBuf.length());
+
     qDebug() << qstrMessage;
 }
 
-void CNetwork::Error(QAbstractSocket::SocketError)
+void CNetwork::SLOT_Error(QAbstractSocket::SocketError)
 {
     qDebug() << m_pSocket->errorString();
     m_pSocket->close();
 }
 
-void CNetwork::InitNetwork()
+VOID CNetwork::InitNetwork()
 {
     m_pSocket = new QTcpSocket(this);
-    connect(m_pSocket, SIGNAL(readyRead()), this, SLOT(RecvMessage()));
+    connect(m_pSocket, SIGNAL(readyRead()), this, SLOT(SLOT_RecvMessage()));
 
-    connect(m_pSocket, SIGNAL(QAbstractSocket::SocketError), this, SLOT(Error()));
+    connect(m_pSocket, SIGNAL(QAbstractSocket::SocketError), this, SLOT(SLOT_Error()));
 }
 
-void CNetwork::Connect()
+VOID CNetwork::PushMessage(UINT32 u32MSgType, const CHAR *pcMsg, UINT32 u32MsgLen)
 {
-    m_pSocket->abort();
-    m_pSocket->connectToHost("192.168.9.51", m_iPort);
+    switch (u32MSgType)
+    {
+    case E_APP_MSG_REGIST_USER_RSP:
+        CCtrlUser::GetInstance()->OnRegistUserRsp(pcMsg, u32MsgLen);
+        break;
+    case E_APP_MSG_MODIFY_PASSWD_RSP:
+        CCtrlUser::GetInstance()->OnModifyPasswdRsp(pcMsg, u32MsgLen);
+
+        break;
+    default:
+        break;
+    }
 }
