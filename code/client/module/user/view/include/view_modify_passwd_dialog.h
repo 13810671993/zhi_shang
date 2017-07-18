@@ -16,12 +16,17 @@ public:
     explicit CModifyPasswdDialog(QWidget *parent = 0);
     ~CModifyPasswdDialog();
 
+signals:
+    void SIGNAL_Connect2Server();
+
 public slots:
     void SLOT_PopModifyPage();
     void SLOT_GetUserName(QString);
-    void SLOT_GetPasswd(QString);
-    void SLOT_GetSecondpasswd(QString);
-    void SLOT_FinishedInputPasswd();
+    void SLOT_GetOldPasswd(QString);
+    void SLOT_GetNewPasswd(QString);
+    void SLOT_GetSecondNewPasswd(QString);
+    void SLOT_FinishedInputNewPasswd();
+    void SLOT_ModifyPasswd();
 
 private:
     VOID InitWidget();
@@ -45,7 +50,8 @@ private:
     BOOL						m_bMoving;
     BOOL						m_bPageExist;		// TRUE: 存在 FALSE: 不存在
     QString						m_qstrUserName;
-    QString						m_qstrPasswd;
+    QString						m_qstrOldPasswd;
+    QString						m_qstrNewPasswd;
 };
 
 #endif // VIEW_MODIFY_PASSWD_DIALOG_H

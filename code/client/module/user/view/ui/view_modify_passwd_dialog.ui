@@ -23,7 +23,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="CLedPasswd_Modify">
+  <widget class="QLineEdit" name="CLedOldPasswd_Modify">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -33,7 +33,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="CLedPasswdAgain_Modify">
+  <widget class="QLineEdit" name="CLedNewPasswd_Modify">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -43,7 +43,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="CBtnConfirm_Modify">
+  <widget class="QPushButton" name="CBtnModify_Modify">
    <property name="geometry">
     <rect>
      <x>220</x>
@@ -69,7 +69,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="CLblPasswdAgainError_Modify">
+  <widget class="QLabel" name="CLblNewPasswdError_Modify">
    <property name="geometry">
     <rect>
      <x>290</x>
@@ -95,7 +95,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="CLblPasswdError_Modify">
+  <widget class="QLabel" name="CLblOldPasswdError_Modify">
    <property name="geometry">
     <rect>
      <x>290</x>
@@ -147,7 +147,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLineEdit" name="CLedPasswdAgain_Modify_2">
+  <widget class="QLineEdit" name="CLedNewPasswdAgain_Modify">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -157,18 +157,32 @@
     </rect>
    </property>
   </widget>
+  <widget class="QLabel" name="CLblNewPasswdAgainError_Modify">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>234</y>
+     <width>110</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>CLblBackgroundDown_Modify</zorder>
   <zorder>CLblBackgroundCenter_Modify</zorder>
   <zorder>CLblBackgroundUp_Modify</zorder>
   <zorder>CLedUser_Modify</zorder>
-  <zorder>CLedPasswd_Modify</zorder>
-  <zorder>CLedPasswdAgain_Modify</zorder>
-  <zorder>CBtnConfirm_Modify</zorder>
+  <zorder>CLedOldPasswd_Modify</zorder>
+  <zorder>CLedNewPasswd_Modify</zorder>
+  <zorder>CBtnModify_Modify</zorder>
   <zorder>CBtnCancel_Modify</zorder>
-  <zorder>CLblPasswdAgainError_Modify</zorder>
+  <zorder>CLblNewPasswdError_Modify</zorder>
   <zorder>CLblUserError_Modify</zorder>
-  <zorder>CLblPasswdError_Modify</zorder>
-  <zorder>CLedPasswdAgain_Modify_2</zorder>
+  <zorder>CLblOldPasswdError_Modify</zorder>
+  <zorder>CLedNewPasswdAgain_Modify</zorder>
+  <zorder>CLblNewPasswdAgainError_Modify</zorder>
  </widget>
  <resources/>
  <connections/>

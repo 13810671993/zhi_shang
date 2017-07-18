@@ -31,14 +31,21 @@ void CNetwork::DestroyInstance()
 
 BOOL CNetwork::Connect(const QString& qstrIp, const QString& qstrPort, QString& qstrError)
 {
-    m_pSocket->abort();
-    m_pSocket->connectToHost(qstrIp, qstrPort.toInt());
-    BOOL bResult = m_pSocket->waitForConnected(3 * 1000);
-    qstrError = m_pSocket->errorString();
-    return bResult;
+    if (m_pSocket->isOpen())
+    {
+        return TRUE;
+    }
+    else
+    {
+        m_pSocket->abort();
+        m_pSocket->connectToHost(qstrIp, qstrPort.toInt());
+        BOOL bResult = m_pSocket->waitForConnected(3 * 1000);
+        qstrError = tr(m_pSocket->errorString().toStdString().data());
+        return bResult;
+    }
 }
 
-VOID CNetwork::SendMessage(UINT32 u32MsgType, CHAR *pcMsg, UINT32 u32MsgLen)
+VOID CNetwork::PostMessage(UINT32 u32MsgType, CHAR *pcMsg, UINT32 u32MsgLen)
 {
     std::string strProtoBuf;
     CAppProtocol::Struct2ProtoBuf(u32MsgType, pcMsg, u32MsgLen, strProtoBuf);
@@ -54,16 +61,12 @@ VOID CNetwork::SendMessage(UINT32 u32MsgType, CHAR *pcMsg, UINT32 u32MsgLen)
 
 void CNetwork::SLOT_RecvMessage()
 {
-    QString qstrMessage = m_pSocket->readAll();
-    QByteArray arrMsg =  qstrMessage.toLatin1();
+    QByteArray qstrMessage = m_pSocket->readAll();
     UINT32 u32MsgType = 0;
-    UINT32 u32PbLen = 0;
-    memcpy(&u32PbLen, arrMsg.data(), sizeof(u32PbLen));
     std::string strStructBuf;
-    CAppProtocol::ProtoBuf2Struct(arrMsg.data() + sizeof(u32PbLen), u32PbLen, u32MsgType, strStructBuf);
+    UINT32 u32PbLen = qstrMessage.length();
+    CAppProtocol::ProtoBuf2Struct(qstrMessage.data(), qstrMessage.length(), u32MsgType, strStructBuf);
     PushMessage(u32MsgType, strStructBuf.c_str(), strStructBuf.length());
-
-    qDebug() << qstrMessage;
 }
 
 void CNetwork::SLOT_Error(QAbstractSocket::SocketError)
@@ -77,20 +80,23 @@ VOID CNetwork::InitNetwork()
     m_pSocket = new QTcpSocket(this);
     connect(m_pSocket, SIGNAL(readyRead()), this, SLOT(SLOT_RecvMessage()));
 
-    connect(m_pSocket, SIGNAL(QAbstractSocket::SocketError), this, SLOT(SLOT_Error()));
+    connect(m_pSocket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(SLOT_Error(QAbstractSocket::SocketError)));
 }
 
-VOID CNetwork::PushMessage(UINT32 u32MSgType, const CHAR *pcMsg, UINT32 u32MsgLen)
+VOID CNetwork::PushMessage(UINT32 u32MsgType, const CHAR *pcMsg, UINT32 u32MsgLen)
 {
-    switch (u32MSgType)
+    switch (u32MsgType)
     {
     case E_APP_MSG_REGIST_USER_RSP:
         CCtrlUser::GetInstance()->OnRegistUserRsp(pcMsg, u32MsgLen);
         break;
     case E_APP_MSG_MODIFY_PASSWD_RSP:
         CCtrlUser::GetInstance()->OnModifyPasswdRsp(pcMsg, u32MsgLen);
-
         break;
+    case E_APP_MSG_LOGIN_RSP:
+        CCtrlLogin::GetInstance()->OnLoginRsp(pcMsg, u32MsgLen);
+        break;
+
     default:
         break;
     }

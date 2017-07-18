@@ -109,12 +109,13 @@ void CRegistAccountDialog::SLOT_GetSex(bool bSex)
 
 void CRegistAccountDialog::SLOT_Regist()
 {
+    emit SIGNAL_Connect2Server();
     T_APP_REGIST_USER_REQ tRegistUser = {0};
     tRegistUser.u32Sex = m_bSex;
     tRegistUser.u64Context = 1;
     memcpy(tRegistUser.acUserName, m_qstrUserName.toStdString().data(), m_qstrUserName.length());
     memcpy(tRegistUser.acPasswd, m_qstrPasswd.toStdString().data(), m_qstrPasswd.length());
-    CNetwork::GetInstance()->SendMessage(E_APP_MSG_REGIST_USER_REQ, (CHAR*)&tRegistUser, sizeof(tRegistUser));
+    CNetwork::GetInstance()->PostMessage(E_APP_MSG_REGIST_USER_REQ, (CHAR*)&tRegistUser, sizeof(tRegistUser));
 }
 
 VOID CRegistAccountDialog::InitWidget()
@@ -170,6 +171,7 @@ VOID CRegistAccountDialog::BindSignals()
     connect(ui->CLedPasswdAgain_Regist, SIGNAL(editingFinished()), this, SLOT(SLOT_FinishedInputPasswd()));
     connect(ui->CRbtnMan, SIGNAL(clicked(bool)), this, SLOT(SLOT_GetSex(bool)));
     connect(ui->CBtnRegist_Regist, SIGNAL(clicked()), this, SLOT(SLOT_Regist()));
+    connect(this, SIGNAL(SIGNAL_Connect2Server()), m_pParentWidget, SLOT(SLOT_Connect2Server()));
 }
 
 

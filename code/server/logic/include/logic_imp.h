@@ -25,7 +25,9 @@ private:
     UINT32  UnRegistMessageCB();                // È¡Ïû×¢²á
 
     UINT32  OnDealMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN CHAR* pcMsg);
+    UINT32  OnLoginReq(IN UINT32 u32NodeID, IN UINT32 u32MsgLen, IN CHAR* pcMsg);
     UINT32  OnRegistUserReq(IN UINT32 u32NodeID, IN UINT32 u32MsgLen, IN CHAR* pcMsg);
+    UINT32  OnModifyPasswdReq(IN UINT32 u32NodeID, IN UINT32 u32MsgLen, IN CHAR* pcMsg);
 
 private:
     CLogicImp();

@@ -56,12 +56,22 @@ void CLoginWidget::SLOT_Connect2Server()
     QString qstrError;
     if (CNetwork::GetInstance()->Connect(ui->CCmbIp_Server->lineEdit()->text(), ui->CLedPort_Server->text(), qstrError))
     {
-        SLOT_SwitchPage();
     }
     else
     {
         qDebug() << qstrError;
     }
+}
+
+void CLoginWidget::SLOT_Login()
+{
+    SLOT_Connect2Server();
+    // 1. 发送登录请求
+    T_APP_LOGIN_REQ tReq = {0};
+    tReq.u64Context = 1;
+    memcpy(tReq.acUserName, ui->CCmbUser_Login->lineEdit()->text().toStdString().data(), ui->CCmbUser_Login->lineEdit()->text().length());
+    memcpy(tReq.acPasswd, ui->CLedPasswd_Login->text().toStdString().data(), ui->CLedPasswd_Login->text().length());
+    CNetwork::GetInstance()->PostMessage(E_APP_MSG_LOGIN_REQ, (CHAR*)&tReq, sizeof(tReq));
 }
 
 VOID CLoginWidget::InitWidget()
@@ -84,8 +94,9 @@ VOID CLoginWidget::InitWidget()
                "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
 
     ui->CCmbIp_Server->lineEdit()->setValidator(new QRegExpValidator(regexIp, ui->CCmbIp_Server));
-
+    ui->CCmbIp_Server->lineEdit()->setText("192.168.9.51");
     ui->CCmbIp_Server->lineEdit()->setPlaceholderText(tr("ip"));
+
     ui->CLblUser_Login->setText(tr("user"));
     ui->CBtnLogin_Login->setText(tr("login"));
     ui->CLblPasswd_Login->setText(tr("passwd"));
@@ -99,6 +110,12 @@ VOID CLoginWidget::InitWidget()
     ui->CCmbUser_Login->setContextMenuPolicy(Qt::NoContextMenu);
     ui->CCmbUser_Login->setEditable(TRUE);
     ui->CCmbUser_Login->lineEdit()->setPlaceholderText(tr("user name"));
+    QRegExp regexUserName("[a-zA-Z0-9_]{6,31}");
+    QValidator* pValidatorUser = new QRegExpValidator(regexUserName, this);
+    ui->CCmbUser_Login->lineEdit()->setValidator(pValidatorUser);
+    QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,15}");
+    QValidator* pValidatorPasswd = new QRegExpValidator(regexPasswd, this);
+    ui->CLedPasswd_Login->setValidator(pValidatorPasswd);
 
     ui->CStackedWidget->setCurrentIndex(0);
 }
@@ -128,12 +145,14 @@ VOID CLoginWidget::BindSignals()
     connect(ui->CBtnSwitch_Login, SIGNAL(clicked()), this, SLOT(SLOT_SwitchPage()));
     connect(ui->CBtnRegistAccount_Login, SIGNAL(clicked()), m_pRegistAccountDialog, SLOT(SLOT_PopRegistPage()));
     connect(ui->CBtnModifyPasswd_Login, SIGNAL(clicked()), m_pModifyPasswdDialog, SLOT(SLOT_PopModifyPage()));
+    connect(ui->CBtnLogin_Login, SIGNAL(clicked()), this, SLOT(SLOT_Login()));
 
     connect(ui->CBtnClose_Server, SIGNAL(clicked()), this, SLOT(SLOT_Exit()));
     connect(ui->CBtnMinimum_Server, SIGNAL(clicked()), this, SLOT(showMinimized()));
     connect(ui->CBtnSwitch_Server, SIGNAL(clicked()), this, SLOT(SLOT_SwitchPage()));
     connect(ui->CBtnCancel_Server, SIGNAL(clicked()), this, SLOT(SLOT_SwitchPage()));
     connect(ui->CBtnConnect_Server, SIGNAL(clicked()), this, SLOT(SLOT_Connect2Server()));
+    connect(ui->CBtnConnect_Server, SIGNAL(clicked()), this, SLOT(SLOT_SwitchPage()));
 }
 
 

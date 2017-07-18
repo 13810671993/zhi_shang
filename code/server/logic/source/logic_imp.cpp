@@ -182,16 +182,33 @@ UINT32 CLogicImp::OnDealMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UI
     switch (u32MsgType)
     {
     case E_APP_MSG_LOGIN_REQ:
+        OnLoginReq(u32NodeID, u32MsgLen, pcMsg);
         break;
     case E_APP_MSG_REGIST_USER_REQ:
         OnRegistUserReq(u32NodeID, u32MsgLen, pcMsg);
         break;
     case E_APP_MSG_MODIFY_PASSWD_REQ:
+        OnModifyPasswdReq(u32NodeID, u32MsgLen, pcMsg);
         break;
 
     default:
         break;
     }
+
+    return u32Ret;
+}
+
+UINT32 CLogicImp::OnLoginReq(IN UINT32 u32NodeID, IN UINT32 u32MsgLen, IN CHAR* pcMsg)
+{
+    T_APP_LOGIN_REQ*    ptReq = (T_APP_LOGIN_REQ*)pcMsg;
+    T_APP_LOGIN_RSP     tResp = { 0 };
+    UINT32  u32Ret = 0;
+
+    LogInfo("OnLoginReq user : %s  passwd: %s", ptReq->acUserName, ptReq->acPasswd);
+
+    tResp.u32Result = 0;
+    tResp.u64Context = ptReq->u64Context;
+    m_pMsgMgr->PostMessage(u32NodeID, E_APP_MSG_LOGIN_RSP, sizeof(tResp), (CHAR*)&tResp);
 
     return u32Ret;
 }
@@ -202,11 +219,26 @@ UINT32 CLogicImp::OnRegistUserReq(IN UINT32 u32NodeID, IN UINT32 u32MsgLen, IN C
     T_APP_REGIST_USER_RSP   tResp = { 0 };
     UINT32 u32Ret = 0;
 
-    LogInfo("user: %s  passwd: %s", ptReq->acUserName, ptReq->acPasswd);
+    LogInfo("OnRegistUserReq user: %s  passwd: %s", ptReq->acUserName, ptReq->acPasswd);
 
     tResp.u32Result = 0;
     tResp.u64Context = ptReq->u64Context;
     m_pMsgMgr->PostMessage(u32NodeID, E_APP_MSG_REGIST_USER_RSP, sizeof(tResp), (CHAR*)&tResp);
+
+    return u32Ret;
+}
+
+UINT32 CLogicImp::OnModifyPasswdReq(IN UINT32 u32NodeID, IN UINT32 u32MsgLen, IN CHAR* pcMsg)
+{
+    T_APP_MODIFY_PASSWD_REQ*    ptReq = (T_APP_MODIFY_PASSWD_REQ*)pcMsg;
+    T_APP_MODIFY_PASSWD_RSP     tResp = { 0 };
+    UINT32  u32Ret = 0;
+
+    LogInfo("OnModifyPasswdReq user: %s  old passwd: %s  new passwd: %s", ptReq->acUserName, ptReq->acOldPasswd, ptReq->acNewPasswd);
+
+    tResp.u32Result = 0;
+    tResp.u64Context = ptReq->u64Context;
+    m_pMsgMgr->PostMessage(u32NodeID, E_APP_MSG_MODIFY_PASSWD_RSP, sizeof(tResp), (CHAR*)&tResp);
 
     return u32Ret;
 }

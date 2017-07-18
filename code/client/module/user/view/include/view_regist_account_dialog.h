@@ -16,6 +16,9 @@ public:
     explicit CRegistAccountDialog(QWidget *parent = 0);
     ~CRegistAccountDialog();
 
+signals:
+    void SIGNAL_Connect2Server();
+
 public slots:
     void SLOT_PopRegistPage();
     void SLOT_GetUserName(QString);

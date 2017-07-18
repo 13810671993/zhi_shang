@@ -31,10 +31,12 @@ VOID CCtrlUser::DestroyInstance()
 
 VOID CCtrlUser::OnRegistUserRsp(const CHAR *pcMsg, UINT32 u32MsgLen)
 {
-    qDebug() << "success";
+    T_APP_REGIST_USER_RSP* ptRsp = (T_APP_REGIST_USER_RSP*)pcMsg;
+    qDebug() << "context: " << ptRsp->u64Context << "  result: " << ptRsp->u32Result;
 }
 
 VOID CCtrlUser::OnModifyPasswdRsp(const CHAR *pcMsg, UINT32 u32MsgLen)
 {
-
+    T_APP_MODIFY_PASSWD_RSP* ptRsp = (T_APP_MODIFY_PASSWD_RSP*)pcMsg;
+    qDebug() << "context: " << ptRsp->u64Context << "  result: " << ptRsp->u32Result;
 }

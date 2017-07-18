@@ -29,7 +29,7 @@ private slots:
 
 public:
     BOOL Connect(const QString& qstrIp, const QString& qstrPort, QString& qstrError);
-    VOID SendMessage(UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen);
+    VOID PostMessage(UINT32 u32MsgType, CHAR* pcMsg, UINT32 u32MsgLen);
 
 private:
     VOID InitNetwork();

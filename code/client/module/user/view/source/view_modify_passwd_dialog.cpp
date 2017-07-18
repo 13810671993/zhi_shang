@@ -49,81 +49,116 @@ void CModifyPasswdDialog::SLOT_GetUserName(QString qstrUserName)
     }
 }
 
-void CModifyPasswdDialog::SLOT_GetPasswd(QString qstrPasswd)
+void CModifyPasswdDialog::SLOT_GetOldPasswd(QString qstrPasswd)
 {
     if (qstrPasswd == "")
         return ;
     QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,15}");
     if (!regexPasswd.exactMatch(qstrPasswd))
     {
-        ui->CLblPasswdError_Modify->setStyleSheet("color: red;");
-        ui->CLblPasswdError_Modify->setText(tr("passwd error"));
-        m_qstrPasswd.clear();
+        ui->CLblOldPasswdError_Modify->setStyleSheet("color: red;");
+        ui->CLblOldPasswdError_Modify->setText(tr("passwd error"));
+        m_qstrOldPasswd.clear();
     }
     else
     {
-        ui->CLblPasswdError_Modify->setStyleSheet("color: green;");
-        ui->CLblPasswdError_Modify->setText(tr("correct"));
+        ui->CLblOldPasswdError_Modify->setStyleSheet("color: green;");
+        ui->CLblOldPasswdError_Modify->setText(tr("correct"));
+        m_qstrOldPasswd = qstrPasswd;
     }
 }
 
-void CModifyPasswdDialog::SLOT_GetSecondpasswd(QString qstrPasswd)
+void CModifyPasswdDialog::SLOT_GetNewPasswd(QString qstrPasswd)
 {
     if (qstrPasswd == "")
         return ;
-    if (ui->CLedPasswd_Modify->text() == qstrPasswd)
+    QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,15}");
+    if (!regexPasswd.exactMatch(qstrPasswd))
     {
-        ui->CLblPasswdAgainError_Modify->setStyleSheet("color: green;");
-        ui->CLblPasswdAgainError_Modify->setText(tr("correct"));
+        ui->CLblNewPasswdError_Modify->setStyleSheet("color: red;");
+        ui->CLblNewPasswdError_Modify->setText(tr("passwd error"));
+        m_qstrNewPasswd.clear();
     }
     else
     {
-        ui->CLblPasswdAgainError_Modify->setStyleSheet("color: red;");
-        ui->CLblPasswdAgainError_Modify->setText(tr("passwd different"));
-        m_qstrPasswd.clear();
+        ui->CLblNewPasswdError_Modify->setStyleSheet("color: green;");
+        ui->CLblNewPasswdError_Modify->setText(tr("correct"));
     }
 }
 
-void CModifyPasswdDialog::SLOT_FinishedInputPasswd()
+void CModifyPasswdDialog::SLOT_GetSecondNewPasswd(QString qstrPasswd)
 {
-    if (ui->CLedPasswdAgain_Modify->text() == "")
+    if (qstrPasswd == "")
         return ;
-    if (ui->CLedPasswd_Modify->text() == ui->CLedPasswdAgain_Modify->text())
+    if (ui->CLedNewPasswd_Modify->text() == qstrPasswd)
     {
-        ui->CLblPasswdAgainError_Modify->setStyleSheet("color: green;");
-        ui->CLblPasswdAgainError_Modify->setText(tr("correct"));
-        m_qstrPasswd = ui->CLedPasswdAgain_Modify->text();
+        ui->CLblNewPasswdAgainError_Modify->setStyleSheet("color: green;");
+        ui->CLblNewPasswdAgainError_Modify->setText(tr("correct"));
     }
     else
     {
-        ui->CLblPasswdAgainError_Modify->setStyleSheet("color: red;");
-        ui->CLblPasswdAgainError_Modify->setText(tr("passwd different"));
-        m_qstrPasswd.clear();
+        ui->CLblNewPasswdAgainError_Modify->setStyleSheet("color: red;");
+        ui->CLblNewPasswdAgainError_Modify->setText(tr("passwd different"));
+        m_qstrNewPasswd.clear();
     }
+}
+
+void CModifyPasswdDialog::SLOT_FinishedInputNewPasswd()
+{
+    if (ui->CLedNewPasswdAgain_Modify->text() == "")
+        return ;
+    if (ui->CLedNewPasswd_Modify->text() == ui->CLedNewPasswdAgain_Modify->text())
+    {
+        ui->CLblNewPasswdAgainError_Modify->setStyleSheet("color: green;");
+        ui->CLblNewPasswdAgainError_Modify->setText(tr("correct"));
+        m_qstrNewPasswd = ui->CLedNewPasswdAgain_Modify->text();
+    }
+    else
+    {
+        ui->CLblNewPasswdAgainError_Modify->setStyleSheet("color: red;");
+        ui->CLblNewPasswdAgainError_Modify->setText(tr("passwd different"));
+        m_qstrNewPasswd.clear();
+    }
+}
+
+void CModifyPasswdDialog::SLOT_ModifyPasswd()
+{
+    emit SIGNAL_Connect2Server();
+    T_APP_MODIFY_PASSWD_REQ tReq = {0};
+    tReq.u64Context = 1;
+    memcpy(tReq.acUserName, m_qstrUserName.toStdString().data(), m_qstrUserName.length());
+    memcpy(tReq.acOldPasswd, m_qstrOldPasswd.toStdString().data(), m_qstrOldPasswd.length());
+    memcpy(tReq.acNewPasswd, m_qstrNewPasswd.toStdString().data(), m_qstrNewPasswd.length());
+    CNetwork::GetInstance()->PostMessage(E_APP_MSG_MODIFY_PASSWD_REQ, (CHAR*)&tReq, sizeof(tReq));
 }
 
 VOID CModifyPasswdDialog::InitWidget()
 {
     ui->CBtnCancel_Modify->setText(tr("cancel"));
-    ui->CBtnConfirm_Modify->setText(tr("modify"));
+    ui->CBtnModify_Modify->setText(tr("modify"));
     ui->CLedUser_Modify->setPlaceholderText(tr("user name"));
-    ui->CLedPasswd_Modify->setPlaceholderText(tr("passwd"));
-    ui->CLedPasswdAgain_Modify->setPlaceholderText(tr("passwd again"));
+    ui->CLedOldPasswd_Modify->setPlaceholderText(tr("old passwd"));
+    ui->CLedNewPasswd_Modify->setPlaceholderText(tr("new passwd"));
+    ui->CLedNewPasswdAgain_Modify->setPlaceholderText(tr("new passwd again"));
     QRegExp regexUserName("[a-zA-Z0-9_]{6,31}");
     QValidator* pValidatorUser = new QRegExpValidator(regexUserName, this);
     ui->CLedUser_Modify->setValidator(pValidatorUser);
     QRegExp regexPasswd("[^\u4E00-\u9FA5]{6,15}");
     QValidator* pValidatorPasswd = new QRegExpValidator(regexPasswd, this);
-    ui->CLedPasswd_Modify->setValidator(pValidatorPasswd);
+    ui->CLedOldPasswd_Modify->setValidator(pValidatorPasswd);
+    ui->CLedNewPasswd_Modify->setValidator(pValidatorPasswd);
+    ui->CLedNewPasswdAgain_Modify->setValidator(pValidatorPasswd);
 
     // http://blog.sina.com.cn/s/blog_a0e483280102vizf.html
     // 无右键菜单
     ui->CLedUser_Modify->setContextMenuPolicy(Qt::NoContextMenu);
-    ui->CLedPasswd_Modify->setContextMenuPolicy(Qt::NoContextMenu);
-    ui->CLedPasswdAgain_Modify->setContextMenuPolicy(Qt::NoContextMenu);
+    ui->CLedOldPasswd_Modify->setContextMenuPolicy(Qt::NoContextMenu);
+    ui->CLedNewPasswd_Modify->setContextMenuPolicy(Qt::NoContextMenu);
+    ui->CLedNewPasswdAgain_Modify->setContextMenuPolicy(Qt::NoContextMenu);
     // 设置密码隐藏
-    ui->CLedPasswd_Modify->setEchoMode(QLineEdit::Password);
-    ui->CLedPasswdAgain_Modify->setEchoMode(QLineEdit::Password);
+    ui->CLedOldPasswd_Modify->setEchoMode(QLineEdit::Password);
+    ui->CLedNewPasswd_Modify->setEchoMode(QLineEdit::Password);
+    ui->CLedNewPasswdAgain_Modify->setEchoMode(QLineEdit::Password);
 }
 
 VOID CModifyPasswdDialog::InitWindow()
@@ -149,10 +184,13 @@ VOID CModifyPasswdDialog::BindSignals()
 {
     connect(ui->CBtnCancel_Modify, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->CLedUser_Modify, SIGNAL(textEdited(QString)), this, SLOT(SLOT_GetUserName(QString)));
-    connect(ui->CLedPasswd_Modify, SIGNAL(textEdited(QString)), this, SLOT(SLOT_GetPasswd(QString)));
-    connect(ui->CLedPasswd_Modify, SIGNAL(editingFinished()), this, SLOT(SLOT_FinishedInputPasswd()));
-    connect(ui->CLedPasswdAgain_Modify, SIGNAL(textChanged(QString)), this, SLOT(SLOT_GetSecondpasswd(QString)));
-    connect(ui->CLedPasswdAgain_Modify, SIGNAL(editingFinished()), this, SLOT(SLOT_FinishedInputPasswd()));
+    connect(ui->CLedOldPasswd_Modify, SIGNAL(textEdited(QString)), this, SLOT(SLOT_GetOldPasswd(QString)));
+    connect(ui->CLedNewPasswd_Modify, SIGNAL(textEdited(QString)), this, SLOT(SLOT_GetNewPasswd(QString)));
+    connect(ui->CLedNewPasswd_Modify, SIGNAL(editingFinished()), this, SLOT(SLOT_FinishedInputNewPasswd()));
+    connect(ui->CLedNewPasswdAgain_Modify, SIGNAL(textChanged(QString)), this, SLOT(SLOT_GetSecondNewPasswd(QString)));
+    connect(ui->CLedNewPasswdAgain_Modify, SIGNAL(editingFinished()), this, SLOT(SLOT_FinishedInputNewPasswd()));
+    connect(ui->CBtnModify_Modify, SIGNAL(clicked()), this, SLOT(SLOT_ModifyPasswd()));
+    connect(this, SIGNAL(SIGNAL_Connect2Server()), m_pParentWidget, SLOT(SLOT_Connect2Server()));
 }
 
 void CModifyPasswdDialog::mousePressEvent(QMouseEvent* pEvent)

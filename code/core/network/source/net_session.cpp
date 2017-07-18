@@ -229,13 +229,19 @@ VOID CNetSession::PostMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN cons
     memcpy(cMessageVec.data(), &u32MsgType, sizeof(u32MsgType));
     memcpy(cMessageVec.data() + sizeof(u32MsgType), pcMsg, u32MsgLen);
 #else
-    std::vector<CHAR> cMessageVec(u32MsgLen, 0);
-    memcpy(cMessageVec.data(), pcMsg, u32MsgLen);
+    std::string strProtoBuf;
+    UINT32 u32Ret = CAppProtocol::Struct2ProtoBuf(u32MsgType, pcMsg, u32MsgLen, strProtoBuf);
+    u32MsgLen = strProtoBuf.length();
+
+    //std::vector<CHAR> cMessageVec(sizeof(u32MsgLen) + strProtoBuf.length(), 0);
+    //memcpy(cMessageVec.data(), &u32ProtoBufLen, sizeof(u32ProtoBufLen));
+    //memcpy(cMessageVec.data() + sizeof(u32ProtoBufLen), strProtoBuf.data(), u32ProtoBufLen);
+    //memcpy(cMessageVec.data(), pcMsg, u32MsgLen);
 #endif
 
     if (m_socket.is_open())
     {
-        m_socket.write_some(boost::asio::buffer(cMessageVec), error);
+        m_socket.write_some(boost::asio::buffer(strProtoBuf, strProtoBuf.length()), error);
     }
 
     if (error)

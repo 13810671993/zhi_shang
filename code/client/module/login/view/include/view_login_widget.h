@@ -22,6 +22,7 @@ public slots:
     void SLOT_Exit();
     void SLOT_SwitchPage();
     void SLOT_Connect2Server();
+    void SLOT_Login();
 
 private:
     VOID InitWidget();

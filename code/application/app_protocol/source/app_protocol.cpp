@@ -57,7 +57,7 @@ CAppProtocol::~CAppProtocol()
 
 }
 
-UINT32 CAppProtocol::Struct2ProtoBuf(IN UINT32 u32MsgType, IN VOID* pStruct, IN UINT32 u32StructLen, OUT std::string& strProtoBuf)
+UINT32 CAppProtocol::Struct2ProtoBuf(IN UINT32 u32MsgType, IN const VOID* pStruct, IN UINT32 u32StructLen, OUT std::string& strProtoBuf)
 {
     UINT32 u32Ret = COMERR_OK;
 
@@ -72,7 +72,7 @@ UINT32 CAppProtocol::Struct2ProtoBuf(IN UINT32 u32MsgType, IN VOID* pStruct, IN 
     return u32Ret;
 }
 
-UINT32 CAppProtocol::ProtoBuf2Struct(IN VOID* pProtoBuf, IN UINT32 u32ProtoBufLen, OUT UINT32& u32MsgType, OUT std::string& strStructBuf)
+UINT32 CAppProtocol::ProtoBuf2Struct(IN const VOID* pProtoBuf, IN UINT32 u32ProtoBufLen, OUT UINT32& u32MsgType, OUT std::string& strStructBuf)
 {
     UINT32 u32Ret = COMERR_OK;
 
@@ -92,7 +92,7 @@ UINT32 CAppProtocol::ProtoBuf2Struct(IN VOID* pProtoBuf, IN UINT32 u32ProtoBufLe
 }
 
 template<typename TStruct, typename CProto>
-UINT32 CAppProtocol::Struct2ProtoString(IN VOID* pStruct, IN UINT32 u32ProtoBufLen, IN UINT32 u32MsgType, OUT std::string& strProtoBuf)
+UINT32 CAppProtocol::Struct2ProtoString(IN const VOID* pStruct, IN UINT32 u32ProtoBufLen, IN UINT32 u32MsgType, OUT std::string& strProtoBuf)
 {
     if (sizeof(TStruct) != u32ProtoBufLen)
     {

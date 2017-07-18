@@ -22,6 +22,7 @@ QLabel
     color: red;
 }
 
+/***********************************************************************************/
 
 QLabel#CLblBackgroundUp_Modify
 {
@@ -38,20 +39,20 @@ QLabel#CLblBackgroundDown_Modify
     background-color: qlineargradient(spread:pad, x1:0.505318, y1:1, x2:0.494636, y2:0, stop:0 rgba(171, 196, 199, 255), stop:1 rgba(242, 255, 254, 255));
 }
 
-QPushButton#CBtnConfirm_Modify
+QPushButton#CBtnModify_Modify
 {
     color: black;
     border-radius:3px;
     /*background-color: #0e96fe;*/
     background-color: #f0f6fb;
 }
-QPushButton#CBtnConfirm_Modify:hover
+QPushButton#CBtnModify_Modify:hover
 {
     color: black;
     /*background-color: #2c89ff;*/
     background-color: #bfd7fb;
 }
-QPushButton#CBtnConfirm_Modify:pressed
+QPushButton#CBtnModify_Modify:pressed
 {
     color: black;
     padding-top:3px;

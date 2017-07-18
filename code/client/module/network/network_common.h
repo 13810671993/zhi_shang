@@ -10,6 +10,7 @@
 #include "application/app_protocol/application_struct.h"
 
 #include "user/ctrl/include/ctrl_user.h"
+#include "login/ctrl/include/ctrl_login.h"
 
 #include "include/network.h"
 
