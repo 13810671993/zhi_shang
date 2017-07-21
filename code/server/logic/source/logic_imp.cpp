@@ -155,6 +155,7 @@ UINT32 CLogicImp::RegistMessageCB()
                                 E_APP_MSG_LOGIN_REQ,
                                 E_APP_MSG_REGIST_USER_REQ,
                                 E_APP_MSG_MODIFY_PASSWD_REQ,
+                                E_APP_MSG_GET_ONLINE_USER_REQ,
                             };
     for (auto i = 0; i < sizeof(au32MsgType) / sizeof(UINT32); ++i)
     {
@@ -189,6 +190,9 @@ UINT32 CLogicImp::OnDealMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UI
         break;
     case E_APP_MSG_MODIFY_PASSWD_REQ:
         OnModifyPasswdReq(u32NodeID, u32MsgLen, pcMsg);
+        break;
+    case E_APP_MSG_GET_ONLINE_USER_REQ:
+        OnGetOnlineUserReq(u32NodeID, u32MsgLen, pcMsg);
         break;
 
     default:
@@ -239,6 +243,28 @@ UINT32 CLogicImp::OnModifyPasswdReq(IN UINT32 u32NodeID, IN UINT32 u32MsgLen, IN
     tResp.u32Result = 0;
     tResp.u64Context = ptReq->u64Context;
     m_pMsgMgr->PostMessage(u32NodeID, E_APP_MSG_MODIFY_PASSWD_RSP, sizeof(tResp), (CHAR*)&tResp);
+
+    return u32Ret;
+}
+
+UINT32 CLogicImp::OnGetOnlineUserReq(IN UINT32 u32NodeID, IN UINT32 u32MsgLen, IN CHAR* pcMsg)
+{
+    T_APP_GET_ONLINE_USER_REQ*  ptReq = (T_APP_GET_ONLINE_USER_REQ*)pcMsg;
+    T_APP_GET_ONLINE_USER_RSP   tResp = { 0 };
+    UINT32  u32Ret = 0;
+
+    LogInfo("OnGetOnlineUserReq");
+
+    tResp.u32Result = 0;
+    tResp.u64Context = ptReq->u64Context;
+    tResp.u32UserNum = 15;
+    CHAR a = 'a';
+    for (auto i = 0; i < 15; ++i, ++a)
+    {
+        memcpy(tResp.atOnlineUser[i].acUserName, &a, sizeof(a));
+    }
+
+    m_pMsgMgr->PostMessage(u32NodeID, E_APP_MSG_GET_ONLINE_USER_RSP, sizeof(tResp), (CHAR*)&tResp);
 
     return u32Ret;
 }

@@ -132,11 +132,15 @@
     <ClInclude Include="..\include\application_proto_swap.h" />
     <ClInclude Include="..\include\application_struct.pb.h" />
     <ClInclude Include="..\include\app_protocol_common.h" />
+    <ClInclude Include="..\include\general_proto_swap.h" />
+    <ClInclude Include="..\include\general_struct.pb.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\application_proto_swap.cpp" />
     <ClCompile Include="..\source\application_struct.pb.cc" />
     <ClCompile Include="..\source\app_protocol.cpp" />
+    <ClCompile Include="..\source\general_proto_swap.cpp" />
+    <ClCompile Include="..\source\general_struct.pb.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -67,6 +67,7 @@ UINT32 CAppProtocol::Struct2ProtoBuf(IN UINT32 u32MsgType, IN const VOID* pStruc
         APP_REQ_AND_RSP_TO_PROTO(REGIST_USER)
         APP_REQ_AND_RSP_TO_PROTO(LOGIN)
         APP_REQ_AND_RSP_TO_PROTO(MODIFY_PASSWD)
+        APP_REQ_AND_RSP_TO_PROTO(GET_ONLINE_USER)
     }
 
     return u32Ret;
@@ -86,6 +87,7 @@ UINT32 CAppProtocol::ProtoBuf2Struct(IN const VOID* pProtoBuf, IN UINT32 u32Prot
         APP_PROTO_TO_REQ_AND_RSP(REGIST_USER)
         APP_PROTO_TO_REQ_AND_RSP(LOGIN)
         APP_PROTO_TO_REQ_AND_RSP(MODIFY_PASSWD)
+        APP_PROTO_TO_REQ_AND_RSP(GET_ONLINE_USER)
     }
 
     return u32Ret;

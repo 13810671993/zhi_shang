@@ -57,4 +57,17 @@ typedef struct
     UINT32  u32Result;
 }T_APP_MODIFY_PASSWD_RSP;
 
+
+typedef struct  
+{
+    UINT64  u64Context;
+}T_APP_GET_ONLINE_USER_REQ;
+
+typedef struct  
+{
+    UINT64  u64Context;
+    UINT32  u32Result;
+    UINT32  u32UserNum;
+    T_GNRL_ONLINE_USER  atOnlineUser[APP_MAX_USER_NUM];
+}T_APP_GET_ONLINE_USER_RSP;
 #endif // !__APPLICATION_STRUCT_H__

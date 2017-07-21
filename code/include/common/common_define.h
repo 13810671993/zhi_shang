@@ -27,6 +27,9 @@
 #ifndef APP_MAX_ID_LEN
 #define APP_MAX_ID_LEN				    32
 #endif
+#ifndef APP_MAX_USER_NUM
+#define APP_MAX_USER_NUM                64
+#endif
 
 
 #endif

@@ -12,8 +12,10 @@ CLoginWidget::CLoginWidget(QWidget *parent) :
 
     InitWidget();
     InitWindow();
-    InitStyly();
+    InitStyle();
     BindSignals();
+
+    connect(CCtrlLogin::GetInstance(), SIGNAL(SIGNAL_LoginSuccess()), this, SIGNAL(SIGNAL_LoginSuccess()));
 }
 
 CLoginWidget::~CLoginWidget()
@@ -118,6 +120,8 @@ VOID CLoginWidget::InitWidget()
     ui->CLedPasswd_Login->setValidator(pValidatorPasswd);
 
     ui->CStackedWidget->setCurrentIndex(0);
+
+//    ui->CLblUser_Login->setVisible(false);
 }
 
 VOID CLoginWidget::InitWindow()
@@ -128,7 +132,7 @@ VOID CLoginWidget::InitWindow()
     setAttribute(Qt::WA_TranslucentBackground);
 }
 
-VOID CLoginWidget::InitStyly()
+VOID CLoginWidget::InitStyle()
 {
     QFile styleSheet(":/login/resource/login.qss");
     if (styleSheet.open(QFile::ReadOnly))

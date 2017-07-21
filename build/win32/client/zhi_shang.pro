@@ -29,6 +29,7 @@ win32-msvc*:QMAKE_CXXFLAGS += /wd"4099"
 # module
 MODULE_DIR = $$BASE_DIR/code/client/module
 include($$MODULE_DIR/network/network.pri)
+include($$MODULE_DIR/page_manager/page_manager.pri)
 include($$MODULE_DIR/login/login.pri)
 include($$MODULE_DIR/user/user.pri)
 include($$MODULE_DIR/home/home.pri)

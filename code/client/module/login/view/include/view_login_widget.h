@@ -18,6 +18,9 @@ public:
     explicit CLoginWidget(QWidget *parent = 0);
     ~CLoginWidget();
 
+signals:
+    void SIGNAL_LoginSuccess();
+
 public slots:
     void SLOT_Exit();
     void SLOT_SwitchPage();
@@ -27,7 +30,7 @@ public slots:
 private:
     VOID InitWidget();
     VOID InitWindow();
-    VOID InitStyly();
+    VOID InitStyle();
     VOID BindSignals();
 
 private:

@@ -1,7 +1,7 @@
 #include "login/login_common.h"
 
 
-CCtrlLogin::CCtrlLogin()
+CCtrlLogin::CCtrlLogin() : QObject()
 {
 
 }
@@ -32,4 +32,8 @@ VOID CCtrlLogin::OnLoginRsp(const CHAR *pcMsg, UINT32 u32MsgLen)
 {
     T_APP_LOGIN_RSP* ptRsp = (T_APP_LOGIN_RSP*)pcMsg;
     qDebug() << "context: " << ptRsp->u64Context << "  result: " << ptRsp->u32Result;
+    if (ptRsp->u32Result == 0)
+    {
+        emit SIGNAL_LoginSuccess();
+    }
 }

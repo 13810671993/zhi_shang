@@ -2,11 +2,17 @@ package application;
 
 option java_outer_classname = "application_struct";
 
+import "general_struct.proto";
+
 message T_APP_LOGIN_REQ
 {
 	required fixed64 u64Context = 1;
 	required bytes acUserName = 2;
 	required bytes acPasswd = 3;
+}
+message T_APP_GET_ONLINE_USER_REQ
+{
+	required fixed64 u64Context = 1;
 }
 message T_APP_REGIST_USER_RSP
 {
@@ -41,6 +47,13 @@ message T_APP_REGIST_USER_REQ
 	required bytes acUserName = 2;
 	required bytes acPasswd = 3;
 	required fixed32 u32Sex = 4;
+}
+message T_APP_GET_ONLINE_USER_RSP
+{
+	required fixed64 u64Context = 1;
+	required fixed32 u32Result = 2;
+	required fixed32 u32UserNum = 3;
+	repeated general.T_GNRL_ONLINE_USER atOnlineUser = 4;
 }
 message T_APP_FIRST_TEST_RSP
 {

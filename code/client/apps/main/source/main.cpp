@@ -1,7 +1,6 @@
 #include <QApplication>
 #include <QTextCodec>
-#include "login/login_common.h"
-#include "network/network_common.h"
+#include "page_manager/include/page_manager.h"
 
 int main(int argc, char *argv[])
 {
@@ -9,9 +8,8 @@ int main(int argc, char *argv[])
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 
-    CLoginWidget ab(0);
-    ab.show();
-
+    CPageMgr pageMgr;
+    pageMgr.StartLogin();
 
     return a.exec();
 }

@@ -23,6 +23,12 @@
     <ClInclude Include="..\..\..\include\application\app_protocol\app_protocol.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\general_proto_swap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\general_struct.pb.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\application_proto_swap.cpp">
@@ -32,6 +38,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\source\app_protocol.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\general_proto_swap.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\general_struct.pb.cc">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

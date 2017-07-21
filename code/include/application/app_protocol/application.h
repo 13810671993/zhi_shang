@@ -7,6 +7,7 @@ typedef enum
     E_APP_MSG_REGIST_USER_REQ       = 0xA001,
     E_APP_MSG_LOGIN_REQ             = 0xA002,
     E_APP_MSG_MODIFY_PASSWD_REQ     = 0xA003,
+    E_APP_MSG_GET_ONLINE_USER_REQ   = 0xA004,
 }E_APP_MSG_REQ_TYPE;
 
 
@@ -16,6 +17,7 @@ typedef enum
     E_APP_MSG_REGIST_USER_RSP       = 0xC001,
     E_APP_MSG_LOGIN_RSP             = 0xC002,
     E_APP_MSG_MODIFY_PASSWD_RSP     = 0xC003,
+    E_APP_MSG_GET_ONLINE_USER_RSP   = 0xC004,
 }E_APP_MSG_RSP_TYPE;
 
 #endif // !__APPLICATION_H__

@@ -15,6 +15,7 @@
 #include "common/common_tool.h"
 #include "common/common_define.h"
 
+#include "application/app_protocol/general_struct.h"
 #include "application/app_protocol/application.h"
 #include "application/app_protocol/application_struct.h"
 

@@ -96,6 +96,10 @@ VOID CNetwork::PushMessage(UINT32 u32MsgType, const CHAR *pcMsg, UINT32 u32MsgLe
     case E_APP_MSG_LOGIN_RSP:
         CCtrlLogin::GetInstance()->OnLoginRsp(pcMsg, u32MsgLen);
         break;
+    case E_APP_MSG_GET_ONLINE_USER_RSP:
+        CCtrlHome::GetInstance()->OnGetOnlineUserRsp(pcMsg, u32MsgLen);
+        break;
+
 
     default:
         break;

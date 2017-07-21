@@ -1,0 +1,8 @@
+package general;
+
+option java_outer_classname = "general_struct";
+
+message T_GNRL_ONLINE_USER
+{
+	required bytes acUserName = 1;
+}

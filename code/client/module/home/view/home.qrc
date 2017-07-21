@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/home">
+        <file>resource/home.qss</file>
+        <file>resource/image/button_close_hover.png</file>
+        <file>resource/image/button_close_normal.png</file>
+        <file>resource/image/button_close_pressed.png</file>
+        <file>resource/image/button_mail_hover.png</file>
+        <file>resource/image/button_mail_normal.png</file>
+        <file>resource/image/button_minimum_hover.png</file>
+        <file>resource/image/button_minimum_normal.png</file>
+        <file>resource/image/button_minimum_pressed.png</file>
+        <file>resource/image/button_session_hover.png</file>
+        <file>resource/image/button_session_normal.png</file>
+        <file>resource/image/button_set_hover.png</file>
+        <file>resource/image/button_set_normal.png</file>
+        <file>resource/image/button_mail_checked.png</file>
+        <file>resource/image/button_session_checked.png</file>
+    </qresource>
+</RCC>

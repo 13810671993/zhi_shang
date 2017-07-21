@@ -8,10 +8,12 @@
 #include <QValidator>
 
 #include "common/data_type.h"
+#include "common/common_define.h"
+
 #include "conf/conf.h"
 
-#include "common/common_define.h"
 #include "application/app_protocol/application.h"
+#include "application/app_protocol/general_struct.h"
 #include "application/app_protocol/application_struct.h"
 
 #include "network/include/network.h"

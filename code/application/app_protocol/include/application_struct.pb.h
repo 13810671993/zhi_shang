@@ -24,6 +24,7 @@
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/unknown_field_set.h>
+#include "general_struct.pb.h"
 // @@protoc_insertion_point(includes)
 
 namespace application {
@@ -34,12 +35,14 @@ void protobuf_AssignDesc_application_5fstruct_2eproto();
 void protobuf_ShutdownFile_application_5fstruct_2eproto();
 
 class T_APP_LOGIN_REQ;
+class T_APP_GET_ONLINE_USER_REQ;
 class T_APP_REGIST_USER_RSP;
 class T_APP_FIRST_TEST_REQ;
 class T_APP_MODIFY_PASSWD_REQ;
 class T_APP_MODIFY_PASSWD_RSP;
 class T_APP_LOGIN_RSP;
 class T_APP_REGIST_USER_REQ;
+class T_APP_GET_ONLINE_USER_RSP;
 class T_APP_FIRST_TEST_RSP;
 
 // ===================================================================
@@ -153,6 +156,88 @@ class T_APP_LOGIN_REQ : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static T_APP_LOGIN_REQ* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class T_APP_GET_ONLINE_USER_REQ : public ::google::protobuf::Message {
+ public:
+  T_APP_GET_ONLINE_USER_REQ();
+  virtual ~T_APP_GET_ONLINE_USER_REQ();
+
+  T_APP_GET_ONLINE_USER_REQ(const T_APP_GET_ONLINE_USER_REQ& from);
+
+  inline T_APP_GET_ONLINE_USER_REQ& operator=(const T_APP_GET_ONLINE_USER_REQ& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const T_APP_GET_ONLINE_USER_REQ& default_instance();
+
+  void Swap(T_APP_GET_ONLINE_USER_REQ* other);
+
+  // implements Message ----------------------------------------------
+
+  T_APP_GET_ONLINE_USER_REQ* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const T_APP_GET_ONLINE_USER_REQ& from);
+  void MergeFrom(const T_APP_GET_ONLINE_USER_REQ& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required fixed64 u64Context = 1;
+  inline bool has_u64context() const;
+  inline void clear_u64context();
+  static const int kU64ContextFieldNumber = 1;
+  inline ::google::protobuf::uint64 u64context() const;
+  inline void set_u64context(::google::protobuf::uint64 value);
+
+  // @@protoc_insertion_point(class_scope:application.T_APP_GET_ONLINE_USER_REQ)
+ private:
+  inline void set_has_u64context();
+  inline void clear_has_u64context();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint64 u64context_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_application_5fstruct_2eproto();
+  friend void protobuf_AssignDesc_application_5fstruct_2eproto();
+  friend void protobuf_ShutdownFile_application_5fstruct_2eproto();
+
+  void InitAsDefaultInstance();
+  static T_APP_GET_ONLINE_USER_REQ* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -773,6 +858,121 @@ class T_APP_REGIST_USER_REQ : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class T_APP_GET_ONLINE_USER_RSP : public ::google::protobuf::Message {
+ public:
+  T_APP_GET_ONLINE_USER_RSP();
+  virtual ~T_APP_GET_ONLINE_USER_RSP();
+
+  T_APP_GET_ONLINE_USER_RSP(const T_APP_GET_ONLINE_USER_RSP& from);
+
+  inline T_APP_GET_ONLINE_USER_RSP& operator=(const T_APP_GET_ONLINE_USER_RSP& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const T_APP_GET_ONLINE_USER_RSP& default_instance();
+
+  void Swap(T_APP_GET_ONLINE_USER_RSP* other);
+
+  // implements Message ----------------------------------------------
+
+  T_APP_GET_ONLINE_USER_RSP* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const T_APP_GET_ONLINE_USER_RSP& from);
+  void MergeFrom(const T_APP_GET_ONLINE_USER_RSP& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required fixed64 u64Context = 1;
+  inline bool has_u64context() const;
+  inline void clear_u64context();
+  static const int kU64ContextFieldNumber = 1;
+  inline ::google::protobuf::uint64 u64context() const;
+  inline void set_u64context(::google::protobuf::uint64 value);
+
+  // required fixed32 u32Result = 2;
+  inline bool has_u32result() const;
+  inline void clear_u32result();
+  static const int kU32ResultFieldNumber = 2;
+  inline ::google::protobuf::uint32 u32result() const;
+  inline void set_u32result(::google::protobuf::uint32 value);
+
+  // required fixed32 u32UserNum = 3;
+  inline bool has_u32usernum() const;
+  inline void clear_u32usernum();
+  static const int kU32UserNumFieldNumber = 3;
+  inline ::google::protobuf::uint32 u32usernum() const;
+  inline void set_u32usernum(::google::protobuf::uint32 value);
+
+  // repeated .general.T_GNRL_ONLINE_USER atOnlineUser = 4;
+  inline int atonlineuser_size() const;
+  inline void clear_atonlineuser();
+  static const int kAtOnlineUserFieldNumber = 4;
+  inline const ::general::T_GNRL_ONLINE_USER& atonlineuser(int index) const;
+  inline ::general::T_GNRL_ONLINE_USER* mutable_atonlineuser(int index);
+  inline ::general::T_GNRL_ONLINE_USER* add_atonlineuser();
+  inline const ::google::protobuf::RepeatedPtrField< ::general::T_GNRL_ONLINE_USER >&
+      atonlineuser() const;
+  inline ::google::protobuf::RepeatedPtrField< ::general::T_GNRL_ONLINE_USER >*
+      mutable_atonlineuser();
+
+  // @@protoc_insertion_point(class_scope:application.T_APP_GET_ONLINE_USER_RSP)
+ private:
+  inline void set_has_u64context();
+  inline void clear_has_u64context();
+  inline void set_has_u32result();
+  inline void clear_has_u32result();
+  inline void set_has_u32usernum();
+  inline void clear_has_u32usernum();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint64 u64context_;
+  ::google::protobuf::uint32 u32result_;
+  ::google::protobuf::uint32 u32usernum_;
+  ::google::protobuf::RepeatedPtrField< ::general::T_GNRL_ONLINE_USER > atonlineuser_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_application_5fstruct_2eproto();
+  friend void protobuf_AssignDesc_application_5fstruct_2eproto();
+  friend void protobuf_ShutdownFile_application_5fstruct_2eproto();
+
+  void InitAsDefaultInstance();
+  static T_APP_GET_ONLINE_USER_RSP* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class T_APP_FIRST_TEST_RSP : public ::google::protobuf::Message {
  public:
   T_APP_FIRST_TEST_RSP();
@@ -1030,6 +1230,32 @@ inline void T_APP_LOGIN_REQ::set_allocated_acpasswd(::std::string* acpasswd) {
     clear_has_acpasswd();
     acpasswd_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
+}
+
+// -------------------------------------------------------------------
+
+// T_APP_GET_ONLINE_USER_REQ
+
+// required fixed64 u64Context = 1;
+inline bool T_APP_GET_ONLINE_USER_REQ::has_u64context() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void T_APP_GET_ONLINE_USER_REQ::set_has_u64context() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void T_APP_GET_ONLINE_USER_REQ::clear_has_u64context() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void T_APP_GET_ONLINE_USER_REQ::clear_u64context() {
+  u64context_ = GOOGLE_ULONGLONG(0);
+  clear_has_u64context();
+}
+inline ::google::protobuf::uint64 T_APP_GET_ONLINE_USER_REQ::u64context() const {
+  return u64context_;
+}
+inline void T_APP_GET_ONLINE_USER_REQ::set_u64context(::google::protobuf::uint64 value) {
+  set_has_u64context();
+  u64context_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -1646,6 +1872,101 @@ inline ::google::protobuf::uint32 T_APP_REGIST_USER_REQ::u32sex() const {
 inline void T_APP_REGIST_USER_REQ::set_u32sex(::google::protobuf::uint32 value) {
   set_has_u32sex();
   u32sex_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// T_APP_GET_ONLINE_USER_RSP
+
+// required fixed64 u64Context = 1;
+inline bool T_APP_GET_ONLINE_USER_RSP::has_u64context() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::set_has_u64context() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::clear_has_u64context() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::clear_u64context() {
+  u64context_ = GOOGLE_ULONGLONG(0);
+  clear_has_u64context();
+}
+inline ::google::protobuf::uint64 T_APP_GET_ONLINE_USER_RSP::u64context() const {
+  return u64context_;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::set_u64context(::google::protobuf::uint64 value) {
+  set_has_u64context();
+  u64context_ = value;
+}
+
+// required fixed32 u32Result = 2;
+inline bool T_APP_GET_ONLINE_USER_RSP::has_u32result() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::set_has_u32result() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::clear_has_u32result() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::clear_u32result() {
+  u32result_ = 0u;
+  clear_has_u32result();
+}
+inline ::google::protobuf::uint32 T_APP_GET_ONLINE_USER_RSP::u32result() const {
+  return u32result_;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::set_u32result(::google::protobuf::uint32 value) {
+  set_has_u32result();
+  u32result_ = value;
+}
+
+// required fixed32 u32UserNum = 3;
+inline bool T_APP_GET_ONLINE_USER_RSP::has_u32usernum() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::set_has_u32usernum() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::clear_has_u32usernum() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::clear_u32usernum() {
+  u32usernum_ = 0u;
+  clear_has_u32usernum();
+}
+inline ::google::protobuf::uint32 T_APP_GET_ONLINE_USER_RSP::u32usernum() const {
+  return u32usernum_;
+}
+inline void T_APP_GET_ONLINE_USER_RSP::set_u32usernum(::google::protobuf::uint32 value) {
+  set_has_u32usernum();
+  u32usernum_ = value;
+}
+
+// repeated .general.T_GNRL_ONLINE_USER atOnlineUser = 4;
+inline int T_APP_GET_ONLINE_USER_RSP::atonlineuser_size() const {
+  return atonlineuser_.size();
+}
+inline void T_APP_GET_ONLINE_USER_RSP::clear_atonlineuser() {
+  atonlineuser_.Clear();
+}
+inline const ::general::T_GNRL_ONLINE_USER& T_APP_GET_ONLINE_USER_RSP::atonlineuser(int index) const {
+  return atonlineuser_.Get(index);
+}
+inline ::general::T_GNRL_ONLINE_USER* T_APP_GET_ONLINE_USER_RSP::mutable_atonlineuser(int index) {
+  return atonlineuser_.Mutable(index);
+}
+inline ::general::T_GNRL_ONLINE_USER* T_APP_GET_ONLINE_USER_RSP::add_atonlineuser() {
+  return atonlineuser_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::general::T_GNRL_ONLINE_USER >&
+T_APP_GET_ONLINE_USER_RSP::atonlineuser() const {
+  return atonlineuser_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::general::T_GNRL_ONLINE_USER >*
+T_APP_GET_ONLINE_USER_RSP::mutable_atonlineuser() {
+  return &atonlineuser_;
 }
 
 // -------------------------------------------------------------------
