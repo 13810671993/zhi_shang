@@ -44,6 +44,12 @@ case E_APP_MSG_##name: \
 #define APP_PROTO_TO_CMD(name) \
     APP_PROTO_TO_STRUCT(name##_CMD) \
 
+#define APP_ACT_TO_PROTO(name)\
+    APP_STRUCT_TO_PROTO(name##_ACT) \
+
+#define APP_PROTO_TO_ACT(name) \
+    APP_PROTO_TO_STRUCT(name##_ACT) \
+
 
 
 
@@ -63,11 +69,13 @@ UINT32 CAppProtocol::Struct2ProtoBuf(IN UINT32 u32MsgType, IN const VOID* pStruc
 
     switch (u32MsgType)
     {
-        APP_REQ_AND_RSP_TO_PROTO(FIRST_TEST)
         APP_REQ_AND_RSP_TO_PROTO(REGIST_USER)
         APP_REQ_AND_RSP_TO_PROTO(LOGIN)
         APP_REQ_AND_RSP_TO_PROTO(MODIFY_PASSWD)
         APP_REQ_AND_RSP_TO_PROTO(GET_ONLINE_USER)
+        APP_REQ_AND_RSP_TO_PROTO(SEND_MESSAGE)
+        APP_ACT_TO_PROTO(TRANSMIT_MESSAGE)
+        APP_NTF_TO_PROTO(UPDATE_ONLINE_USER)
     }
 
     return u32Ret;
@@ -83,11 +91,13 @@ UINT32 CAppProtocol::ProtoBuf2Struct(IN const VOID* pProtoBuf, IN UINT32 u32Prot
 
     switch (u32MsgType)
     {
-        APP_PROTO_TO_REQ_AND_RSP(FIRST_TEST)
         APP_PROTO_TO_REQ_AND_RSP(REGIST_USER)
         APP_PROTO_TO_REQ_AND_RSP(LOGIN)
         APP_PROTO_TO_REQ_AND_RSP(MODIFY_PASSWD)
         APP_PROTO_TO_REQ_AND_RSP(GET_ONLINE_USER)
+        APP_PROTO_TO_REQ_AND_RSP(SEND_MESSAGE)
+        APP_PROTO_TO_ACT(TRANSMIT_MESSAGE)
+        APP_PROTO_TO_NTF(UPDATE_ONLINE_USER)
     }
 
     return u32Ret;

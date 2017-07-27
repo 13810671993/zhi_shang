@@ -24,11 +24,13 @@ public slots:
     void SLOT_SwitchSessionPage(bool);
     void SLOT_SwitchMailPage(bool);
     void SLOT_CurrentPage(int);
-    void SLOT_OnlineUser(QList<T_GNRL_ONLINE_USER> tUserList);
+    void SLOT_UpdateOnlineUser(QList<T_GNRL_ONLINE_USER> tUserList);
     void SLOT_OpenSession();
     void SLOT_OpenUserInfo(QListWidgetItem* pUserItem);
     void SLOT_SendMessage();
     void SLOT_GetSendMessage();
+    void SLOT_SwitchSession(QListWidgetItem*);
+    void SLOT_TransmitMessage(QString, QString);
 
 private:
     VOID InitWidget();
@@ -38,6 +40,7 @@ private:
 
     VOID OnGetOnlineReq();
     QScrollArea* 	CreateSessionArea(T_GNRL_ONLINE_USER& tOnlineUser);
+    UINT32			FindIndex(QList<T_GNRL_ONLINE_USER>& list, const T_GNRL_ONLINE_USER* pDest);
     // QWidget interface
 protected:
     void mousePressEvent(QMouseEvent *);

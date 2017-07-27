@@ -128,7 +128,8 @@ VOID CLoginWidget::InitWindow()
 {
     // 隐藏边框
     setWindowOpacity(1);
-    setWindowFlags(Qt::Widget | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint | Qt::FramelessWindowHint);
+//    setWindowFlags(Qt::Widget | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint | Qt::FramelessWindowHint);
+    setWindowFlags(Qt::Widget | Qt::X11BypassWindowManagerHint | Qt::FramelessWindowHint);
     setAttribute(Qt::WA_TranslucentBackground);
 }
 

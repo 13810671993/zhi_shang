@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/home">
-        <file>resource/home.qss</file>
         <file>resource/image/button_close_hover.png</file>
         <file>resource/image/button_close_normal.png</file>
         <file>resource/image/button_close_pressed.png</file>
@@ -15,5 +14,8 @@
         <file>resource/image/button_set_normal.png</file>
         <file>resource/image/button_mail_checked.png</file>
         <file>resource/image/button_session_checked.png</file>
+        <file>resource/home.qss</file>
+        <file>resource/mail.qss</file>
+        <file>resource/session.qss</file>
     </qresource>
 </RCC>

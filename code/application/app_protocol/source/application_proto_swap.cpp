@@ -81,6 +81,22 @@ UINT32 ProtoToStruct(const application::T_APP_MODIFY_PASSWD_REQ& proto, T_APP_MO
 	return TRUE;
 }
 
+UINT32 StructToProto(const T_APP_SEND_MESSAGE_REQ& tStruct, application::T_APP_SEND_MESSAGE_REQ& proto)
+{
+	proto.set_u64context(tStruct.u64Context);
+	proto.set_acobjid(tStruct.acObjID, APP_MAX_NAME_LEN);
+	proto.set_acmessage(tStruct.acMessage, APP_MAX_MESSAGE_LEN);
+	return TRUE;
+}
+
+UINT32 ProtoToStruct(const application::T_APP_SEND_MESSAGE_REQ& proto, T_APP_SEND_MESSAGE_REQ& tStruct)
+{
+	tStruct.u64Context = proto.u64context();
+	memcpy(tStruct.acObjID, proto.acobjid().c_str(), APP_MAX_NAME_LEN);
+	memcpy(tStruct.acMessage, proto.acmessage().c_str(), APP_MAX_MESSAGE_LEN);
+	return TRUE;
+}
+
 UINT32 StructToProto(const T_APP_MODIFY_PASSWD_RSP& tStruct, application::T_APP_MODIFY_PASSWD_RSP& proto)
 {
 	proto.set_u64context(tStruct.u64Context);
@@ -103,6 +119,54 @@ UINT32 StructToProto(const T_APP_LOGIN_RSP& tStruct, application::T_APP_LOGIN_RS
 }
 
 UINT32 ProtoToStruct(const application::T_APP_LOGIN_RSP& proto, T_APP_LOGIN_RSP& tStruct)
+{
+	tStruct.u64Context = proto.u64context();
+	tStruct.u32Result = proto.u32result();
+	return TRUE;
+}
+
+UINT32 StructToProto(const T_APP_UPDATE_ONLINE_USER_NTF& tStruct, application::T_APP_UPDATE_ONLINE_USER_NTF& proto)
+{
+	proto.set_u32usernum(tStruct.u32UserNum);
+	for(INT32 i = 0; i < APP_MAX_USER_NUM; ++i)
+	{
+		StructToProto(tStruct.atOnlineUser[i], *(proto.add_atonlineuser()));
+	}
+	return TRUE;
+}
+
+UINT32 ProtoToStruct(const application::T_APP_UPDATE_ONLINE_USER_NTF& proto, T_APP_UPDATE_ONLINE_USER_NTF& tStruct)
+{
+	tStruct.u32UserNum = proto.u32usernum();
+	for(INT32 i = 0; i < proto.atonlineuser().size() && i < APP_MAX_USER_NUM; ++i)
+	{
+		ProtoToStruct(proto.atonlineuser(i), tStruct.atOnlineUser[i]);
+	}
+	return TRUE;
+}
+
+UINT32 StructToProto(const T_APP_TRANSMIT_MESSAGE_ACT& tStruct, application::T_APP_TRANSMIT_MESSAGE_ACT& proto)
+{
+	proto.set_acfrmid(tStruct.acFrmID, APP_MAX_NAME_LEN);
+	proto.set_acmessage(tStruct.acMessage, APP_MAX_MESSAGE_LEN);
+	return TRUE;
+}
+
+UINT32 ProtoToStruct(const application::T_APP_TRANSMIT_MESSAGE_ACT& proto, T_APP_TRANSMIT_MESSAGE_ACT& tStruct)
+{
+	memcpy(tStruct.acFrmID, proto.acfrmid().c_str(), APP_MAX_NAME_LEN);
+	memcpy(tStruct.acMessage, proto.acmessage().c_str(), APP_MAX_MESSAGE_LEN);
+	return TRUE;
+}
+
+UINT32 StructToProto(const T_APP_SEND_MESSAGE_RSP& tStruct, application::T_APP_SEND_MESSAGE_RSP& proto)
+{
+	proto.set_u64context(tStruct.u64Context);
+	proto.set_u32result(tStruct.u32Result);
+	return TRUE;
+}
+
+UINT32 ProtoToStruct(const application::T_APP_SEND_MESSAGE_RSP& proto, T_APP_SEND_MESSAGE_RSP& tStruct)
 {
 	tStruct.u64Context = proto.u64context();
 	tStruct.u32Result = proto.u32result();

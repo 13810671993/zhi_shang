@@ -36,6 +36,7 @@
         #pragma comment(lib, LIB_DEBUG_IMPORT("log_d.lib"))
         #pragma comment(lib, LIB_DEBUG_IMPORT("mem_pool_d.lib"))
         #pragma comment(lib, LIB_DEBUG_IMPORT("app_protocol_d.lib"))
+        #pragma comment(lib, LIB_DEBUG_IMPORT("session_mgr_d.lib"))
     #else
         #pragma comment(lib, LIB_THIRD_IMPORT("google/protobuf/Release/libprotobuf.lib"))
         #pragma comment(lib, LIB_THIRD_IMPORT("google/protobuf/Release/libprotobuf-lite.lib"))
@@ -48,6 +49,7 @@
         #pragma comment(lib, LIB_RELEASE_IMPORT("log.lib"))
         #pragma comment(lib, LIB_RELEASE_IMPORT("mem_pool.lib"))
         #pragma comment(lib, LIB_RELEASE_IMPORT("app_protocol.lib"))
+        #pragma comment(lib, LIB_RELEASE_IMPORT("session_mgr.lib"))
 
     #endif
 

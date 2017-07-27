@@ -56,3 +56,13 @@ UINT32 CMsgMgrImp::SubscribeMessage(IN UINT32 u32MsgType, IN CSubMsgHandler* pSu
 {
     return m_pSubscriber->SubscribeMessage(u32MsgType, pSubMsgHandler);
 }
+
+UINT32 CMsgMgrImp::SetConnectHandler(IN CLogic* pLogic)
+{
+    return m_pAdpt->SetConnectHandler(pLogic);
+}
+
+UINT32 CMsgMgrImp::GetRemoteNodeInfo(IN UINT32 u32NodeID, OUT std::string& strIp, OUT UINT16& u16Port)
+{
+    return m_pAdpt->GetRemoteNodeInfo(u32NodeID, strIp, u16Port);
+}

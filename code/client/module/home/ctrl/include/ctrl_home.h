@@ -19,10 +19,13 @@ protected:
     ~CCtrlHome();
 
 signals:
-    void	SIGNAL_OnlineUser(QList<T_GNRL_ONLINE_USER> tUserList);
+    void	SIGNAL_UpdateOnlineUser(QList<T_GNRL_ONLINE_USER> tUserList);
+    void	SIGNAL_TransmitMessage(QString qstrFrmID, QString qstrMessage);
 
 public:
-    VOID	OnGetOnlineUserRsp(const CHAR* pcMsg, UINT32 u32MsgLen);
+    VOID	OnUpdateOnlineUserNtf(const CHAR* pcMsg, UINT32 u32MsgLen);
+    VOID	OnSendMessageRsp(const CHAR* pcMsg, UINT32 u32MsgLen);
+    VOID	OnTransmitMessageAct(const CHAR* pcMsg, UINT32 u32MsgLen);
 
 private:
     static CCtrlHome*	m_pCtrlHome;

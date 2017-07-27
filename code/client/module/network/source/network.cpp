@@ -65,8 +65,12 @@ void CNetwork::SLOT_RecvMessage()
     UINT32 u32MsgType = 0;
     std::string strStructBuf;
     UINT32 u32PbLen = qstrMessage.length();
-    CAppProtocol::ProtoBuf2Struct(qstrMessage.data(), qstrMessage.length(), u32MsgType, strStructBuf);
-    PushMessage(u32MsgType, strStructBuf.c_str(), strStructBuf.length());
+    UINT32 u32Ret = CAppProtocol::ProtoBuf2Struct(qstrMessage.data(), qstrMessage.length(), u32MsgType, strStructBuf);
+    qDebug() << "proto ret = " << u32Ret << " MsgType = " << u32MsgType << " MsgLen = " << qstrMessage.length();
+    if (u32Ret == 0)
+    {
+        PushMessage(u32MsgType, strStructBuf.c_str(), strStructBuf.length());
+    }
 }
 
 void CNetwork::SLOT_Error(QAbstractSocket::SocketError)
@@ -96,8 +100,14 @@ VOID CNetwork::PushMessage(UINT32 u32MsgType, const CHAR *pcMsg, UINT32 u32MsgLe
     case E_APP_MSG_LOGIN_RSP:
         CCtrlLogin::GetInstance()->OnLoginRsp(pcMsg, u32MsgLen);
         break;
-    case E_APP_MSG_GET_ONLINE_USER_RSP:
-        CCtrlHome::GetInstance()->OnGetOnlineUserRsp(pcMsg, u32MsgLen);
+    case E_APP_MSG_SEND_MESSAGE_RSP:
+        CCtrlHome::GetInstance()->OnSendMessageRsp(pcMsg, u32MsgLen);
+        break;
+    case E_APP_MSG_TRANSMIT_MESSAGE_ACT:
+        CCtrlHome::GetInstance()->OnTransmitMessageAct(pcMsg, u32MsgLen);
+        break;
+    case E_APP_MSG_UPDATE_ONLINE_USER_NTF:
+        CCtrlHome::GetInstance()->OnUpdateOnlineUserNtf(pcMsg, u32MsgLen);
         break;
 
 

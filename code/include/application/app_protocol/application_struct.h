@@ -70,4 +70,31 @@ typedef struct
     UINT32  u32UserNum;
     T_GNRL_ONLINE_USER  atOnlineUser[APP_MAX_USER_NUM];
 }T_APP_GET_ONLINE_USER_RSP;
+
+
+typedef struct  
+{
+    UINT64  u64Context;
+    CHAR    acObjID[APP_MAX_NAME_LEN];
+    CHAR    acMessage[APP_MAX_MESSAGE_LEN];
+}T_APP_SEND_MESSAGE_REQ;
+
+typedef struct  
+{
+    UINT64  u64Context;
+    UINT32  u32Result;
+}T_APP_SEND_MESSAGE_RSP;
+
+typedef struct  
+{
+    CHAR    acFrmID[APP_MAX_NAME_LEN];
+    CHAR    acMessage[APP_MAX_MESSAGE_LEN];
+}T_APP_TRANSMIT_MESSAGE_ACT;
+
+
+typedef struct  
+{
+    UINT32  u32UserNum;
+    T_GNRL_ONLINE_USER  atOnlineUser[APP_MAX_USER_NUM];
+}T_APP_UPDATE_ONLINE_USER_NTF;
 #endif // !__APPLICATION_STRUCT_H__

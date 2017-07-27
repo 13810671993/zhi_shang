@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
 
-    CPageMgr pageMgr;
+    CPageMgr pageMgr(&a);
     pageMgr.StartLogin();
 
     return a.exec();

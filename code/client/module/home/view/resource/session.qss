@@ -1,0 +1,151 @@
+QWidget#CSessionListPage
+{
+    background-color: #e6e6e6;
+}
+
+QTextEdit#CTedInput
+{
+    background-color: white;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    border-top-color: #ececec;
+}
+QTextEdit#CTedInput:selected
+{
+    background-color: black;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    border-top-color: #ececec;
+}
+
+
+QPushButton#CBtnSend
+{
+    border: 1px solid #e6e6e6;
+    outline: none;
+    background-color: #f5f5f5;
+}
+QPushButton#CBtnSend:hover
+{
+    background-color: #3cce3c;
+}
+
+
+QScrollArea
+{
+    outline: none;
+    border: none;
+}
+
+/*垂直滚动条整体*/
+QScrollBar:vertical
+{
+    width:8px;
+    background:rgb(0,0,0,0%);
+    margin:0px,0px,0px,0px;
+    padding-top:0px;   /*上预留位置*/
+    padding-bottom:0px;    /*下预留位置*/
+}
+
+/*滚动条中滑块的样式*/
+QScrollBar::handle:vertical
+{
+    width:8px;
+    background:rgb(0,0,0,25%);
+    border-radius:4px;
+    min-height:20px;
+}
+
+/*鼠标触及滑块样式*/
+QScrollBar::handle:vertical:hover
+{
+    width:9px;
+    background:rgb(0,0,0,50%);
+    border-radius:4px;
+    min-height:20;
+}
+
+/*设置下箭头*/
+QScrollBar::add-line:vertical
+{
+    height:0px;
+    width:0px;
+    /*subcontrol-position:bottom;*/
+    background-image: none;
+}
+
+/*设置上箭头*/
+QScrollBar::sub-line:vertical
+{
+    height:0px;
+    width:0px;
+    /*subcontrol-position:top;*/
+    background-image: none;
+}
+
+/*设置下箭头:悬浮状态*/
+QScrollBar::add-line:vertical:hover
+{
+    height:12px;
+    width:10px;
+    subcontrol-position:bottom;
+}
+
+/*设置上箭头：悬浮状态*/
+QScrollBar::sub-line:vertical:hover
+{
+    height:12px;
+    width:10px;
+    subcontrol-position:top;
+}
+
+/*当滚动条滚动的时候，上面的部分和下面的部分*/
+QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical
+{
+    background:rgb(0,0,0,10%);
+    border-radius:4px;
+}
+
+
+QFrame#CFrmBackground
+{
+    border: none;
+}
+
+
+QListWidget#CListSession
+{
+    background-color: #e6e6e6;
+    border: none;
+    outline: none;
+}
+
+QListWidget#CListSession::item
+{
+    height: 60px;
+}
+
+
+QListWidget#CListSession::item:hover
+{
+    show-decoration-selected:5;
+    background-color: #d7d7d7;
+}
+
+QListWidget#CListSession::item:selected
+{
+    /*border:0px;*/
+    background-color: #c3c3c3;
+    padding:0px;
+    margin:0px;
+    color: black;
+}
+
+/*上次选择后保留的状态，鼠标离开后显示*/
+QListWidget#CListSession::item:selected:!active
+{
+    border-width:0px;
+    background-color: #c3c3c3;
+}

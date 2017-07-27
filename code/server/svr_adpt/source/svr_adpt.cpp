@@ -58,3 +58,25 @@ VOID CSvrAdpt::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 
     CNetworkMgr::GetInstance()->PostMessage(u32NodeID, u32MsgType, u32MsgLen, pcMsg);
 }
 
+UINT32 CSvrAdpt::SetConnectHandler(IN CLogic* pLogic)
+{
+    m_pLogic = pLogic;
+
+    return COMERR_OK;
+}
+
+UINT32 CSvrAdpt::Connected(IN UINT32 u32NodeID, IN const std::string& strIp, IN UINT16 u16Port)
+{
+    return m_pLogic->Connected(u32NodeID, strIp, u16Port);
+}
+
+UINT32 CSvrAdpt::Disconnected(IN UINT32 u32NodeID)
+{
+    return m_pLogic->Disconnected(u32NodeID);
+}
+
+UINT32 CSvrAdpt::GetRemoteNodeInfo(IN UINT32 u32NodeID, OUT std::string& strIp, OUT UINT16& u16Port)
+{
+    return CNetworkMgr::GetInstance()->GetRemoteNodeInfo(u32NodeID, strIp, u16Port);
+}
+

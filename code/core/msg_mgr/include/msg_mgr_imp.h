@@ -26,6 +26,8 @@ public:
     UINT32  StartLisen(IN UINT16 u16Port);
     VOID    PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg);
     UINT32  SubscribeMessage(IN UINT32 u32MsgType, IN CSubMsgHandler* pSubMsgHandler);
+    UINT32  SetConnectHandler(IN CLogic* pLogic);
+    UINT32  GetRemoteNodeInfo(IN UINT32 u32NodeID, OUT std::string& strIp, OUT UINT16& u16Port);
 
 private:
     static CMsgMgrImp*  m_pMsgMgrImp;
@@ -33,6 +35,7 @@ private:
     CSubscriber*        m_pSubscriber;
     CMsgTransmitImp*    m_pMsgLayer;
     CAdpt*              m_pAdpt;
+    CLogic*             m_pLogic;
 };
 
 #endif

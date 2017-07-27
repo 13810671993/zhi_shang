@@ -28,7 +28,10 @@
 #define APP_MAX_ID_LEN				    32
 #endif
 #ifndef APP_MAX_USER_NUM
-#define APP_MAX_USER_NUM                64
+#define APP_MAX_USER_NUM                32
+#endif
+#ifndef APP_MAX_MESSAGE_LEN
+#define APP_MAX_MESSAGE_LEN             512
 #endif
 
 

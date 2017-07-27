@@ -2,6 +2,7 @@
 #define HOME_COMMON_H
 
 #include <QFile>
+#include <QScrollBar>
 #include <QMouseEvent>
 #include <QDesktopWidget>
 #include <QListWidgetItem>

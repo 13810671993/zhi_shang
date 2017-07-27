@@ -19,21 +19,6 @@ QLabel#CLblBackgroundRight
     background-color: #f5f5f5;
 }
 
-QLabel#CLblUserInfo
-{
-    background-color: #f5f5f5;
-}
-
-QLabel#CLblUserName
-{
-    background-color: #f5f5f5;
-}
-
-QWidget#CMailListPage
-{
-    background-color: #f5f5f5;
-}
-
 QPushButton
 {
     border: none;

@@ -76,3 +76,21 @@ UINT32 CNetNodeIDLayer::GetSession(IN UINT32 u32NodeID, OUT boost::shared_ptr<CN
         return COMERR_NOT_FOUND;
     }
 }
+
+UINT32 CNetNodeIDLayer::GetRemoteNodeInfo(IN UINT32 u32NodeID, OUT std::string& strIp, OUT UINT16& u16Port)
+{
+    CNetNodeIDLayer::TypeReadLock ReadLock(m_mutex);
+    auto it = m_u32NodeID_ptrSessionMap.find(u32NodeID);
+    if (it != m_u32NodeID_ptrSessionMap.end())
+    {
+        // ур╣╫ак
+        strIp = it->second->RemoteAddr();
+        u16Port = it->second->RemotePort();
+        return COMERR_OK;
+    }
+    else
+    {
+        // н╢ур╣╫
+        return COMERR_NOT_FOUND;
+    }
+}

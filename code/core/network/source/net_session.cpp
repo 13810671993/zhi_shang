@@ -68,7 +68,7 @@ VOID CNetSession::RecvMessageHeadCB(IN const boost::system::error_code& ec, IN U
             // 连接断开 回收节点ID资源
             do
             {
-                u32Ret = m_pNetworkMgr->Disconnect(u32NodeID);
+                u32Ret = m_pNetworkMgr->Disconnected(u32NodeID);
                 CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "Disconnect Failed. u32Ret = 0x%x. u32NodeID = %u", u32Ret, u32NodeID);
             } while (0);
         }
@@ -84,7 +84,7 @@ VOID CNetSession::RecvMessageHeadCB(IN const boost::system::error_code& ec, IN U
         // 连接断开 回收节点ID资源
         do 
         {
-            u32Ret = m_pNetworkMgr->Disconnect(u32NodeID);
+            u32Ret = m_pNetworkMgr->Disconnected(u32NodeID);
             CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "Disconnect Failed. u32Ret = 0x%x. u32NodeID = %u", u32Ret, u32NodeID);
         } while (0);
 
@@ -130,7 +130,7 @@ VOID CNetSession::RecvMessageBodyCB(IN const boost::system::error_code& ec, IN U
         // 连接断开 回收节点ID资源
         do 
         {
-            u32Ret = m_pNetworkMgr->Disconnect(u32NodeID);
+            u32Ret = m_pNetworkMgr->Disconnected(u32NodeID);
             CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "Disconnect Failed. u32Ret = 0x%x. u32NodeID = %u", u32Ret, u32NodeID);
         } while (0);
 
@@ -155,7 +155,7 @@ VOID CNetSession::MessageHandlerCB(IN const boost::system::error_code& ec, IN UI
         // 连接断开 回收节点ID资源
         do 
         {
-            u32Ret = m_pNetworkMgr->Disconnect(u32NodeID);
+            u32Ret = m_pNetworkMgr->Disconnected(u32NodeID);
             CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "Disconnect Failed. u32Ret = 0x%x. u32NodeID = %u", u32Ret, u32NodeID);
         } while (0);
 
@@ -252,5 +252,15 @@ VOID CNetSession::PostMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN cons
         LogError("write_some error. error_code = %d, error: %s", error.value(), error.message().c_str());
         return;
     }
+}
+
+std::string CNetSession::RemoteAddr()
+{
+    return m_socket.remote_endpoint().address().to_string();
+}
+
+UINT16 CNetSession::RemotePort()
+{
+    return m_socket.remote_endpoint().port();
 }
 

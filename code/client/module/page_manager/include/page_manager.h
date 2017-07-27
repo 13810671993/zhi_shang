@@ -1,6 +1,7 @@
 #ifndef PAGE_MANAGER_H
 #define PAGE_MANAGER_H
 
+#include <QApplication>
 #include <QObject>
 
 class QWidget;
@@ -9,7 +10,7 @@ class CPageMgr : QObject
     Q_OBJECT
 
 public:
-    CPageMgr();
+    CPageMgr(const QApplication* pApp);
     ~CPageMgr();
 
 public slots:
@@ -21,6 +22,7 @@ public:
 private:
     QWidget*	m_pLoginPage;
     QWidget*	m_pHomePage;
+    const QApplication*	m_pApp;
 
 };
 

@@ -27,19 +27,29 @@ VOID CCtrlHome::DestroyInstance()
     }
 }
 
-VOID CCtrlHome::OnGetOnlineUserRsp(const CHAR *pcMsg, UINT32 u32MsgLen)
+VOID CCtrlHome::OnUpdateOnlineUserNtf(const CHAR *pcMsg, UINT32 u32MsgLen)
 {
-    T_APP_GET_ONLINE_USER_RSP*	ptRsp = (T_APP_GET_ONLINE_USER_RSP*)pcMsg;
+    T_APP_UPDATE_ONLINE_USER_NTF*	ptNtf = (T_APP_UPDATE_ONLINE_USER_NTF*)pcMsg;
 
-    if (ptRsp->u32Result == 0)
+    // 收集在线用户列表
+    QList<T_GNRL_ONLINE_USER> tUserList;
+    for (auto i = 0; i < ptNtf->u32UserNum; ++i)
     {
-        // 收集在线用户列表
-        QList<T_GNRL_ONLINE_USER> tUserList;
-        for (auto i = 0; i < ptRsp->u32UserNum; ++i)
-        {
-            tUserList.push_back(ptRsp->atOnlineUser[i]);
-        }
-        emit SIGNAL_OnlineUser(tUserList);
+        tUserList.push_back(ptNtf->atOnlineUser[i]);
     }
+    emit SIGNAL_UpdateOnlineUser(tUserList);
+}
+
+VOID CCtrlHome::OnSendMessageRsp(const CHAR *pcMsg, UINT32 u32MsgLen)
+{
+    T_APP_SEND_MESSAGE_RSP*	ptRsp = (T_APP_SEND_MESSAGE_RSP*)pcMsg;
+    qDebug() << ptRsp->u32Result;
+}
+
+VOID CCtrlHome::OnTransmitMessageAct(const CHAR *pcMsg, UINT32 u32MsgLen)
+{
+    T_APP_TRANSMIT_MESSAGE_ACT*	ptAct = (T_APP_TRANSMIT_MESSAGE_ACT*)pcMsg;
+    qDebug() << ptAct->acFrmID << " - " << ptAct->acMessage;
+    emit SIGNAL_TransmitMessage(ptAct->acFrmID, ptAct->acMessage);
 }
 

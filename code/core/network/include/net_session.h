@@ -15,6 +15,8 @@ public:
     VOID            RecvMessageBodyCB(IN const boost::system::error_code& ec, IN UINT32 u32MsgLen, IN UINT32 u32NodeID);
     VOID            MessageHandlerCB(IN const boost::system::error_code& ec, IN UINT32 u32MsgLen, IN UINT32 u32NodeID);     // 消息回调
     VOID            PostMessage(IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg);
+    std::string     RemoteAddr();
+    UINT16          RemotePort();
 
     inline boost::asio::ip::tcp::socket& GetSocket();
 

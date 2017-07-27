@@ -38,6 +38,11 @@ UINT32 CNetworkMgrImp::RegistAdpt(IN CAdpt* pAdpt)
     return COMERR_OK;
 }
 
+UINT32 CNetworkMgrImp::GetRemoteNodeInfo(IN UINT32 u32NodeID, OUT std::string& strIp, OUT UINT16& u16Port)
+{
+    return m_pNodeIDLayer->GetRemoteNodeInfo(u32NodeID, strIp, u16Port);
+}
+
 VOID CNetworkMgrImp::PostMessage(IN UINT32 u32NodeID, IN UINT32 u32MsgType, IN UINT32 u32MsgLen, IN const CHAR* pcMsg)
 {
     boost::shared_ptr<CNetSession> ptrSession;
@@ -99,7 +104,7 @@ VOID CNetworkMgrImp::AcceptHandlerCB(IN const boost::system::error_code& ec, IN 
     UINT32  u32NodeID = 0;
     do 
     {
-        u32Ret = m_pNodeIDLayer->GenerateNetNodeID(ptrSession, u32NodeID);
+        u32Ret = Connected(ptrSession, u32NodeID);
         CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GenerateNetNodeID Failed. u32Ret = 0x%x", u32Ret);
     } while (0);
     // 启动这个会话
@@ -113,13 +118,36 @@ VOID CNetworkMgrImp::AcceptHandlerCB(IN const boost::system::error_code& ec, IN 
     m_acceptor.async_accept(ptrSession->GetSocket(), boost::bind(&CNetworkMgrImp::AcceptHandlerCB, this, boost::asio::placeholders::error, ptrSession));
 }
 
-UINT32 CNetworkMgrImp::Disconnect(IN UINT32 u32NodeID)
+UINT32 CNetworkMgrImp::Connected(IN boost::shared_ptr<CNetSession>& ptrSession, OUT UINT32& u32NodeID)
+{
+    // 记录下来这个新的连接 为其分配节点ID
+    UINT32  u32Ret = 0;
+    do 
+    {
+        u32Ret = m_pNodeIDLayer->GenerateNetNodeID(ptrSession, u32NodeID);
+        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "GenerateNetNodeID Failed. u32Ret = 0x%x", u32Ret);
+        u32Ret = m_pAdpt->Connected(u32NodeID, ptrSession->RemoteAddr(), ptrSession->RemotePort());
+    } while (0);
+
+    return u32Ret;
+}
+
+UINT32 CNetworkMgrImp::Disconnected(IN UINT32 u32NodeID)
 {
 #ifdef _DEBUG_
     std::cout << u32NodeID << std::endl;
 #endif
     LogInfo("Disconnect u32NodeID = %u", u32NodeID);
-    return m_pNodeIDLayer->ReleaseNetNodeID(u32NodeID);
+    UINT32 u32Ret = 0;
+
+    do 
+    {
+        u32Ret = m_pNodeIDLayer->ReleaseNetNodeID(u32NodeID);
+        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "ReleaseNetNodeID Failed. u32Ret = 0x%x", u32Ret);
+        u32Ret = m_pAdpt->Disconnected(u32NodeID);
+        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "Disconnected Failed. u32Ret = 0x%x, u32NodeID = %d", u32Ret, u32NodeID);
+    } while (0);
+    return u32Ret;
 }
 
 VOID CNetworkMgrImp::ListenThread(IN CNetworkMgrImp* pThis, IN UINT16 u16Port)
