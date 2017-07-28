@@ -49,20 +49,6 @@ UINT32 ProtoToStruct(const application::T_APP_REGIST_USER_RSP& proto, T_APP_REGI
 	return TRUE;
 }
 
-UINT32 StructToProto(const T_APP_FIRST_TEST_REQ& tStruct, application::T_APP_FIRST_TEST_REQ& proto)
-{
-	proto.set_u32result(tStruct.u32Result);
-	proto.set_u32test(tStruct.u32Test);
-	return TRUE;
-}
-
-UINT32 ProtoToStruct(const application::T_APP_FIRST_TEST_REQ& proto, T_APP_FIRST_TEST_REQ& tStruct)
-{
-	tStruct.u32Result = proto.u32result();
-	tStruct.u32Test = proto.u32test();
-	return TRUE;
-}
-
 UINT32 StructToProto(const T_APP_MODIFY_PASSWD_REQ& tStruct, application::T_APP_MODIFY_PASSWD_REQ& proto)
 {
 	proto.set_u64context(tStruct.u64Context);
@@ -115,6 +101,7 @@ UINT32 StructToProto(const T_APP_LOGIN_RSP& tStruct, application::T_APP_LOGIN_RS
 {
 	proto.set_u64context(tStruct.u64Context);
 	proto.set_u32result(tStruct.u32Result);
+	proto.set_acusername(tStruct.acUserName, APP_MAX_NAME_LEN);
 	return TRUE;
 }
 
@@ -122,6 +109,7 @@ UINT32 ProtoToStruct(const application::T_APP_LOGIN_RSP& proto, T_APP_LOGIN_RSP&
 {
 	tStruct.u64Context = proto.u64context();
 	tStruct.u32Result = proto.u32result();
+	memcpy(tStruct.acUserName, proto.acusername().c_str(), APP_MAX_NAME_LEN);
 	return TRUE;
 }
 
@@ -163,6 +151,7 @@ UINT32 StructToProto(const T_APP_SEND_MESSAGE_RSP& tStruct, application::T_APP_S
 {
 	proto.set_u64context(tStruct.u64Context);
 	proto.set_u32result(tStruct.u32Result);
+	proto.set_acobjid(tStruct.acObjID, APP_MAX_NAME_LEN);
 	return TRUE;
 }
 
@@ -170,6 +159,7 @@ UINT32 ProtoToStruct(const application::T_APP_SEND_MESSAGE_RSP& proto, T_APP_SEN
 {
 	tStruct.u64Context = proto.u64context();
 	tStruct.u32Result = proto.u32result();
+	memcpy(tStruct.acObjID, proto.acobjid().c_str(), APP_MAX_NAME_LEN);
 	return TRUE;
 }
 
@@ -212,20 +202,6 @@ UINT32 ProtoToStruct(const application::T_APP_GET_ONLINE_USER_RSP& proto, T_APP_
 	{
 		ProtoToStruct(proto.atonlineuser(i), tStruct.atOnlineUser[i]);
 	}
-	return TRUE;
-}
-
-UINT32 StructToProto(const T_APP_FIRST_TEST_RSP& tStruct, application::T_APP_FIRST_TEST_RSP& proto)
-{
-	proto.set_u32result(tStruct.u32Result);
-	proto.set_u32test(tStruct.u32Test);
-	return TRUE;
-}
-
-UINT32 ProtoToStruct(const application::T_APP_FIRST_TEST_RSP& proto, T_APP_FIRST_TEST_RSP& tStruct)
-{
-	tStruct.u32Result = proto.u32result();
-	tStruct.u32Test = proto.u32test();
 	return TRUE;
 }
 

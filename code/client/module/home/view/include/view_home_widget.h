@@ -11,12 +11,13 @@ namespace Ui {
 class CHomeWidget;
 }
 
-class CHomeWidget : public QWidget
+class CPageMgr;
+class CHomeWidget : public CPageMgr
 {
     Q_OBJECT
 
 public:
-    explicit CHomeWidget(QWidget *parent = 0);
+    explicit CHomeWidget(QString qstrUserInfo);
     ~CHomeWidget();
 
 public slots:
@@ -31,15 +32,16 @@ public slots:
     void SLOT_GetSendMessage();
     void SLOT_SwitchSession(QListWidgetItem*);
     void SLOT_TransmitMessage(QString, QString);
+    void SLOT_SendMessageError(QString);
 
 private:
-    VOID InitWidget();
+    VOID InitWidget(QString qstrUserInfo);
     VOID InitWindow();
     VOID InitStyle();
     VOID BindSignals();
 
     VOID OnGetOnlineReq();
-    QScrollArea* 	CreateSessionArea(T_GNRL_ONLINE_USER& tOnlineUser);
+    QScrollArea* 	CreateSessionArea();
     UINT32			FindIndex(QList<T_GNRL_ONLINE_USER>& list, const T_GNRL_ONLINE_USER* pDest);
     // QWidget interface
 protected:

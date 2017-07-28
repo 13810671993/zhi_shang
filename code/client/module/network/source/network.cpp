@@ -64,7 +64,6 @@ void CNetwork::SLOT_RecvMessage()
     QByteArray qstrMessage = m_pSocket->readAll();
     UINT32 u32MsgType = 0;
     std::string strStructBuf;
-    UINT32 u32PbLen = qstrMessage.length();
     UINT32 u32Ret = CAppProtocol::ProtoBuf2Struct(qstrMessage.data(), qstrMessage.length(), u32MsgType, strStructBuf);
     qDebug() << "proto ret = " << u32Ret << " MsgType = " << u32MsgType << " MsgLen = " << qstrMessage.length();
     if (u32Ret == 0)

@@ -3,25 +3,27 @@
 
 #include <QApplication>
 #include <QObject>
+#include <QWidget>
 
-class QWidget;
-class CPageMgr : QObject
+#include "common/data_type.h"
+
+class CPageMgr : public QWidget
 {
     Q_OBJECT
 
 public:
-    CPageMgr(const QApplication* pApp);
+    CPageMgr(const QApplication* pApp = NULL);
     ~CPageMgr();
 
 public slots:
-    void SLOT_LoginSuccess();
+    void SLOT_LoginSuccess(QString);
 
 public:
     void StartLogin();
 
 private:
-    QWidget*	m_pLoginPage;
-    QWidget*	m_pHomePage;
+    CPageMgr*			m_pLoginPage;
+    CPageMgr*			m_pHomePage;
     const QApplication*	m_pApp;
 
 };

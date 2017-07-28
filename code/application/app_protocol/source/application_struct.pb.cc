@@ -29,9 +29,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* T_APP_REGIST_USER_RSP_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   T_APP_REGIST_USER_RSP_reflection_ = NULL;
-const ::google::protobuf::Descriptor* T_APP_FIRST_TEST_REQ_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  T_APP_FIRST_TEST_REQ_reflection_ = NULL;
 const ::google::protobuf::Descriptor* T_APP_MODIFY_PASSWD_REQ_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   T_APP_MODIFY_PASSWD_REQ_reflection_ = NULL;
@@ -59,9 +56,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* T_APP_GET_ONLINE_USER_RSP_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   T_APP_GET_ONLINE_USER_RSP_reflection_ = NULL;
-const ::google::protobuf::Descriptor* T_APP_FIRST_TEST_RSP_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  T_APP_FIRST_TEST_RSP_reflection_ = NULL;
 
 }  // namespace
 
@@ -120,23 +114,7 @@ void protobuf_AssignDesc_application_5fstruct_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(T_APP_REGIST_USER_RSP));
-  T_APP_FIRST_TEST_REQ_descriptor_ = file->message_type(3);
-  static const int T_APP_FIRST_TEST_REQ_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_FIRST_TEST_REQ, u32result_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_FIRST_TEST_REQ, u32test_),
-  };
-  T_APP_FIRST_TEST_REQ_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      T_APP_FIRST_TEST_REQ_descriptor_,
-      T_APP_FIRST_TEST_REQ::default_instance_,
-      T_APP_FIRST_TEST_REQ_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_FIRST_TEST_REQ, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_FIRST_TEST_REQ, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(T_APP_FIRST_TEST_REQ));
-  T_APP_MODIFY_PASSWD_REQ_descriptor_ = file->message_type(4);
+  T_APP_MODIFY_PASSWD_REQ_descriptor_ = file->message_type(3);
   static const int T_APP_MODIFY_PASSWD_REQ_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_MODIFY_PASSWD_REQ, u64context_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_MODIFY_PASSWD_REQ, acusername_),
@@ -154,7 +132,7 @@ void protobuf_AssignDesc_application_5fstruct_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(T_APP_MODIFY_PASSWD_REQ));
-  T_APP_SEND_MESSAGE_REQ_descriptor_ = file->message_type(5);
+  T_APP_SEND_MESSAGE_REQ_descriptor_ = file->message_type(4);
   static const int T_APP_SEND_MESSAGE_REQ_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_SEND_MESSAGE_REQ, u64context_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_SEND_MESSAGE_REQ, acobjid_),
@@ -171,7 +149,7 @@ void protobuf_AssignDesc_application_5fstruct_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(T_APP_SEND_MESSAGE_REQ));
-  T_APP_MODIFY_PASSWD_RSP_descriptor_ = file->message_type(6);
+  T_APP_MODIFY_PASSWD_RSP_descriptor_ = file->message_type(5);
   static const int T_APP_MODIFY_PASSWD_RSP_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_MODIFY_PASSWD_RSP, u64context_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_MODIFY_PASSWD_RSP, u32result_),
@@ -187,10 +165,11 @@ void protobuf_AssignDesc_application_5fstruct_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(T_APP_MODIFY_PASSWD_RSP));
-  T_APP_LOGIN_RSP_descriptor_ = file->message_type(7);
-  static const int T_APP_LOGIN_RSP_offsets_[2] = {
+  T_APP_LOGIN_RSP_descriptor_ = file->message_type(6);
+  static const int T_APP_LOGIN_RSP_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_LOGIN_RSP, u64context_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_LOGIN_RSP, u32result_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_LOGIN_RSP, acusername_),
   };
   T_APP_LOGIN_RSP_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -203,7 +182,7 @@ void protobuf_AssignDesc_application_5fstruct_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(T_APP_LOGIN_RSP));
-  T_APP_UPDATE_ONLINE_USER_NTF_descriptor_ = file->message_type(8);
+  T_APP_UPDATE_ONLINE_USER_NTF_descriptor_ = file->message_type(7);
   static const int T_APP_UPDATE_ONLINE_USER_NTF_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_UPDATE_ONLINE_USER_NTF, u32usernum_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_UPDATE_ONLINE_USER_NTF, atonlineuser_),
@@ -219,7 +198,7 @@ void protobuf_AssignDesc_application_5fstruct_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(T_APP_UPDATE_ONLINE_USER_NTF));
-  T_APP_TRANSMIT_MESSAGE_ACT_descriptor_ = file->message_type(9);
+  T_APP_TRANSMIT_MESSAGE_ACT_descriptor_ = file->message_type(8);
   static const int T_APP_TRANSMIT_MESSAGE_ACT_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_TRANSMIT_MESSAGE_ACT, acfrmid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_TRANSMIT_MESSAGE_ACT, acmessage_),
@@ -235,10 +214,11 @@ void protobuf_AssignDesc_application_5fstruct_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(T_APP_TRANSMIT_MESSAGE_ACT));
-  T_APP_SEND_MESSAGE_RSP_descriptor_ = file->message_type(10);
-  static const int T_APP_SEND_MESSAGE_RSP_offsets_[2] = {
+  T_APP_SEND_MESSAGE_RSP_descriptor_ = file->message_type(9);
+  static const int T_APP_SEND_MESSAGE_RSP_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_SEND_MESSAGE_RSP, u64context_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_SEND_MESSAGE_RSP, u32result_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_SEND_MESSAGE_RSP, acobjid_),
   };
   T_APP_SEND_MESSAGE_RSP_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -251,7 +231,7 @@ void protobuf_AssignDesc_application_5fstruct_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(T_APP_SEND_MESSAGE_RSP));
-  T_APP_REGIST_USER_REQ_descriptor_ = file->message_type(11);
+  T_APP_REGIST_USER_REQ_descriptor_ = file->message_type(10);
   static const int T_APP_REGIST_USER_REQ_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_REGIST_USER_REQ, u64context_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_REGIST_USER_REQ, acusername_),
@@ -269,7 +249,7 @@ void protobuf_AssignDesc_application_5fstruct_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(T_APP_REGIST_USER_REQ));
-  T_APP_GET_ONLINE_USER_RSP_descriptor_ = file->message_type(12);
+  T_APP_GET_ONLINE_USER_RSP_descriptor_ = file->message_type(11);
   static const int T_APP_GET_ONLINE_USER_RSP_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_GET_ONLINE_USER_RSP, u64context_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_GET_ONLINE_USER_RSP, u32result_),
@@ -287,22 +267,6 @@ void protobuf_AssignDesc_application_5fstruct_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(T_APP_GET_ONLINE_USER_RSP));
-  T_APP_FIRST_TEST_RSP_descriptor_ = file->message_type(13);
-  static const int T_APP_FIRST_TEST_RSP_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_FIRST_TEST_RSP, u32result_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_FIRST_TEST_RSP, u32test_),
-  };
-  T_APP_FIRST_TEST_RSP_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      T_APP_FIRST_TEST_RSP_descriptor_,
-      T_APP_FIRST_TEST_RSP::default_instance_,
-      T_APP_FIRST_TEST_RSP_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_FIRST_TEST_RSP, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(T_APP_FIRST_TEST_RSP, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(T_APP_FIRST_TEST_RSP));
 }
 
 namespace {
@@ -322,8 +286,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     T_APP_REGIST_USER_RSP_descriptor_, &T_APP_REGIST_USER_RSP::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    T_APP_FIRST_TEST_REQ_descriptor_, &T_APP_FIRST_TEST_REQ::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     T_APP_MODIFY_PASSWD_REQ_descriptor_, &T_APP_MODIFY_PASSWD_REQ::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     T_APP_SEND_MESSAGE_REQ_descriptor_, &T_APP_SEND_MESSAGE_REQ::default_instance());
@@ -341,8 +303,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
     T_APP_REGIST_USER_REQ_descriptor_, &T_APP_REGIST_USER_REQ::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     T_APP_GET_ONLINE_USER_RSP_descriptor_, &T_APP_GET_ONLINE_USER_RSP::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    T_APP_FIRST_TEST_RSP_descriptor_, &T_APP_FIRST_TEST_RSP::default_instance());
 }
 
 }  // namespace
@@ -354,8 +314,6 @@ void protobuf_ShutdownFile_application_5fstruct_2eproto() {
   delete T_APP_GET_ONLINE_USER_REQ_reflection_;
   delete T_APP_REGIST_USER_RSP::default_instance_;
   delete T_APP_REGIST_USER_RSP_reflection_;
-  delete T_APP_FIRST_TEST_REQ::default_instance_;
-  delete T_APP_FIRST_TEST_REQ_reflection_;
   delete T_APP_MODIFY_PASSWD_REQ::default_instance_;
   delete T_APP_MODIFY_PASSWD_REQ_reflection_;
   delete T_APP_SEND_MESSAGE_REQ::default_instance_;
@@ -374,8 +332,6 @@ void protobuf_ShutdownFile_application_5fstruct_2eproto() {
   delete T_APP_REGIST_USER_REQ_reflection_;
   delete T_APP_GET_ONLINE_USER_RSP::default_instance_;
   delete T_APP_GET_ONLINE_USER_RSP_reflection_;
-  delete T_APP_FIRST_TEST_RSP::default_instance_;
-  delete T_APP_FIRST_TEST_RSP_reflection_;
 }
 
 void protobuf_AddDesc_application_5fstruct_2eproto() {
@@ -392,36 +348,33 @@ void protobuf_AddDesc_application_5fstruct_2eproto() {
     "\022\020\n\010acPasswd\030\003 \002(\014\"/\n\031T_APP_GET_ONLINE_U"
     "SER_REQ\022\022\n\nu64Context\030\001 \002(\006\">\n\025T_APP_REG"
     "IST_USER_RSP\022\022\n\nu64Context\030\001 \002(\006\022\021\n\tu32R"
-    "esult\030\002 \002(\007\":\n\024T_APP_FIRST_TEST_REQ\022\021\n\tu"
-    "32Result\030\001 \002(\007\022\017\n\007u32Test\030\002 \002(\007\"k\n\027T_APP"
-    "_MODIFY_PASSWD_REQ\022\022\n\nu64Context\030\001 \002(\006\022\022"
-    "\n\nacUserName\030\002 \002(\014\022\023\n\013acOldPasswd\030\003 \002(\014\022"
-    "\023\n\013acNewPasswd\030\004 \002(\014\"P\n\026T_APP_SEND_MESSA"
-    "GE_REQ\022\022\n\nu64Context\030\001 \002(\006\022\017\n\007acObjID\030\002 "
-    "\002(\014\022\021\n\tacMessage\030\003 \002(\014\"@\n\027T_APP_MODIFY_P"
-    "ASSWD_RSP\022\022\n\nu64Context\030\001 \002(\006\022\021\n\tu32Resu"
-    "lt\030\002 \002(\007\"8\n\017T_APP_LOGIN_RSP\022\022\n\nu64Contex"
-    "t\030\001 \002(\006\022\021\n\tu32Result\030\002 \002(\007\"e\n\034T_APP_UPDA"
+    "esult\030\002 \002(\007\"k\n\027T_APP_MODIFY_PASSWD_REQ\022\022"
+    "\n\nu64Context\030\001 \002(\006\022\022\n\nacUserName\030\002 \002(\014\022\023"
+    "\n\013acOldPasswd\030\003 \002(\014\022\023\n\013acNewPasswd\030\004 \002(\014"
+    "\"P\n\026T_APP_SEND_MESSAGE_REQ\022\022\n\nu64Context"
+    "\030\001 \002(\006\022\017\n\007acObjID\030\002 \002(\014\022\021\n\tacMessage\030\003 \002"
+    "(\014\"@\n\027T_APP_MODIFY_PASSWD_RSP\022\022\n\nu64Cont"
+    "ext\030\001 \002(\006\022\021\n\tu32Result\030\002 \002(\007\"L\n\017T_APP_LO"
+    "GIN_RSP\022\022\n\nu64Context\030\001 \002(\006\022\021\n\tu32Result"
+    "\030\002 \002(\007\022\022\n\nacUserName\030\003 \002(\014\"e\n\034T_APP_UPDA"
     "TE_ONLINE_USER_NTF\022\022\n\nu32UserNum\030\001 \002(\007\0221"
     "\n\014atOnlineUser\030\002 \003(\0132\033.general.T_GNRL_ON"
     "LINE_USER\"@\n\032T_APP_TRANSMIT_MESSAGE_ACT\022"
-    "\017\n\007acFrmID\030\001 \002(\014\022\021\n\tacMessage\030\002 \002(\014\"\?\n\026T"
+    "\017\n\007acFrmID\030\001 \002(\014\022\021\n\tacMessage\030\002 \002(\014\"P\n\026T"
     "_APP_SEND_MESSAGE_RSP\022\022\n\nu64Context\030\001 \002("
-    "\006\022\021\n\tu32Result\030\002 \002(\007\"a\n\025T_APP_REGIST_USE"
-    "R_REQ\022\022\n\nu64Context\030\001 \002(\006\022\022\n\nacUserName\030"
-    "\002 \002(\014\022\020\n\010acPasswd\030\003 \002(\014\022\016\n\006u32Sex\030\004 \002(\007\""
-    "\211\001\n\031T_APP_GET_ONLINE_USER_RSP\022\022\n\nu64Cont"
-    "ext\030\001 \002(\006\022\021\n\tu32Result\030\002 \002(\007\022\022\n\nu32UserN"
-    "um\030\003 \002(\007\0221\n\014atOnlineUser\030\004 \003(\0132\033.general"
-    ".T_GNRL_ONLINE_USER\":\n\024T_APP_FIRST_TEST_"
-    "RSP\022\021\n\tu32Result\030\001 \002(\007\022\017\n\007u32Test\030\002 \002(\007B"
-    "\024B\022application_struct", 1181);
+    "\006\022\021\n\tu32Result\030\002 \002(\007\022\017\n\007acObjID\030\003 \002(\014\"a\n"
+    "\025T_APP_REGIST_USER_REQ\022\022\n\nu64Context\030\001 \002"
+    "(\006\022\022\n\nacUserName\030\002 \002(\014\022\020\n\010acPasswd\030\003 \002(\014"
+    "\022\016\n\006u32Sex\030\004 \002(\007\"\211\001\n\031T_APP_GET_ONLINE_US"
+    "ER_RSP\022\022\n\nu64Context\030\001 \002(\006\022\021\n\tu32Result\030"
+    "\002 \002(\007\022\022\n\nu32UserNum\030\003 \002(\007\0221\n\014atOnlineUse"
+    "r\030\004 \003(\0132\033.general.T_GNRL_ONLINE_USERB\024B\022"
+    "application_struct", 1098);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "application_struct.proto", &protobuf_RegisterTypes);
   T_APP_LOGIN_REQ::default_instance_ = new T_APP_LOGIN_REQ();
   T_APP_GET_ONLINE_USER_REQ::default_instance_ = new T_APP_GET_ONLINE_USER_REQ();
   T_APP_REGIST_USER_RSP::default_instance_ = new T_APP_REGIST_USER_RSP();
-  T_APP_FIRST_TEST_REQ::default_instance_ = new T_APP_FIRST_TEST_REQ();
   T_APP_MODIFY_PASSWD_REQ::default_instance_ = new T_APP_MODIFY_PASSWD_REQ();
   T_APP_SEND_MESSAGE_REQ::default_instance_ = new T_APP_SEND_MESSAGE_REQ();
   T_APP_MODIFY_PASSWD_RSP::default_instance_ = new T_APP_MODIFY_PASSWD_RSP();
@@ -431,11 +384,9 @@ void protobuf_AddDesc_application_5fstruct_2eproto() {
   T_APP_SEND_MESSAGE_RSP::default_instance_ = new T_APP_SEND_MESSAGE_RSP();
   T_APP_REGIST_USER_REQ::default_instance_ = new T_APP_REGIST_USER_REQ();
   T_APP_GET_ONLINE_USER_RSP::default_instance_ = new T_APP_GET_ONLINE_USER_RSP();
-  T_APP_FIRST_TEST_RSP::default_instance_ = new T_APP_FIRST_TEST_RSP();
   T_APP_LOGIN_REQ::default_instance_->InitAsDefaultInstance();
   T_APP_GET_ONLINE_USER_REQ::default_instance_->InitAsDefaultInstance();
   T_APP_REGIST_USER_RSP::default_instance_->InitAsDefaultInstance();
-  T_APP_FIRST_TEST_REQ::default_instance_->InitAsDefaultInstance();
   T_APP_MODIFY_PASSWD_REQ::default_instance_->InitAsDefaultInstance();
   T_APP_SEND_MESSAGE_REQ::default_instance_->InitAsDefaultInstance();
   T_APP_MODIFY_PASSWD_RSP::default_instance_->InitAsDefaultInstance();
@@ -445,7 +396,6 @@ void protobuf_AddDesc_application_5fstruct_2eproto() {
   T_APP_SEND_MESSAGE_RSP::default_instance_->InitAsDefaultInstance();
   T_APP_REGIST_USER_REQ::default_instance_->InitAsDefaultInstance();
   T_APP_GET_ONLINE_USER_RSP::default_instance_->InitAsDefaultInstance();
-  T_APP_FIRST_TEST_RSP::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_application_5fstruct_2eproto);
 }
 
@@ -1207,251 +1157,6 @@ void T_APP_REGIST_USER_RSP::Swap(T_APP_REGIST_USER_RSP* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = T_APP_REGIST_USER_RSP_descriptor_;
   metadata.reflection = T_APP_REGIST_USER_RSP_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int T_APP_FIRST_TEST_REQ::kU32ResultFieldNumber;
-const int T_APP_FIRST_TEST_REQ::kU32TestFieldNumber;
-#endif  // !_MSC_VER
-
-T_APP_FIRST_TEST_REQ::T_APP_FIRST_TEST_REQ()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void T_APP_FIRST_TEST_REQ::InitAsDefaultInstance() {
-}
-
-T_APP_FIRST_TEST_REQ::T_APP_FIRST_TEST_REQ(const T_APP_FIRST_TEST_REQ& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void T_APP_FIRST_TEST_REQ::SharedCtor() {
-  _cached_size_ = 0;
-  u32result_ = 0u;
-  u32test_ = 0u;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-T_APP_FIRST_TEST_REQ::~T_APP_FIRST_TEST_REQ() {
-  SharedDtor();
-}
-
-void T_APP_FIRST_TEST_REQ::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void T_APP_FIRST_TEST_REQ::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* T_APP_FIRST_TEST_REQ::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return T_APP_FIRST_TEST_REQ_descriptor_;
-}
-
-const T_APP_FIRST_TEST_REQ& T_APP_FIRST_TEST_REQ::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_application_5fstruct_2eproto();
-  return *default_instance_;
-}
-
-T_APP_FIRST_TEST_REQ* T_APP_FIRST_TEST_REQ::default_instance_ = NULL;
-
-T_APP_FIRST_TEST_REQ* T_APP_FIRST_TEST_REQ::New() const {
-  return new T_APP_FIRST_TEST_REQ;
-}
-
-void T_APP_FIRST_TEST_REQ::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    u32result_ = 0u;
-    u32test_ = 0u;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool T_APP_FIRST_TEST_REQ::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required fixed32 u32Result = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
-                 input, &u32result_)));
-          set_has_u32result();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(21)) goto parse_u32Test;
-        break;
-      }
-
-      // required fixed32 u32Test = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_u32Test:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
-                 input, &u32test_)));
-          set_has_u32test();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void T_APP_FIRST_TEST_REQ::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required fixed32 u32Result = 1;
-  if (has_u32result()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFixed32(1, this->u32result(), output);
-  }
-
-  // required fixed32 u32Test = 2;
-  if (has_u32test()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFixed32(2, this->u32test(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* T_APP_FIRST_TEST_REQ::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required fixed32 u32Result = 1;
-  if (has_u32result()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFixed32ToArray(1, this->u32result(), target);
-  }
-
-  // required fixed32 u32Test = 2;
-  if (has_u32test()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFixed32ToArray(2, this->u32test(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int T_APP_FIRST_TEST_REQ::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required fixed32 u32Result = 1;
-    if (has_u32result()) {
-      total_size += 1 + 4;
-    }
-
-    // required fixed32 u32Test = 2;
-    if (has_u32test()) {
-      total_size += 1 + 4;
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void T_APP_FIRST_TEST_REQ::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const T_APP_FIRST_TEST_REQ* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const T_APP_FIRST_TEST_REQ*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void T_APP_FIRST_TEST_REQ::MergeFrom(const T_APP_FIRST_TEST_REQ& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_u32result()) {
-      set_u32result(from.u32result());
-    }
-    if (from.has_u32test()) {
-      set_u32test(from.u32test());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void T_APP_FIRST_TEST_REQ::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void T_APP_FIRST_TEST_REQ::CopyFrom(const T_APP_FIRST_TEST_REQ& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool T_APP_FIRST_TEST_REQ::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
-
-  return true;
-}
-
-void T_APP_FIRST_TEST_REQ::Swap(T_APP_FIRST_TEST_REQ* other) {
-  if (other != this) {
-    std::swap(u32result_, other->u32result_);
-    std::swap(u32test_, other->u32test_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata T_APP_FIRST_TEST_REQ::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = T_APP_FIRST_TEST_REQ_descriptor_;
-  metadata.reflection = T_APP_FIRST_TEST_REQ_reflection_;
   return metadata;
 }
 
@@ -2360,6 +2065,7 @@ void T_APP_MODIFY_PASSWD_RSP::Swap(T_APP_MODIFY_PASSWD_RSP* other) {
 #ifndef _MSC_VER
 const int T_APP_LOGIN_RSP::kU64ContextFieldNumber;
 const int T_APP_LOGIN_RSP::kU32ResultFieldNumber;
+const int T_APP_LOGIN_RSP::kAcUserNameFieldNumber;
 #endif  // !_MSC_VER
 
 T_APP_LOGIN_RSP::T_APP_LOGIN_RSP()
@@ -2380,6 +2086,7 @@ void T_APP_LOGIN_RSP::SharedCtor() {
   _cached_size_ = 0;
   u64context_ = GOOGLE_ULONGLONG(0);
   u32result_ = 0u;
+  acusername_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -2388,6 +2095,9 @@ T_APP_LOGIN_RSP::~T_APP_LOGIN_RSP() {
 }
 
 void T_APP_LOGIN_RSP::SharedDtor() {
+  if (acusername_ != &::google::protobuf::internal::kEmptyString) {
+    delete acusername_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -2417,6 +2127,11 @@ void T_APP_LOGIN_RSP::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     u64context_ = GOOGLE_ULONGLONG(0);
     u32result_ = 0u;
+    if (has_acusername()) {
+      if (acusername_ != &::google::protobuf::internal::kEmptyString) {
+        acusername_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -2455,6 +2170,20 @@ bool T_APP_LOGIN_RSP::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(26)) goto parse_acUserName;
+        break;
+      }
+
+      // required bytes acUserName = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_acUserName:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_acusername()));
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -2487,6 +2216,12 @@ void T_APP_LOGIN_RSP::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFixed32(2, this->u32result(), output);
   }
 
+  // required bytes acUserName = 3;
+  if (has_acusername()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      3, this->acusername(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -2503,6 +2238,13 @@ void T_APP_LOGIN_RSP::SerializeWithCachedSizes(
   // required fixed32 u32Result = 2;
   if (has_u32result()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFixed32ToArray(2, this->u32result(), target);
+  }
+
+  // required bytes acUserName = 3;
+  if (has_acusername()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        3, this->acusername(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -2524,6 +2266,13 @@ int T_APP_LOGIN_RSP::ByteSize() const {
     // required fixed32 u32Result = 2;
     if (has_u32result()) {
       total_size += 1 + 4;
+    }
+
+    // required bytes acUserName = 3;
+    if (has_acusername()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->acusername());
     }
 
   }
@@ -2559,6 +2308,9 @@ void T_APP_LOGIN_RSP::MergeFrom(const T_APP_LOGIN_RSP& from) {
     if (from.has_u32result()) {
       set_u32result(from.u32result());
     }
+    if (from.has_acusername()) {
+      set_acusername(from.acusername());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -2576,7 +2328,7 @@ void T_APP_LOGIN_RSP::CopyFrom(const T_APP_LOGIN_RSP& from) {
 }
 
 bool T_APP_LOGIN_RSP::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -2585,6 +2337,7 @@ void T_APP_LOGIN_RSP::Swap(T_APP_LOGIN_RSP* other) {
   if (other != this) {
     std::swap(u64context_, other->u64context_);
     std::swap(u32result_, other->u32result_);
+    std::swap(acusername_, other->acusername_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -3120,6 +2873,7 @@ void T_APP_TRANSMIT_MESSAGE_ACT::Swap(T_APP_TRANSMIT_MESSAGE_ACT* other) {
 #ifndef _MSC_VER
 const int T_APP_SEND_MESSAGE_RSP::kU64ContextFieldNumber;
 const int T_APP_SEND_MESSAGE_RSP::kU32ResultFieldNumber;
+const int T_APP_SEND_MESSAGE_RSP::kAcObjIDFieldNumber;
 #endif  // !_MSC_VER
 
 T_APP_SEND_MESSAGE_RSP::T_APP_SEND_MESSAGE_RSP()
@@ -3140,6 +2894,7 @@ void T_APP_SEND_MESSAGE_RSP::SharedCtor() {
   _cached_size_ = 0;
   u64context_ = GOOGLE_ULONGLONG(0);
   u32result_ = 0u;
+  acobjid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -3148,6 +2903,9 @@ T_APP_SEND_MESSAGE_RSP::~T_APP_SEND_MESSAGE_RSP() {
 }
 
 void T_APP_SEND_MESSAGE_RSP::SharedDtor() {
+  if (acobjid_ != &::google::protobuf::internal::kEmptyString) {
+    delete acobjid_;
+  }
   if (this != default_instance_) {
   }
 }
@@ -3177,6 +2935,11 @@ void T_APP_SEND_MESSAGE_RSP::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     u64context_ = GOOGLE_ULONGLONG(0);
     u32result_ = 0u;
+    if (has_acobjid()) {
+      if (acobjid_ != &::google::protobuf::internal::kEmptyString) {
+        acobjid_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -3215,6 +2978,20 @@ bool T_APP_SEND_MESSAGE_RSP::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(26)) goto parse_acObjID;
+        break;
+      }
+
+      // required bytes acObjID = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_acObjID:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_acobjid()));
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -3247,6 +3024,12 @@ void T_APP_SEND_MESSAGE_RSP::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteFixed32(2, this->u32result(), output);
   }
 
+  // required bytes acObjID = 3;
+  if (has_acobjid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      3, this->acobjid(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -3263,6 +3046,13 @@ void T_APP_SEND_MESSAGE_RSP::SerializeWithCachedSizes(
   // required fixed32 u32Result = 2;
   if (has_u32result()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFixed32ToArray(2, this->u32result(), target);
+  }
+
+  // required bytes acObjID = 3;
+  if (has_acobjid()) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        3, this->acobjid(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -3284,6 +3074,13 @@ int T_APP_SEND_MESSAGE_RSP::ByteSize() const {
     // required fixed32 u32Result = 2;
     if (has_u32result()) {
       total_size += 1 + 4;
+    }
+
+    // required bytes acObjID = 3;
+    if (has_acobjid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->acobjid());
     }
 
   }
@@ -3319,6 +3116,9 @@ void T_APP_SEND_MESSAGE_RSP::MergeFrom(const T_APP_SEND_MESSAGE_RSP& from) {
     if (from.has_u32result()) {
       set_u32result(from.u32result());
     }
+    if (from.has_acobjid()) {
+      set_acobjid(from.acobjid());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -3336,7 +3136,7 @@ void T_APP_SEND_MESSAGE_RSP::CopyFrom(const T_APP_SEND_MESSAGE_RSP& from) {
 }
 
 bool T_APP_SEND_MESSAGE_RSP::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -3345,6 +3145,7 @@ void T_APP_SEND_MESSAGE_RSP::Swap(T_APP_SEND_MESSAGE_RSP* other) {
   if (other != this) {
     std::swap(u64context_, other->u64context_);
     std::swap(u32result_, other->u32result_);
+    std::swap(acobjid_, other->acobjid_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -4023,251 +3824,6 @@ void T_APP_GET_ONLINE_USER_RSP::Swap(T_APP_GET_ONLINE_USER_RSP* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = T_APP_GET_ONLINE_USER_RSP_descriptor_;
   metadata.reflection = T_APP_GET_ONLINE_USER_RSP_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int T_APP_FIRST_TEST_RSP::kU32ResultFieldNumber;
-const int T_APP_FIRST_TEST_RSP::kU32TestFieldNumber;
-#endif  // !_MSC_VER
-
-T_APP_FIRST_TEST_RSP::T_APP_FIRST_TEST_RSP()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void T_APP_FIRST_TEST_RSP::InitAsDefaultInstance() {
-}
-
-T_APP_FIRST_TEST_RSP::T_APP_FIRST_TEST_RSP(const T_APP_FIRST_TEST_RSP& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void T_APP_FIRST_TEST_RSP::SharedCtor() {
-  _cached_size_ = 0;
-  u32result_ = 0u;
-  u32test_ = 0u;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-T_APP_FIRST_TEST_RSP::~T_APP_FIRST_TEST_RSP() {
-  SharedDtor();
-}
-
-void T_APP_FIRST_TEST_RSP::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void T_APP_FIRST_TEST_RSP::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* T_APP_FIRST_TEST_RSP::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return T_APP_FIRST_TEST_RSP_descriptor_;
-}
-
-const T_APP_FIRST_TEST_RSP& T_APP_FIRST_TEST_RSP::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_application_5fstruct_2eproto();
-  return *default_instance_;
-}
-
-T_APP_FIRST_TEST_RSP* T_APP_FIRST_TEST_RSP::default_instance_ = NULL;
-
-T_APP_FIRST_TEST_RSP* T_APP_FIRST_TEST_RSP::New() const {
-  return new T_APP_FIRST_TEST_RSP;
-}
-
-void T_APP_FIRST_TEST_RSP::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    u32result_ = 0u;
-    u32test_ = 0u;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool T_APP_FIRST_TEST_RSP::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required fixed32 u32Result = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
-                 input, &u32result_)));
-          set_has_u32result();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(21)) goto parse_u32Test;
-        break;
-      }
-
-      // required fixed32 u32Test = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_FIXED32) {
-         parse_u32Test:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
-                 input, &u32test_)));
-          set_has_u32test();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void T_APP_FIRST_TEST_RSP::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required fixed32 u32Result = 1;
-  if (has_u32result()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFixed32(1, this->u32result(), output);
-  }
-
-  // required fixed32 u32Test = 2;
-  if (has_u32test()) {
-    ::google::protobuf::internal::WireFormatLite::WriteFixed32(2, this->u32test(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* T_APP_FIRST_TEST_RSP::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required fixed32 u32Result = 1;
-  if (has_u32result()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFixed32ToArray(1, this->u32result(), target);
-  }
-
-  // required fixed32 u32Test = 2;
-  if (has_u32test()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFixed32ToArray(2, this->u32test(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int T_APP_FIRST_TEST_RSP::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required fixed32 u32Result = 1;
-    if (has_u32result()) {
-      total_size += 1 + 4;
-    }
-
-    // required fixed32 u32Test = 2;
-    if (has_u32test()) {
-      total_size += 1 + 4;
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void T_APP_FIRST_TEST_RSP::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const T_APP_FIRST_TEST_RSP* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const T_APP_FIRST_TEST_RSP*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void T_APP_FIRST_TEST_RSP::MergeFrom(const T_APP_FIRST_TEST_RSP& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_u32result()) {
-      set_u32result(from.u32result());
-    }
-    if (from.has_u32test()) {
-      set_u32test(from.u32test());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void T_APP_FIRST_TEST_RSP::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void T_APP_FIRST_TEST_RSP::CopyFrom(const T_APP_FIRST_TEST_RSP& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool T_APP_FIRST_TEST_RSP::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
-
-  return true;
-}
-
-void T_APP_FIRST_TEST_RSP::Swap(T_APP_FIRST_TEST_RSP* other) {
-  if (other != this) {
-    std::swap(u32result_, other->u32result_);
-    std::swap(u32test_, other->u32test_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata T_APP_FIRST_TEST_RSP::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = T_APP_FIRST_TEST_RSP_descriptor_;
-  metadata.reflection = T_APP_FIRST_TEST_RSP_reflection_;
   return metadata;
 }
 

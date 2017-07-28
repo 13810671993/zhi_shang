@@ -37,7 +37,6 @@ void protobuf_ShutdownFile_application_5fstruct_2eproto();
 class T_APP_LOGIN_REQ;
 class T_APP_GET_ONLINE_USER_REQ;
 class T_APP_REGIST_USER_RSP;
-class T_APP_FIRST_TEST_REQ;
 class T_APP_MODIFY_PASSWD_REQ;
 class T_APP_SEND_MESSAGE_REQ;
 class T_APP_MODIFY_PASSWD_RSP;
@@ -47,7 +46,6 @@ class T_APP_TRANSMIT_MESSAGE_ACT;
 class T_APP_SEND_MESSAGE_RSP;
 class T_APP_REGIST_USER_REQ;
 class T_APP_GET_ONLINE_USER_RSP;
-class T_APP_FIRST_TEST_RSP;
 
 // ===================================================================
 
@@ -334,98 +332,6 @@ class T_APP_REGIST_USER_RSP : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static T_APP_REGIST_USER_RSP* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class T_APP_FIRST_TEST_REQ : public ::google::protobuf::Message {
- public:
-  T_APP_FIRST_TEST_REQ();
-  virtual ~T_APP_FIRST_TEST_REQ();
-
-  T_APP_FIRST_TEST_REQ(const T_APP_FIRST_TEST_REQ& from);
-
-  inline T_APP_FIRST_TEST_REQ& operator=(const T_APP_FIRST_TEST_REQ& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const T_APP_FIRST_TEST_REQ& default_instance();
-
-  void Swap(T_APP_FIRST_TEST_REQ* other);
-
-  // implements Message ----------------------------------------------
-
-  T_APP_FIRST_TEST_REQ* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const T_APP_FIRST_TEST_REQ& from);
-  void MergeFrom(const T_APP_FIRST_TEST_REQ& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required fixed32 u32Result = 1;
-  inline bool has_u32result() const;
-  inline void clear_u32result();
-  static const int kU32ResultFieldNumber = 1;
-  inline ::google::protobuf::uint32 u32result() const;
-  inline void set_u32result(::google::protobuf::uint32 value);
-
-  // required fixed32 u32Test = 2;
-  inline bool has_u32test() const;
-  inline void clear_u32test();
-  static const int kU32TestFieldNumber = 2;
-  inline ::google::protobuf::uint32 u32test() const;
-  inline void set_u32test(::google::protobuf::uint32 value);
-
-  // @@protoc_insertion_point(class_scope:application.T_APP_FIRST_TEST_REQ)
- private:
-  inline void set_has_u32result();
-  inline void clear_has_u32result();
-  inline void set_has_u32test();
-  inline void clear_has_u32test();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::uint32 u32result_;
-  ::google::protobuf::uint32 u32test_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
-
-  friend void  protobuf_AddDesc_application_5fstruct_2eproto();
-  friend void protobuf_AssignDesc_application_5fstruct_2eproto();
-  friend void protobuf_ShutdownFile_application_5fstruct_2eproto();
-
-  void InitAsDefaultInstance();
-  static T_APP_FIRST_TEST_REQ* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -828,20 +734,35 @@ class T_APP_LOGIN_RSP : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 u32result() const;
   inline void set_u32result(::google::protobuf::uint32 value);
 
+  // required bytes acUserName = 3;
+  inline bool has_acusername() const;
+  inline void clear_acusername();
+  static const int kAcUserNameFieldNumber = 3;
+  inline const ::std::string& acusername() const;
+  inline void set_acusername(const ::std::string& value);
+  inline void set_acusername(const char* value);
+  inline void set_acusername(const void* value, size_t size);
+  inline ::std::string* mutable_acusername();
+  inline ::std::string* release_acusername();
+  inline void set_allocated_acusername(::std::string* acusername);
+
   // @@protoc_insertion_point(class_scope:application.T_APP_LOGIN_RSP)
  private:
   inline void set_has_u64context();
   inline void clear_has_u64context();
   inline void set_has_u32result();
   inline void clear_has_u32result();
+  inline void set_has_acusername();
+  inline void clear_has_acusername();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint64 u64context_;
+  ::std::string* acusername_;
   ::google::protobuf::uint32 u32result_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_application_5fstruct_2eproto();
   friend void protobuf_AssignDesc_application_5fstruct_2eproto();
@@ -1117,20 +1038,35 @@ class T_APP_SEND_MESSAGE_RSP : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 u32result() const;
   inline void set_u32result(::google::protobuf::uint32 value);
 
+  // required bytes acObjID = 3;
+  inline bool has_acobjid() const;
+  inline void clear_acobjid();
+  static const int kAcObjIDFieldNumber = 3;
+  inline const ::std::string& acobjid() const;
+  inline void set_acobjid(const ::std::string& value);
+  inline void set_acobjid(const char* value);
+  inline void set_acobjid(const void* value, size_t size);
+  inline ::std::string* mutable_acobjid();
+  inline ::std::string* release_acobjid();
+  inline void set_allocated_acobjid(::std::string* acobjid);
+
   // @@protoc_insertion_point(class_scope:application.T_APP_SEND_MESSAGE_RSP)
  private:
   inline void set_has_u64context();
   inline void clear_has_u64context();
   inline void set_has_u32result();
   inline void clear_has_u32result();
+  inline void set_has_acobjid();
+  inline void clear_has_acobjid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint64 u64context_;
+  ::std::string* acobjid_;
   ::google::protobuf::uint32 u32result_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_application_5fstruct_2eproto();
   friend void protobuf_AssignDesc_application_5fstruct_2eproto();
@@ -1376,98 +1312,6 @@ class T_APP_GET_ONLINE_USER_RSP : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static T_APP_GET_ONLINE_USER_RSP* default_instance_;
 };
-// -------------------------------------------------------------------
-
-class T_APP_FIRST_TEST_RSP : public ::google::protobuf::Message {
- public:
-  T_APP_FIRST_TEST_RSP();
-  virtual ~T_APP_FIRST_TEST_RSP();
-
-  T_APP_FIRST_TEST_RSP(const T_APP_FIRST_TEST_RSP& from);
-
-  inline T_APP_FIRST_TEST_RSP& operator=(const T_APP_FIRST_TEST_RSP& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const T_APP_FIRST_TEST_RSP& default_instance();
-
-  void Swap(T_APP_FIRST_TEST_RSP* other);
-
-  // implements Message ----------------------------------------------
-
-  T_APP_FIRST_TEST_RSP* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const T_APP_FIRST_TEST_RSP& from);
-  void MergeFrom(const T_APP_FIRST_TEST_RSP& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required fixed32 u32Result = 1;
-  inline bool has_u32result() const;
-  inline void clear_u32result();
-  static const int kU32ResultFieldNumber = 1;
-  inline ::google::protobuf::uint32 u32result() const;
-  inline void set_u32result(::google::protobuf::uint32 value);
-
-  // required fixed32 u32Test = 2;
-  inline bool has_u32test() const;
-  inline void clear_u32test();
-  static const int kU32TestFieldNumber = 2;
-  inline ::google::protobuf::uint32 u32test() const;
-  inline void set_u32test(::google::protobuf::uint32 value);
-
-  // @@protoc_insertion_point(class_scope:application.T_APP_FIRST_TEST_RSP)
- private:
-  inline void set_has_u32result();
-  inline void clear_has_u32result();
-  inline void set_has_u32test();
-  inline void clear_has_u32test();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::uint32 u32result_;
-  ::google::protobuf::uint32 u32test_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
-
-  friend void  protobuf_AddDesc_application_5fstruct_2eproto();
-  friend void protobuf_AssignDesc_application_5fstruct_2eproto();
-  friend void protobuf_ShutdownFile_application_5fstruct_2eproto();
-
-  void InitAsDefaultInstance();
-  static T_APP_FIRST_TEST_RSP* default_instance_;
-};
 // ===================================================================
 
 
@@ -1709,54 +1553,6 @@ inline ::google::protobuf::uint32 T_APP_REGIST_USER_RSP::u32result() const {
 inline void T_APP_REGIST_USER_RSP::set_u32result(::google::protobuf::uint32 value) {
   set_has_u32result();
   u32result_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// T_APP_FIRST_TEST_REQ
-
-// required fixed32 u32Result = 1;
-inline bool T_APP_FIRST_TEST_REQ::has_u32result() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void T_APP_FIRST_TEST_REQ::set_has_u32result() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void T_APP_FIRST_TEST_REQ::clear_has_u32result() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void T_APP_FIRST_TEST_REQ::clear_u32result() {
-  u32result_ = 0u;
-  clear_has_u32result();
-}
-inline ::google::protobuf::uint32 T_APP_FIRST_TEST_REQ::u32result() const {
-  return u32result_;
-}
-inline void T_APP_FIRST_TEST_REQ::set_u32result(::google::protobuf::uint32 value) {
-  set_has_u32result();
-  u32result_ = value;
-}
-
-// required fixed32 u32Test = 2;
-inline bool T_APP_FIRST_TEST_REQ::has_u32test() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void T_APP_FIRST_TEST_REQ::set_has_u32test() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void T_APP_FIRST_TEST_REQ::clear_has_u32test() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void T_APP_FIRST_TEST_REQ::clear_u32test() {
-  u32test_ = 0u;
-  clear_has_u32test();
-}
-inline ::google::protobuf::uint32 T_APP_FIRST_TEST_REQ::u32test() const {
-  return u32test_;
-}
-inline void T_APP_FIRST_TEST_REQ::set_u32test(::google::protobuf::uint32 value) {
-  set_has_u32test();
-  u32test_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -2257,6 +2053,76 @@ inline void T_APP_LOGIN_RSP::set_u32result(::google::protobuf::uint32 value) {
   u32result_ = value;
 }
 
+// required bytes acUserName = 3;
+inline bool T_APP_LOGIN_RSP::has_acusername() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void T_APP_LOGIN_RSP::set_has_acusername() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void T_APP_LOGIN_RSP::clear_has_acusername() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void T_APP_LOGIN_RSP::clear_acusername() {
+  if (acusername_ != &::google::protobuf::internal::kEmptyString) {
+    acusername_->clear();
+  }
+  clear_has_acusername();
+}
+inline const ::std::string& T_APP_LOGIN_RSP::acusername() const {
+  return *acusername_;
+}
+inline void T_APP_LOGIN_RSP::set_acusername(const ::std::string& value) {
+  set_has_acusername();
+  if (acusername_ == &::google::protobuf::internal::kEmptyString) {
+    acusername_ = new ::std::string;
+  }
+  acusername_->assign(value);
+}
+inline void T_APP_LOGIN_RSP::set_acusername(const char* value) {
+  set_has_acusername();
+  if (acusername_ == &::google::protobuf::internal::kEmptyString) {
+    acusername_ = new ::std::string;
+  }
+  acusername_->assign(value);
+}
+inline void T_APP_LOGIN_RSP::set_acusername(const void* value, size_t size) {
+  set_has_acusername();
+  if (acusername_ == &::google::protobuf::internal::kEmptyString) {
+    acusername_ = new ::std::string;
+  }
+  acusername_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* T_APP_LOGIN_RSP::mutable_acusername() {
+  set_has_acusername();
+  if (acusername_ == &::google::protobuf::internal::kEmptyString) {
+    acusername_ = new ::std::string;
+  }
+  return acusername_;
+}
+inline ::std::string* T_APP_LOGIN_RSP::release_acusername() {
+  clear_has_acusername();
+  if (acusername_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = acusername_;
+    acusername_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void T_APP_LOGIN_RSP::set_allocated_acusername(::std::string* acusername) {
+  if (acusername_ != &::google::protobuf::internal::kEmptyString) {
+    delete acusername_;
+  }
+  if (acusername) {
+    set_has_acusername();
+    acusername_ = acusername;
+  } else {
+    clear_has_acusername();
+    acusername_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
 // -------------------------------------------------------------------
 
 // T_APP_UPDATE_ONLINE_USER_NTF
@@ -2498,6 +2364,76 @@ inline ::google::protobuf::uint32 T_APP_SEND_MESSAGE_RSP::u32result() const {
 inline void T_APP_SEND_MESSAGE_RSP::set_u32result(::google::protobuf::uint32 value) {
   set_has_u32result();
   u32result_ = value;
+}
+
+// required bytes acObjID = 3;
+inline bool T_APP_SEND_MESSAGE_RSP::has_acobjid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void T_APP_SEND_MESSAGE_RSP::set_has_acobjid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void T_APP_SEND_MESSAGE_RSP::clear_has_acobjid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void T_APP_SEND_MESSAGE_RSP::clear_acobjid() {
+  if (acobjid_ != &::google::protobuf::internal::kEmptyString) {
+    acobjid_->clear();
+  }
+  clear_has_acobjid();
+}
+inline const ::std::string& T_APP_SEND_MESSAGE_RSP::acobjid() const {
+  return *acobjid_;
+}
+inline void T_APP_SEND_MESSAGE_RSP::set_acobjid(const ::std::string& value) {
+  set_has_acobjid();
+  if (acobjid_ == &::google::protobuf::internal::kEmptyString) {
+    acobjid_ = new ::std::string;
+  }
+  acobjid_->assign(value);
+}
+inline void T_APP_SEND_MESSAGE_RSP::set_acobjid(const char* value) {
+  set_has_acobjid();
+  if (acobjid_ == &::google::protobuf::internal::kEmptyString) {
+    acobjid_ = new ::std::string;
+  }
+  acobjid_->assign(value);
+}
+inline void T_APP_SEND_MESSAGE_RSP::set_acobjid(const void* value, size_t size) {
+  set_has_acobjid();
+  if (acobjid_ == &::google::protobuf::internal::kEmptyString) {
+    acobjid_ = new ::std::string;
+  }
+  acobjid_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* T_APP_SEND_MESSAGE_RSP::mutable_acobjid() {
+  set_has_acobjid();
+  if (acobjid_ == &::google::protobuf::internal::kEmptyString) {
+    acobjid_ = new ::std::string;
+  }
+  return acobjid_;
+}
+inline ::std::string* T_APP_SEND_MESSAGE_RSP::release_acobjid() {
+  clear_has_acobjid();
+  if (acobjid_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = acobjid_;
+    acobjid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void T_APP_SEND_MESSAGE_RSP::set_allocated_acobjid(::std::string* acobjid) {
+  if (acobjid_ != &::google::protobuf::internal::kEmptyString) {
+    delete acobjid_;
+  }
+  if (acobjid) {
+    set_has_acobjid();
+    acobjid_ = acobjid;
+  } else {
+    clear_has_acobjid();
+    acobjid_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
@@ -2781,54 +2717,6 @@ T_APP_GET_ONLINE_USER_RSP::atonlineuser() const {
 inline ::google::protobuf::RepeatedPtrField< ::general::T_GNRL_ONLINE_USER >*
 T_APP_GET_ONLINE_USER_RSP::mutable_atonlineuser() {
   return &atonlineuser_;
-}
-
-// -------------------------------------------------------------------
-
-// T_APP_FIRST_TEST_RSP
-
-// required fixed32 u32Result = 1;
-inline bool T_APP_FIRST_TEST_RSP::has_u32result() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void T_APP_FIRST_TEST_RSP::set_has_u32result() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void T_APP_FIRST_TEST_RSP::clear_has_u32result() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void T_APP_FIRST_TEST_RSP::clear_u32result() {
-  u32result_ = 0u;
-  clear_has_u32result();
-}
-inline ::google::protobuf::uint32 T_APP_FIRST_TEST_RSP::u32result() const {
-  return u32result_;
-}
-inline void T_APP_FIRST_TEST_RSP::set_u32result(::google::protobuf::uint32 value) {
-  set_has_u32result();
-  u32result_ = value;
-}
-
-// required fixed32 u32Test = 2;
-inline bool T_APP_FIRST_TEST_RSP::has_u32test() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void T_APP_FIRST_TEST_RSP::set_has_u32test() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void T_APP_FIRST_TEST_RSP::clear_has_u32test() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void T_APP_FIRST_TEST_RSP::clear_u32test() {
-  u32test_ = 0u;
-  clear_has_u32test();
-}
-inline ::google::protobuf::uint32 T_APP_FIRST_TEST_RSP::u32test() const {
-  return u32test_;
-}
-inline void T_APP_FIRST_TEST_RSP::set_u32test(::google::protobuf::uint32 value) {
-  set_has_u32test();
-  u32test_ = value;
 }
 
 

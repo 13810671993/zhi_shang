@@ -34,6 +34,6 @@ VOID CCtrlLogin::OnLoginRsp(const CHAR *pcMsg, UINT32 u32MsgLen)
     qDebug() << "context: " << ptRsp->u64Context << "  result: " << ptRsp->u32Result;
     if (ptRsp->u32Result == 0)
     {
-        emit SIGNAL_LoginSuccess();
+        emit SIGNAL_LoginSuccess(ptRsp->acUserName);
     }
 }

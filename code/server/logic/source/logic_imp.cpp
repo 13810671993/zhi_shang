@@ -135,8 +135,23 @@ UINT32 CLogicImp::Disconnected(IN UINT32 u32NodeID)
     UINT32 u32Ret = 0;
     do
     {
+        // 删除会话
         u32Ret = m_pSessionMgr->SessionDel(u32NodeID);
         CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "DelSession Failed. u32Ret = 0x%x, u32NodeID = %d", u32Ret, u32NodeID);
+
+        // 通知所有的客户端 最新会话列表
+        std::vector<T_SESSION>  tSessionVec;
+        u32Ret = m_pSessionMgr->SessionGet(tSessionVec);
+        CHECK_ERR_BREAK(u32Ret == 0, u32Ret, "SessionGet Failed. u32Ret = 0x%x", u32Ret);
+        T_APP_UPDATE_ONLINE_USER_NTF    tNtfy = { 0 };
+        tNtfy.u32UserNum = tSessionVec.size();
+        UINT32 i = 0;
+        for (auto it = tSessionVec.begin(); it != tSessionVec.end(); ++it, ++i)
+        {
+            memcpy(tNtfy.atOnlineUser[i].acUserName, it->tSessionUOID.acObjID, sizeof(tNtfy.atOnlineUser[i].acUserName));
+        }
+        // 通知所有客户端在线用户
+        u32Ret = NotifyClient(E_APP_MSG_UPDATE_ONLINE_USER_NTF, (CHAR*)&tNtfy, sizeof(tNtfy));
     } while (0);
 
     return u32Ret;
@@ -151,8 +166,6 @@ VOID CLogicImp::DealMessageThread(IN CLogicImp* pThis, IN UINT32 u32ThreadNum)
         if (g_LogicMsgQueue.pop(pMsg) && pMsg != NULL)
         {
 #ifdef _DEBUG_
-            T_APP_FIRST_TEST_REQ* ptReq = (T_APP_FIRST_TEST_REQ*)(pMsg->GetMsgBuf());
-
             //std::cout << "u32ThreadNum: " << u32ThreadNum << " " << pMsg->GetMsgType() << " " << ptReq->u32Result << " " << ptReq->u32Test << std::endl;
 #endif
             if (pMsg->GetMsgBuf() != NULL)
@@ -286,11 +299,15 @@ UINT32 CLogicImp::OnLoginReq(IN UINT32 u32NodeID, IN UINT32 u32MsgLen, IN CHAR* 
     } while (0);
     tResp.u32Result = 0;
     tResp.u64Context = ptReq->u64Context;
+    memcpy(tResp.acUserName, ptReq->acUserName, sizeof(tResp.acUserName));
     m_pMsgMgr->PostMessage(u32NodeID, E_APP_MSG_LOGIN_RSP, sizeof(tResp), (CHAR*)&tResp);
-    BOOST_SLEEP(500);
+    //BOOST_SLEEP(500);
 
-    // 通知所有客户端在线用户
-    u32Ret = NotifyClient(E_APP_MSG_UPDATE_ONLINE_USER_NTF, (CHAR*)&tNtfy, sizeof(tNtfy));
+    if (u32Ret == 0)
+    {
+        // 通知所有客户端在线用户
+        u32Ret = NotifyClient(E_APP_MSG_UPDATE_ONLINE_USER_NTF, (CHAR*)&tNtfy, sizeof(tNtfy));
+    }
 
     return u32Ret;
 }
@@ -386,13 +403,14 @@ UINT32 CLogicImp::OnSendMessageReq(IN UINT32 u32NodeID, IN UINT32 u32MsgLen, IN 
         // 3. 发送消息到接收者
         // session中含有接收者NodeID
         m_pMsgMgr->PostMessage(tSessionRecver.u32NodeID, E_APP_MSG_TRANSMIT_MESSAGE_ACT, sizeof(tAct), (CHAR*)&tAct);
-        BOOST_SLEEP(500);
+        //BOOST_SLEEP(500);
 
         // 4. 回复发送者执行结果
     } while (0);
 
     tResp.u32Result = u32Ret;
     tResp.u64Context = ptReq->u64Context;
+    memcpy(tResp.acObjID, ptReq->acObjID, sizeof(tResp.acObjID));
     m_pMsgMgr->PostMessage(u32NodeID, E_APP_MSG_SEND_MESSAGE_RSP, sizeof(tResp), (CHAR*)&tResp);
 
     return u32Ret;

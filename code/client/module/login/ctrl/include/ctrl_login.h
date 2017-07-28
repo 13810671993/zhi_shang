@@ -17,7 +17,7 @@ protected:
     ~CCtrlLogin();
 
 signals:
-    void SIGNAL_LoginSuccess();
+    void SIGNAL_LoginSuccess(QString);
 
 public:
     VOID OnLoginRsp(const CHAR* pcMsg, UINT32 u32MsgLen);

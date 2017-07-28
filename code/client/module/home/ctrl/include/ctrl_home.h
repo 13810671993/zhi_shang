@@ -21,6 +21,7 @@ protected:
 signals:
     void	SIGNAL_UpdateOnlineUser(QList<T_GNRL_ONLINE_USER> tUserList);
     void	SIGNAL_TransmitMessage(QString qstrFrmID, QString qstrMessage);
+    void	SIGNAL_SendMessageError(QString qstrObjID);
 
 public:
     VOID	OnUpdateOnlineUserNtf(const CHAR* pcMsg, UINT32 u32MsgLen);

@@ -33,7 +33,7 @@ VOID CCtrlHome::OnUpdateOnlineUserNtf(const CHAR *pcMsg, UINT32 u32MsgLen)
 
     // 收集在线用户列表
     QList<T_GNRL_ONLINE_USER> tUserList;
-    for (auto i = 0; i < ptNtf->u32UserNum; ++i)
+    for (UINT32 i = 0; i < ptNtf->u32UserNum; ++i)
     {
         tUserList.push_back(ptNtf->atOnlineUser[i]);
     }
@@ -43,7 +43,11 @@ VOID CCtrlHome::OnUpdateOnlineUserNtf(const CHAR *pcMsg, UINT32 u32MsgLen)
 VOID CCtrlHome::OnSendMessageRsp(const CHAR *pcMsg, UINT32 u32MsgLen)
 {
     T_APP_SEND_MESSAGE_RSP*	ptRsp = (T_APP_SEND_MESSAGE_RSP*)pcMsg;
-    qDebug() << ptRsp->u32Result;
+    if (ptRsp->u32Result == COMERR_NOT_FOUND)
+    {
+        // 对方已下线
+        emit SIGNAL_SendMessageError(ptRsp->acObjID);
+    }
 }
 
 VOID CCtrlHome::OnTransmitMessageAct(const CHAR *pcMsg, UINT32 u32MsgLen)

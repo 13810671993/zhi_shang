@@ -1,8 +1,8 @@
 #include "login/login_common.h"
 #include "ui_view_login_widget.h"
 
-CLoginWidget::CLoginWidget(QWidget *parent) :
-      QWidget(parent)
+CLoginWidget::CLoginWidget() :
+      CPageMgr()
     , ui(new Ui::CLoginWidget)
     , m_bRegistExist(FALSE)
     , m_pRegistAccountDialog(new CRegistAccountDialog(this))
@@ -15,7 +15,7 @@ CLoginWidget::CLoginWidget(QWidget *parent) :
     InitStyle();
     BindSignals();
 
-    connect(CCtrlLogin::GetInstance(), SIGNAL(SIGNAL_LoginSuccess()), this, SIGNAL(SIGNAL_LoginSuccess()));
+    connect(CCtrlLogin::GetInstance(), SIGNAL(SIGNAL_LoginSuccess(QString)), this, SIGNAL(SIGNAL_LoginSuccess(QString)));
 }
 
 CLoginWidget::~CLoginWidget()

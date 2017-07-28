@@ -316,6 +316,19 @@
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="CLblUserSelf">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>15</y>
+     <width>60</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>CLblBackgroundRight</zorder>
   <zorder>CLblBackgroundLeft</zorder>
   <zorder>CStackedWidget</zorder>
@@ -326,6 +339,7 @@
   <zorder>CBtnClose</zorder>
   <zorder>CGroupBox</zorder>
   <zorder>CLblObjID</zorder>
+  <zorder>CLblUserSelf</zorder>
  </widget>
  <resources/>
  <connections/>

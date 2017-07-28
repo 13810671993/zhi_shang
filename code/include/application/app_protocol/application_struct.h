@@ -3,19 +3,6 @@
 
 typedef struct
 {
-    UINT32 u32Result;
-    UINT32 u32Test;
-}T_APP_FIRST_TEST_REQ;
-
-typedef struct
-{
-    UINT32 u32Result;
-    UINT32 u32Test;
-}T_APP_FIRST_TEST_RSP;
-
-
-typedef struct
-{
     UINT64  u64Context;
     CHAR    acUserName[APP_MAX_NAME_LEN];
     CHAR    acPasswd[APP_MAX_PASSWD_LEN];
@@ -40,6 +27,7 @@ typedef struct
 {
     UINT64  u64Context;
     UINT32  u32Result;
+    CHAR    acUserName[APP_MAX_NAME_LEN];
 }T_APP_LOGIN_RSP;
 
 
@@ -83,6 +71,7 @@ typedef struct
 {
     UINT64  u64Context;
     UINT32  u32Result;
+    CHAR    acObjID[APP_MAX_NAME_LEN];
 }T_APP_SEND_MESSAGE_RSP;
 
 typedef struct  

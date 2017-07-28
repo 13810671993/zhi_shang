@@ -16,6 +16,9 @@
 #include "application/app_protocol/application_struct.h"
 
 #include "network/include/network.h"
+
+#include "page_manager/include/page_manager.h"
+
 #include "login/view/include/view_login_widget.h"
 #include "login/ctrl/include/ctrl_login.h"
 #include "user/view/include/view_modify_passwd_dialog.h"

@@ -19,11 +19,6 @@ message T_APP_REGIST_USER_RSP
 	required fixed64 u64Context = 1;
 	required fixed32 u32Result = 2;
 }
-message T_APP_FIRST_TEST_REQ
-{
-	required fixed32 u32Result = 1;
-	required fixed32 u32Test = 2;
-}
 message T_APP_MODIFY_PASSWD_REQ
 {
 	required fixed64 u64Context = 1;
@@ -46,6 +41,7 @@ message T_APP_LOGIN_RSP
 {
 	required fixed64 u64Context = 1;
 	required fixed32 u32Result = 2;
+	required bytes acUserName = 3;
 }
 message T_APP_UPDATE_ONLINE_USER_NTF
 {
@@ -61,6 +57,7 @@ message T_APP_SEND_MESSAGE_RSP
 {
 	required fixed64 u64Context = 1;
 	required fixed32 u32Result = 2;
+	required bytes acObjID = 3;
 }
 message T_APP_REGIST_USER_REQ
 {
@@ -75,9 +72,4 @@ message T_APP_GET_ONLINE_USER_RSP
 	required fixed32 u32Result = 2;
 	required fixed32 u32UserNum = 3;
 	repeated general.T_GNRL_ONLINE_USER atOnlineUser = 4;
-}
-message T_APP_FIRST_TEST_RSP
-{
-	required fixed32 u32Result = 1;
-	required fixed32 u32Test = 2;
 }

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "common/data_type.h"
+#include "page_manager/include/page_manager.h"
 
 namespace Ui {
 class CLoginWidget;
@@ -10,16 +11,17 @@ class CLoginWidget;
 
 class CRegistAccountDialog;
 class CModifyPasswdDialog;
-class CLoginWidget : public QWidget
+class CPageMgr;
+class CLoginWidget : public CPageMgr
 {
     Q_OBJECT
 
 public:
-    explicit CLoginWidget(QWidget *parent = 0);
+    explicit CLoginWidget();
     ~CLoginWidget();
 
 signals:
-    void SIGNAL_LoginSuccess();
+    void SIGNAL_LoginSuccess(QString);
 
 public slots:
     void SLOT_Exit();
@@ -48,6 +50,7 @@ private:
     BOOL						m_bRegistExist;			// TRUE: 窗体已存在 FALSE: 窗体不存在
     CRegistAccountDialog*		m_pRegistAccountDialog;
     CModifyPasswdDialog*		m_pModifyPasswdDialog;
+
 
 };
 

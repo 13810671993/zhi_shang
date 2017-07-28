@@ -9,9 +9,6 @@ UINT32 ProtoToStruct(const application::T_APP_GET_ONLINE_USER_REQ& proto, T_APP_
 UINT32 StructToProto(const T_APP_REGIST_USER_RSP& tStruct, application::T_APP_REGIST_USER_RSP& proto);
 UINT32 ProtoToStruct(const application::T_APP_REGIST_USER_RSP& proto, T_APP_REGIST_USER_RSP& tStruct);
 
-UINT32 StructToProto(const T_APP_FIRST_TEST_REQ& tStruct, application::T_APP_FIRST_TEST_REQ& proto);
-UINT32 ProtoToStruct(const application::T_APP_FIRST_TEST_REQ& proto, T_APP_FIRST_TEST_REQ& tStruct);
-
 UINT32 StructToProto(const T_APP_MODIFY_PASSWD_REQ& tStruct, application::T_APP_MODIFY_PASSWD_REQ& proto);
 UINT32 ProtoToStruct(const application::T_APP_MODIFY_PASSWD_REQ& proto, T_APP_MODIFY_PASSWD_REQ& tStruct);
 
@@ -38,8 +35,5 @@ UINT32 ProtoToStruct(const application::T_APP_REGIST_USER_REQ& proto, T_APP_REGI
 
 UINT32 StructToProto(const T_APP_GET_ONLINE_USER_RSP& tStruct, application::T_APP_GET_ONLINE_USER_RSP& proto);
 UINT32 ProtoToStruct(const application::T_APP_GET_ONLINE_USER_RSP& proto, T_APP_GET_ONLINE_USER_RSP& tStruct);
-
-UINT32 StructToProto(const T_APP_FIRST_TEST_RSP& tStruct, application::T_APP_FIRST_TEST_RSP& proto);
-UINT32 ProtoToStruct(const application::T_APP_FIRST_TEST_RSP& proto, T_APP_FIRST_TEST_RSP& tStruct);
 
 #endif

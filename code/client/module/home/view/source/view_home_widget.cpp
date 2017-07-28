@@ -1,14 +1,14 @@
 #include "home/home_common.h"
 #include "ui_view_home_widget.h"
 
-CHomeWidget::CHomeWidget(QWidget *parent) :
-    QWidget(parent),
+CHomeWidget::CHomeWidget(QString qstrUserInfo) :
+    CPageMgr(),
     ui(new Ui::CHomeWidget)
 {
     ui->setupUi(this);
 
     BindSignals();
-    InitWidget();
+    InitWidget(qstrUserInfo);
 
     // 向服务器请求 获取在线列表
 //    OnGetOnlineReq();
@@ -37,7 +37,10 @@ void CHomeWidget::SLOT_SwitchSessionPage(bool bFlag)
         ui->CLblObjID->setText(ui->CListSession->currentItem()->text());
     }
     if (bFlag)
+    {
         ui->CStackedWidget->setCurrentIndex(0);
+        ui->CBtnSession->setChecked(TRUE);
+    }
 }
 
 void CHomeWidget::SLOT_SwitchMailPage(bool bFlag)
@@ -45,7 +48,10 @@ void CHomeWidget::SLOT_SwitchMailPage(bool bFlag)
     ui->CListMail->setVisible(TRUE);
     ui->CLblObjID->clear();
     if (bFlag)
+    {
         ui->CStackedWidget->setCurrentIndex(1);
+        ui->CBtnMail->setChecked(TRUE);
+    }
 }
 
 void CHomeWidget::SLOT_CurrentPage(int index)
@@ -53,11 +59,13 @@ void CHomeWidget::SLOT_CurrentPage(int index)
     if (index == 0)
     {
         // session
-        ui->CBtnSession->setChecked(TRUE);
+//        ui->CBtnSession->setChecked(TRUE);
+        emit ui->CBtnSession->clicked(TRUE);
     }
     else if (index == 1)
     {
-        ui->CBtnMail->setChecked(TRUE);
+//        ui->CBtnMail->setChecked(TRUE);
+        emit ui->CBtnMail->clicked(TRUE);
     }
 }
 
@@ -78,7 +86,8 @@ void CHomeWidget::SLOT_OpenSession()
 {
     ui->CListSession->setVisible(TRUE);
     // 1. 切换到session界面
-    ui->CStackedWidget->setCurrentIndex(0);
+//    ui->CStackedWidget->setCurrentIndex(0);
+    emit ui->CStackedWidget->currentChanged(0);
 
     // 2. 创建一个新的会话 并插入到会话列表 CListSession
     QListWidgetItem* pUser = ui->CListMail->currentItem();
@@ -96,9 +105,9 @@ void CHomeWidget::SLOT_OpenSession()
         pSession = new QListWidgetItem(*pUser);
         ui->CListSession->addItem(pSession);
         // 2. 为新的会话创建对话窗口
-        T_GNRL_ONLINE_USER	tOnlineUser = {0};
-        memcpy(&tOnlineUser, &(m_tUserList.at(u32Index)), sizeof(tOnlineUser));
-        QScrollArea* pSessionArea = CreateSessionArea(tOnlineUser);
+//        T_GNRL_ONLINE_USER	tOnlineUser = {0};
+//        memcpy(&tOnlineUser, &(m_tUserList.at(u32Index)), sizeof(tOnlineUser));
+        QScrollArea* pSessionArea = CreateSessionArea();
         static UINT32 u32ID = 0;
         m_tSessionMap.insert(u32ID, pSessionArea);
         ++u32ID;
@@ -135,13 +144,16 @@ void CHomeWidget::SLOT_OpenUserInfo(QListWidgetItem *pUserItem)
 void CHomeWidget::SLOT_SendMessage()
 {
     UINT32 u32Index = ui->CListSession->currentRow();
+    qDebug() << "u32Index: " << u32Index;
+    if (u32Index == -1)
+        return ;
     // 1. 发送消息
     T_APP_SEND_MESSAGE_REQ tReq = {0};
     tReq.u64Context = 1;
 //    memcpy(tReq.acMessage, m_qstrSendMessage.toStdString().c_str(), sizeof(tReq.acMessage));
 //    memcpy(tReq.acObjID, m_tSessionList.at(u32Index).acUserName, sizeof(tReq.acObjID));
-    strcpy(tReq.acMessage, m_qstrSendMessage.toStdString().c_str());
-    strcpy(tReq.acObjID, m_tSessionList.at(u32Index).acUserName);
+    strncpy(tReq.acMessage, m_qstrSendMessage.toStdString().c_str(), sizeof(tReq.acMessage));
+    strncpy(tReq.acObjID, m_tSessionList.at(u32Index).acUserName, sizeof(tReq.acObjID));
     CNetwork::GetInstance()->PostMessage(E_APP_MSG_SEND_MESSAGE_REQ, (CHAR*)&tReq, sizeof(tReq));
 
     // 2. 张贴消息
@@ -153,7 +165,7 @@ void CHomeWidget::SLOT_SendMessage()
         QScrollArea* pSessionArea = *it;
         QLabel* pLabel = new QLabel(m_qstrSendMessage);
         pLabel->setMaximumWidth(300);
-        pLabel->setMinimumHeight(40);
+        pLabel->setMinimumHeight(30);
         pLabel->adjustSize();
         pLabel->setAlignment(Qt::AlignCenter);
         pLabel->setStyleSheet("QLabel"
@@ -164,7 +176,7 @@ void CHomeWidget::SLOT_SendMessage()
         pSessionArea->widget()->layout()->addWidget(pLabel);
         pSessionArea->widget()->layout()->setAlignment(pLabel, Qt::AlignRight);
         pSessionArea->verticalScrollBar()->setValue(pSessionArea->verticalScrollBar()->maximum());
-        qDebug() << pSessionArea->widget();
+//        qDebug() << pSessionArea->widget();
     }
     else
     {
@@ -186,7 +198,7 @@ void CHomeWidget::SLOT_SwitchSession(QListWidgetItem* pItem)
         // 找到了
         QScrollArea* pSessionArea = *it;
         pSessionArea->raise();
-        qDebug() << u32Index;
+//        qDebug() << u32Index;
 
         ui->CLblObjID->setText(pItem->text());
     }
@@ -199,27 +211,45 @@ void CHomeWidget::SLOT_SwitchSession(QListWidgetItem* pItem)
 void CHomeWidget::SLOT_TransmitMessage(QString qstrFrmID, QString qstrMessage)
 {
     T_GNRL_ONLINE_USER tUser = {0};
-    strcpy(tUser.acUserName, qstrFrmID.toStdString().c_str());
-    UINT32 u32Index = FindIndex(m_tSessionList, &tUser);
-    if (u32Index >= 0)
+    strncpy(tUser.acUserName, qstrFrmID.toStdString().c_str(), sizeof(tUser.acUserName));
+    // 1. 从用户列表里面查找该用户是否存在
+    UINT32 u32IndexMail = FindIndex(m_tUserList, &tUser);
+    if (u32IndexMail != -1)
     {
-        // 找到了
-        auto it = m_tSessionMap.find(u32Index);
-        if (it != m_tSessionMap.end())
+        // 找到了 说明用户存在 设置为当前item
+        ui->CListMail->setCurrentRow(u32IndexMail);
+
+        // 2. 从会话列表里面查找 该会话是否存在
+        UINT32 u32IndexSession = FindIndex(m_tSessionList, &tUser);
+        if (u32IndexSession != -1)
         {
-            // 找到了
-            // 1. 切换界面到会话界面
+            // 找到了 该会话存在 切换到这个会话
+            // 切换界面到会话界面
             emit ui->CStackedWidget->currentChanged(0);
 
-            // 2. 切换到对应的会话item
-            ui->CListSession->setCurrentRow(u32Index);
-
-            // 3. 张贴消息
+            // 切换到对应的会话item
+            ui->CListSession->setCurrentRow(u32IndexSession);
+        }
+        else
+        {
+            // 未找到 该会话不存在 创建会话
+            SLOT_OpenSession();
+        }
+        // 3. 重新在会话列表里面查找 该会话是否存在
+        u32IndexSession = FindIndex(m_tSessionList, &tUser);
+        auto it = m_tSessionMap.find(u32IndexSession);
+        if (it != m_tSessionMap.end())
+        {
+            // 4. 张贴消息
+            // 找到了界面了
             QScrollArea* pSessionArea = *it;
             QLabel* pLabel = new QLabel(qstrMessage);
             pLabel->setMaximumWidth(300);
-            pLabel->setMinimumHeight(40);
+            pLabel->setMinimumHeight(30);
             pLabel->adjustSize();
+            pLabel->setGeometry(QRect(328, 240, 329, 27*4));  //四倍行距
+            pLabel->setWordWrap(TRUE);
+//            pLabel->setAlignment(Qt::AlignTop);
             pLabel->setAlignment(Qt::AlignCenter);
             pLabel->setStyleSheet("QLabel"
                                   "{"
@@ -230,18 +260,48 @@ void CHomeWidget::SLOT_TransmitMessage(QString qstrFrmID, QString qstrMessage)
             pSessionArea->widget()->layout()->setAlignment(pLabel, Qt::AlignLeft);
             pSessionArea->verticalScrollBar()->setValue(pSessionArea->verticalScrollBar()->maximum());
         }
-        else
-        {
-            // 没找到
-        }
     }
     else
     {
-        // 没找到
+        // 未找到 说明用户不存在
     }
 }
 
-VOID CHomeWidget::InitWidget()
+void CHomeWidget::SLOT_SendMessageError(QString qstrObjID)
+{
+    // 对方已经下线了 在会话列表中删除相应的会话
+    // 1. 删除会话item
+    T_GNRL_ONLINE_USER	tUser = {0};
+    strncpy(tUser.acUserName, qstrObjID.toStdString().c_str(), sizeof(tUser.acUserName));
+    UINT32 u32Index = FindIndex(m_tSessionList, &tUser);
+    if (u32Index != -1)
+    {
+        // 找到了
+        m_tSessionList.removeAt(u32Index);
+        QListWidgetItem* pSession = ui->CListSession->item(u32Index);
+        ui->CListSession->removeItemWidget(pSession);
+        delete pSession;
+        pSession = NULL;
+
+        // 2. 删除对话框
+        auto it = m_tSessionMap.find(u32Index);
+        if (it != m_tSessionMap.end())
+        {
+            QScrollArea* p = *it;
+            delete p;
+            p = NULL;
+            m_tSessionMap.erase(it);
+        }
+        ui->CLblObjID->clear();
+    }
+    else
+    {
+        // 未找到
+    }
+
+}
+
+VOID CHomeWidget::InitWidget(QString qstrUserInfo)
 {
     ui->CBtnSendMessage->setText(tr("session"));
     ui->CBtnSendMessage->setVisible(FALSE);
@@ -258,6 +318,8 @@ VOID CHomeWidget::InitWidget()
     ui->CBtnMail->setAutoExclusive(TRUE);
 
     ui->CBtnSend->setText(tr("send"));
+    ui->CLblUserSelf->setText(qstrUserInfo);
+    ui->CLblUserSelf->setAlignment(Qt::AlignCenter);
 }
 
 VOID CHomeWidget::InitWindow()
@@ -301,6 +363,7 @@ VOID CHomeWidget::BindSignals()
     qRegisterMetaType< QList<T_GNRL_ONLINE_USER> >("QList<T_GNRL_ONLINE_USER>");
     connect(CCtrlHome::GetInstance(), SIGNAL(SIGNAL_UpdateOnlineUser(QList<T_GNRL_ONLINE_USER>)), this, SLOT(SLOT_UpdateOnlineUser(QList<T_GNRL_ONLINE_USER>)));
     connect(CCtrlHome::GetInstance(), SIGNAL(SIGNAL_TransmitMessage(QString,QString)), this, SLOT(SLOT_TransmitMessage(QString,QString)));
+    connect(CCtrlHome::GetInstance(), SIGNAL(SIGNAL_SendMessageError(QString)), this, SLOT(SLOT_SendMessageError(QString)));
     connect(ui->CListMail, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(SLOT_OpenUserInfo(QListWidgetItem*)));
     connect(ui->CStackedWidget, SIGNAL(currentChanged(int)), this, SLOT(SLOT_CurrentPage(int)));
     connect(ui->CBtnSendMessage, SIGNAL(clicked()), this, SLOT(SLOT_OpenSession()));
@@ -316,7 +379,7 @@ VOID CHomeWidget::OnGetOnlineReq()
     CNetwork::GetInstance()->PostMessage(E_APP_MSG_GET_ONLINE_USER_REQ, (CHAR*)&tReq, sizeof(tReq));
 }
 
-QScrollArea* CHomeWidget::CreateSessionArea(T_GNRL_ONLINE_USER &tOnlineUser)
+QScrollArea* CHomeWidget::CreateSessionArea()
 {
     QScrollArea* pSessionArea = new QScrollArea(ui->CFrmBackground);
     pSessionArea->setMinimumSize(550, 430);
